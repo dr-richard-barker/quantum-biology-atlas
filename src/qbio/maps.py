@@ -36,6 +36,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 MAP_SRC_DIR = ROOT / "maps" / "src"
 MAP_OUT_DIR = ROOT / "maps"
 
+#: Clear visual separation between two adjacent compartment bands, on top of the
+#: padding each one already reserves. Without this they would merely touch.
+BAND_SEPARATION = 18.0
+
 COMPARTMENT_LABEL = {
     "mitochondrial_matrix": "Mitochondrial matrix",
     "mitochondrial_inner_membrane": "Inner mitochondrial membrane",
@@ -237,12 +241,30 @@ def layout_map(spec: MapSpec, onto: Ontology) -> tuple[list[LaidOutNode], list[t
             f"{sorted(unknown)}"
         )
 
+    # Vertical gutters are per-gap, not uniform.
+    #
+    # A compartment band is drawn COMPARTMENT_PAD below its last node and
+    # COMPARTMENT_PAD + COMPARTMENT_LABEL_BAND above its first. So where the
+    # compartment changes between two lanes, the gap has to swallow both paddings
+    # AND the label band, or the two bands overlap — which they did, by exactly the
+    # 12px this arithmetic predicts. Derive the figure instead of guessing it, so it
+    # stays correct if the padding constants change.
+    within_gutter = MIN_GUTTER_Y + 30.0        # room for unit chips between lanes
+    boundary_gutter = (
+        2 * COMPARTMENT_PAD + render.COMPARTMENT_LABEL_BAND + BAND_SEPARATION
+    )
+    lane_compartments = [lane.get("compartment") for lane in spec.lanes]
+    gutters = [
+        boundary_gutter if lane_compartments[i] != lane_compartments[i + 1] else within_gutter
+        for i in range(len(rows) - 1)
+    ]
+
     place_rows(
         rows,
         origin_x=0.0,
         origin_y=0.0,
         gutter_x=MIN_GUTTER_X,
-        gutter_y=MIN_GUTTER_Y + 30.0,   # room for compartment labels and unit chips between lanes
+        gutter_y=gutters,
     )
     resolve_collisions(all_nodes)
 

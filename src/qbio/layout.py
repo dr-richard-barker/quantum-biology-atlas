@@ -206,21 +206,37 @@ def place_rows(
     origin_x: float = 0.0,
     origin_y: float = 0.0,
     gutter_x: float = MIN_GUTTER_X,
-    gutter_y: float = MIN_GUTTER_Y,
+    gutter_y: float | Sequence[float] = MIN_GUTTER_Y,
     align: str = "center",
 ) -> Box:
     """Place pre-sized nodes as centred rows. Returns the bounding box used.
 
     Gutters are minimums that are always honoured, so two boxes in the same row
     cannot touch, and two rows cannot touch.
+
+    `gutter_y` may be a single value, or one value per gap between consecutive
+    rows (so `len(rows) - 1` of them). The per-gap form exists because a gap where
+    the compartment changes has to swallow two compartment paddings plus a label
+    band, which is much more than a gap inside one compartment needs — using one
+    value for both either overlaps the bands or wastes vertical space everywhere.
     """
     row_widths = [
         sum(n.box.w for n in row) + gutter_x * max(0, len(row) - 1) for row in rows
     ]
     total_width = max(row_widths, default=0.0)
 
+    if isinstance(gutter_y, (int, float)):
+        gutters = [float(gutter_y)] * max(0, len(rows) - 1)
+    else:
+        gutters = [float(g) for g in gutter_y]
+        if len(gutters) != max(0, len(rows) - 1):
+            raise ValueError(
+                f"gutter_y has {len(gutters)} values but {len(rows)} rows need "
+                f"{max(0, len(rows) - 1)}"
+            )
+
     y = origin_y
-    for row, row_width in zip(rows, row_widths):
+    for i, (row, row_width) in enumerate(zip(rows, row_widths)):
         if not row:
             continue
         if align == "center":
@@ -234,10 +250,11 @@ def place_rows(
             node.box.x = x
             node.box.y = y + (row_height - node.box.h) / 2.0   # vertically centre in the row
             x += node.box.w + gutter_x
-        y += row_height + gutter_y
+        y += row_height
+        if i < len(gutters):
+            y += gutters[i]
 
-    height = max(0.0, y - origin_y - gutter_y)
-    return Box(origin_x, origin_y, total_width, height)
+    return Box(origin_x, origin_y, total_width, max(0.0, y - origin_y))
 
 
 def bounding_box(nodes: Iterable[LaidOutNode], pad: float = CANVAS_MARGIN) -> Box:

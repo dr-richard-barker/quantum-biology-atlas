@@ -139,10 +139,78 @@
     });
   });
 
-  // ---- 6. the map must carry a caption naming its data source ------------
+  // ---- 6. compartment bands must not overlap each other -------------------
+  // Added after two bands shipped overlapping by 12px: a band is drawn
+  // COMPARTMENT_PAD below its last node and COMPARTMENT_PAD + the label band above
+  // its first, so a uniform row gutter between lanes in different compartments is
+  // not enough. Nothing else here would have caught it — the nodes were fine, only
+  // the bands around them collided.
+  const bands = Array.from(svg.querySelectorAll('[data-compartment-rect]')).map((r, i) => ({
+    i,
+    name: r.getAttribute('data-compartment-rect'),
+    box: rel(r),
+  }));
+  for (let i = 0; i < bands.length; i++) {
+    for (let j = i + 1; j < bands.length; j++) {
+      if (overlaps(bands[i].box, bands[j].box, PENETRATE_TOL)) {
+        const dy =
+          Math.min(bands[i].box.y2, bands[j].box.y2) - Math.max(bands[i].box.y, bands[j].box.y);
+        failures.push(
+          `COMPARTMENT BANDS OVERLAP: "${bands[i].name}"[${i}] / "${bands[j].name}"[${j}] ` +
+            `by ${dy.toFixed(1)}px`
+        );
+      }
+    }
+  }
+
+  // ---- 7. a compartment label must not land on a node --------------------
+  const compLabels = Array.from(svg.querySelectorAll('.qbm-compartment-label'));
+  compLabels.forEach((l) => {
+    const lb = rel(l);
+    ids.forEach((id) => {
+      if (overlaps(lb, rects[id], PENETRATE_TOL)) {
+        failures.push(`COMPARTMENT LABEL "${l.textContent}" covers node "${id}"`);
+      }
+    });
+  });
+
+  // ---- 8. on a data-overlaid map, the overlay must actually have rendered --
+  // The overlay slot once carried an inline style="fill:none", which outranks every
+  // selector, so the per-node fills silently never applied and the "data" map was
+  // identical to the base map. Assert the overlay changed something.
+  const valueChips = svg.querySelectorAll('[data-value-for]').length;
+  if (valueChips > 0) {
+    let tinted = 0;
+    svg.querySelectorAll('[data-overlay-for]').forEach((o) => {
+      const f = getComputedStyle(o).fill;
+      if (f && f !== 'none' && !/rgba\(0,\s*0,\s*0,\s*0\)/.test(f)) tinted++;
+    });
+    if (tinted === 0) {
+      failures.push(
+        `OVERLAY DID NOT RENDER: ${valueChips} nodes carry a value chip but none is tinted`
+      );
+    }
+    const bar = svg.querySelector('.qbm-overlay-legend');
+    if (!bar) {
+      failures.push('data-overlaid map has no colour-bar legend');
+    } else {
+      const bb = rel(bar);
+      ids.forEach((id) => {
+        if (overlaps(bb, rects[id], PENETRATE_TOL)) failures.push(`COLOUR BAR covers node "${id}"`);
+      });
+      svg.querySelectorAll('.qbm-caption, .qbm-title, .qbm-subtitle').forEach((c) => {
+        if (overlaps(bb, rel(c), PENETRATE_TOL)) failures.push('COLOUR BAR covers title or caption');
+      });
+    }
+  }
+
+  // ---- 9. the map must carry a caption naming its data source ------------
   const caption = Array.from(svg.querySelectorAll('.qbm-caption'))
     .map((n) => n.textContent)
     .join(' ');
+  if (/&amp;|&quot;|&lt;|&gt;/.test(caption)) {
+    failures.push('CAPTION IS DOUBLE-ESCAPED — entities are showing as literal text');
+  }
   if (caption.trim().length < 80) {
     failures.push('CAPTION missing or too short — every map must state what it shows and where it came from');
   } else if (!/derived from/i.test(caption)) {
