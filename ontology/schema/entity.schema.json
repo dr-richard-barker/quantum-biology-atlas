@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dr-richard-barker.github.io/quantum-biology-atlas/schema/entity.schema.json",
+  "title": "QBO entity",
+  "description": "A quantum-biology annotation attached to an existing biological identifier. The schema enforces the one rule the ontology exists for: an evidence tier that asserts magnetic-field sensitivity must cite a DOI.",
+  "type": "object",
+  "required": ["id", "label", "kind", "quantum_class", "evidence_tier", "confidence"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^QBO:[A-Z0-9_]+$",
+      "description": "Stable QBO identifier, e.g. QBO:CRY1_FAD."
+    },
+    "label": { "type": "string", "minLength": 1 },
+    "kind": {
+      "enum": ["macromolecule", "complex", "simple_chemical", "cofactor", "process", "phenotype", "compartment", "perturbation"],
+      "description": "Maps onto the SBGN PD glyph the compiler will emit."
+    },
+    "description": { "type": "string" },
+
+    "xref": {
+      "type": "object",
+      "description": "Bindings to identifiers that already exist. At least one is required for anything a data table could join on.",
+      "additionalProperties": false,
+      "properties": {
+        "agi": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^AT[1-5CM]G[0-9]{5}$" },
+          "description": "Arabidopsis locus identifiers. Verified against Ensembl Plants by tests/test_ontology.py."
+        },
+        "uniprot": { "type": "array", "items": { "type": "string" } },
+        "chebi": { "type": "array", "items": { "type": "string", "pattern": "^CHEBI:[0-9]+$" } },
+        "kegg": { "type": "array", "items": { "type": "string" } },
+        "go_component": { "type": "array", "items": { "type": "string", "pattern": "^GO:[0-9]{7}$" } },
+        "ec": { "type": "array", "items": { "type": "string" } },
+        "interpro": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+
+    "compartment": {
+      "enum": [
+        "mitochondrial_matrix", "mitochondrial_inner_membrane",
+        "mitochondrial_intermembrane_space", "mitochondrion",
+        "chloroplast_stroma", "thylakoid_membrane", "thylakoid_lumen", "chloroplast",
+        "cytosol", "nucleus", "peroxisome", "plasma_membrane", "apoplast",
+        "vacuole", "endoplasmic_reticulum", "cell", "organism", "environment"
+      ]
+    },
+
+    "quantum_class": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string" },
+      "description": "One or more ids from qbo-core.yaml quantum_classes. Chemistry, not evidence."
+    },
+    "nuclei": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Spin-bearing nuclei implicated for this entity; ids from qbo-core.yaml nuclei."
+    },
+    "cofactors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "ChEBI ids of bound cofactors, e.g. CHEBI:57692 (FAD)."
+    },
+
+    "evidence_tier": { "enum": ["T1", "T2", "T3", "T4"] },
+    "confidence": { "enum": ["verified", "reported", "inferred"] },
+
+    "evidence": {
+      "type": "array",
+      "description": "Claims from the literature. Every `ref` must exist in evidence/references.yaml, which is itself CrossRef-verified.",
+      "items": {
+        "type": "object",
+        "required": ["ref", "claim"],
+        "additionalProperties": false,
+        "properties": {
+          "ref": { "type": "string", "description": "citation key from evidence/references.yaml" },
+          "claim": { "type": "string", "minLength": 1 },
+          "species": { "type": "string" },
+          "field_regime": { "enum": ["NNMF", "hypomagnetic", "GMF", "static_MF", "EMF"] },
+          "field_uT": { "type": ["number", "null"] },
+          "direction": { "enum": ["increase", "decrease", "altered", "no_effect"] },
+          "tissue": { "type": "string" },
+          "developmental_stage": { "type": "string" }
+        }
+      }
+    },
+
+    "rationale": {
+      "type": "string",
+      "description": "Why this entity carries this quantum_class. Required in spirit for T3, where no measurement exists and the reasoning IS the annotation."
+    },
+    "caveat": {
+      "type": "string",
+      "description": "Anything that argues against the annotation. Surfaced in the UI, not buried."
+    },
+    "note": { "type": "string" }
+  },
+
+  "allOf": [
+    {
+      "if": { "properties": { "evidence_tier": { "enum": ["T1", "T2"] } }, "required": ["evidence_tier"] },
+      "then": {
+        "required": ["evidence"],
+        "properties": { "evidence": { "minItems": 1 } },
+        "description": "T1 and T2 assert a magnetic-field effect, so they must cite at least one verified reference."
+      }
+    },
+    {
+      "if": {
+        "properties": { "quantum_class": { "contains": { "const": "structural_context" } } },
+        "required": ["quantum_class"]
+      },
+      "then": {
+        "properties": { "evidence_tier": { "const": "T4" } },
+        "description": "structural_context makes no quantum claim, so it can only be T4."
+      }
+    }
+  ]
+}

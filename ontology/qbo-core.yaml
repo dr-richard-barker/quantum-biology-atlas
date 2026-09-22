@@ -1,0 +1,338 @@
+# ==========================================================================
+# QBO — the Quantum Biology Ontology, core vocabulary
+# ==========================================================================
+#
+# QBO is deliberately NOT a new upper ontology. It is an ANNOTATION LAYER that
+# hangs quantum-mechanistic descriptors off identifiers that already exist
+# (AGI locus, UniProt, ChEBI, KEGG, GO cellular component). A QBO entity always
+# points at something a biologist can already look up.
+#
+# Two orthogonal axes, and keeping them apart is the point of the whole design:
+#
+#   quantum_class   WHAT CHEMISTRY the entity carries. A statement about
+#                   cofactors and spin-bearing centres. Structural, and largely
+#                   uncontroversial: complex III's Rieske centre is a [2Fe-2S]
+#                   cluster whether or not magnetic fields do anything to it.
+#
+#   evidence_tier   HOW MUCH IS ACTUALLY KNOWN about magnetic-field sensitivity
+#                   of that entity. This is where the claims live, and every
+#                   tier above T3 must cite a resolved DOI.
+#
+# Conflating the two is how "contains a flavin" quietly becomes "is magnetically
+# sensitive". QBO makes that conflation impossible to express.
+#
+# version: 0.1.0
+# licence: CC-BY-4.0
+# ==========================================================================
+
+qbo_version: "0.1.0"
+
+# --------------------------------------------------------------------------
+# Evidence tiers — the honesty backbone.
+# --------------------------------------------------------------------------
+# Rendered as a visual channel on every map, so a reader can always see how much
+# of a diagram is measured and how much is reasoned.
+evidence_tiers:
+  - id: T1
+    label: Demonstrated
+    definition: >
+      A magnetic-field manipulation has been applied and an effect measured on
+      THIS entity, or on an activity for which this entity is the accepted
+      direct readout. Requires at least one resolved DOI in `evidence`.
+    requires_doi: true
+
+  - id: T2
+    label: Inferred
+    definition: >
+      A magnetic-field effect has been demonstrated on the complex, pathway or
+      process that contains this entity, but not resolved to the entity itself.
+      Requires at least one resolved DOI in `evidence`.
+    requires_doi: true
+
+  - id: T3
+    label: Plausible
+    definition: >
+      The entity carries a qualifying quantum_class (a radical-pair-forming
+      cofactor, an Fe/S cluster, a heme-copper centre) and therefore a physical
+      route by which a weak field could act, but NO magnetic-field measurement
+      on it exists. A hypothesis, and labelled as one.
+    requires_doi: false
+
+  - id: T4
+    label: Context
+    definition: >
+      Structural or topological context only. No quantum claim of any kind is
+      being made. Present so the maps are readable as biology rather than as a
+      list of magnetically interesting nodes.
+    requires_doi: false
+
+# --------------------------------------------------------------------------
+# Confidence — provenance of the annotation itself, independent of tier.
+# --------------------------------------------------------------------------
+confidence_levels:
+  - id: verified
+    definition: Checked against the cited primary source during this build.
+  - id: reported
+    definition: Stated by a cited review; the primary source was not re-read.
+  - id: inferred
+    definition: Reasoned from structure or homology; no source states it directly.
+
+# --------------------------------------------------------------------------
+# Spin-bearing nuclei.
+# --------------------------------------------------------------------------
+# Natural abundance matters and is not decoration. The review's hyperfine
+# argument leans on 57Fe, and only ~2% of iron atoms in a plant ARE 57Fe — so a
+# hyperfine route through iron is intrinsically dilute in a way that a route
+# through 1H or 14N is not. Encoding abundance keeps that caveat visible instead
+# of letting "Fe/S clusters have hyperfine coupling" stand unqualified.
+#
+# Every value below was resolved against a source at build time; see `source`.
+nuclei:
+  - id: "1H"
+    name: protium
+    spin: 0.5
+    natural_abundance_pct: 99.98
+    note: >
+      Dominant hyperfine partner in flavin and tryptophan radicals. Effectively
+      every hydrogen is spin-bearing, so this route is never abundance-limited.
+    source: "https://en.wikipedia.org/wiki/Isotopes_of_hydrogen"
+
+  - id: "14N"
+    name: nitrogen-14
+    spin: 1.0
+    natural_abundance_pct: 99.62
+    quadrupolar: true
+    note: >
+      The canonical radical-pair hyperfine nucleus: FAD's isoalloxazine
+      nitrogens and the tryptophan indole nitrogen. Spin-1 and quadrupolar.
+    source: "https://en.wikipedia.org/wiki/Isotopes_of_nitrogen"
+
+  - id: "13C"
+    name: carbon-13
+    spin: 0.5
+    natural_abundance_pct: 1.1
+    note: Minor hyperfine contributor at natural abundance; relevant to labelling studies.
+    source: "https://en.wikipedia.org/wiki/Isotopes_of_carbon"
+
+  - id: "33S"
+    name: sulfur-33
+    spin: 1.5
+    natural_abundance_pct: 0.76
+    quadrupolar: true
+    note: >
+      The bridging sulfides of Fe/S clusters. At 0.76% abundance this is a very
+      dilute route — most clusters contain no spin-bearing sulfur at all.
+    source: "https://en.wikipedia.org/wiki/Isotopes_of_sulfur"
+
+  - id: "57Fe"
+    name: iron-57
+    spin: 0.5
+    natural_abundance_pct: 2.12
+    note: >
+      The only spin-bearing stable iron isotope. Named explicitly in the review's
+      hyperfine argument. At 2.12% abundance, a [4Fe-4S] cluster has roughly an
+      8% chance of containing at least one 57Fe — so 57Fe hyperfine cannot be
+      the whole story for a bulk metabolic effect, and isotope-substitution
+      experiments are the obvious discriminating test.
+    source: "https://en.wikipedia.org/wiki/Isotopes_of_iron"
+
+# --------------------------------------------------------------------------
+# Quantum classes — the chemistry axis.
+# --------------------------------------------------------------------------
+# `magnetically_addressable` records whether the class provides a PHYSICAL route
+# by which a weak static field could plausibly act. It is a statement about
+# mechanism availability, never about whether an effect has been observed —
+# that is what evidence_tier is for.
+quantum_classes:
+
+  # ---- radical-pair chemistry -------------------------------------------
+  - id: radical_pair_donor
+    label: Radical-pair donor
+    definition: >
+      One-electron donor that forms a spin-correlated radical pair on electron
+      transfer. Canonically the tryptophan triad of cryptochrome.
+    magnetically_addressable: true
+    typical_nuclei: ["1H", "14N"]
+
+  - id: radical_pair_acceptor
+    label: Radical-pair acceptor
+    definition: >
+      One-electron acceptor partner in a spin-correlated pair; in cryptochrome
+      the FAD that becomes FADH-dot.
+    magnetically_addressable: true
+    typical_nuclei: ["1H", "14N"]
+
+  - id: flavin_semiquinone
+    label: Flavin semiquinone radical
+    definition: >
+      A one-electron-reduced flavin (FAD/FMN) radical. Long-lived flavin
+      semiquinones are the best-characterised biological magnetosensitive
+      species.
+    magnetically_addressable: true
+    typical_nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692", "CHEBI:58210"]   # FAD, FMN
+
+  - id: triplet_yield_sensitive
+    label: Singlet-triplet interconversion sensitive
+    definition: >
+      A step whose product branching depends on singlet-triplet mixing in a
+      precursor radical pair, so a weak field can shift the yield without
+      changing any activation energy.
+    magnetically_addressable: true
+
+  - id: semiquinone_radical
+    label: Quinone semiquinone radical
+    definition: >
+      Ubisemiquinone or plastosemiquinone formed during two-step quinone
+      reduction. Kinetically stabilised at the Qo/Qi and QA/QB sites, which is
+      exactly where one-electron chemistry lingers long enough to matter.
+    magnetically_addressable: true
+    typical_nuclei: ["1H"]
+
+  # ---- iron-sulfur chemistry --------------------------------------------
+  - id: iron_sulfur_2Fe2S
+    label: "[2Fe-2S] cluster"
+    definition: One-electron-transferring [2Fe-2S] cluster.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "33S"]
+
+  - id: iron_sulfur_4Fe4S
+    label: "[4Fe-4S] cluster"
+    definition: >
+      One-electron-transferring [4Fe-4S] cluster. Oxygen-labile in aconitase and
+      in several assembly intermediates, which makes these the clusters most
+      exposed to a redox perturbation.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "33S"]
+
+  - id: iron_sulfur_3Fe4S
+    label: "[3Fe-4S] cluster"
+    definition: >
+      [3Fe-4S] cluster, as in succinate dehydrogenase. Often a degradation or
+      interconversion product of a [4Fe-4S] cluster.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "33S"]
+
+  - id: rieske_2Fe2S
+    label: Rieske [2Fe-2S] centre
+    definition: >
+      His/Cys-ligated [2Fe-2S] centre of complex III and cytochrome b6f. Its
+      large redox-potential swing on movement is central to the Q-cycle, and the
+      Q-cycle is where semiquinone radicals live.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "33S", "1H"]
+
+  # ---- heme and copper ---------------------------------------------------
+  - id: heme_copper_binuclear
+    label: Heme-copper binuclear centre
+    definition: >
+      The heme a3 / CuB site of cytochrome c oxidase, where O2 is reduced
+      through paramagnetic intermediates.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "1H"]
+
+  - id: cu_a_binuclear
+    label: CuA binuclear centre
+    definition: Mixed-valence binuclear copper electron entry site of complex IV.
+    magnetically_addressable: true
+    typical_nuclei: ["1H"]
+
+  - id: heme_electron_carrier
+    label: Heme electron carrier
+    definition: >
+      b-, c- or a-type heme performing one-electron transfer. Paramagnetic in
+      the ferric state.
+    magnetically_addressable: true
+    typical_nuclei: ["57Fe", "1H"]
+
+  # ---- consequence, not mechanism ----------------------------------------
+  - id: ros_leak_site
+    label: ROS-generating leak site
+    definition: >
+      A site where an electron escapes to O2 to give superoxide. Not itself a
+      magnetosensitive mechanism — it is the downstream amplifier that converts
+      a small change in electron-transfer branching into a signalling event.
+    magnetically_addressable: false
+
+  - id: spin_relaxation_modulated
+    label: Spin-relaxation modulated
+    definition: >
+      Entity whose relevant paramagnetic species relaxes fast enough that
+      coherent radical-pair mixing is unlikely, but where field-dependent
+      relaxation remains arguable. Flagged so these are not quietly counted as
+      radical-pair sites.
+    magnetically_addressable: true
+
+  - id: structural_context
+    label: Structural context
+    definition: >
+      Carries no spin-bearing cofactor. Present for pathway readability.
+      Always pairs with evidence_tier T4.
+    magnetically_addressable: false
+
+# --------------------------------------------------------------------------
+# Field regimes — so an `evidence` entry says which experiment it came from.
+# --------------------------------------------------------------------------
+# Boundaries follow the review's own definitions (section 1): the geomagnetic
+# field is "typically tens of microtesla"; NNMF systems reduce the local field
+# "to nanotesla-to-low-microtesla values"; "hypomagnetic" is the looser term for
+# anything substantially below the local GMF.
+field_regimes:
+  - id: NNMF
+    label: Near-null magnetic field
+    range_uT: [0.0, 1.0]
+    definition: Local GMF actively compensated or shielded to nT-to-low-uT values.
+  - id: hypomagnetic
+    label: Hypomagnetic
+    range_uT: [1.0, 25.0]
+    definition: Substantially weaker than the local GMF but not near-null.
+  - id: GMF
+    label: Geomagnetic field
+    range_uT: [25.0, 65.0]
+    definition: Ambient terrestrial field; the reference condition.
+  - id: static_MF
+    label: Elevated static magnetic field
+    range_uT: [65.0, 1.0e9]
+    definition: Applied static field above ambient.
+  - id: EMF
+    label: Oscillating electromagnetic field
+    range_uT: null
+    definition: Time-varying field; not directly comparable to static regimes.
+
+# --------------------------------------------------------------------------
+# Edge semantics for the maps.
+# --------------------------------------------------------------------------
+# The first six mirror Figure 7's six arrow colours; `electron_transfer` and
+# `cofactor_insertion` are added because the gene-resolved maps need to say what
+# a chemical arrow actually moves.
+edge_classes:
+  - id: direct_influence
+    label: Direct influence
+    sbgn_arc: stimulation
+  - id: indirect_influence
+    label: Indirect influence
+    sbgn_arc: modulation
+  - id: hormonal_feedback
+    label: Hormonal / signalling feedback
+    sbgn_arc: modulation
+  - id: circadian_feedback
+    label: Circadian feedback
+    sbgn_arc: modulation
+  - id: redox_feedback
+    label: Redox-state feedback
+    sbgn_arc: modulation
+  - id: energy_feedback
+    label: ATP / energy feedback
+    sbgn_arc: modulation
+  - id: electron_transfer
+    label: Electron transfer
+    sbgn_arc: consumption
+  - id: cofactor_insertion
+    label: Cofactor insertion / maturation
+    sbgn_arc: catalysis
+  - id: catalysis
+    label: Catalysis
+    sbgn_arc: catalysis
+  - id: inhibition
+    label: Inhibition
+    sbgn_arc: inhibition

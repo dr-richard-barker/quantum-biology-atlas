@@ -1,0 +1,159 @@
+# QBM-01 — Mitochondrial electron transport and oxidative phosphorylation
+#
+# Re-authoring of Figure 1A / Figure 4 of the review as a declarative source.
+#
+# No coordinate appears anywhere in this file. Lane order and grouping are
+# declared; every box size and position is derived from measured text by
+# qbio.layout. That is the structural fix for the draft's "text spills out of
+# the box's" — a label cannot overflow a box that was sized around it.
+#
+# Node identity, evidence tier and quantum classes come from the ontology, not
+# from here, so the same entity cannot claim different evidence on two maps.
+
+id: QBM-01
+title: Mitochondrial electron transport and oxidative phosphorylation
+subtitle: >-
+  Magnetically addressable nodes of the plant respiratory chain, with the evidence
+  tier for each shown as a border style
+derived_from: >-
+  Figures 1A and 4 of Porterfield & Barker, "Plant Responses to Near-Null Magnetic
+  Fields" — expanded to gene level and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  The respiratory chain redrawn so that each node carries its quantum chemistry and
+  the evidence behind it. Solid heavy borders mark entities where a magnetic-field
+  effect has been demonstrated (T1); solid light, where it has been shown for the
+  containing process (T2); dashed, where a physical route exists but no field
+  measurement has been made (T3); hairline, structural context with no quantum claim
+  (T4). The map is almost entirely dashed, and that is the finding: the Arabidopsis
+  near-null-field literature is developmental and nutritional, and has not yet
+  measured a respiratory complex directly. Alternative oxidase and the type II NAD(P)H
+  dehydrogenases are drawn because they are the confounders — a plant can route
+  electrons around a lesion in complex I or complex IV, so respiration rate alone
+  cannot test the hypothesis and cytochrome-versus-alternative flux must be
+  partitioned.
+
+lanes:
+  - id: substrates
+    compartment: mitochondrial_matrix
+    node_width: 150
+    nodes: [NADH_POOL, SUCCINATE, O2]
+
+  - id: dehydrogenases
+    compartment: mitochondrial_inner_membrane
+    node_width: 200
+    nodes: [COMPLEX_I, COMPLEX_I_FMN, COMPLEX_II, ALT_NADH_DH]
+
+  - id: quinone
+    compartment: mitochondrial_inner_membrane
+    node_width: 190
+    nodes: [UBIQUINONE_POOL, UBISEMIQUINONE, AOX]
+
+  - id: cytochrome_chain
+    compartment: mitochondrial_inner_membrane
+    node_width: 200
+    nodes: [RIESKE_FES, CYTOCHROME_C, COMPLEX_IV]
+
+  - id: output
+    compartment: mitochondrial_matrix
+    node_width: 195
+    nodes: [ATP_SYNTHASE, MITO_SUPEROXIDE, ACONITASE, LIPOYL_SYNTHASE]
+
+nodes:
+  - id: NADH_POOL
+    qbo: QBO:NADH_POOL
+    units: ["matrix redox couple"]
+  - id: SUCCINATE
+    qbo: QBO:SUCCINATE
+  - id: O2
+    qbo: QBO:O2
+    units: ["triplet ground state"]
+
+  - id: COMPLEX_I
+    qbo: QBO:COMPLEX_I
+    label: "Complex I"
+    units: ["FMN", "8 × Fe/S"]
+  - id: COMPLEX_I_FMN
+    qbo: QBO:COMPLEX_I_FMN
+    label: "FMN site"
+    units: ["flavin semiquinone"]
+  - id: COMPLEX_II
+    qbo: QBO:COMPLEX_II
+    label: "Complex II (SDH)"
+    units: ["FAD", "2Fe-2S / 4Fe-4S / 3Fe-4S"]
+  - id: ALT_NADH_DH
+    qbo: QBO:ALT_NADH_DH
+    label: "Type II NAD(P)H DH"
+    units: ["bypass — confounder"]
+
+  - id: UBIQUINONE_POOL
+    qbo: QBO:UBIQUINONE_POOL
+    label: "Ubiquinone pool"
+  - id: UBISEMIQUINONE
+    qbo: QBO:UBISEMIQUINONE
+    label: "Ubisemiquinone"
+    units: ["free radical"]
+  - id: AOX
+    qbo: QBO:AOX
+    label: "Alternative oxidase"
+    units: ["bypass — confounder"]
+
+  - id: RIESKE_FES
+    qbo: QBO:RIESKE_FES
+    label: "Complex III Rieske centre"
+    units: ["2Fe-2S", "Q cycle"]
+  - id: CYTOCHROME_C
+    qbo: QBO:CYTOCHROME_C
+    units: ["c-type heme"]
+  - id: COMPLEX_IV
+    qbo: QBO:COMPLEX_IV
+    label: "Complex IV (COX)"
+    units: ["heme a3 / CuB", "CuA"]
+
+  - id: ATP_SYNTHASE
+    qbo: QBO:ATP_SYNTHASE
+    label: "ATP synthase"
+    units: ["readout: ATP/ADP"]
+  - id: MITO_SUPEROXIDE
+    qbo: QBO:MITO_SUPEROXIDE
+    label: "Superoxide / H2O2"
+    units: ["signal amplifier"]
+  - id: ACONITASE
+    qbo: QBO:ACONITASE
+    units: ["4Fe-4S sentinel"]
+  - id: LIPOYL_SYNTHASE
+    qbo: QBO:LIPOYL_SYNTHASE
+    units: ["radical SAM"]
+
+edges:
+  # --- forward electron flow ---
+  - [NADH_POOL, COMPLEX_I, electron_transfer, "2e−"]
+  - [NADH_POOL, ALT_NADH_DH, electron_transfer, ""]
+  - [COMPLEX_I, COMPLEX_I_FMN, cofactor_insertion, ""]
+  - [SUCCINATE, COMPLEX_II, electron_transfer, "2e−"]
+  - [COMPLEX_I, UBIQUINONE_POOL, electron_transfer, ""]
+  - [COMPLEX_II, UBIQUINONE_POOL, electron_transfer, ""]
+  - [ALT_NADH_DH, UBIQUINONE_POOL, electron_transfer, ""]
+  - [UBIQUINONE_POOL, UBISEMIQUINONE, electron_transfer, "1e−"]
+  - [UBISEMIQUINONE, RIESKE_FES, electron_transfer, "Qo"]
+  - [UBIQUINONE_POOL, AOX, electron_transfer, "bypass"]
+  - [RIESKE_FES, CYTOCHROME_C, electron_transfer, ""]
+  - [CYTOCHROME_C, COMPLEX_IV, electron_transfer, ""]
+  - [COMPLEX_IV, O2, electron_transfer, "4e− → 2 H2O"]
+  - [AOX, O2, electron_transfer, "no H+ pumped"]
+
+  # --- proton circuit and its readout ---
+  - [COMPLEX_I, ATP_SYNTHASE, energy_feedback, "H+"]
+  - [RIESKE_FES, ATP_SYNTHASE, energy_feedback, "H+"]
+  - [COMPLEX_IV, ATP_SYNTHASE, energy_feedback, "H+"]
+
+  # --- leak to ROS, and what ROS does back ---
+  - [COMPLEX_I_FMN, MITO_SUPEROXIDE, direct_influence, "leak"]
+  - [UBISEMIQUINONE, MITO_SUPEROXIDE, direct_influence, "leak"]
+  - [MITO_SUPEROXIDE, ACONITASE, redox_feedback, "cluster damage"]
+  - [MITO_SUPEROXIDE, LIPOYL_SYNTHASE, redox_feedback, ""]
+
+  # --- Fe/S maintenance feeding back into the chain ---
+  - [LIPOYL_SYNTHASE, SUCCINATE, indirect_influence, "via 2-OGDH / PDH"]
+  - [ACONITASE, SUCCINATE, indirect_influence, "TCA flux"]

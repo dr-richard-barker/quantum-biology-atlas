@@ -1,0 +1,30 @@
+symbol	agi	description
+CRY1	AT4G08920	cryptochrome 1
+CRY2	AT1G04400	cryptochrome 2
+CRY3	AT5G24850	cryptochrome 3
+PHOT1	AT3G45780	phototropin 1
+PHYB	AT2G18790	phytochrome B
+AOX1A	AT3G22370	alternative oxidase 1A
+AOX1B	AT3G22360	alternative oxidase 1B
+AOX1C	AT3G27620	alternative oxidase 1C
+AOX1D	AT1G32350	alternative oxidase 1D
+AOX2	AT5G64210	alternative oxidase 2
+NDA1	AT1G07180	alternative NAD(P)H dehydrogenase 1
+NDA2	AT2G29990	alternative NAD(P)H dehydrogenase 2
+NDB1	AT4G28220	NAD(P)H dehydrogenase B1
+NDB2	AT4G05020	NAD(P)H dehydrogenase B2
+NDB4	AT2G20800	NAD(P)H dehydrogenase B4
+SDH1-1	AT5G66760	succinate dehydrogenase 1-1
+SDH2-1	AT3G27380	succinate dehydrogenase 2-1
+SDH2-2	AT5G40650	succinate dehydrogenase 2-2
+SDH3-1	AT5G09600	succinate dehydrogenase 3-1
+SDH4	AT2G46505	succinate dehydrogenase subunit 4
+ACO1	AT4G35830	aconitase 1
+ACO2	AT1G62380	ACC oxidase 2
+ACO3	AT2G05710	aconitase 3
+LIP1	AT2G15230	lipase 1
+RNR1	AT2G21790	ribonucleotide reductase 1
+CSD1	AT1G08830	copper/zinc superoxide dismutase 1
+CSD2	AT2G28190	copper/zinc superoxide dismutase 2
+MSD1	AT3G10920	manganese superoxide dismutase 1
+FSD1	AT4G25100	Fe superoxide dismutase 1

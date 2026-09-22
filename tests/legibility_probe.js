@@ -1,0 +1,164 @@
+/**
+ * Legibility probe — runs inside a real browser against a rendered QBM map.
+ *
+ * This is the acceptance test for the standing requirement that figures be
+ * legible: no overlapping text, nothing clipped at the edges, every label
+ * readable. The review draft it replaces carried the margin note
+ * "The text spills out of the box's", and the fix was structural — boxes are
+ * sized around measured text — so the test has to be structural too.
+ *
+ * It deliberately does NOT re-run the compiler's arithmetic. qbio.layout sizes
+ * boxes with matplotlib's glyph metrics; this probe measures what a browser
+ * actually painted, using its own independent text layout. If the two engines
+ * disagree, that disagreement is the bug, and a test that shared the metric
+ * engine would never see it.
+ *
+ * Everything is measured in SCREEN space via getBoundingClientRect(), not
+ * getBBox(). getBBox() reports an element's own untransformed coordinates, so a
+ * node inside a <g transform="translate(...)"> appears to sit at negative
+ * coordinates and every element reads as clipped. Screen space is also simply
+ * what the reader sees.
+ *
+ * Returns {failures: [...], stats: {...}}. An empty `failures` is a pass.
+ *
+ * Every assertion below has been verified non-vacuous by injecting the matching
+ * defect into a clean map and confirming the probe fires: shrinking a node box
+ * raised TEXT OVERFLOW, moving one box onto another raised NODE OVERLAP,
+ * moving a label background onto a node raised EDGE LABEL, and moving the title
+ * off-canvas raised CLIPPED.
+ */
+(() => {
+  const svg = document.querySelector('svg');
+  if (!svg) return { failures: ['no <svg> element on the page'], stats: {} };
+
+  const root = svg.getBoundingClientRect();
+  const rel = (el) => {
+    const r = el.getBoundingClientRect();
+    return {
+      x: r.left - root.left,
+      y: r.top - root.top,
+      x2: r.right - root.left,
+      y2: r.bottom - root.top,
+      w: r.width,
+      h: r.height,
+    };
+  };
+  const CANVAS = { x: 0, y: 0, x2: root.width, y2: root.height };
+
+  const inside = (i, o, tol) =>
+    i.x >= o.x - tol && i.y >= o.y - tol && i.x2 <= o.x2 + tol && i.y2 <= o.y2 + tol;
+  const overlaps = (a, b, tol) =>
+    !(a.x2 <= b.x + tol || b.x2 <= a.x + tol || a.y2 <= b.y + tol || b.y2 <= a.y + tol);
+  const fmt = (b) =>
+    `[${b.x.toFixed(1)},${b.y.toFixed(1)} → ${b.x2.toFixed(1)},${b.y2.toFixed(1)}]`;
+
+  const failures = [];
+  // Two different tolerances, and mixing them up is easy:
+  //   CONTAIN_TOL  slack when asking "is A inside B" — a positive value is lenient.
+  //   PENETRATE_TOL how far two boxes must actually intrude before it counts as an
+  //                 overlap. Passing a NEGATIVE value to overlaps() would expand both
+  //                 boxes and turn the test into a proximity check — which is how an
+  //                 earlier draft reported 19 false "unit chip covers label" failures
+  //                 on boxes with 0.2px of genuine clearance.
+  const CONTAIN_TOL = 1.5;
+  const PENETRATE_TOL = 0.5;
+
+  // ---- 1. every text run sits inside the box that was sized around it -----
+  const rects = {};
+  svg.querySelectorAll('[data-node-rect]').forEach((r) => {
+    rects[r.getAttribute('data-node-rect')] = rel(r);
+  });
+  let textRuns = 0;
+  svg.querySelectorAll('[data-text-for]').forEach((t) => {
+    textRuns++;
+    const id = t.getAttribute('data-text-for');
+    const box = rects[id];
+    if (!box) {
+      failures.push(`text references unknown node "${id}"`);
+      return;
+    }
+    const tb = rel(t);
+    if (!inside(tb, box, CONTAIN_TOL)) {
+      failures.push(
+        `TEXT OVERFLOW on "${id}": "${t.textContent}" ${fmt(tb)} escapes box ${fmt(box)}`
+      );
+    }
+  });
+
+  // ---- 2. no two node boxes overlap --------------------------------------
+  const ids = Object.keys(rects);
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      if (overlaps(rects[ids[i]], rects[ids[j]], PENETRATE_TOL)) {
+        failures.push(`NODE OVERLAP: "${ids[i]}" ${fmt(rects[ids[i]])} / "${ids[j]}" ${fmt(rects[ids[j]])}`);
+      }
+    }
+  }
+
+  // ---- 3. nothing is clipped by the canvas -------------------------------
+  let checked = 0;
+  svg.querySelectorAll('rect, text, path, tspan').forEach((el) => {
+    let b;
+    try {
+      b = rel(el);
+    } catch (e) {
+      return;
+    }
+    if (b.w === 0 && b.h === 0) return;           // empty markers, defs
+    checked++;
+    if (!inside(b, CANVAS, CONTAIN_TOL)) {
+      failures.push(
+        `CLIPPED <${el.tagName}> "${(el.textContent || '').slice(0, 44)}" ${fmt(b)} outside canvas ${fmt(CANVAS)}`
+      );
+    }
+  });
+
+  // ---- 4. edge labels never cover a node ---------------------------------
+  svg.querySelectorAll('[data-edge-label]').forEach((l) => {
+    const lb = rel(l);
+    ids.forEach((id) => {
+      if (overlaps(lb, rects[id], PENETRATE_TOL)) {
+        failures.push(`EDGE LABEL "${l.getAttribute('data-edge-label')}" covers node "${id}"`);
+      }
+    });
+  });
+
+  // ---- 5. unit chips never cover a node's own label -----------------------
+  let chipPairs = 0;
+  svg.querySelectorAll('[data-unit-for]').forEach((u) => {
+    const id = u.getAttribute('data-unit-for');
+    const ub = rel(u);
+    // Scoped to this chip's own node: a chip sitting above node A is expected to
+    // be nowhere near node B's text, and comparing them all-against-all only
+    // produces noise.
+    svg.querySelectorAll(`[data-text-for="${id}"]`).forEach((t) => {
+      chipPairs++;
+      if (overlaps(ub, rel(t), PENETRATE_TOL)) {
+        failures.push(`UNIT CHIP covers the label of "${id}"`);
+      }
+    });
+  });
+
+  // ---- 6. the map must carry a caption naming its data source ------------
+  const caption = Array.from(svg.querySelectorAll('.qbm-caption'))
+    .map((n) => n.textContent)
+    .join(' ');
+  if (caption.trim().length < 80) {
+    failures.push('CAPTION missing or too short — every map must state what it shows and where it came from');
+  } else if (!/derived from/i.test(caption)) {
+    failures.push('CAPTION does not say what the map was derived from');
+  }
+
+  return {
+    failures,
+    stats: {
+      nodes: ids.length,
+      textRuns,
+      elementsChecked: checked,
+      canvas: `${root.width.toFixed(0)}x${root.height.toFixed(0)} css px`,
+      viewBox: svg.getAttribute('viewBox'),
+      chipPairs,
+      captionChars: caption.trim().length,
+    },
+  };
+})();

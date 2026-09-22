@@ -1,0 +1,472 @@
+"""
+SVG rendering for QBM maps.
+
+Two things drive every visual decision here.
+
+**Evidence must be visible.** The evidence tier is a border channel, not a
+footnote: T1 (demonstrated) draws solid and heavy, T2 (inferred) solid and light,
+T3 (plausible) *dashed* — so a hypothesis literally looks provisional on the
+page — and T4 (context) a thin grey hairline. A reader can tell at a glance how
+much of a diagram is measured and how much is reasoned, without reading a legend.
+
+**Colour must survive a colourblind reader and a dark background.** The palette
+is Okabe-Ito throughout; the review's own figures used pure red/green, which is
+the one pairing to avoid. Theming goes through a `<style>` block rather than
+presentation attributes, because WebKit does not resolve `var()` inside an SVG
+presentation attribute — `fill="var(--x)"` renders as nothing in Safari, while a
+CSS rule `.qbm-node { fill: var(--x) }` works everywhere.
+"""
+from __future__ import annotations
+
+import html
+import textwrap
+from typing import Iterable, Sequence
+
+from .layout import (
+    LINE_SPACING,
+    SVG_FONT_STACK,
+    Box,
+    LaidOutNode,
+    edge_anchors,
+    measure,
+)
+
+# Okabe-Ito, the portfolio's standing palette.
+OKABE_ITO = {
+    "orange": "#E69F00",
+    "sky": "#56B4E9",
+    "green": "#009E73",
+    "yellow": "#F0E442",
+    "blue": "#0072B2",
+    "vermillion": "#D55E00",
+    "purple": "#CC79A7",
+    "black": "#000000",
+}
+
+#: Compartment fills. Deliberately low-saturation so node borders carry the signal.
+COMPARTMENT_STYLE = {
+    "mitochondrial_matrix": ("#7a4a12", "mito"),
+    "mitochondrial_inner_membrane": ("#7a4a12", "mito"),
+    "mitochondrial_intermembrane_space": ("#7a4a12", "mito"),
+    "mitochondrion": ("#7a4a12", "mito"),
+    "chloroplast_stroma": ("#0b5c46", "plastid"),
+    "thylakoid_membrane": ("#0b5c46", "plastid"),
+    "thylakoid_lumen": ("#0b5c46", "plastid"),
+    "chloroplast": ("#0b5c46", "plastid"),
+    "cytosol": ("#264b63", "cytosol"),
+    "nucleus": ("#4a2a55", "nucleus"),
+    "peroxisome": ("#6b5a06", "peroxisome"),
+    "plasma_membrane": ("#264b63", "cytosol"),
+    "apoplast": ("#3d3d3d", "apoplast"),
+    "vacuole": ("#264b63", "cytosol"),
+    "endoplasmic_reticulum": ("#264b63", "cytosol"),
+    "cell": ("#3d3d3d", "cell"),
+    "organism": ("#3d3d3d", "cell"),
+    "environment": ("#3d3d3d", "environment"),
+}
+
+TIER_LABEL = {
+    "T1": "Demonstrated",
+    "T2": "Inferred",
+    "T3": "Plausible",
+    "T4": "Context",
+}
+
+TITLE_SIZE = 20.0
+SUBTITLE_SIZE = 12.5
+NODE_SIZE = 13.0
+SUB_SIZE = 10.0
+CAPTION_SIZE = 11.5
+LEGEND_SIZE = 11.0
+
+
+def esc(s: str) -> str:
+    return html.escape(str(s), quote=True)
+
+
+def _stylesheet() -> str:
+    """Theme tokens plus the tier/class rules. Light and dark both explicit."""
+    return textwrap.dedent(
+        f"""
+        :root {{
+          --qbm-bg: #ffffff;
+          --qbm-ink: #16181d;
+          --qbm-ink-soft: #55606e;
+          --qbm-node-fill: #f7f8fa;
+          --qbm-node-stroke: #16181d;
+          --qbm-hairline: #9aa3b0;
+          --qbm-edge: #55606e;
+          --qbm-compartment-fill: rgba(0,0,0,0.035);
+        }}
+        @media (prefers-color-scheme: dark) {{
+          :root:not([data-theme="light"]) {{
+            --qbm-bg: #0f1115;
+            --qbm-ink: #e8eaee;
+            --qbm-ink-soft: #a3adbb;
+            --qbm-node-fill: #191d24;
+            --qbm-node-stroke: #e8eaee;
+            --qbm-hairline: #5b6572;
+            --qbm-edge: #a3adbb;
+            --qbm-compartment-fill: rgba(255,255,255,0.045);
+          }}
+        }}
+        :root[data-theme="dark"] {{
+          --qbm-bg: #0f1115;
+          --qbm-ink: #e8eaee;
+          --qbm-ink-soft: #a3adbb;
+          --qbm-node-fill: #191d24;
+          --qbm-node-stroke: #e8eaee;
+          --qbm-hairline: #5b6572;
+          --qbm-edge: #a3adbb;
+          --qbm-compartment-fill: rgba(255,255,255,0.045);
+        }}
+
+        .qbm-canvas {{ fill: var(--qbm-bg); }}
+        text {{ font-family: {SVG_FONT_STACK}; fill: var(--qbm-ink); }}
+        .qbm-title  {{ font-size: {TITLE_SIZE}px; font-weight: 700; }}
+        .qbm-subtitle,.qbm-caption {{ font-size: {SUBTITLE_SIZE}px; fill: var(--qbm-ink-soft); }}
+        .qbm-caption {{ font-size: {CAPTION_SIZE}px; }}
+        .qbm-label  {{ font-size: {NODE_SIZE}px; font-weight: 600; }}
+        .qbm-sub    {{ font-size: {SUB_SIZE}px; fill: var(--qbm-ink-soft); font-weight: 400; }}
+        .qbm-legend {{ font-size: {LEGEND_SIZE}px; fill: var(--qbm-ink-soft); }}
+
+        .qbm-node {{ fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }}
+        .qbm-unit {{ fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }}
+        .qbm-unit-label {{ font-size: {UNIT_SIZE}px; fill: var(--qbm-ink-soft);
+                           font-weight: 600; letter-spacing: 0.01em; }}
+        /* Evidence tier is a border channel — a hypothesis looks provisional. */
+        .tier-T1 {{ stroke-width: 2.6; }}
+        .tier-T2 {{ stroke-width: 1.7; }}
+        .tier-T3 {{ stroke-width: 1.5; stroke-dasharray: 7 5; }}
+        .tier-T4 {{ stroke-width: 0.9; stroke: var(--qbm-hairline); }}
+
+        .qbm-compartment {{ fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                            stroke-dasharray: 3 4; }}
+        .qbm-compartment-label {{ font-size: 11px; font-weight: 700;
+                                  letter-spacing: 0.08em; text-transform: uppercase; }}
+        .qbm-edge {{ fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }}
+        .qbm-edge-inhibition {{ stroke: {OKABE_ITO['vermillion']}; }}
+        .qbm-edge-electron_transfer {{ stroke: {OKABE_ITO['blue']}; stroke-width: 2.0; }}
+        .qbm-edge-cofactor_insertion {{ stroke: {OKABE_ITO['purple']}; stroke-dasharray: 5 4; }}
+        .qbm-edge-redox_feedback {{ stroke: {OKABE_ITO['orange']}; stroke-dasharray: 2 4; }}
+        .qbm-edge-energy_feedback {{ stroke: {OKABE_ITO['green']}; stroke-dasharray: 2 4; }}
+        .qbm-edge-circadian_feedback {{ stroke: {OKABE_ITO['purple']}; stroke-dasharray: 2 4; }}
+        .qbm-edge-hormonal_feedback {{ stroke: {OKABE_ITO['sky']}; stroke-dasharray: 2 4; }}
+        .qbm-edge-indirect_influence {{ stroke-dasharray: 6 4; }}
+        .qbm-edge-label-bg {{ fill: var(--qbm-bg); stroke: none; }}
+        .qbm-edge-label {{ font-size: {EDGE_LABEL_SIZE}px; fill: var(--qbm-ink-soft); }}
+
+        /* Data overlay: filled by qbio.project, absent in the base map. */
+        .qbm-overlay {{ stroke: none; }}
+        """
+    ).strip()
+
+
+def _defs() -> str:
+    """Arrowheads, one per stroke role so an arrow's head matches its line."""
+    heads = {
+        "arrow": "var(--qbm-edge)",
+        "arrow-electron": OKABE_ITO["blue"],
+        "arrow-cofactor": OKABE_ITO["purple"],
+        "arrow-inhibit": OKABE_ITO["vermillion"],
+    }
+    out = ["<defs>"]
+    for name, colour in heads.items():
+        out.append(
+            f'<marker id="{name}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" '
+            f'markerHeight="7" orient="auto-start-reverse">'
+            f'<path d="M0,0 L10,5 L0,10 z" style="fill:{colour}"/></marker>'
+        )
+    # Inhibition uses a bar, per SBGN.
+    out.append(
+        '<marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" '
+        'markerHeight="7" orient="auto-start-reverse">'
+        f'<rect x="4" y="0.5" width="2" height="9" style="fill:{OKABE_ITO["vermillion"]}"/></marker>'
+    )
+    out.append("</defs>")
+    return "".join(out)
+
+
+def _marker_for(edge_class: str) -> str:
+    return {
+        "electron_transfer": "arrow-electron",
+        "cofactor_insertion": "arrow-cofactor",
+        "inhibition": "bar",
+    }.get(edge_class, "arrow")
+
+
+UNIT_SIZE = 9.0
+UNIT_PAD_X = 5.0
+UNIT_H = 14.0
+UNIT_GAP = 4.0
+#: Gap between a unit chip and the node box below it. Chips used to straddle the
+#: border, which left ~0.2px between chip and first text line — technically not
+#: an overlap, but far too tight to read.
+UNIT_CLEARANCE = 3.0
+
+
+def unit_chips_svg(n: LaidOutNode) -> str:
+    """SBGN units-of-information as chips on the node's top edge.
+
+    These carry the cofactor a reader needs ("FMN", "2Fe-2S", "radical SAM"), so
+    they belong on the drawing, not only in the SBGN annotation. Each chip is
+    sized from its own measured text, and the row is centred on the node; a row
+    wider than the node overhangs symmetrically rather than being clipped.
+    """
+    units = list(n.payload.get("units") or ())
+    if not units:
+        return ""
+    widths = [measure(u, UNIT_SIZE)[0] + 2 * UNIT_PAD_X for u in units]
+    total = sum(widths) + UNIT_GAP * (len(units) - 1)
+    x = n.box.cx - total / 2.0
+    y = n.box.y - UNIT_H - UNIT_CLEARANCE
+    out = [f'<g class="qbm-units" data-units-for="{esc(n.id)}">']
+    for u, w in zip(units, widths):
+        out.append(
+            f'<rect class="qbm-unit" data-unit-for="{esc(n.id)}" x="{x:.2f}" y="{y:.2f}" '
+            f'width="{w:.2f}" height="{UNIT_H}" rx="3"/>'
+        )
+        out.append(
+            f'<text class="qbm-unit-label" x="{x + w / 2:.2f}" y="{y + UNIT_H - 4:.2f}" '
+            f'text-anchor="middle">{esc(u)}</text>'
+        )
+        x += w + UNIT_GAP
+    out.append("</g>")
+    return "".join(out)
+
+
+def unit_row_box(n: LaidOutNode) -> Box | None:
+    """Bounding box of a node's unit chips, so layout can keep them clear."""
+    units = list(n.payload.get("units") or ())
+    if not units:
+        return None
+    widths = [measure(u, UNIT_SIZE)[0] + 2 * UNIT_PAD_X for u in units]
+    total = sum(widths) + UNIT_GAP * (len(units) - 1)
+    return Box(n.box.cx - total / 2.0, n.box.y - UNIT_H - UNIT_CLEARANCE, total, UNIT_H)
+
+
+def node_svg(n: LaidOutNode) -> str:
+    """One node: rounded rect sized by the layout, then its measured text lines."""
+    tier = n.payload.get("evidence_tier", "T4")
+    qbo_id = n.payload.get("qbo", "")
+    kind = n.payload.get("kind", "macromolecule")
+    rx = 16.0 if kind in ("simple_chemical", "cofactor") else 7.0
+
+    parts = [f'<g class="qbm-node-group" data-node-id="{esc(n.id)}" data-tier="{esc(tier)}"'
+             f' data-qbo="{esc(qbo_id)}">']
+    parts.append(
+        f'<title>{esc(n.payload.get("tooltip") or n.payload.get("label") or n.id)}</title>'
+    )
+    parts.append(
+        f'<rect class="qbm-node tier-{esc(tier)}" data-node-rect="{esc(n.id)}" '
+        f'x="{n.box.x:.2f}" y="{n.box.y:.2f}" width="{n.box.w:.2f}" height="{n.box.h:.2f}" '
+        f'rx="{rx}" ry="{rx}"/>'
+    )
+    # A slot the overlay writes into; empty in the base map so nothing implies data.
+    parts.append(
+        f'<rect class="qbm-overlay" data-overlay-for="{esc(n.id)}" '
+        f'x="{n.box.x:.2f}" y="{n.box.y:.2f}" width="{n.box.w:.2f}" height="{n.box.h:.2f}" '
+        f'rx="{rx}" ry="{rx}" style="fill:none"/>'
+    )
+
+    total_h = len(n.lines) * n.font_size * LINE_SPACING + (
+        len(n.sublines) * n.sub_font_size * LINE_SPACING if n.sublines else 0.0
+    )
+    y = n.box.cy - total_h / 2.0 + n.font_size * 0.86
+    for line in n.lines:
+        parts.append(
+            f'<text class="qbm-label" data-text-for="{esc(n.id)}" x="{n.box.cx:.2f}" '
+            f'y="{y:.2f}" text-anchor="middle">{esc(line)}</text>'
+        )
+        y += n.font_size * LINE_SPACING
+    for line in n.sublines:
+        parts.append(
+            f'<text class="qbm-sub" data-text-for="{esc(n.id)}" x="{n.box.cx:.2f}" '
+            f'y="{y:.2f}" text-anchor="middle">{esc(line)}</text>'
+        )
+        y += n.sub_font_size * LINE_SPACING
+    parts.append("</g>")
+    return "".join(parts)
+
+
+EDGE_LABEL_SIZE = 9.5
+EDGE_LABEL_H = 13.0
+
+
+def _place_edge_label(
+    label: str,
+    sx: float,
+    sy: float,
+    ex: float,
+    ey: float,
+    obstacles: Iterable[Box],
+) -> Box | None:
+    """Find a spot on the edge where the label hits nothing. None = give up.
+
+    Edge labels that land on top of a node box are exactly the defect the draft
+    figures had, so an unplaceable label is DROPPED rather than drawn over a
+    node. Callers are expected to count the drops — a map that loses many labels
+    is a map that needs re-laning, and the build reports that instead of hiding it.
+    """
+    w = measure(label, EDGE_LABEL_SIZE)[0] + 6.0
+    obstacles = list(obstacles)
+    # Try along the edge, then offset perpendicular to it.
+    dx, dy = ex - sx, ey - sy
+    length = max(1e-6, (dx * dx + dy * dy) ** 0.5)
+    nx, ny = -dy / length, dx / length          # unit normal
+    for t in (0.5, 0.38, 0.62, 0.28, 0.72):
+        for offset in (0.0, 11.0, -11.0, 20.0, -20.0):
+            cx = sx + dx * t + nx * offset
+            cy = sy + dy * t + ny * offset
+            box = Box(cx - w / 2.0, cy - EDGE_LABEL_H / 2.0, w, EDGE_LABEL_H)
+            if not any(box.overlaps(o, tol=-2.0) for o in obstacles):
+                return box
+    return None
+
+
+def edge_svg(
+    a: LaidOutNode,
+    b: LaidOutNode,
+    edge_class: str,
+    label: str = "",
+    obstacles: Iterable[Box] = (),
+) -> tuple[str, bool]:
+    """Render one edge. Returns (svg, label_was_drawn)."""
+    (sx, sy), (ex, ey) = edge_anchors(a.box, b.box)
+    marker = _marker_for(edge_class)
+    out = [
+        f'<g class="qbm-edge-group" data-edge="{esc(a.id)}-&gt;{esc(b.id)}" '
+        f'data-edge-class="{esc(edge_class)}">',
+        f'<path class="qbm-edge qbm-edge-{esc(edge_class)}" '
+        f'd="M{sx:.2f},{sy:.2f} L{ex:.2f},{ey:.2f}" marker-end="url(#{marker})"/>',
+    ]
+    drawn = False
+    if label:
+        box = _place_edge_label(label, sx, sy, ex, ey, obstacles)
+        if box is not None:
+            drawn = True
+            out.append(
+                f'<rect class="qbm-edge-label-bg" data-edge-label="{esc(a.id)}-&gt;{esc(b.id)}" '
+                f'x="{box.x:.2f}" y="{box.y:.2f}" width="{box.w:.2f}" '
+                f'height="{box.h:.2f}" rx="3"/>'
+            )
+            out.append(
+                f'<text class="qbm-edge-label" x="{box.cx:.2f}" y="{box.cy + 3.3:.2f}" '
+                f'text-anchor="middle">{esc(label)}</text>'
+            )
+    out.append("</g>")
+    return "".join(out), drawn
+
+
+#: Vertical space reserved at the top of a compartment band for its own label.
+#: Nodes are never placed here, so the label cannot land on a node or a unit chip.
+COMPARTMENT_LABEL_BAND = 20.0
+
+
+def compartment_svg(box: Box, compartment: str, label: str) -> str:
+    """Draw a compartment band with its label in reserved space above the contents.
+
+    The box passed in already clears its members; this extends it upward by
+    COMPARTMENT_LABEL_BAND so the label has somewhere of its own to sit.
+    """
+    stroke, _slug = COMPARTMENT_STYLE.get(compartment, ("#3d3d3d", "other"))
+    y = box.y - COMPARTMENT_LABEL_BAND
+    h = box.h + COMPARTMENT_LABEL_BAND
+    return (
+        f'<g class="qbm-compartment-group" data-compartment="{esc(compartment)}">'
+        f'<rect class="qbm-compartment" data-compartment-rect="{esc(compartment)}" '
+        f'x="{box.x:.2f}" y="{y:.2f}" '
+        f'width="{box.w:.2f}" height="{h:.2f}" rx="12" ry="12" '
+        f'style="stroke:{stroke}"/>'
+        f'<text class="qbm-compartment-label" x="{box.x + 14:.2f}" y="{y + 15:.2f}" '
+        f'style="fill:{stroke}">{esc(label)}</text>'
+        f"</g>"
+    )
+
+
+def compartment_tag_svg(n: LaidOutNode) -> str:
+    """Tag a node that sits in a different compartment from its lane's band."""
+    tag = n.payload.get("compartment_tag")
+    if not tag:
+        return ""
+    w = measure(tag, UNIT_SIZE)[0] + 2 * UNIT_PAD_X
+    x = n.box.cx - w / 2.0
+    y = n.box.y2 + UNIT_CLEARANCE
+    return (
+        f'<g class="qbm-comp-tag" data-comp-tag-for="{esc(n.id)}">'
+        f'<rect class="qbm-unit" x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" '
+        f'height="{UNIT_H}" rx="7"/>'
+        f'<text class="qbm-unit-label" x="{n.box.cx:.2f}" y="{y + UNIT_H - 4:.2f}" '
+        f'text-anchor="middle">{esc(tag)}</text>'
+        f"</g>"
+    )
+
+
+def tier_legend_svg(x: float, y: float, tiers_present: Sequence[str]) -> tuple[str, float]:
+    """Legend for the tier border channel. Returns (svg, height consumed)."""
+    rows = [t for t in ("T1", "T2", "T3", "T4") if t in tiers_present]
+    if not rows:
+        return "", 0.0
+    out = [f'<g class="qbm-legend-group" transform="translate({x:.2f},{y:.2f})">']
+    out.append('<text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text>')
+    cy = 14.0
+    for t in rows:
+        out.append(
+            f'<rect class="qbm-node tier-{t}" x="0" y="{cy:.2f}" width="26" height="14" rx="4"/>'
+        )
+        out.append(
+            f'<text class="qbm-legend" x="34" y="{cy + 11:.2f}">'
+            f"{t} — {esc(TIER_LABEL[t])}</text>"
+        )
+        cy += 21.0
+    out.append("</g>")
+    return "".join(out), cy + 6.0
+
+
+def document(
+    *,
+    title: str,
+    subtitle: str,
+    caption: str,
+    body: str,
+    canvas: Box,
+    legend: str = "",
+) -> str:
+    """Assemble the SVG. The viewBox comes from the measured content, so nothing clips."""
+    header_h = 64.0
+    # Wrap the caption against the final canvas width, then take the footer height
+    # from the number of lines that actually resulted — sizing the footer from an
+    # estimate is how a caption ends up running off the bottom of the image.
+    total_w = max(canvas.w, 560.0)
+    caption_lines, _, _ = _caption_block(caption, total_w - 32)
+    footer_h = len(caption_lines) * CAPTION_SIZE * LINE_SPACING + 34.0
+    total_h = canvas.h + header_h + footer_h
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+        f'viewBox="0 0 {total_w:.2f} {total_h:.2f}" width="{total_w:.2f}" height="{total_h:.2f}" '
+        f'role="img" aria-label="{esc(title)}">',
+        f"<style>{_stylesheet()}</style>",
+        _defs(),
+        f'<rect class="qbm-canvas" x="0" y="0" width="{total_w:.2f}" height="{total_h:.2f}"/>',
+        f'<text class="qbm-title" x="16" y="30">{esc(title)}</text>',
+        f'<text class="qbm-subtitle" x="16" y="50">{esc(subtitle)}</text>',
+        f'<g transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
+    ]
+    if legend:
+        parts.append(f'<g transform="translate(0,{header_h:.2f})">{legend}</g>')
+
+    y = canvas.h + header_h + 18.0
+    for line in caption_lines:
+        parts.append(f'<text class="qbm-caption" x="16" y="{y:.2f}">{esc(line)}</text>')
+        y += CAPTION_SIZE * LINE_SPACING
+    parts.append("</svg>")
+    return "\n".join(parts)
+
+
+def _caption_block(caption: str, width: float) -> tuple[list[str], float, float]:
+    from .layout import text_block
+
+    if not caption:
+        return [], 0.0, 0.0
+    return text_block(caption, CAPTION_SIZE, max(240.0, width))

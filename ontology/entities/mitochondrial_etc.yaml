@@ -1,0 +1,418 @@
+# QBO entities — mitochondrial electron transport, oxidative phosphorylation
+# and the Fe/S-dependent TCA steps that feed them.
+#
+# Backs QBM-01 and QBM-05.
+#
+# Every AGI locus here was resolved against Ensembl Plants by
+# scripts/resolve_loci.py and is re-checked by tests/test_ontology.py. None was
+# typed from memory — two symbol collisions found during authoring make the point:
+# `ACO2` as a symbol returns ACC OXIDASE 2 (AT1G62380), not aconitase 2
+# (AT4G26970), and `LIP1` returns a lipase (AT2G15230), not lipoyl synthase
+# (AT2G20860). The ontology therefore stores loci, never symbols.
+#
+# Tier discipline, restated because it is the whole point:
+#   T1/T2 assert a magnetic-field effect and MUST cite a verified reference.
+#   T3 asserts only that a physical route exists, and must say why in `rationale`.
+#   T4 asserts nothing.
+#
+# The Arabidopsis NNMF literature is developmental and nutritional; almost none of
+# it measured a respiratory complex directly. That is the review's central gap, and
+# it shows up here as an ontology that is honestly mostly T3.
+
+entities:
+
+  # ======================================================================
+  # Complex I — NADH:ubiquinone oxidoreductase
+  # ======================================================================
+  - id: QBO:COMPLEX_I
+    label: "Complex I (NADH:ubiquinone oxidoreductase)"
+    kind: complex
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Entry point for matrix NADH. Carries one FMN and a chain of Fe/S clusters
+      that conduct electrons roughly 90 Å to the quinone site, pumping protons.
+    xref:
+      agi: [AT5G37510, AT5G08530, AT4G02580, AT5G11770]
+      go_component: [GO:0005747]
+      ec: ["7.1.1.2"]
+    quantum_class: [flavin_semiquinone, iron_sulfur_4Fe4S, iron_sulfur_2Fe2S, ros_leak_site]
+    nuclei: ["1H", "14N", "57Fe", "33S"]
+    cofactors: ["CHEBI:58210"]          # FMN
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The FMN site forms a flavin semiquinone during turnover and is a known
+      superoxide-producing leak site, and the Fe/S chain performs sequential
+      one-electron transfers — both of the physical routes the radical-pair and
+      hyperfine arguments require. No published experiment has applied a
+      near-null field and measured plant complex I activity, so this is a
+      hypothesis with a mechanism, not a result.
+    caveat: >
+      Electron transfer along the Fe/S chain is fast relative to plausible
+      singlet-triplet mixing times, so a coherent radical-pair effect here is
+      harder to argue than at the flavin. Treat the flavin and the cluster chain
+      as separate hypotheses rather than one.
+    note: >
+      Loci listed are the Fe/S- and flavin-bearing nuclear subunits verified so
+      far (75 kDa EMB1467, 51 kDa CI51, 24 kDa, 20 kDa). The mitochondrially
+      encoded NAD subunits are not yet bound — pending, not omitted.
+
+  - id: QBO:COMPLEX_I_FMN
+    label: "Complex I FMN site"
+    kind: cofactor
+    compartment: mitochondrial_matrix
+    description: >
+      The flavin mononucleotide that accepts a hydride from NADH and passes
+      electrons on singly, transiting a semiquinone radical state.
+    xref:
+      chebi: ["CHEBI:58210"]
+      agi: [AT5G08530]
+    quantum_class: [flavin_semiquinone, radical_pair_acceptor, ros_leak_site]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:58210"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      A one-electron-reduced flavin is the best-characterised magnetosensitive
+      species in biology; the same chemistry underlies the cryptochrome
+      radical-pair model. The review's argument is precisely that this chemistry
+      is not confined to photoreceptors.
+
+  # ======================================================================
+  # Complex II — succinate dehydrogenase
+  # ======================================================================
+  - id: QBO:COMPLEX_II
+    label: "Complex II (succinate dehydrogenase)"
+    kind: complex
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Shared node of the TCA cycle and the respiratory chain. A covalent FAD on
+      SDH1 oxidises succinate; [2Fe-2S], [4Fe-4S] and [3Fe-4S] clusters on SDH2
+      carry the electrons to ubiquinone.
+    xref:
+      agi: [AT5G66760, AT3G27380, AT5G40650, AT5G09600, AT2G46505]
+      go_component: [GO:0005749]
+      ec: ["1.3.5.1"]
+    quantum_class: [flavin_semiquinone, iron_sulfur_2Fe2S, iron_sulfur_4Fe4S, iron_sulfur_3Fe4S, ros_leak_site]
+    nuclei: ["1H", "14N", "57Fe", "33S"]
+    cofactors: ["CHEBI:57692"]          # FAD
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Carries all three cluster types plus a covalent flavin, and sits at the
+      junction the review nominates as the bottleneck — a change here propagates
+      into both TCA flux and respiratory electron flow.
+
+  # ======================================================================
+  # Complex III — the Rieske centre and the Q cycle
+  # ======================================================================
+  - id: QBO:RIESKE_FES
+    label: "Rieske [2Fe-2S] centre (complex III)"
+    kind: macromolecule
+    compartment: mitochondrial_inner_membrane
+    description: >
+      His/Cys-ligated [2Fe-2S] centre whose large domain movement drives the
+      bifurcated Q cycle.
+    xref:
+      agi: [AT5G13430, AT5G13440]
+      go_component: [GO:0005750]
+    quantum_class: [rieske_2Fe2S, semiquinone_radical, ros_leak_site]
+    nuclei: ["57Fe", "33S", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The Qo site generates a kinetically stabilised ubisemiquinone — a genuine,
+      comparatively long-lived organic radical in a defined protein pocket, which
+      is the most favourable setting for a field-dependent branching effect
+      anywhere in the respiratory chain.
+    caveat: >
+      Qo-site semiquinone is short-lived and its occupancy is debated; a
+      field effect here would be easier to argue if lifetime were measured
+      under the relevant conditions.
+
+  - id: QBO:UBISEMIQUINONE
+    label: "Ubisemiquinone (UQ·−)"
+    kind: simple_chemical
+    compartment: mitochondrial_inner_membrane
+    description: One-electron-reduced ubiquinone, the radical intermediate of the Q cycle.
+    xref:
+      chebi: ["CHEBI:16389"]
+    quantum_class: [semiquinone_radical, radical_pair_donor, ros_leak_site]
+    nuclei: ["1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      A free-radical intermediate held in a protein pocket. If any respiratory
+      species supports spin-correlated chemistry, this is the leading candidate.
+
+  # ======================================================================
+  # Complex IV — cytochrome c oxidase
+  # ======================================================================
+  - id: QBO:COMPLEX_IV
+    label: "Complex IV (cytochrome c oxidase)"
+    kind: complex
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Terminal oxidase. Electrons enter at the binuclear CuA site, pass through
+      heme a to the heme a3/CuB binuclear centre where O2 is reduced to water
+      through paramagnetic intermediates.
+    xref:
+      go_component: [GO:0005751]
+      ec: ["7.1.1.9"]
+    quantum_class: [heme_copper_binuclear, cu_a_binuclear, heme_electron_carrier]
+    nuclei: ["57Fe", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The review names cytochrome oxidase explicitly as a candidate direct
+      metabolic target. The heme a3/CuB centre passes through paramagnetic
+      oxygen intermediates (P, F, oxoferryl) whose spin states are, in principle,
+      field-addressable.
+    caveat: >
+      Strongly exchange-coupled metal centres relax very fast, which argues
+      against coherent spin effects. This is a mechanistically attractive but
+      physically demanding hypothesis, and is labelled T3 for that reason.
+    note: >
+      Subunit loci not yet bound — the Arabidopsis COX core subunits are
+      mitochondrially encoded (ATMG…) and were not resolvable in this build.
+
+  - id: QBO:CYTOCHROME_C
+    label: "Cytochrome c"
+    kind: macromolecule
+    compartment: mitochondrial_intermembrane_space
+    description: >
+      Mobile c-type heme carrier between complex III and complex IV; also links
+      mitochondrial state to ABA-dependent germination control.
+    xref:
+      agi: [AT1G22840, AT4G10040]
+      go_component: [GO:0005758]
+    quantum_class: [heme_electron_carrier]
+    nuclei: ["57Fe", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      A one-electron heme carrier, paramagnetic in the ferric state. Included
+      because Racca et al. place cytochrome c on the path from mitochondrial
+      state to germination timing, which is the developmental window the review
+      argues matters most.
+    evidence:
+      - ref: Racca2022
+        claim: >
+          Cytochrome c and the transcription factor ABI4 link mitochondrial status
+          to ABA-dependent seed germination.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: altered
+        developmental_stage: germination
+
+  # ======================================================================
+  # Alternative pathway — the uncoupling escape route
+  # ======================================================================
+  - id: QBO:AOX
+    label: "Alternative oxidase (AOX)"
+    kind: macromolecule
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Di-iron quinol oxidase that bypasses complexes III and IV, reducing O2
+      without pumping protons. Uncouples electron flux from ATP yield.
+    xref:
+      agi: [AT3G22370, AT3G22360, AT3G27620, AT1G32350, AT5G64210]
+      go_component: [GO:0005739]
+    quantum_class: [structural_context]
+    nuclei: []
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Deliberately T4 and structural_context. AOX carries a non-heme di-iron
+      centre, so a case for magnetic addressability could be made — but no
+      measurement exists and the review does not argue it. Its importance here is
+      as the confounder: AOX lets a plant maintain electron flux while ATP yield
+      falls, so respiration rate alone cannot test the review's hypothesis.
+      Any NNMF respirometry must partition cytochrome and alternative pathway
+      flux, or it will measure the wrong thing.
+
+  - id: QBO:ALT_NADH_DH
+    label: "Alternative NAD(P)H dehydrogenases (NDA/NDB)"
+    kind: macromolecule
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Rotenone-insensitive type II NAD(P)H dehydrogenases on both faces of the
+      inner membrane. They oxidise NAD(P)H without proton pumping, bypassing
+      complex I.
+    xref:
+      agi: [AT1G07180, AT2G29990, AT4G28220, AT4G05020, AT2G20800]
+    quantum_class: [flavin_semiquinone]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      FAD-dependent, so the same flavin semiquinone chemistry applies. Included
+      mainly as the second confounder alongside AOX — a plant can route around a
+      complex I lesion, which blunts any phenotype and must be controlled for.
+
+  # ======================================================================
+  # Fe/S-dependent TCA enzymes — the review's sentinel nodes
+  # ======================================================================
+  - id: QBO:ACONITASE
+    label: "Aconitase (ACO1/2/3)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      Citrate-isocitrate isomerase carrying a solvent-exposed [4Fe-4S] cluster
+      with one non-cysteinyl-ligated iron used for substrate binding.
+    xref:
+      agi: [AT4G35830, AT4G26970, AT2G05710]
+      ec: ["4.2.1.3"]
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The review nominates aconitase as the sentinel of Fe/S integrity, and the
+      biochemistry supports it: the exposed cluster iron makes aconitase the
+      first TCA activity to fall under oxidative stress, so it reports cluster
+      damage before anything else does.
+    caveat: >
+      Precisely because aconitase responds to any oxidative insult, a change
+      under NNMF would NOT by itself implicate a magnetic mechanism. It is a
+      sensitive readout and a poor discriminator; it needs a paired
+      ROS-independent control.
+    note: >
+      Loci verified individually: AT4G35830 aconitase 1, AT4G26970 aconitase 2,
+      AT2G05710 aconitase 3. Resolving the symbol `ACO2` instead would have
+      returned ACC oxidase 2 — see the file header.
+
+  - id: QBO:LIPOYL_SYNTHASE
+    label: "Lipoyl synthase (LIP1)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      Radical-SAM enzyme that inserts sulfur into the lipoyl cofactor, consuming
+      one of its own [4Fe-4S] clusters as the sulfur donor.
+    xref:
+      agi: [AT2G20860]
+      ec: ["2.8.1.8"]
+    quantum_class: [iron_sulfur_4Fe4S, radical_pair_donor]
+    nuclei: ["57Fe", "33S", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      A radical-SAM enzyme generating a 5'-deoxyadenosyl radical from a [4Fe-4S]
+      cluster — genuine organic radical chemistry on an iron-sulfur centre, which
+      is the tightest coupling of the review's two proposed mechanisms found
+      anywhere in primary metabolism. Its product lipoylates pyruvate
+      dehydrogenase and the 2-oxoglutarate dehydrogenase complex, so a defect
+      propagates straight into TCA flux.
+    caveat: >
+      The radical is generated inside the active site and quenched within one
+      turnover; whether a spin-correlated pair with a long enough lifetime to be
+      field-sensitive ever forms is untested.
+    note: >
+      AT2G20860 verified as lipoic acid synthase 1. The symbol `LIP1` resolves to
+      AT2G15230, a lipase — see the file header.
+
+  # ======================================================================
+  # Downstream consequence
+  # ======================================================================
+  - id: QBO:MITO_SUPEROXIDE
+    label: "Mitochondrial superoxide / H2O2"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    description: >
+      ROS produced at complex I's flavin and complex III's Qo site, dismutated by
+      matrix MnSOD. The signalling amplifier between a small change in electron
+      branching and a transcriptional response.
+    xref:
+      chebi: ["CHEBI:18421", "CHEBI:16240"]
+      agi: [AT3G10920]
+    quantum_class: [ros_leak_site]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      Not a magnetosensitive mechanism itself — it is the amplifier. A field
+      effect too small to measure as a rate change can still register here,
+      because ROS signalling is threshold-like.
+    evidence:
+      - ref: Parmagnani2022
+        claim: >
+          Near-null magnetic field exposure alters ROS-associated transcriptomic and
+          metabolomic programmes in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+      - ref: Farooq2021
+        claim: >
+          Reactive oxygen species and mitochondria jointly regulate seed germination,
+          establishing the route from mitochondrial ROS to a developmental outcome.
+        species: multiple
+        field_regime: null
+        direction: altered
+        developmental_stage: germination
+
+  - id: QBO:ATP_SYNTHASE
+    label: "ATP synthase (complex V)"
+    kind: complex
+    compartment: mitochondrial_inner_membrane
+    description: Uses the proton motive force to phosphorylate ADP.
+    xref:
+      go_component: [GO:0005753]
+      ec: ["7.1.2.2"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Carries no spin-bearing cofactor and is not a candidate direct target. It is
+      on the map because it is where any upstream electron-transport perturbation
+      is finally read out as an ATP/ADP ratio — the measurement the review asks
+      for.
+
+  - id: QBO:NADH_POOL
+    label: "NADH / NAD+"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    description: Matrix redox couple; substrate for complex I.
+    xref:
+      chebi: ["CHEBI:57945", "CHEBI:57540"]
+      kegg: ["C00004", "C00003"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:SUCCINATE
+    label: "Succinate"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:30031"]
+      kegg: ["C00042"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:UBIQUINONE_POOL
+    label: "Ubiquinone pool (UQ / UQH2)"
+    kind: simple_chemical
+    compartment: mitochondrial_inner_membrane
+    description: Two-electron carrier whose one-electron intermediate is the semiquinone.
+    xref:
+      chebi: ["CHEBI:16389"]
+      kegg: ["C00399"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:O2
+    label: "O2"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:15379"]
+      kegg: ["C00007"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Ground-state dioxygen is itself a triplet, which is why one-electron
+      reduction to superoxide is spin-allowed where two-electron chemistry is
+      not. Worth stating on the map even though no claim is attached to it.
