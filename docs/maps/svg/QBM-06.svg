@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 749.56 949.00" width="749.56" height="949.00" role="img" aria-label="QBM-06 · Seed germination before photosynthesis">
+<style>:root {
+  --qbm-bg: #ffffff;
+  --qbm-ink: #16181d;
+  --qbm-ink-soft: #55606e;
+  --qbm-node-fill: #f7f8fa;
+  --qbm-node-stroke: #16181d;
+  --qbm-hairline: #9aa3b0;
+  --qbm-edge: #55606e;
+  --qbm-compartment-fill: rgba(0,0,0,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qbm-bg: #0f1115;
+    --qbm-ink: #e8eaee;
+    --qbm-ink-soft: #a3adbb;
+    --qbm-node-fill: #191d24;
+    --qbm-node-stroke: #e8eaee;
+    --qbm-hairline: #5b6572;
+    --qbm-edge: #a3adbb;
+    --qbm-compartment-fill: rgba(255,255,255,0.045);
+  }
+}
+:root[data-theme="dark"] {
+  --qbm-bg: #0f1115;
+  --qbm-ink: #e8eaee;
+  --qbm-ink-soft: #a3adbb;
+  --qbm-node-fill: #191d24;
+  --qbm-node-stroke: #e8eaee;
+  --qbm-hairline: #5b6572;
+  --qbm-edge: #a3adbb;
+  --qbm-compartment-fill: rgba(255,255,255,0.045);
+}
+
+.qbm-canvas { fill: var(--qbm-bg); }
+text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
+.qbm-title  { font-size: 20.0px; font-weight: 700; }
+.qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
+.qbm-caption { font-size: 11.5px; }
+.qbm-label  { font-size: 13.0px; font-weight: 600; }
+.qbm-sub    { font-size: 10.0px; fill: var(--qbm-ink-soft); font-weight: 400; }
+.qbm-legend { font-size: 11.0px; fill: var(--qbm-ink-soft); }
+
+.qbm-node { fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }
+.qbm-unit { fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }
+.qbm-unit-label { font-size: 9.0px; fill: var(--qbm-ink-soft);
+                   font-weight: 600; letter-spacing: 0.01em; }
+/* Evidence tier is a border channel — a hypothesis looks provisional. */
+.tier-T1 { stroke-width: 2.6; }
+.tier-T2 { stroke-width: 1.7; }
+.tier-T3 { stroke-width: 1.5; stroke-dasharray: 7 5; }
+.tier-T4 { stroke-width: 0.9; stroke: var(--qbm-hairline); }
+
+.qbm-compartment { fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                    stroke-dasharray: 3 4; }
+.qbm-compartment-label { font-size: 11px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; }
+.qbm-edge { fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }
+.qbm-edge-inhibition { stroke: #D55E00; }
+.qbm-edge-electron_transfer { stroke: #0072B2; stroke-width: 2.0; }
+.qbm-edge-cofactor_insertion { stroke: #CC79A7; stroke-dasharray: 5 4; }
+.qbm-edge-redox_feedback { stroke: #E69F00; stroke-dasharray: 2 4; }
+.qbm-edge-energy_feedback { stroke: #009E73; stroke-dasharray: 2 4; }
+.qbm-edge-circadian_feedback { stroke: #CC79A7; stroke-dasharray: 2 4; }
+.qbm-edge-hormonal_feedback { stroke: #56B4E9; stroke-dasharray: 2 4; }
+.qbm-edge-indirect_influence { stroke-dasharray: 6 4; }
+.qbm-edge-label-bg { fill: var(--qbm-bg); stroke: none; }
+.qbm-edge-label { font-size: 9.5px; fill: var(--qbm-ink-soft); }
+
+/* Data overlay: transparent until qbio.project fills it. Declared as a class
+   rule rather than an inline style="fill:none" — an inline style outranks every
+   selector, so the per-node overlay rules would silently never apply. */
+.qbm-overlay { stroke: none; fill: none; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
+<rect class="qbm-canvas" x="0" y="0" width="749.56" height="949.00"/>
+<text class="qbm-title" x="16" y="31.20">QBM-06 · Seed germination before photosynthesis</text>
+<text class="qbm-subtitle" x="16" y="58.80">The review&#x27;s highest-leverage window — and the experiment nobody has run</text>
+<g transform="translate(52.00,226.60)"><g class="qbm-compartment-group" data-compartment="peroxisome"><rect class="qbm-compartment" data-compartment-rect="peroxisome" x="60.24" y="-46.00" width="525.08" height="119.44" rx="12" ry="12" style="stroke:#6b5a06"/><text class="qbm-compartment-label" x="74.24" y="-31.00" style="fill:#6b5a06">Peroxisome</text></g><g class="qbm-compartment-group" data-compartment="mitochondrial_matrix"><rect class="qbm-compartment" data-compartment-rect="mitochondrial_matrix" x="-26.00" y="91.44" width="697.56" height="132.24" rx="12" ry="12" style="stroke:#7a4a12"/><text class="qbm-compartment-label" x="-12.00" y="106.44" style="fill:#7a4a12">Mitochondrial matrix</text></g><g class="qbm-compartment-group" data-compartment="cell"><rect class="qbm-compartment" data-compartment-rect="cell" x="43.39" y="241.68" width="558.79" height="119.44" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="57.39" y="256.68" style="fill:#3d3d3d">Cell</text></g><g class="qbm-compartment-group" data-compartment="organism"><rect class="qbm-compartment" data-compartment-rect="organism" x="223.33" y="379.12" width="198.90" height="106.64" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="237.33" y="394.12" style="fill:#3d3d3d">Organism</text></g><g class="qbm-edge-group" data-edge="TAG_LIPASE-&gt;BETA_OXIDATION" data-edge-class="catalysis"><path class="qbm-edge qbm-edge-catalysis" d="M225.83,23.72 L259.83,23.72" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="TAG_LIPASE-&gt;BETA_OXIDATION" x="215.21" y="51.22" width="55.24" height="13.00" rx="3"/><text class="qbm-edge-label" x="242.83" y="61.02" text-anchor="middle">fatty acids</text></g><g class="qbm-edge-group" data-edge="BETA_OXIDATION-&gt;GLYOXYLATE_CYCLE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M376.33,23.72 L410.33,23.72" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="BETA_OXIDATION-&gt;MITO_SUPEROXIDE" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M317.50,41.04 L309.25,287.68" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="BETA_OXIDATION-&gt;MITO_SUPEROXIDE" x="298.95" y="128.26" width="30.83" height="13.00" rx="3"/><text class="qbm-edge-label" x="314.37" y="138.06" text-anchor="middle">H2O2</text></g><g class="qbm-edge-group" data-edge="GLYOXYLATE_CYCLE-&gt;ACETYL_COA" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M412.79,47.44 L100.60,150.24" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="ACETYL_COA-&gt;ACONITASE" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M96.00,167.56 L490.63,167.56" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="ACETYL_COA-&gt;ACONITASE" x="266.72" y="207.06" width="53.20" height="13.00" rx="3"/><text class="qbm-edge-label" x="293.31" y="216.86" text-anchor="middle">via citrate</text></g><g class="qbm-edge-group" data-edge="ACETYL_COA-&gt;COMPLEX_I" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M96.00,167.56 L130.00,167.56" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="ACETYL_COA-&gt;COMPLEX_I" x="88.02" y="207.06" width="49.95" height="13.00" rx="3"/><text class="qbm-edge-label" x="113.00" y="216.86" text-anchor="middle">via NADH</text></g><g class="qbm-edge-group" data-edge="COMPLEX_I-&gt;COMPLEX_IV" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M284.93,167.56 L318.93,167.56" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="COMPLEX_IV-&gt;GERMINATION_ATP" data-edge-class="energy_feedback"><path class="qbm-edge qbm-edge-energy_feedback" d="M356.69,184.88 L160.65,294.08" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="COMPLEX_I-&gt;MITO_SUPEROXIDE" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M228.61,197.68 L291.80,287.68" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="COMPLEX_I-&gt;MITO_SUPEROXIDE" x="265.77" y="223.54" width="24.88" height="13.00" rx="3"/><text class="qbm-edge-label" x="278.21" y="233.34" text-anchor="middle">leak</text></g><g class="qbm-edge-group" data-edge="COMPLEX_IV-&gt;CYTOCHROME_C" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M401.49,184.88 L482.90,287.68" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="CYTOCHROME_C-&gt;RADICLE_EMERGENCE" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M469.30,335.12 L346.43,425.12" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CYTOCHROME_C-&gt;RADICLE_EMERGENCE" x="372.54" y="363.94" width="56.46" height="13.00" rx="3"/><text class="qbm-edge-label" x="400.77" y="373.74" text-anchor="middle">ABI4 / ABA</text></g><g class="qbm-edge-group" data-edge="GERMINATION_ATP-&gt;RADICLE_EMERGENCE" data-edge-class="energy_feedback"><path class="qbm-edge qbm-edge-energy_feedback" d="M155.10,328.72 L297.24,425.12" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="GERMINATION_ATP-&gt;RADICLE_EMERGENCE" x="198.41" y="360.49" width="69.00" height="13.00" rx="3"/><text class="qbm-edge-label" x="232.91" y="370.29" text-anchor="middle">sets the pace</text></g><g class="qbm-edge-group" data-edge="MITO_SUPEROXIDE-&gt;RADICLE_EMERGENCE" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M311.05,335.12 L320.89,425.12" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="MITO_SUPEROXIDE-&gt;RADICLE_EMERGENCE" x="270.00" y="362.82" width="89.58" height="13.00" rx="3"/><text class="qbm-edge-label" x="314.79" y="372.62" text-anchor="middle">signalling window</text></g><g class="qbm-edge-group" data-edge="MITO_SUPEROXIDE-&gt;ACONITASE" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M351.27,287.68 L513.73,197.68" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="MITO_SUPEROXIDE-&gt;ACONITASE" x="387.13" y="225.68" width="79.10" height="13.00" rx="3"/><text class="qbm-edge-label" x="426.69" y="235.48" text-anchor="middle">cluster damage</text></g><g class="qbm-edge-group" data-edge="ACONITASE-&gt;GERMINATION_ATP" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M490.63,192.97 L189.73,291.66" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="ACONITASE-&gt;GERMINATION_ATP" x="314.07" y="224.41" width="44.74" height="13.00" rx="3"/><text class="qbm-edge-label" x="336.44" y="234.21" text-anchor="middle">TCA flux</text></g><g class="qbm-node-group" data-node-id="TAG_LIPASE" data-tier="T4" data-qbo="QBO:TAG_LIPASE"><title>TAG lipase (SDP1)
+tier T4 (inferred)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="TAG_LIPASE" x="86.24" y="6.40" width="139.59" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="TAG_LIPASE" x="86.24" y="6.40" width="139.59" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="TAG_LIPASE" x="156.03" y="26.58" text-anchor="middle">TAG lipase (SDP1)</text></g><g class="qbm-units" data-units-for="TAG_LIPASE"><rect class="qbm-unit" data-unit-for="TAG_LIPASE" x="133.60" y="-10.60" width="44.86" height="14.0" rx="3"/><text class="qbm-unit-label" x="156.03" y="-0.60" text-anchor="middle">oil body</text></g><g class="qbm-node-group" data-node-id="BETA_OXIDATION" data-tier="T3" data-qbo="QBO:BETA_OXIDATION"><title>Peroxisomal beta-oxidation
+tier T3 (inferred)
+quantum class: ros_leak_site
+rationale: Acyl-CoA oxidase is a flavoprotein that reduces O2 directly to H2O2 as part of its normal catalytic cycle — one of the few places in the cell where peroxide production is the intended chemistry rather than a leak. During germination that makes the peroxisome a major ROS source at exactly the stage the review argues matters most.
+
+caveat: A flavin semiquinone is not well established in the acyl-CoA oxidase mechanism, and the enzyme&#x27;s own catalase-rich compartment quenches the product quickly. Classed only as a ROS source, not as a radical-pair site.
+</title><rect class="qbm-node tier-T3" data-node-rect="BETA_OXIDATION" x="259.83" y="6.40" width="116.51" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="BETA_OXIDATION" x="259.83" y="6.40" width="116.51" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="BETA_OXIDATION" x="318.08" y="26.58" text-anchor="middle">Beta-oxidation</text></g><g class="qbm-units" data-units-for="BETA_OXIDATION"><rect class="qbm-unit" data-unit-for="BETA_OXIDATION" x="277.94" y="-10.60" width="80.27" height="14.0" rx="3"/><text class="qbm-unit-label" x="318.08" y="-0.60" text-anchor="middle">H2O2 by design</text></g><g class="qbm-node-group" data-node-id="GLYOXYLATE_CYCLE" data-tier="T4" data-qbo="QBO:GLYOXYLATE_CYCLE"><title>Glyoxylate cycle (ICL, MLS)
+tier T4 (verified)
+quantum class: structural_context
+AGI: AT3G21720, AT5G03860</title><rect class="qbm-node tier-T4" data-node-rect="GLYOXYLATE_CYCLE" x="410.33" y="0.00" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="GLYOXYLATE_CYCLE" x="410.33" y="0.00" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="GLYOXYLATE_CYCLE" x="484.83" y="20.18" text-anchor="middle">Glyoxylate cycle</text><text class="qbm-sub" data-text-for="GLYOXYLATE_CYCLE" x="484.83" y="36.82" text-anchor="middle">AT3G21720 · AT5G03860</text></g><g class="qbm-units" data-units-for="GLYOXYLATE_CYCLE"><rect class="qbm-unit" data-unit-for="GLYOXYLATE_CYCLE" x="459.92" y="-17.00" width="49.81" height="14.0" rx="3"/><text class="qbm-unit-label" x="484.83" y="-7.00" text-anchor="middle">ICL / MLS</text></g><g class="qbm-node-group" data-node-id="ACETYL_COA" data-tier="T4" data-qbo="QBO:ACETYL_COA"><title>Acetyl-CoA
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="ACETYL_COA" x="0.00" y="150.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="ACETYL_COA" x="0.00" y="150.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="ACETYL_COA" x="48.00" y="170.42" text-anchor="middle">Acetyl-CoA</text></g><g class="qbm-node-group" data-node-id="COMPLEX_I" data-tier="T3" data-qbo="QBO:COMPLEX_I"><title>Complex I (NADH:ubiquinone oxidoreductase)
+tier T3 (inferred)
+quantum class: flavin_semiquinone, iron_sulfur_4Fe4S, iron_sulfur_2Fe2S, ros_leak_site
+nuclei: 1H, 14N, 57Fe, 33S
+AGI: AT5G37510, AT5G08530, AT4G02580, AT5G11770
+rationale: The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers — both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.
+
+caveat: Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.
+</title><rect class="qbm-node tier-T3" data-node-rect="COMPLEX_I" x="130.00" y="137.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="COMPLEX_I" x="130.00" y="137.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="COMPLEX_I" x="207.47" y="157.62" text-anchor="middle">Complex I</text><text class="qbm-sub" data-text-for="COMPLEX_I" x="207.47" y="174.26" text-anchor="middle">AT5G37510 · AT5G08530 ·</text><text class="qbm-sub" data-text-for="COMPLEX_I" x="207.47" y="187.06" text-anchor="middle">AT4G02580…</text></g><g class="qbm-units" data-units-for="COMPLEX_I"><rect class="qbm-unit" data-unit-for="COMPLEX_I" x="168.09" y="120.44" width="27.91" height="14.0" rx="3"/><text class="qbm-unit-label" x="182.04" y="130.44" text-anchor="middle">FMN</text><rect class="qbm-unit" data-unit-for="COMPLEX_I" x="200.00" y="120.44" width="46.84" height="14.0" rx="3"/><text class="qbm-unit-label" x="223.42" y="130.44" text-anchor="middle">8 × Fe/S</text></g><g class="qbm-comp-tag" data-comp-tag-for="COMPLEX_I"><rect class="qbm-unit" x="132.97" y="200.68" width="148.99" height="14.0" rx="7"/><text class="qbm-unit-label" x="207.47" y="210.68" text-anchor="middle">Inner mitochondrial membrane</text></g><g class="qbm-node-group" data-node-id="COMPLEX_IV" data-tier="T3" data-qbo="QBO:COMPLEX_IV"><title>Complex IV (cytochrome c oxidase)
+tier T3 (inferred)
+quantum class: heme_copper_binuclear, cu_a_binuclear, heme_electron_carrier
+nuclei: 57Fe, 1H
+rationale: The review names cytochrome oxidase explicitly as a candidate direct metabolic target. The heme a3/CuB centre passes through paramagnetic oxygen intermediates (P, F, oxoferryl) whose spin states are, in principle, field-addressable.
+
+caveat: Strongly exchange-coupled metal centres relax very fast, which argues against coherent spin effects. This is a mechanistically attractive but physically demanding hypothesis, and is labelled T3 for that reason.
+</title><rect class="qbm-node tier-T3" data-node-rect="COMPLEX_IV" x="318.93" y="150.24" width="137.70" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="COMPLEX_IV" x="318.93" y="150.24" width="137.70" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="COMPLEX_IV" x="387.78" y="170.42" text-anchor="middle">Complex IV (COX)</text></g><g class="qbm-units" data-units-for="COMPLEX_IV"><rect class="qbm-unit" data-unit-for="COMPLEX_IV" x="350.22" y="133.24" width="75.11" height="14.0" rx="3"/><text class="qbm-unit-label" x="387.78" y="143.24" text-anchor="middle">heme a3 / CuB</text></g><g class="qbm-comp-tag" data-comp-tag-for="COMPLEX_IV"><rect class="qbm-unit" x="313.28" y="187.88" width="148.99" height="14.0" rx="7"/><text class="qbm-unit-label" x="387.78" y="197.88" text-anchor="middle">Inner mitochondrial membrane</text></g><g class="qbm-node-group" data-node-id="ACONITASE" data-tier="T3" data-qbo="QBO:ACONITASE"><title>Aconitase (ACO1/2/3)
+tier T3 (inferred)
+quantum class: iron_sulfur_4Fe4S
+nuclei: 57Fe, 33S
+AGI: AT4G35830, AT4G26970, AT2G05710
+rationale: The review nominates aconitase as the sentinel of Fe/S integrity, and the biochemistry supports it: the exposed cluster iron makes aconitase the first TCA activity to fall under oxidative stress, so it reports cluster damage before anything else does.
+
+caveat: Precisely because aconitase responds to any oxidative insult, a change under NNMF would NOT by itself implicate a magnetic mechanism. It is a sensitive readout and a poor discriminator; it needs a paired ROS-independent control.
+</title><rect class="qbm-node tier-T3" data-node-rect="ACONITASE" x="490.63" y="137.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="ACONITASE" x="490.63" y="137.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="ACONITASE" x="568.09" y="157.62" text-anchor="middle">Aconitase</text><text class="qbm-sub" data-text-for="ACONITASE" x="568.09" y="174.26" text-anchor="middle">AT4G35830 · AT4G26970 ·</text><text class="qbm-sub" data-text-for="ACONITASE" x="568.09" y="187.06" text-anchor="middle">AT2G05710</text></g><g class="qbm-units" data-units-for="ACONITASE"><rect class="qbm-unit" data-unit-for="ACONITASE" x="529.14" y="120.44" width="77.91" height="14.0" rx="3"/><text class="qbm-unit-label" x="568.09" y="130.44" text-anchor="middle">4Fe-4S sentinel</text></g><g class="qbm-node-group" data-node-id="GERMINATION_ATP" data-tier="T4" data-qbo="QBO:GERMINATION_ATP"><title>ATP / ADP ratio (pre-photosynthetic)
+tier T4 (reported)
+quantum class: structural_context
+Nietzel2020: Mitochondrial energy metabolism is redox-kick-started during seed germination, establishing that respiratory competence is restored before photosynthesis.
+ [10.1073/pnas.1910501117]
+Rosental2014: Primary metabolism is activated and regulated during seed germination, with respiration supplying the energy for reserve mobilisation and cell expansion.
+ [10.1017/S0960258513000391]</title><rect class="qbm-node tier-T4" data-node-rect="GERMINATION_ATP" x="69.39" y="294.08" width="120.35" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="GERMINATION_ATP" x="69.39" y="294.08" width="120.35" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="GERMINATION_ATP" x="129.56" y="314.26" text-anchor="middle">ATP / ADP ratio</text></g><g class="qbm-units" data-units-for="GERMINATION_ATP"><rect class="qbm-unit" data-unit-for="GERMINATION_ATP" x="65.87" y="277.08" width="127.38" height="14.0" rx="3"/><text class="qbm-unit-label" x="129.56" y="287.08" text-anchor="middle">the missing measurement</text></g><g class="qbm-node-group" data-node-id="MITO_SUPEROXIDE" data-tier="T2" data-qbo="QBO:MITO_SUPEROXIDE"><title>Mitochondrial superoxide / H2O2
+tier T2 (reported)
+quantum class: ros_leak_site
+AGI: AT3G10920
+Parmagnani2022: Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+ [10.3390/biom12121824]
+Farooq2021: Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.
+ [10.3389/fpls.2021.781734]
+rationale: Not a magnetosensitive mechanism itself — it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.
+</title><rect class="qbm-node tier-T2" data-node-rect="MITO_SUPEROXIDE" x="223.73" y="287.68" width="169.45" height="47.44" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="MITO_SUPEROXIDE" x="223.73" y="287.68" width="169.45" height="47.44" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="MITO_SUPEROXIDE" x="308.46" y="307.86" text-anchor="middle">ROS signalling window</text><text class="qbm-sub" data-text-for="MITO_SUPEROXIDE" x="308.46" y="324.50" text-anchor="middle">AT3G10920</text></g><g class="qbm-units" data-units-for="MITO_SUPEROXIDE"><rect class="qbm-unit" data-unit-for="MITO_SUPEROXIDE" x="259.57" y="270.68" width="97.77" height="14.0" rx="3"/><text class="qbm-unit-label" x="308.46" y="280.68" text-anchor="middle">too little / too much</text></g><g class="qbm-comp-tag" data-comp-tag-for="MITO_SUPEROXIDE"><rect class="qbm-unit" x="257.40" y="338.12" width="102.11" height="14.0" rx="7"/><text class="qbm-unit-label" x="308.46" y="348.12" text-anchor="middle">Mitochondrial matrix</text></g><g class="qbm-node-group" data-node-id="CYTOCHROME_C" data-tier="T3" data-qbo="QBO:CYTOCHROME_C"><title>Cytochrome c
+tier T3 (inferred)
+quantum class: heme_electron_carrier
+nuclei: 57Fe, 1H
+AGI: AT1G22840, AT4G10040
+Racca2022: Cytochrome c and the transcription factor ABI4 link mitochondrial status to ABA-dependent seed germination.
+ [10.1111/nph.18287]
+rationale: A one-electron heme carrier, paramagnetic in the ferric state. Included because Racca et al. place cytochrome c on the path from mitochondrial state to germination timing, which is the developmental window the review argues matters most.
+</title><rect class="qbm-node tier-T3" data-node-rect="CYTOCHROME_C" x="427.18" y="287.68" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CYTOCHROME_C" x="427.18" y="287.68" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CYTOCHROME_C" x="501.68" y="307.86" text-anchor="middle">Cytochrome c</text><text class="qbm-sub" data-text-for="CYTOCHROME_C" x="501.68" y="324.50" text-anchor="middle">AT1G22840 · AT4G10040</text></g><g class="qbm-units" data-units-for="CYTOCHROME_C"><rect class="qbm-unit" data-unit-for="CYTOCHROME_C" x="467.80" y="270.68" width="67.77" height="14.0" rx="3"/><text class="qbm-unit-label" x="501.68" y="280.68" text-anchor="middle">→ ABI4 / ABA</text></g><g class="qbm-comp-tag" data-comp-tag-for="CYTOCHROME_C"><rect class="qbm-unit" x="447.62" y="338.12" width="108.11" height="14.0" rx="7"/><text class="qbm-unit-label" x="501.68" y="348.12" text-anchor="middle">Intermembrane space</text></g><g class="qbm-node-group" data-node-id="RADICLE_EMERGENCE" data-tier="T4" data-qbo="QBO:RADICLE_EMERGENCE"><title>Radicle emergence
+tier T4 (reported)
+quantum class: structural_context
+Farooq2021: Reactive oxygen species and mitochondria jointly regulate seed germination, defining the window in which a respiratory lesion would have most leverage.
+ [10.3389/fpls.2021.781734]
+Eckardt2005: Peroxisomal citrate synthase provides the exit route from fatty acid metabolism in oilseeds, linking reserve mobilisation to the TCA cycle.
+ [10.1105/tpc.105.034843]</title><rect class="qbm-node tier-T4" data-node-rect="RADICLE_EMERGENCE" x="249.33" y="425.12" width="146.90" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="RADICLE_EMERGENCE" x="249.33" y="425.12" width="146.90" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="RADICLE_EMERGENCE" x="322.78" y="445.30" text-anchor="middle">Radicle emergence</text></g><g class="qbm-units" data-units-for="RADICLE_EMERGENCE"><rect class="qbm-unit" data-unit-for="RADICLE_EMERGENCE" x="281.68" y="408.12" width="82.20" height="14.0" rx="3"/><text class="qbm-unit-label" x="322.78" y="418.12" text-anchor="middle">0–72 h endpoint</text></g></g>
+<g transform="translate(0,81.60)"><g class="qbm-legend-group" transform="translate(16.00,0.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text><rect class="qbm-node tier-T2" x="0" y="14.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="25.00">T2 — Inferred</text><rect class="qbm-node tier-T3" x="0" y="35.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="46.00">T3 — Plausible</text><rect class="qbm-node tier-T4" x="0" y="56.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="67.00">T4 — Context</text></g></g>
+<text class="qbm-caption" x="16" y="756.36">Before chloroplasts mature, an oilseed embryo is entirely heterotrophic: stored triacylglycerol must be mobilised, run</text>
+<text class="qbm-caption" x="16" y="771.08">through peroxisomal beta-oxidation and the glyoxylate cycle, and converted to ATP by mitochondrial respiration. That</text>
+<text class="qbm-caption" x="16" y="785.80">makes the first 0-72 hours after imbibition the window where a respiratory or Fe/S lesion would have most leverage, and the</text>
+<text class="qbm-caption" x="16" y="800.52">reason Arabidopsis and Brassica are comparable systems for the review&#x27;s argument. The original Figure 6 carried a</text>
+<text class="qbm-caption" x="16" y="815.24">summary table of &quot;normalized trend ranges&quot; for germination rate, radicle length, ATP status and seedling vigour; those</text>
+<text class="qbm-caption" x="16" y="829.96">were qualitative cross-study impressions rather than measured values, so no number from them is reproduced here. The</text>
+<text class="qbm-caption" x="16" y="844.68">map shows the route and the endpoints; any quantity has to arrive from projected data. Every node on this map is T3 or T4,</text>
+<text class="qbm-caption" x="16" y="859.40">which is the honest state of the field: the review&#x27;s central proposal is a geomagnetic-versus-near-null imbibition time</text>
+<text class="qbm-caption" x="16" y="874.12">course, and no such experiment exists in its bibliography. Derived from: Figure 6 of Porterfield &amp; Barker, &quot;Plant Responses to</text>
+<text class="qbm-caption" x="16" y="888.84">Near-Null Magnetic Fields&quot; — expanded to the reserve-mobilisation route and bound to Arabidopsis loci. Node counts by</text>
+<text class="qbm-caption" x="16" y="903.56">evidence tier: T2=1, T3=5, T4=5. Schematic topology only — no quantitative value is encoded in this base map; numbers</text>
+<text class="qbm-caption" x="16" y="918.28">appear only when measured data is projected onto it.</text>
+</svg>

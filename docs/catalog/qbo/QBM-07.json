@@ -1,0 +1,319 @@
+{
+  "map": "QBM-07",
+  "title": "ROS production, scavenging and redox buffering",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "COMPLEX_I",
+      "qbo": "QBO:COMPLEX_I",
+      "label": "Complex I (NADH:ubiquinone oxidoreductase)",
+      "kind": "complex",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone",
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_2Fe2S",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H",
+        "14N",
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT5G37510",
+        "AT5G08530",
+        "AT4G02580",
+        "AT5G11770"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers \u2014 both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.\n",
+      "caveat": "Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "PLASTID_ROS",
+      "qbo": "QBO:PLASTID_ROS",
+      "label": "Plastid superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT4G25100",
+        "AT2G28190"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "As in the mitochondrion, the amplifier rather than the mechanism: threshold behaviour converts a small change in electron branching into a signal.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2023",
+          "doi": "10.3390/ijms24032896",
+          "claim": "Reactive oxygen species production differed between geomagnetic and near-null field conditions in lima bean.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Phaseolus lunatus"
+        },
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "BETA_OXIDATION",
+      "qbo": "QBO:BETA_OXIDATION",
+      "label": "Peroxisomal beta-oxidation",
+      "kind": "process",
+      "compartment": "peroxisome",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "Acyl-CoA oxidase is a flavoprotein that reduces O2 directly to H2O2 as part of its normal catalytic cycle \u2014 one of the few places in the cell where peroxide production is the intended chemistry rather than a leak. During germination that makes the peroxisome a major ROS source at exactly the stage the review argues matters most.\n",
+      "caveat": "A flavin semiquinone is not well established in the acyl-CoA oxidase mechanism, and the enzyme's own catalase-rich compartment quenches the product quickly. Classed only as a ROS source, not as a radical-pair site.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "MITO_SUPEROXIDE",
+      "qbo": "QBO:MITO_SUPEROXIDE",
+      "label": "Mitochondrial superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G10920"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Not a magnetosensitive mechanism itself \u2014 it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "SUPEROXIDE_DISMUTASES",
+      "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+      "label": "Superoxide dismutases (CSD1/2, MSD1, FSD1)",
+      "kind": "macromolecule",
+      "compartment": "cell",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G08830",
+        "AT2G28190",
+        "AT3G10920",
+        "AT4G25100"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ASCORBATE_PEROXIDASE",
+      "qbo": "QBO:ASCORBATE_PEROXIDASE",
+      "label": "Ascorbate peroxidase (APX1, APX2)",
+      "kind": "macromolecule",
+      "compartment": "cytosol",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "heme_electron_carrier"
+      ],
+      "nuclei": [
+        "57Fe",
+        "1H"
+      ],
+      "agi": [
+        "AT1G07890",
+        "AT3G09640"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Catalysis proceeds through Compound I, an oxoferryl porphyrin pi-cation radical \u2014 a genuine protein-based radical intermediate, and one of the few in the redox network rather than the electron transport chains.\n",
+      "caveat": "The porphyrin radical is strongly exchange-coupled to the ferryl iron and extremely short-lived. Structurally it is a radical; whether it could ever be a spin-correlated pair with a geomagnetically relevant lifetime is untested and doubtful.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "CATALASE",
+      "qbo": "QBO:CATALASE",
+      "label": "Catalase (CAT1, CAT2, CAT3)",
+      "kind": "macromolecule",
+      "compartment": "peroxisome",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "heme_electron_carrier"
+      ],
+      "nuclei": [
+        "57Fe",
+        "1H"
+      ],
+      "agi": [
+        "AT1G20630",
+        "AT4G35090",
+        "AT1G20620"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Like ascorbate peroxidase, catalase cycles through a Compound I porphyrin radical. Its relevance here is positional: it is the enzyme standing between germination beta-oxidation and oxidative damage.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PEROXIREDOXIN_TRX",
+      "qbo": "QBO:PEROXIREDOXIN_TRX",
+      "label": "Peroxiredoxin / thioredoxin system (PRXIIF)",
+      "kind": "complex",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G06050"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ASC_GSH_CYCLE",
+      "qbo": "QBO:ASC_GSH_CYCLE",
+      "label": "Ascorbate-glutathione cycle (GR1, DHAR1, MDAR1)",
+      "kind": "complex",
+      "compartment": "cytosol",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [
+        "AT3G24170",
+        "AT1G19570",
+        "AT3G52880"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Glutathione reductase and monodehydroascorbate reductase are FAD enzymes, so the same flavin semiquinone chemistry applies here as at complex I and FNR. MDAR is notable for acting on a stable organic radical \u2014 monodehydroascorbate \u2014 as its actual substrate.\n",
+      "caveat": "The monodehydroascorbate radical is free in solution rather than held in a protein pocket, so it has no correlated partner and tumbles freely. It is a radical, not a radical pair.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "REDOX_POOLS",
+      "qbo": "QBO:REDOX_POOLS",
+      "label": "Ascorbate / glutathione / NAD(P)H pools",
+      "kind": "simple_chemical",
+      "compartment": "cell",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "NADPH_POOL",
+      "qbo": "QBO:NADPH_POOL",
+      "label": "NADPH / NADP+",
+      "kind": "simple_chemical",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ROS_TRANSCRIPTIONAL_RESPONSE",
+      "qbo": "QBO:ROS_TRANSCRIPTIONAL_RESPONSE",
+      "label": "ROS-responsive transcriptional programme",
+      "kind": "process",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "This entity carries demonstrated near-null-field evidence but NO proposed quantum route, and is classed structural_context to say so explicitly. It is the amplifier's output: threshold-like signalling turns an upstream change too small to measure directly into a transcriptional response. That sensitivity is what makes it the best-evidenced node in the atlas and simultaneously a poor discriminator \u2014 it reports that something moved upstream, never what.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Transcriptomics and metabolomics of ROS modulation in near-null magnetic field-induced Arabidopsis: field reduction alters ROS-associated transcriptional and metabolic programmes.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Zsigmond2008",
+          "doi": "10.1104/pp.107.111260",
+          "claim": "Arabidopsis PPR40 connects abiotic stress responses to mitochondrial electron transport, establishing a route from respiratory state to stress signalling.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    }
+  ]
+}

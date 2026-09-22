@@ -1,0 +1,298 @@
+{
+  "map": "QBM-05",
+  "title": "TCA cycle and the Fe/S-dependent steps",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "ACETYL_COA",
+      "qbo": "QBO:ACETYL_COA",
+      "label": "Acetyl-CoA",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "OXALOACETATE",
+      "qbo": "QBO:OXALOACETATE",
+      "label": "Oxaloacetate",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "MALATE_DH",
+      "qbo": "QBO:MALATE_DH",
+      "label": "Malate dehydrogenase (MMDH1)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G53240"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CITRATE_SYNTHASE",
+      "qbo": "QBO:CITRATE_SYNTHASE",
+      "label": "Citrate synthase (CSY4)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G44350"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CITRATE",
+      "qbo": "QBO:CITRATE",
+      "label": "Citrate",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ACONITASE",
+      "qbo": "QBO:ACONITASE",
+      "label": "Aconitase (ACO1/2/3)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G35830",
+        "AT4G26970",
+        "AT2G05710"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The review nominates aconitase as the sentinel of Fe/S integrity, and the biochemistry supports it: the exposed cluster iron makes aconitase the first TCA activity to fall under oxidative stress, so it reports cluster damage before anything else does.\n",
+      "caveat": "Precisely because aconitase responds to any oxidative insult, a change under NNMF would NOT by itself implicate a magnetic mechanism. It is a sensitive readout and a poor discriminator; it needs a paired ROS-independent control.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "ISOCITRATE",
+      "qbo": "QBO:ISOCITRATE",
+      "label": "Isocitrate",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ISOCITRATE_DH",
+      "qbo": "QBO:ISOCITRATE_DH",
+      "label": "Isocitrate dehydrogenase (IDH1, IDH2)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT4G35260",
+        "AT2G17130"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "LIPOYL_SYNTHASE",
+      "qbo": "QBO:LIPOYL_SYNTHASE",
+      "label": "Lipoyl synthase (LIP1)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S",
+        "radical_pair_donor"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S",
+        "1H"
+      ],
+      "agi": [
+        "AT2G20860"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "A radical-SAM enzyme generating a 5'-deoxyadenosyl radical from a [4Fe-4S] cluster \u2014 genuine organic radical chemistry on an iron-sulfur centre, which is the tightest coupling of the review's two proposed mechanisms found anywhere in primary metabolism. Its product lipoylates pyruvate dehydrogenase and the 2-oxoglutarate dehydrogenase complex, so a defect propagates straight into TCA flux.\n",
+      "caveat": "The radical is generated inside the active site and quenched within one turnover; whether a spin-correlated pair with a long enough lifetime to be field-sensitive ever forms is untested.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "COMPLEX_II",
+      "qbo": "QBO:COMPLEX_II",
+      "label": "Complex II (succinate dehydrogenase)",
+      "kind": "complex",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone",
+        "iron_sulfur_2Fe2S",
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_3Fe4S",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H",
+        "14N",
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT5G66760",
+        "AT3G27380",
+        "AT5G40650",
+        "AT5G09600",
+        "AT2G46505"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Carries all three cluster types plus a covalent flavin, and sits at the junction the review nominates as the bottleneck \u2014 a change here propagates into both TCA flux and respiratory electron flow.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "FUMARASE",
+      "qbo": "QBO:FUMARASE",
+      "label": "Fumarase (FUM1)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G47510"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "NADH_POOL",
+      "qbo": "QBO:NADH_POOL",
+      "label": "NADH / NAD+",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "MITO_SUPEROXIDE",
+      "qbo": "QBO:MITO_SUPEROXIDE",
+      "label": "Mitochondrial superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G10920"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Not a magnetosensitive mechanism itself \u2014 it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        }
+      ]
+    }
+  ]
+}

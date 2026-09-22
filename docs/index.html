@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quantum Biology Atlas</title>
+<meta name="description" content="Identifier-bound SBGN-ML pathway maps annotated with quantum-mechanistic descriptors and an explicit evidence tier per node.">
+<meta name="author" content="Richard Barker">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Tokens are namespaced --qba-* and mapped onto the CoSE palette loaded from
+     cose-map.css. Each falls back to a literal, so the page is still legible and
+     correctly themed if that stylesheet cannot be fetched.
+
+     Note --qba-soft maps to --muted, NOT to --soft: in the CoSE vocabulary --soft is
+     a surface colour, and using it for text renders near-white on white. */
+  :root {
+    --qba-bg:     var(--bg,       #ffffff);
+    --qba-ink:    var(--ink,      #1a2230);
+    --qba-soft:   var(--muted,    #5a6473);
+    --qba-faint:  var(--ink-faint,#8892a3);
+    --qba-rule:   var(--line,     #e5e9f0);
+    --qba-card:   var(--surface,  #f7f9fc);
+    --qba-card2:  var(--surface-2,#eef2f8);
+    --qba-accent: var(--accent,   #3B6EA5);
+    --qba-accent2:var(--accent2,  #3FB6A8);
+    /* Okabe-Ito vermillion: the CoSE palette has no warning token, and this is the
+       same colour the maps use for a down-regulated node. */
+    --qba-warn:   #D55E00;
+    --qba-t1: var(--ink,       #1a2230);
+    --qba-t2: var(--muted,     #5a6473);
+    --qba-t3: var(--ink-faint, #8892a3);
+    --qba-t4: var(--line,      #c9d1dc);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--qba-bg); color:var(--qba-ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 16px 96px; }
+  header.hero { padding:56px 0 28px; border-bottom:1px solid var(--qba-rule); }
+  h1 { font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.18; margin:0 0 10px; letter-spacing:-.02em; }
+  .lede { font-size:1.12rem; color:var(--qba-soft); max-width:62ch; margin:0 0 18px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:1.05rem; margin:26px 0 6px; }
+  p, li { max-width:74ch; }
+  a { color:var(--qba-accent); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+    background:var(--qba-card); padding:1px 5px; border-radius:4px; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+  .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
+    padding:9px 14px; font-size:.9rem; }
+  .stats b { font-size:1.18rem; display:block; font-weight:700; }
+  .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
+    border-radius:0 8px 8px 0; margin:20px 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
+    vertical-align:top; }
+  th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .swatch { display:inline-block; width:34px; height:15px; border-radius:4px;
+    background:var(--qba-card); vertical-align:-2px; margin-right:8px; }
+  .swatch.T1 { border:2.6px solid var(--qba-t1); }
+  .swatch.T2 { border:1.7px solid var(--qba-t2); }
+  .swatch.T3 { border:1.5px dashed var(--qba-t3); }
+  .swatch.T4 { border:1px solid var(--qba-t4); }
+  figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-card); }
+  figure.map > a { display:block; background:var(--qba-bg); }
+  figure.map img { width:100%; height:auto; display:block; }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
+    margin-bottom:4px; }
+  .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
+  .dl { margin-top:8px; font-size:.85rem; }
+  footer { border-top:1px solid var(--qba-rule); margin-top:56px; padding-top:22px;
+    font-size:.88rem; color:var(--qba-soft); }
+  @media (max-width:640px) { header.hero { padding-top:34px; } }
+</style>
+<!-- CoSE colour scheme only. cose-chrome.css and theme.js would inject the
+     navigation rail, and are deliberately not loaded. -->
+<link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-map.css">
+</head>
+<body data-site-id="quantum-biology-atlas">
+<div class="wrap">
+
+<header class="hero">
+<h1>Quantum Biology Atlas</h1>
+<p class="lede">Identifier-bound pathway maps of the places where weak magnetic fields
+could plausibly act in a cell — each node carrying its quantum chemistry, its
+supporting citations, and an explicit statement of how much is actually known.</p>
+<p class="lede">Companion software to the review <em>“Plant Responses to Near-Null
+Magnetic Fields: Geomagnetism, Bioenergetics, and Primary Metabolism in Arabidopsis
+and Brassica”</em> (D. M. Porterfield &amp; R. Barker, Purdue University).</p>
+<ul class="stats">
+  <li><b>10</b> pathway maps</li>
+  <li><b>126</b> annotated nodes</li>
+  <li><b>125</b> Arabidopsis loci</li>
+  <li><b>42</b> verified references</li>
+</ul>
+</header>
+<h2>Two questions, kept apart</h2>
+<p>The ontology exists because these are different questions, and collapsing them is
+how “contains a flavin” quietly becomes “is magnetically sensitive”:</p>
+<table>
+<tr><th>Axis</th><th>Question</th></tr>
+<tr><td><code>quantum_class</code></td><td>What chemistry does this entity carry?
+Structural, and largely uncontroversial.</td></tr>
+<tr><td><code>evidence_tier</code></td><td>How much is actually <em>known</em> about
+its magnetic-field sensitivity? This is where the claims live.</td></tr>
+</table>
+<p>A tier that asserts a demonstrated or inferred field effect <strong>cannot validate
+without a resolved DOI</strong>. The tier is drawn as a border style on every map, so a
+hypothesis looks provisional on the page:</p>
+<table>
+<tr><th>Tier</th><th>Meaning</th><th style="text-align:right">Nodes</th></tr>
+<tr><td><span class="swatch T1"></span><code>T1</code></td><td><b>Demonstrated</b><br>A field was applied and an effect measured on this entity.</td><td style="text-align:right">4</td></tr><tr><td><span class="swatch T2"></span><code>T2</code></td><td><b>Inferred</b><br>Shown for the containing complex or process, not the entity itself.</td><td style="text-align:right">31</td></tr><tr><td><span class="swatch T3"></span><code>T3</code></td><td><b>Plausible</b><br>A physical route exists; no field measurement has been made.</td><td style="text-align:right">44</td></tr><tr><td><span class="swatch T4"></span><code>T4</code></td><td><b>Context</b><br>Structural context; no quantum claim.</td><td style="text-align:right">47</td></tr>
+</table>
+<div class="note">
+<p style="margin:0"><strong>The maps are mostly dashed, and that is the finding.</strong>
+44 of 126 nodes carry a plausible physical route
+with no field measurement behind them. The Arabidopsis near-null-field literature is
+developmental and nutritional; it has not yet measured a respiratory complex directly.
+No base map encodes a quantitative value — numbers appear only when measured data is
+projected onto one.</p>
+</div>
+<h2>The maps</h2>
+<p>Each map compiles from a declarative source with no coordinates in
+it — box geometry is derived from measured text, which is what stops a label
+outgrowing its box. Every map is published as <strong>SBGN-ML</strong> (Process
+Description) so it opens in Newt, VANTED, CySBGN and the
+<a href="https://dr-richard-barker.github.io/SBGN-Pathway-viewer/app/">SBGN Pathway Visualizer</a>, with the quantum annotation carried in
+<code>&lt;extension&gt;</code> blocks that other renderers safely ignore.</p>
+<figure class="map" id="QBM-01">
+<a href="maps/svg/QBM-01.svg"><img src="maps/svg/QBM-01.svg" alt="Mitochondrial electron transport and oxidative phosphorylation" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-01 · Mitochondrial electron transport and oxidative phosphorylation</span>
+The respiratory chain redrawn so that each node carries its quantum chemistry and the evidence behind it. Solid heavy borders mark entities where a magnetic-field effect has been demonstrated (T1); solid light, where it has been shown for the containing process (T2); dashed, where a physical route exists but no field measurement has been made (T3); hairline, structural context with no quantum claim (T4). The map is almost entirely dashed, and that is the finding: the Arabidopsis near-null-field literature is developmental and nutritional, and has not yet measured a respiratory complex directly. Alternative oxidase and the type II NAD(P)H dehydrogenases are drawn because they are the confounders — a plant can route electrons around a lesion in complex I or complex IV, so respiration rate alone cannot test the hypothesis and cytochrome-versus-alternative flux must be partitioned.
+<div class="tiers">17 nodes · 23 edges · T2 1 · T3 10 · T4 6 ·
+28 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-01.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-01.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-01.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-02">
+<a href="maps/svg/QBM-02.svg"><img src="maps/svg/QBM-02.svg" alt="Photosynthetic electron transport and plastid redox" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-02 · Photosynthetic electron transport and plastid redox</span>
+The photosynthetic chain redrawn with each node&#x27;s quantum chemistry and the evidence behind it. Photosystem I is the strongest structural case in the atlas: charge separation at P700 makes a genuine spin-correlated radical pair, the species the radical-pair mechanism was written for. It is nevertheless only T2, because the one direct field measurement on photosynthesis in the review&#x27;s bibliography was made in lima bean rather than Arabidopsis, and because that pair is extremely short-lived and its known field effects are seen well above geomagnetic strength. Cyclic electron flow is drawn for the same reason alternative oxidase appears on QBM-01 — it lets a chloroplast rebalance ATP against NADPH without changing linear flux, so measuring linear electron transport alone cannot separate &quot;no effect&quot; from &quot;compensated effect&quot;. Four nodes are plastid-encoded (ATCG loci) and will receive no value from poly-A-selected RNA-seq, which is most of OSDR&#x27;s plant studies.
+<div class="tiers">14 nodes · 18 edges · T2 3 · T3 6 · T4 5 ·
+17 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-02.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-02.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-02.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-03">
+<a href="maps/svg/QBM-03.svg"><img src="maps/svg/QBM-03.svg" alt="Cryptochrome radical-pair photochemistry" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-03 · Cryptochrome radical-pair photochemistry</span>
+Cryptochrome is the only plant entity in the review&#x27;s bibliography where a magnetic field was applied and an effect measured on the protein&#x27;s own chemistry rather than on a downstream phenotype, so it carries the atlas&#x27;s only T1 annotations. The hyperfine partners that make this pair field-sensitive are the flavin&#x27;s own nitrogens and protons — 14N at 99.6% natural abundance and 1H at essentially 100% — so unlike the 57Fe route argued for iron-sulfur clusters, this one is not abundance-limited. That asymmetry is much of why cryptochrome is the strongest case here and the Fe/S nodes elsewhere are not. Phytochrome B is drawn deliberately as context with no quantum claim: its photochemistry is a Z/E isomerisation offering no spin-based route, so reported field effects on phytochrome signalling are most simply a downstream consequence of cryptochrome. Note also that one blinded replication (Harris et al. 2009) did NOT reproduce cryptochrome-dependent field effects; that result is recorded in the ontology on the same footing as the positive reports.
+<div class="tiers">8 nodes · 12 edges · T1 2 · T2 3 · T4 3 ·
+3 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-03.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-03.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-03.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-04">
+<a href="maps/svg/QBM-04.svg"><img src="maps/svg/QBM-04.svg" alt="Iron-sulfur cluster biogenesis — ISC, SUF and CIA" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-04 · Iron-sulfur cluster biogenesis — ISC, SUF and CIA</span>
+Every Fe/S node on QBM-01, QBM-02 and QBM-05 depends on one of these three systems, so a defect here sits upstream of the whole atlas and would appear as a metabolic lesion well before any visible phenotype. Read the tiers carefully, because they mark a distinction that is easy to blur: the near-null-field evidence in this area (Islam 2020, Vigani 2021, Narayana 2018) measured iron UPTAKE and Fe-S interplay — nutritional physiology — and is attached to the Fe/S supply node, which is therefore T2. No experiment in the bibliography applied a magnetic field and measured cluster assembly itself, so every assembly node remains T3 no matter how attractive the mechanism looks. The single arrow from mitochondrial export to the CIA system is the reason this map reaches beyond bioenergetics: CIA clients include the DNA replication and repair enzymes, so a mitochondrial lesion propagates to genome maintenance.
+<div class="tiers">11 nodes · 14 edges · T2 1 · T3 7 · T4 3 ·
+23 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-04.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-04.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-04.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-05">
+<a href="maps/svg/QBM-05.svg"><img src="maps/svg/QBM-05.svg" alt="TCA cycle and the Fe/S-dependent steps" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-05 · TCA cycle and the Fe/S-dependent steps</span>
+The review&#x27;s Figure 4 renders this as a linear chain from glucose to oxaloacetate with no OAA-to-citrate closure, which the draft&#x27;s own margin note flags. The closure matters: it is what shows that the two Fe/S-dependent steps throttle flux around the whole loop instead of interrupting a line. Aconitase and succinate dehydrogenase are the review&#x27;s sentinel nodes and are annotated once on QBM-01, referenced here rather than re-declared, so one entity cannot carry different evidence on two maps. The citrate-to-isocitrate ratio is the most direct available in-vivo proxy for Fe/S cluster integrity and is worth measuring in any near-null-field metabolomics experiment. Note that plant mitochondrial fumarase is a class-II enzyme with no Fe/S cluster, unlike the class-I bacterial form it is sometimes confused with.
+<div class="tiers">13 nodes · 17 edges · T2 1 · T3 3 · T4 9 ·
+15 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-05.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-05.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-05.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-06">
+<a href="maps/svg/QBM-06.svg"><img src="maps/svg/QBM-06.svg" alt="Seed germination before photosynthesis" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-06 · Seed germination before photosynthesis</span>
+Before chloroplasts mature, an oilseed embryo is entirely heterotrophic: stored triacylglycerol must be mobilised, run through peroxisomal beta-oxidation and the glyoxylate cycle, and converted to ATP by mitochondrial respiration. That makes the first 0-72 hours after imbibition the window where a respiratory or Fe/S lesion would have most leverage, and the reason Arabidopsis and Brassica are comparable systems for the review&#x27;s argument. The original Figure 6 carried a summary table of &quot;normalized trend ranges&quot; for germination rate, radicle length, ATP status and seedling vigour; those were qualitative cross-study impressions rather than measured values, so no number from them is reproduced here. The map shows the route and the endpoints; any quantity has to arrive from projected data. Every node on this map is T3 or T4, which is the honest state of the field: the review&#x27;s central proposal is a geomagnetic-versus-near-null imbibition time course, and no such experiment exists in its bibliography.
+<div class="tiers">11 nodes · 15 edges · T2 1 · T3 5 · T4 5 ·
+12 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-06.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-06.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-06.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-07">
+<a href="maps/svg/QBM-07.svg"><img src="maps/svg/QBM-07.svg" alt="ROS production, scavenging and redox buffering" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-07 · ROS production, scavenging and redox buffering</span>
+A weak-field effect on an electron-transfer branching ratio may be far too small to measure as a rate change, but ROS signalling is threshold-like, so the same small change can register as a transcriptional response. That is why the ROS-responsive programme is the best-evidenced node in the whole atlas, and equally why it cannot identify a mechanism: an amplifier reports that something moved upstream, never what. The map deliberately includes enzymes with no spin route at all — the peroxiredoxin/thioredoxin system is pure two-electron thiol chemistry with no radical intermediate and no metal — so that &quot;redox&quot; is not read as a synonym for &quot;magnetically addressable&quot;. The heme peroxidases do cycle through a genuine porphyrin radical, but it is exchange-coupled to the ferryl iron and extremely short-lived, and that caveat travels with the annotation.
+<div class="tiers">12 nodes · 14 edges · T2 3 · T3 5 · T4 4 ·
+17 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-07.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-07.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-07.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-08">
+<a href="maps/svg/QBM-08.svg"><img src="maps/svg/QBM-08.svg" alt="From magnetic environment to plant phenotype" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-08 · From magnetic environment to plant phenotype</span>
+The flagship map, and the one that has to be read most carefully. The review states that its Figure 7 is designed for hypothesis generation and experimental planning rather than as a proven causal network, and the tiers here preserve that distinction: the input perturbation and the developmental outputs carry real evidence, while the molecular route between them does not. Read the border styles from left to right and the shape of the field&#x27;s problem is visible — the evidence is concentrated at the two ends, on the perturbation and on the phenotypes, while the middle, where the mechanism would have to live, is almost entirely dashed. Primary metabolism, the review&#x27;s central thesis, is drawn as T4 on purpose: the metabolic route is argued rather than demonstrated, and the map should not let it borrow credibility from the developmental evidence beside it. The model is explicitly modular — cryptochrome may dominate in blue-light-grown seedlings, mitochondria in dark-imbibed seeds, plastids in greening tissue, and nutrient uptake in roots — so a single phenotype may be produced by different weightings of the same components depending on tissue, stage and light regime.
+<div class="tiers">19 nodes · 27 edges · T1 1 · T2 8 · T3 4 · T4 6 ·
+34 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-08.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-08.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-08.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-09">
+<a href="maps/svg/QBM-09.svg"><img src="maps/svg/QBM-09.svg" alt="Iron uptake and sulfate assimilation" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-09 · Iron uptake and sulfate assimilation</span>
+One of two maps the review motivates but does not draw. That is an odd gap, because mineral nutrition is where the direct Arabidopsis near-null-field evidence is strongest: three separate studies report effects on root mineral nutrition, iron uptake efficiency and Fe-S interplay. The map makes the loop visible. Sulfate assimilation supplies the sulfide that every cluster on QBM-04 is built from, and sulfite reductase is itself a ferredoxin-dependent siroheme-[4Fe-4S] enzyme drawing on plastid reducing power from QBM-02 — so iron and sulfur status are not two inputs but one feedback system, which is exactly why Vigani et al. found the effect most pronounced under combined Fe and S deficiency. Note the tier pattern: uptake and assimilation are T2 on real evidence, but they are classed as structural context because no quantum route is proposed for them. A demonstrated effect with no mechanism is recorded here as precisely that.
+<div class="tiers">10 nodes · 13 edges · T2 4 · T3 3 · T4 3 ·
+34 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-09.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-09.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-09.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<figure class="map" id="QBM-10">
+<a href="maps/svg/QBM-10.svg"><img src="maps/svg/QBM-10.svg" alt="Hormone and circadian integration of the flowering response" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-10 · Hormone and circadian integration of the flowering response</span>
+The second map the review motivates but does not draw, covering the other area where direct Arabidopsis evidence is strongest. Delayed flowering is the most reproducible near-null-field phenotype in the whole literature, and separate studies have implicated cryptochrome, gibberellin and auxin in producing it. Drawn together, the route from a photoreceptor to a phenotype becomes concrete and testable with existing mutants — which is what the review&#x27;s call for cry1 cry2, phytochrome and hormone genetics amounts to. The clock is the map&#x27;s most speculative element and is marked T3: no field measurement on clock components exists in the bibliography. It is drawn because a clock is a gate, so the same perturbation applied at different times can produce opposite outcomes — which could explain some of the inconsistency across near-null-field studies, and is testable rather than merely plausible. That is offered as an experimental design consideration, not a finding.
+<div class="tiers">11 nodes · 15 edges · T1 1 · T2 6 · T3 1 · T4 3 ·
+24 loci</div>
+<div class="dl"><a href="maps/sbgn/QBM-10.sbgn">SBGN-ML</a> ·
+<a href="maps/svg/QBM-10.svg">SVG</a> ·
+<a href="catalog/qbo/QBM-10.json">QBO annotation (JSON)</a></div>
+</figcaption>
+</figure>
+<h2>Cross-species projection</h2>
+<p>The ontology is anchored on <em>Arabidopsis</em>, because that is where the
+near-null-field literature is. Projecting onto another organism runs
+<strong>two independent orthology backbones</strong> and reports where they disagree,
+rather than silently preferring one:</p>
+<ul>
+<li><strong>Ensembl Compara <code>pan_homology</code></strong> — the only division that
+crosses kingdoms. The <code>plants</code> division does not reach animals at all.</li>
+<li><strong>OrthoDB v12</strong> — the committed human-anchored matrix from
+<a href="https://github.com/dr-richard-barker/OSDR_X-species_V2">OSDR_X-species_V2</a>.</li>
+</ul>
+<p>Projecting the atlas loci to human maps 15 of 28, with the two methods agreeing on 6
+and disagreeing on none. The <em>unmapped</em> set is the validation: every alternative
+oxidase and type II NAD(P)H dehydrogenase locus fails to map, which is correct —
+humans have neither. A projection that matches nothing <strong>raises</strong> rather
+than returning an empty frame that would render as a blank map.</p>
+<h2>A pre-registered test, and why it could not settle anything</h2>
+<p>The hypothesis, null, data sources and <em>confounds</em> were committed before the
+script was run. The question: are human orthologs carrying spin-bearing cofactors
+over-represented among genes conserved-suppressed across six species in spaceflight?</p>
+<table>
+<tr><th></th><th>carries a spin cofactor</th><th>does not</th></tr>
+<tr><td>conserved <b>down</b></td><td>13</td><td>330</td></tr>
+<tr><td>conserved <b>up</b></td><td>6</td><td>241</td></tr>
+</table>
+<p>Odds ratio <b>1.582</b> (95% CI 0.587–3.925),
+Fisher exact <b>p&nbsp;=&nbsp;0.48</b> — fail to reject the null. Iron-sulfur
+chemistry specifically, the mechanism the review argues hardest for, gives an odds
+ratio of 0.90.</p>
+<div class="note">
+<p style="margin:0 0 8px"><strong>That negative result settles nothing, and saying so
+is the point.</strong> Simulation on the realised marginals puts the minimum detectable
+odds ratio at <b>4.0</b> for 80% power; a genuine doubling of odds would have been
+missed three times in four.</p>
+<p style="margin:0">Three structural reasons this dataset cannot answer the question:
+only 19 of 590 directional genes carry a spin-bearing cofactor; the mitochondrial
+stratum has no contrast at all, because every conserved mitochondrial gene in the
+table is suppressed and none is up-regulated; and spaceflight bundles microgravity,
+ionising radiation and a hypomagnetic environment, so attribution to the magnetic
+component was never available. The result strengthens the review's own call for direct
+bioenergetic measurements under controlled conditions.</p>
+</div>
+<p><a href="results/preregistered_test_report.md">Full report</a> ·
+<a href="results/preregistered_test.json">Machine-readable result</a></p>
+<h2>Things found by building it</h2>
+<h3>A curated study database whose DOIs were mostly wrong</h3>
+<p>Every DOI in the companion repository's <code>nnmf_study_database.csv</code> was
+resolved against CrossRef: <strong>only 7 of 49 title-match</strong>. Its Belyavskaya
+row cites a paper on calcium gradients in the fish inner ear. The manuscript's own
+bibliography, by contrast, is clean — <strong>42 of 42 resolve and title-match</strong> —
+so the evidence base here is built from the bibliography, re-verified on every run,
+and the build refuses to write its output if any reference fails.</p>
+
+<h3>Gene symbols are not safe to type</h3>
+<p>Resolving every symbol against Ensembl during authoring caught five collisions that
+would each have put the wrong gene on a map: <code>ACO2</code> returns ACC oxidase 2
+rather than aconitase 2, <code>LIP1</code> a lipase rather than lipoyl synthase,
+<code>CAT2</code> and <code>CAT3</code> cationic amino acid transporters rather than
+catalases, and <code>KAT2</code> a potassium channel rather than the thiolase. The
+ontology stores loci, never symbols.</p>
+
+<h3>A cofactor table with no iron-sulfur entries</h3>
+<p>The KEGG-derived cofactor mapping in <code>OSDR_X-species_V2</code> contains zero
+iron-sulfur entries despite its generating script listing Fe-S among the cofactors to
+map, and only 5 heme and 10 FMN genes genome-wide. The script skips any cofactor whose
+cache file is missing without reporting the skip. UniProt/Swiss-Prot was used instead,
+which curates 71 human Fe-S proteins.</p>
+
+<h3>Figure legibility as a test, not a review step</h3>
+<p>The review draft carries the margin note <em>“the text spills out of the box's… and
+the TCA cycle needs some work”</em>. Both are fixed structurally: boxes are sized around
+measured text so a label cannot overflow by construction, and the TCA cycle is redrawn
+as an actual closed cycle. A browser-side probe then measures what was really painted —
+using the browser's own text layout rather than re-running the compiler's arithmetic —
+and asserts no overflow, no overlapping boxes or compartment bands, nothing clipped,
+and a caption that states provenance. All ten maps pass across 1,447 elements.</p>
+<h2>Using the atlas</h2>
+<p>The published catalogue is <a href="catalog/manifest.json"><code>catalog/manifest.json</code></a>:
+a flat, self-describing list of every map with its SBGN URL and a per-node annotation
+sidecar carrying evidence tier, quantum class and citations — so a consumer can draw
+the tier channel without parsing SBGN extensions.</p>
+<pre><code>pip install pyyaml matplotlib scipy
+PYTHONPATH=src python3 -c "
+from qbio import ontology, maps
+onto = ontology.load()
+for r in maps.compile_all(onto):
+    print(r['id'], r['nodes'], 'nodes', r['tiers'])"</code></pre>
+<p>Project a NASA OSDR contrast onto a map:</p>
+<pre><code>PYTHONPATH=src python3 -c "
+from qbio import ontology, maps, osdr, project
+onto = ontology.load()
+spec = maps.load_spec('maps/src/QBM-01_mitochondrial_etc.yaml')
+nodes = [(n, onto.get(spec.nodes.get(n, {}).get('qbo',''))) for n in spec.node_ids]
+table = osdr.load_contrast(38, contrast='(FLT)v(GC)')
+proj = project.project_expression(map_id=spec.id, nodes=nodes, table=table)
+print(proj.summary())"</code></pre>
+<footer>
+<p><strong>Licence.</strong> Ontology, maps and evidence base CC-BY-4.0; code MIT.</p>
+<p><strong>Citing.</strong> The review is in preparation and no DOI has been issued.
+Cite this repository by URL until one exists — please do not cite a placeholder DOI.</p>
+<p><strong>Status.</strong> QBO 0.1.0 ·
+<a href="https://github.com/dr-richard-barker/quantum-biology-atlas">source on GitHub</a>.
+The manuscript, viewer integration and Zenodo deposit are not yet built.</p>
+</footer>
+</div>
+</body>
+</html>

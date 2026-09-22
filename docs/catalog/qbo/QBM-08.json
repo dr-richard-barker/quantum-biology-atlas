@@ -1,0 +1,638 @@
+{
+  "map": "QBM-08",
+  "title": "From magnetic environment to plant phenotype",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "NNMF_INPUT",
+      "qbo": "QBO:NNMF_INPUT",
+      "label": "Near-null magnetic field (< 1 uT)",
+      "kind": "perturbation",
+      "compartment": "environment",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "GMF_REFERENCE",
+      "qbo": "QBO:GMF_REFERENCE",
+      "label": "Geomagnetic field (25-65 uT)",
+      "kind": "perturbation",
+      "compartment": "environment",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CRY1",
+      "qbo": "QBO:CRY1",
+      "label": "Cryptochrome 1 (CRY1)",
+      "kind": "macromolecule",
+      "compartment": "nucleus",
+      "evidence_tier": "T1",
+      "confidence": "verified",
+      "quantum_class": [
+        "radical_pair_acceptor",
+        "flavin_semiquinone",
+        "triplet_yield_sensitive"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [
+        "AT4G08920"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The reference case for the radical-pair mechanism in biology, and the entity from which the review's whole argument is generalised outward.\n",
+      "caveat": "Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.\n",
+      "evidence": [
+        {
+          "ref": "Ahmad2007",
+          "doi": "10.1007/s00425-006-0383-0",
+          "claim": "Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Solovyov2007",
+          "doi": "10.1529/biophysj.106.097139",
+          "claim": "Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Harris2009",
+          "doi": "10.1098/rsif.2008.0519",
+          "claim": "Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.\n",
+          "direction": "no_effect",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Pooam2019",
+          "doi": "10.1007/s00425-018-3002-y",
+          "claim": "Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2014",
+          "doi": "10.1016/j.asr.2014.01.033",
+          "claim": "Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "COMPLEX_I",
+      "qbo": "QBO:COMPLEX_I",
+      "label": "Complex I (NADH:ubiquinone oxidoreductase)",
+      "kind": "complex",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone",
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_2Fe2S",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H",
+        "14N",
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT5G37510",
+        "AT5G08530",
+        "AT4G02580",
+        "AT5G11770"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers \u2014 both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.\n",
+      "caveat": "Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "RIESKE_FES",
+      "qbo": "QBO:RIESKE_FES",
+      "label": "Rieske [2Fe-2S] centre (complex III)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "rieske_2Fe2S",
+        "semiquinone_radical",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S",
+        "1H"
+      ],
+      "agi": [
+        "AT5G13430",
+        "AT5G13440"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The Qo site generates a kinetically stabilised ubisemiquinone \u2014 a genuine, comparatively long-lived organic radical in a defined protein pocket, which is the most favourable setting for a field-dependent branching effect anywhere in the respiratory chain.\n",
+      "caveat": "Qo-site semiquinone is short-lived and its occupancy is debated; a field effect here would be easier to argue if lifetime were measured under the relevant conditions.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "PSI_FES",
+      "qbo": "QBO:PSI_FES",
+      "label": "Photosystem I Fe/S centres (FX, FA, FB)",
+      "kind": "complex",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S",
+        "radical_pair_acceptor",
+        "triplet_yield_sensitive"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S",
+        "1H"
+      ],
+      "agi": [
+        "ATCG01060"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "PSI is the strongest structural case in the whole atlas. Charge separation at P700 produces a genuine spin-correlated radical pair (P700\u00b7+ A1\u00b7\u2212), which is the textbook example of the species the radical-pair mechanism describes \u2014 it is studied by exactly that formalism in photosynthesis spectroscopy. Three [4Fe-4S] clusters then carry the electron onward.\n",
+      "caveat": "The P700\u00b7+ A1\u00b7\u2212 pair is extremely short-lived, and the well-characterised magnetic-field effects on it are seen in isolated preparations at fields far above geomagnetic. Structural plausibility is high; relevance at 50 uT is not established.\n",
+      "evidence": [
+        {
+          "ref": "Parmagnani2023",
+          "doi": "10.3390/ijms24032896",
+          "claim": "The geomagnetic field is required for normal lima bean photosynthesis, PSI/LHCI content and ROS production; near-null field conditions altered photosynthetic electron transport.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Phaseolus lunatus"
+        }
+      ]
+    },
+    {
+      "node_id": "FE_SUPPLY",
+      "qbo": "QBO:FE_SUPPLY",
+      "label": "Cellular Fe / S supply",
+      "kind": "simple_chemical",
+      "compartment": "cytosol",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "Note carefully what the cited work does and does not show. Islam 2020 and Vigani 2021 measured iron uptake and Fe-S interplay under altered field conditions \u2014 nutritional physiology. Neither measured cluster assembly. This entity is T2 because the field effect is demonstrated for the process it names; the assembly entities above remain T3 because that evidence does not reach them.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Islam2020",
+          "doi": "10.3389/fpls.2020.00325",
+          "claim": "The geomagnetic field contributes to efficient iron uptake in Arabidopsis; reducing it to near-null affects root metal reductase activity.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Vigani2021",
+          "doi": "10.3390/ijms221810166",
+          "claim": "Geomagnetic-field-dependent modulation of iron-sulfur interplay in Arabidopsis, most pronounced under combined Fe and S deficiency.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Narayana2018",
+          "doi": "10.1016/j.lssr.2018.08.005",
+          "claim": "Reduction of the geomagnetic field to near-null affects Arabidopsis root mineral nutrition.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "SINGLET_TRIPLET",
+      "qbo": "QBO:SINGLET_TRIPLET",
+      "label": "Singlet \u21c4 triplet interconversion",
+      "kind": "process",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "triplet_yield_sensitive",
+        "spin_correlated_pair",
+        "hyperfine_coupled"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [],
+      "magnetically_addressable": true,
+      "rationale": "This is the mechanism itself rather than a molecule. It is on the map because the review's argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.\n",
+      "caveat": "For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate \u2014 roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.\n",
+      "evidence": [
+        {
+          "ref": "Ritz2000",
+          "doi": "10.1016/S0006-3495(00)76629-X",
+          "claim": "A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.\n",
+          "direction": "altered",
+          "field_regime": "GMF",
+          "species": "not applicable"
+        },
+        {
+          "ref": "ZadehHaghighi2022",
+          "doi": "10.1098/rsif.2022.0325",
+          "claim": "Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.\n",
+          "direction": "altered",
+          "field_regime": "GMF",
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "FES_CLIENTS",
+      "qbo": "QBO:FES_CLIENTS",
+      "label": "Fe/S client proteins",
+      "kind": "complex",
+      "compartment": "cell",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_2Fe2S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G35830",
+        "AT5G66760",
+        "AT5G13430",
+        "AT4G03280",
+        "AT1G10960",
+        "AT2G20860",
+        "AT2G21790"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Collected here so the map can show, in one edge, that a single assembly defect reaches respiration, photosynthesis, the TCA cycle, nitrogen and sulfur assimilation and DNA replication simultaneously. That breadth is the review's argument for why Fe/S biology deserves attention ahead of cryptochrome.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "MITO_SUPEROXIDE",
+      "qbo": "QBO:MITO_SUPEROXIDE",
+      "label": "Mitochondrial superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G10920"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Not a magnetosensitive mechanism itself \u2014 it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "PRIMARY_METABOLISM",
+      "qbo": "QBO:PRIMARY_METABOLISM",
+      "label": "Primary metabolism",
+      "kind": "process",
+      "compartment": "cell",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ROS_TRANSCRIPTIONAL_RESPONSE",
+      "qbo": "QBO:ROS_TRANSCRIPTIONAL_RESPONSE",
+      "label": "ROS-responsive transcriptional programme",
+      "kind": "process",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "This entity carries demonstrated near-null-field evidence but NO proposed quantum route, and is classed structural_context to say so explicitly. It is the amplifier's output: threshold-like signalling turns an upstream change too small to measure directly into a transcriptional response. That sensitivity is what makes it the best-evidenced node in the atlas and simultaneously a poor discriminator \u2014 it reports that something moved upstream, never what.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Transcriptomics and metabolomics of ROS modulation in near-null magnetic field-induced Arabidopsis: field reduction alters ROS-associated transcriptional and metabolic programmes.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Zsigmond2008",
+          "doi": "10.1104/pp.107.111260",
+          "claim": "Arabidopsis PPR40 connects abiotic stress responses to mitochondrial electron transport, establishing a route from respiratory state to stress signalling.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "GA_SIGNALLING",
+      "qbo": "QBO:GA_SIGNALLING",
+      "label": "Gibberellin signalling (GA3OX1, GA20OX1, RGA, GAI, RGL2)",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G15550",
+        "AT4G25420",
+        "AT2G01570",
+        "AT1G14920",
+        "AT3G03450"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Demonstrated field evidence with no proposed quantum route. Xu et al. showed gibberellins are involved in the near-null-field effect on flowering, which makes this a real link in the causal chain \u2014 but GA signalling is ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism is claimed.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2017",
+          "doi": "10.1002/bem.22004",
+          "claim": "Gibberellins are involved in the effect of a near-null magnetic field on Arabidopsis flowering.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "AUXIN_TRANSPORT",
+      "qbo": "QBO:AUXIN_TRANSPORT",
+      "label": "Auxin transport and signalling (PIN1/2/3, AUX1, TIR1, ARF7)",
+      "kind": "complex",
+      "compartment": "plasma_membrane",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G73590",
+        "AT5G57090",
+        "AT1G70940",
+        "AT2G38120",
+        "AT3G62980",
+        "AT5G20730"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "As with gibberellin: a demonstrated field effect with no proposed spin route. Xu et al. showed auxin mediates near-null-field suppression of flowering.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2018",
+          "doi": "10.1002/bem.22086",
+          "claim": "Suppression of Arabidopsis flowering by a near-null magnetic field is mediated by auxin.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2021",
+          "doi": "10.1002/bem.22363",
+          "claim": "A near-null magnetic field suppresses fruit growth in Arabidopsis.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "CIRCADIAN_CLOCK",
+      "qbo": "QBO:CIRCADIAN_CLOCK",
+      "label": "Circadian clock (CCA1, LHY, TOC1, PRR5/7/9, GI, ELF4)",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G46830",
+        "AT1G01060",
+        "AT5G61380",
+        "AT5G24470",
+        "AT5G02810",
+        "AT2G46790",
+        "AT1G22770",
+        "AT2G40080"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "No spin route of its own, and no direct field measurement on clock components in the bibliography. It is on the map because cryptochrome is a clock input, so a field effect at CRY would necessarily arrive here \u2014 and because a clock is a gate, meaning the same perturbation can produce opposite outcomes depending on when it is applied. That alone could explain some of the inconsistency in near-null-field results, and it is testable.\n",
+      "caveat": "This is the atlas's most speculative causal claim and is flagged as such. It is offered as an experimental design consideration, not a finding.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "RADICLE_EMERGENCE",
+      "qbo": "QBO:RADICLE_EMERGENCE",
+      "label": "Radicle emergence",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, defining the window in which a respiratory lesion would have most leverage.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        },
+        {
+          "ref": "Eckardt2005",
+          "doi": "10.1105/tpc.105.034843",
+          "claim": "Peroxisomal citrate synthase provides the exit route from fatty acid metabolism in oilseeds, linking reserve mobilisation to the TCA cycle.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "FLOWERING_OUTPUT",
+      "qbo": "QBO:FLOWERING_OUTPUT",
+      "label": "Flowering time (CO \u2192 FT)",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Agliassa2018a",
+          "doi": "10.1002/bem.22123",
+          "claim": "Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2015",
+          "doi": "10.1002/bem.21927",
+          "claim": "Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2013",
+          "doi": "10.1002/bem.21788",
+          "claim": "Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "REPRODUCTIVE_OUTPUT",
+      "qbo": "QBO:REPRODUCTIVE_OUTPUT",
+      "label": "Reproductive output (siliques, seed yield)",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "A phenotype with demonstrated field evidence and, necessarily, no quantum route of its own. It is the accumulated consequence of everything upstream, which is what makes it reproducible and also what makes it uninformative about mechanism.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2013",
+          "doi": "10.1002/bem.21788",
+          "claim": "Removal of the local geomagnetic field affects reproductive growth in Arabidopsis, reducing silique number and seed yield.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2021",
+          "doi": "10.1002/bem.22363",
+          "claim": "Near-null magnetic field suppresses fruit growth in Arabidopsis.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "BRASSICA_TRANSLATION",
+      "qbo": "QBO:BRASSICA_TRANSLATION",
+      "label": "Brassica crop translation",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    }
+  ]
+}

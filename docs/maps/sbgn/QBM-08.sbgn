@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3" xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">
+  <map id="QBM-08" language="process description">
+    <extension>
+      <qbo:mapNotes xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">From magnetic environment to plant phenotype. The flagship map, and the one that has to be read most carefully. The review states that its Figure 7 is designed for hypothesis generation and experimental planning rather than as a proven causal network, and the tiers here preserve that distinction: the input perturbation and the developmental outputs carry real evidence, while the molecular route between them does not. Read the border styles from left to right and the shape of the field's problem is visible — the evidence is concentrated at the two ends, on the perturbation and on the phenotypes, while the middle, where the mechanism would have to live, is almost entirely dashed. Primary metabolism, the review's central thesis, is drawn as T4 on purpose: the metabolic route is argued rather than demonstrated, and the map should not let it borrow credibility from the developmental evidence beside it. The model is explicitly modular — cryptochrome may dominate in blue-light-grown seedlings, mitochondria in dark-imbibed seeds, plastids in greening tissue, and nutrient uptake in roots — so a single phenotype may be produced by different weightings of the same components depending on tissue, stage and light regime. Derived from: Figure 7 of Porterfield &amp; Barker, "Plant Responses to Near-Null Magnetic Fields" — expanded and tier-annotated</qbo:mapNotes>
+    </extension>
+    <glyph id="environment" class="compartment">
+      <label text="Environment" />
+      <bbox x="211.59" y="-26.00" w="397.55" h="86.64" />
+    </glyph>
+    <glyph id="cell" class="compartment">
+      <label text="Cell" />
+      <bbox x="-26.00" y="98.64" w="872.72" h="232.48" />
+    </glyph>
+    <glyph id="nucleus" class="compartment">
+      <label text="Nucleus" />
+      <bbox x="36.79" y="369.12" w="747.15" h="112.24" />
+    </glyph>
+    <glyph id="organism" class="compartment">
+      <label text="Organism" />
+      <bbox x="99.59" y="519.36" w="621.55" h="86.64" />
+    </glyph>
+    <glyph id="NNMF_INPUT" class="perturbing agent" compartmentRef="environment">
+      <label text="Near-null field (&lt; 1 uT)" />
+      <bbox x="237.59" y="0.00" w="170.27" h="34.64" />
+      <glyph id="NNMF_INPUT__u0" class="unit of information">
+        <label text="report geometry + noise" />
+        <bbox x="243.59" y="-9.00" w="161.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:NNMF_INPUT" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="GMF_REFERENCE" class="perturbing agent" compartmentRef="environment">
+      <label text="Geomagnetic field" />
+      <bbox x="441.86" y="0.00" w="141.27" h="34.64" />
+      <glyph id="GMF_REFERENCE__u0" class="unit of information">
+        <label text="reference, not treatment" />
+        <bbox x="447.86" y="-9.00" w="168.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:GMF_REFERENCE" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CRY1" class="macromolecule" compartmentRef="nucleus">
+      <label text="Cryptochrome" />
+      <bbox x="0.00" y="131.04" w="115.05" h="47.44" />
+      <glyph id="CRY1__u0" class="unit of information">
+        <label text="the only T1" />
+        <bbox x="6.00" y="122.04" w="77.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CRY1" evidenceTier="T1" confidence="verified">
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT4G08920</qbo:xref>
+          <qbo:xref db="go_component">GO:0005634</qbo:xref>
+          <qbo:evidence ref="Ahmad2007" doi="10.1007/s00425-006-0383-0" direction="altered" fieldRegime="static_MF">Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.
+</qbo:evidence>
+          <qbo:evidence ref="Solovyov2007" doi="10.1529/biophysj.106.097139" direction="altered" fieldRegime="static_MF">Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.
+</qbo:evidence>
+          <qbo:evidence ref="Harris2009" doi="10.1098/rsif.2008.0519" direction="no_effect" fieldRegime="static_MF">Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.
+</qbo:evidence>
+          <qbo:evidence ref="Pooam2019" doi="10.1007/s00425-018-3002-y" direction="altered" fieldRegime="static_MF">Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2014" doi="10.1016/j.asr.2014.01.033" direction="altered" fieldRegime="NNMF">Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>The reference case for the radical-pair mechanism in biology, and the entity from which the review's whole argument is generalised outward.
+</qbo:rationale>
+          <qbo:caveat>Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COMPLEX_I" class="complex">
+      <label text="Respiratory complexes" />
+      <bbox x="149.05" y="124.64" w="170.16" h="60.24" />
+      <glyph id="COMPLEX_I__u0" class="unit of information">
+        <label text="FMN + Fe/S" />
+        <bbox x="155.05" y="115.64" w="70.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COMPLEX_I" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:cofactor>CHEBI:58210</qbo:cofactor>
+          <qbo:xref db="agi">AT5G37510</qbo:xref>
+          <qbo:xref db="agi">AT5G08530</qbo:xref>
+          <qbo:xref db="agi">AT4G02580</qbo:xref>
+          <qbo:xref db="agi">AT5G11770</qbo:xref>
+          <qbo:xref db="go_component">GO:0005747</qbo:xref>
+          <qbo:xref db="ec">7.1.1.2</qbo:xref>
+          <qbo:rationale>The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers — both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.
+</qbo:rationale>
+          <qbo:caveat>Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="RIESKE_FES" class="macromolecule">
+      <label text="Rieske centres" />
+      <bbox x="353.21" y="131.04" w="148.99" h="47.44" />
+      <glyph id="RIESKE_FES__u0" class="unit of information">
+        <label text="2Fe-2S" />
+        <bbox x="359.21" y="122.04" w="42.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:RIESKE_FES" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>rieske_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT5G13430</qbo:xref>
+          <qbo:xref db="agi">AT5G13440</qbo:xref>
+          <qbo:xref db="go_component">GO:0005750</qbo:xref>
+          <qbo:rationale>The Qo site generates a kinetically stabilised ubisemiquinone — a genuine, comparatively long-lived organic radical in a defined protein pocket, which is the most favourable setting for a field-dependent branching effect anywhere in the respiratory chain.
+</qbo:rationale>
+          <qbo:caveat>Qo-site semiquinone is short-lived and its occupancy is debated; a field effect here would be easier to argue if lifetime were measured under the relevant conditions.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PSI_FES" class="complex">
+      <label text="Photosystem I Fe/S" />
+      <bbox x="536.20" y="131.04" w="145.57" h="47.44" />
+      <glyph id="PSI_FES__u0" class="unit of information">
+        <label text="spin-correlated pair" />
+        <bbox x="542.20" y="122.04" w="140.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PSI_FES" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">ATCG01060</qbo:xref>
+          <qbo:xref db="go_component">GO:0009522</qbo:xref>
+          <qbo:xref db="ec">1.97.1.12</qbo:xref>
+          <qbo:evidence ref="Parmagnani2023" doi="10.3390/ijms24032896" direction="altered" fieldRegime="NNMF">The geomagnetic field is required for normal lima bean photosynthesis, PSI/LHCI content and ROS production; near-null field conditions altered photosynthetic electron transport.
+</qbo:evidence>
+          <qbo:rationale>PSI is the strongest structural case in the whole atlas. Charge separation at P700 produces a genuine spin-correlated radical pair (P700·+ A1·−), which is the textbook example of the species the radical-pair mechanism describes — it is studied by exactly that formalism in photosynthesis spectroscopy. Three [4Fe-4S] clusters then carry the electron onward.
+</qbo:rationale>
+          <qbo:caveat>The P700·+ A1·− pair is extremely short-lived, and the well-characterised magnetic-field effects on it are seen in isolated preparations at fields far above geomagnetic. Structural plausibility is high; relevance at 50 uT is not established.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FE_SUPPLY" class="simple chemical">
+      <label text="Fe / S supply" />
+      <bbox x="715.77" y="137.44" w="104.95" h="34.64" />
+      <glyph id="FE_SUPPLY__u0" class="unit of information">
+        <label text="evidence, no mechanism" />
+        <bbox x="721.77" y="128.44" w="154.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FE_SUPPLY" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:29033</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:29034</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:16189</qbo:xref>
+          <qbo:evidence ref="Islam2020" doi="10.3389/fpls.2020.00325" direction="decrease" fieldRegime="NNMF">The geomagnetic field contributes to efficient iron uptake in Arabidopsis; reducing it to near-null affects root metal reductase activity.
+</qbo:evidence>
+          <qbo:evidence ref="Vigani2021" doi="10.3390/ijms221810166" direction="altered" fieldRegime="NNMF">Geomagnetic-field-dependent modulation of iron-sulfur interplay in Arabidopsis, most pronounced under combined Fe and S deficiency.
+</qbo:evidence>
+          <qbo:evidence ref="Narayana2018" doi="10.1016/j.lssr.2018.08.005" direction="altered" fieldRegime="NNMF">Reduction of the geomagnetic field to near-null affects Arabidopsis root mineral nutrition.
+</qbo:evidence>
+          <qbo:rationale>Note carefully what the cited work does and does not show. Islam 2020 and Vigani 2021 measured iron uptake and Fe-S interplay under altered field conditions — nutritional physiology. Neither measured cluster assembly. This entity is T2 because the field effect is demonstrated for the process it names; the assembly entities above remain T3 because that evidence does not reach them.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="SINGLET_TRIPLET" class="process" compartmentRef="nucleus">
+      <label text="Singlet ⇄ triplet mixing" />
+      <bbox x="51.14" y="257.68" w="173.40" h="34.64" />
+      <glyph id="SINGLET_TRIPLET__u0" class="unit of information">
+        <label text="needs ~us lifetime" />
+        <bbox x="57.14" y="248.68" w="126.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:SINGLET_TRIPLET" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:quantumClass>spin_correlated_pair</qbo:quantumClass>
+          <qbo:quantumClass>hyperfine_coupled</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:evidence ref="Ritz2000" doi="10.1016/S0006-3495(00)76629-X" direction="altered" fieldRegime="GMF">A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.
+</qbo:evidence>
+          <qbo:evidence ref="ZadehHaghighi2022" doi="10.1098/rsif.2022.0325" direction="altered" fieldRegime="GMF">Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.
+</qbo:evidence>
+          <qbo:rationale>This is the mechanism itself rather than a molecule. It is on the map because the review's argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.
+</qbo:rationale>
+          <qbo:caveat>For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate — roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FES_CLIENTS" class="complex" compartmentRef="cell">
+      <label text="Fe/S client proteins" />
+      <bbox x="258.53" y="244.88" w="154.93" h="60.24" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FES_CLIENTS" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_2Fe2S</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:xref db="agi">AT4G35830</qbo:xref>
+          <qbo:xref db="agi">AT5G66760</qbo:xref>
+          <qbo:xref db="agi">AT5G13430</qbo:xref>
+          <qbo:xref db="agi">AT4G03280</qbo:xref>
+          <qbo:xref db="agi">AT1G10960</qbo:xref>
+          <qbo:xref db="agi">AT2G20860</qbo:xref>
+          <qbo:xref db="agi">AT2G21790</qbo:xref>
+          <qbo:rationale>Collected here so the map can show, in one edge, that a single assembly defect reaches respiration, photosynthesis, the TCA cycle, nitrogen and sulfur assimilation and DNA replication simultaneously. That breadth is the review's argument for why Fe/S biology deserves attention ahead of cryptochrome.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="MITO_SUPEROXIDE" class="simple chemical">
+      <label text="ROS homeostasis" />
+      <bbox x="447.46" y="251.28" w="135.54" h="47.44" />
+      <glyph id="MITO_SUPEROXIDE__u0" class="unit of information">
+        <label text="amplifier" />
+        <bbox x="453.46" y="242.28" w="63.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:MITO_SUPEROXIDE" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:18421</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:16240</qbo:xref>
+          <qbo:xref db="agi">AT3G10920</qbo:xref>
+          <qbo:evidence ref="Parmagnani2022" doi="10.3390/biom12121824" direction="altered" fieldRegime="NNMF">Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+</qbo:evidence>
+          <qbo:evidence ref="Farooq2021" doi="10.3389/fpls.2021.781734" direction="altered">Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.
+</qbo:evidence>
+          <qbo:rationale>Not a magnetosensitive mechanism itself — it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PRIMARY_METABOLISM" class="process" compartmentRef="cell">
+      <label text="Primary metabolism" />
+      <bbox x="617.01" y="257.68" w="152.58" h="34.64" />
+      <glyph id="PRIMARY_METABOLISM__u0" class="unit of information">
+        <label text="the thesis — still T4" />
+        <bbox x="623.01" y="248.68" w="147.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PRIMARY_METABOLISM" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="ROS_TRANSCRIPTIONAL_RESPONSE" class="process" compartmentRef="nucleus">
+      <label text="ROS-responsive transcription" />
+      <bbox x="62.79" y="399.60" w="124.58" h="51.28" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:ROS_TRANSCRIPTIONAL_RESPONSE" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Parmagnani2022" doi="10.3390/biom12121824" direction="altered" fieldRegime="NNMF">Transcriptomics and metabolomics of ROS modulation in near-null magnetic field-induced Arabidopsis: field reduction alters ROS-associated transcriptional and metabolic programmes.
+</qbo:evidence>
+          <qbo:evidence ref="Zsigmond2008" doi="10.1104/pp.107.111260" direction="altered">Arabidopsis PPR40 connects abiotic stress responses to mitochondrial electron transport, establishing a route from respiratory state to stress signalling.
+</qbo:evidence>
+          <qbo:rationale>This entity carries demonstrated near-null-field evidence but NO proposed quantum route, and is classed structural_context to say so explicitly. It is the amplifier's output: threshold-like signalling turns an upstream change too small to measure directly into a transcriptional response. That sensitivity is what makes it the best-evidenced node in the atlas and simultaneously a poor discriminator — it reports that something moved upstream, never what.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="GA_SIGNALLING" class="complex" compartmentRef="nucleus">
+      <label text="Gibberellin signalling" />
+      <bbox x="221.37" y="395.12" w="158.70" h="60.24" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:GA_SIGNALLING" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT1G15550</qbo:xref>
+          <qbo:xref db="agi">AT4G25420</qbo:xref>
+          <qbo:xref db="agi">AT2G01570</qbo:xref>
+          <qbo:xref db="agi">AT1G14920</qbo:xref>
+          <qbo:xref db="agi">AT3G03450</qbo:xref>
+          <qbo:evidence ref="Xu2017" doi="10.1002/bem.22004" direction="altered" fieldRegime="NNMF">Gibberellins are involved in the effect of a near-null magnetic field on Arabidopsis flowering.
+</qbo:evidence>
+          <qbo:rationale>Demonstrated field evidence with no proposed quantum route. Xu et al. showed gibberellins are involved in the near-null-field effect on flowering, which makes this a real link in the causal chain — but GA signalling is ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism is claimed.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="AUXIN_TRANSPORT" class="complex">
+      <label text="Auxin transport" />
+      <bbox x="414.07" y="395.12" w="154.93" h="60.24" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:AUXIN_TRANSPORT" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT1G73590</qbo:xref>
+          <qbo:xref db="agi">AT5G57090</qbo:xref>
+          <qbo:xref db="agi">AT1G70940</qbo:xref>
+          <qbo:xref db="agi">AT2G38120</qbo:xref>
+          <qbo:xref db="agi">AT3G62980</qbo:xref>
+          <qbo:xref db="agi">AT5G20730</qbo:xref>
+          <qbo:evidence ref="Xu2018" doi="10.1002/bem.22086" direction="decrease" fieldRegime="NNMF">Suppression of Arabidopsis flowering by a near-null magnetic field is mediated by auxin.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2021" doi="10.1002/bem.22363" direction="decrease" fieldRegime="NNMF">A near-null magnetic field suppresses fruit growth in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>As with gibberellin: a demonstrated field effect with no proposed spin route. Xu et al. showed auxin mediates near-null-field suppression of flowering.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CIRCADIAN_CLOCK" class="complex" compartmentRef="nucleus">
+      <label text="Circadian clock" />
+      <bbox x="603.00" y="395.12" w="154.93" h="60.24" />
+      <glyph id="CIRCADIAN_CLOCK__u0" class="unit of information">
+        <label text="a gate — timing matters" />
+        <bbox x="609.00" y="386.12" w="161.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CIRCADIAN_CLOCK" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT2G46830</qbo:xref>
+          <qbo:xref db="agi">AT1G01060</qbo:xref>
+          <qbo:xref db="agi">AT5G61380</qbo:xref>
+          <qbo:xref db="agi">AT5G24470</qbo:xref>
+          <qbo:xref db="agi">AT5G02810</qbo:xref>
+          <qbo:xref db="agi">AT2G46790</qbo:xref>
+          <qbo:xref db="agi">AT1G22770</qbo:xref>
+          <qbo:xref db="agi">AT2G40080</qbo:xref>
+          <qbo:rationale>No spin route of its own, and no direct field measurement on clock components in the bibliography. It is on the map because cryptochrome is a clock input, so a field effect at CRY would necessarily arrive here — and because a clock is a gate, meaning the same perturbation can produce opposite outcomes depending on when it is applied. That alone could explain some of the inconsistency in near-null-field results, and it is testable.
+</qbo:rationale>
+          <qbo:caveat>This is the atlas's most speculative causal claim and is flagged as such. It is offered as an experimental design consideration, not a finding.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="RADICLE_EMERGENCE" class="phenotype" compartmentRef="organism">
+      <label text="Germination" />
+      <bbox x="125.59" y="545.36" w="102.74" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:RADICLE_EMERGENCE" evidenceTier="T4" confidence="reported">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Farooq2021" doi="10.3389/fpls.2021.781734" direction="altered">Reactive oxygen species and mitochondria jointly regulate seed germination, defining the window in which a respiratory lesion would have most leverage.
+</qbo:evidence>
+          <qbo:evidence ref="Eckardt2005" doi="10.1105/tpc.105.034843" direction="altered">Peroxisomal citrate synthase provides the exit route from fatty acid metabolism in oilseeds, linking reserve mobilisation to the TCA cycle.
+</qbo:evidence>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FLOWERING_OUTPUT" class="phenotype" compartmentRef="organism">
+      <label text="Flowering time" />
+      <bbox x="262.32" y="545.36" w="118.66" h="34.64" />
+      <glyph id="FLOWERING_OUTPUT__u0" class="unit of information">
+        <label text="most reproducible" />
+        <bbox x="268.32" y="536.36" w="119.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FLOWERING_OUTPUT" evidenceTier="T4" confidence="reported">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Agliassa2018a" doi="10.1002/bem.22123" direction="decrease" fieldRegime="NNMF">Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2015" doi="10.1002/bem.21927" direction="decrease" fieldRegime="NNMF">Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2013" doi="10.1002/bem.21788" direction="decrease" fieldRegime="NNMF">Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.
+</qbo:evidence>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="REPRODUCTIVE_OUTPUT" class="phenotype" compartmentRef="organism">
+      <label text="Seed yield" />
+      <bbox x="414.98" y="545.36" w="96.00" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:REPRODUCTIVE_OUTPUT" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Xu2013" doi="10.1002/bem.21788" direction="decrease" fieldRegime="NNMF">Removal of the local geomagnetic field affects reproductive growth in Arabidopsis, reducing silique number and seed yield.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2021" doi="10.1002/bem.22363" direction="decrease" fieldRegime="NNMF">Near-null magnetic field suppresses fruit growth in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>A phenotype with demonstrated field evidence and, necessarily, no quantum route of its own. It is the accumulated consequence of everything upstream, which is what makes it reproducible and also what makes it uninformative about mechanism.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="BRASSICA_TRANSLATION" class="phenotype" compartmentRef="organism">
+      <label text="Brassica translation" />
+      <bbox x="544.98" y="545.36" w="150.15" h="34.64" />
+      <glyph id="BRASSICA_TRANSLATION__u0" class="unit of information">
+        <label text="untested gap" />
+        <bbox x="550.98" y="536.36" w="84.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:BRASSICA_TRANSLATION" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <arc id="arc0" class="stimulation" source="NNMF_INPUT" target="CRY1">
+      <start x="322.72" y="17.32" />
+      <end x="57.53" y="154.76" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc1" class="stimulation" source="NNMF_INPUT" target="COMPLEX_I">
+      <start x="322.72" y="17.32" />
+      <end x="234.13" y="154.76" />
+      <glyph id="arc1__lbl" class="annotation">
+        <label text="proposed" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc2" class="stimulation" source="NNMF_INPUT" target="RIESKE_FES">
+      <start x="322.72" y="17.32" />
+      <end x="427.71" y="154.76" />
+      <glyph id="arc2__lbl" class="annotation">
+        <label text="proposed" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc3" class="stimulation" source="NNMF_INPUT" target="PSI_FES">
+      <start x="322.72" y="17.32" />
+      <end x="608.99" y="154.76" />
+      <glyph id="arc3__lbl" class="annotation">
+        <label text="proposed" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc4" class="stimulation" source="NNMF_INPUT" target="FE_SUPPLY">
+      <start x="322.72" y="17.32" />
+      <end x="768.25" y="154.76" />
+      <glyph id="arc4__lbl" class="annotation">
+        <label text="observed" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc5" class="modulation" source="GMF_REFERENCE" target="NNMF_INPUT">
+      <start x="512.50" y="17.32" />
+      <end x="322.72" y="17.32" />
+      <glyph id="arc5__lbl" class="annotation">
+        <label text="compensated" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc6" class="stimulation" source="CRY1" target="SINGLET_TRIPLET">
+      <start x="57.53" y="154.76" />
+      <end x="137.83" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc7" class="stimulation" source="COMPLEX_I" target="MITO_SUPEROXIDE">
+      <start x="234.13" y="154.76" />
+      <end x="515.24" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc8" class="stimulation" source="RIESKE_FES" target="MITO_SUPEROXIDE">
+      <start x="427.71" y="154.76" />
+      <end x="515.24" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc9" class="stimulation" source="PSI_FES" target="MITO_SUPEROXIDE">
+      <start x="608.99" y="154.76" />
+      <end x="515.24" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc10" class="catalysis" source="FE_SUPPLY" target="FES_CLIENTS">
+      <start x="768.25" y="154.76" />
+      <end x="336.00" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">cofactor_insertion</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc11" class="stimulation" source="FES_CLIENTS" target="PRIMARY_METABOLISM">
+      <start x="336.00" y="275.00" />
+      <end x="693.30" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc12" class="modulation" source="MITO_SUPEROXIDE" target="PRIMARY_METABOLISM">
+      <start x="515.24" y="275.00" />
+      <end x="693.30" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">redox_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc13" class="modulation" source="SINGLET_TRIPLET" target="ROS_TRANSCRIPTIONAL_RESPONSE">
+      <start x="137.83" y="275.00" />
+      <end x="125.08" y="425.24" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc14" class="stimulation" source="MITO_SUPEROXIDE" target="ROS_TRANSCRIPTIONAL_RESPONSE">
+      <start x="515.24" y="275.00" />
+      <end x="125.08" y="425.24" />
+      <glyph id="arc14__lbl" class="annotation">
+        <label text="threshold" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc15" class="modulation" source="PRIMARY_METABOLISM" target="GA_SIGNALLING">
+      <start x="693.30" y="275.00" />
+      <end x="300.72" y="425.24" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc16" class="modulation" source="PRIMARY_METABOLISM" target="AUXIN_TRANSPORT">
+      <start x="693.30" y="275.00" />
+      <end x="491.54" y="425.24" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc17" class="modulation" source="SINGLET_TRIPLET" target="CIRCADIAN_CLOCK">
+      <start x="137.83" y="275.00" />
+      <end x="680.47" y="425.24" />
+      <glyph id="arc17__lbl" class="annotation">
+        <label text="CRY is a clock input" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc18" class="modulation" source="PRIMARY_METABOLISM" target="RADICLE_EMERGENCE">
+      <start x="693.30" y="275.00" />
+      <end x="176.96" y="562.68" />
+      <glyph id="arc18__lbl" class="annotation">
+        <label text="ATP sets the pace" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc19" class="modulation" source="GA_SIGNALLING" target="RADICLE_EMERGENCE">
+      <start x="300.72" y="425.24" />
+      <end x="176.96" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc20" class="modulation" source="GA_SIGNALLING" target="FLOWERING_OUTPUT">
+      <start x="300.72" y="425.24" />
+      <end x="321.65" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc21" class="modulation" source="AUXIN_TRANSPORT" target="FLOWERING_OUTPUT">
+      <start x="491.54" y="425.24" />
+      <end x="321.65" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc22" class="modulation" source="CIRCADIAN_CLOCK" target="FLOWERING_OUTPUT">
+      <start x="680.47" y="425.24" />
+      <end x="321.65" y="562.68" />
+      <glyph id="arc22__lbl" class="annotation">
+        <label text="photoperiod" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">circadian_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc23" class="modulation" source="ROS_TRANSCRIPTIONAL_RESPONSE" target="REPRODUCTIVE_OUTPUT">
+      <start x="125.08" y="425.24" />
+      <end x="462.98" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc24" class="stimulation" source="FLOWERING_OUTPUT" target="REPRODUCTIVE_OUTPUT">
+      <start x="321.65" y="562.68" />
+      <end x="462.98" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc25" class="modulation" source="RADICLE_EMERGENCE" target="BRASSICA_TRANSLATION">
+      <start x="176.96" y="562.68" />
+      <end x="620.06" y="562.68" />
+      <glyph id="arc25__lbl" class="annotation">
+        <label text="untested" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc26" class="modulation" source="REPRODUCTIVE_OUTPUT" target="BRASSICA_TRANSLATION">
+      <start x="462.98" y="562.68" />
+      <end x="620.06" y="562.68" />
+      <glyph id="arc26__lbl" class="annotation">
+        <label text="untested" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+  </map>
+</sbgn>

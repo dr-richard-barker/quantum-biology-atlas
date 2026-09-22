@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 780.56 1027.72" width="780.56" height="1027.72" role="img" aria-label="QBM-02 · Photosynthetic electron transport and plastid redox">
+<style>:root {
+  --qbm-bg: #ffffff;
+  --qbm-ink: #16181d;
+  --qbm-ink-soft: #55606e;
+  --qbm-node-fill: #f7f8fa;
+  --qbm-node-stroke: #16181d;
+  --qbm-hairline: #9aa3b0;
+  --qbm-edge: #55606e;
+  --qbm-compartment-fill: rgba(0,0,0,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qbm-bg: #0f1115;
+    --qbm-ink: #e8eaee;
+    --qbm-ink-soft: #a3adbb;
+    --qbm-node-fill: #191d24;
+    --qbm-node-stroke: #e8eaee;
+    --qbm-hairline: #5b6572;
+    --qbm-edge: #a3adbb;
+    --qbm-compartment-fill: rgba(255,255,255,0.045);
+  }
+}
+:root[data-theme="dark"] {
+  --qbm-bg: #0f1115;
+  --qbm-ink: #e8eaee;
+  --qbm-ink-soft: #a3adbb;
+  --qbm-node-fill: #191d24;
+  --qbm-node-stroke: #e8eaee;
+  --qbm-hairline: #5b6572;
+  --qbm-edge: #a3adbb;
+  --qbm-compartment-fill: rgba(255,255,255,0.045);
+}
+
+.qbm-canvas { fill: var(--qbm-bg); }
+text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
+.qbm-title  { font-size: 20.0px; font-weight: 700; }
+.qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
+.qbm-caption { font-size: 11.5px; }
+.qbm-label  { font-size: 13.0px; font-weight: 600; }
+.qbm-sub    { font-size: 10.0px; fill: var(--qbm-ink-soft); font-weight: 400; }
+.qbm-legend { font-size: 11.0px; fill: var(--qbm-ink-soft); }
+
+.qbm-node { fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }
+.qbm-unit { fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }
+.qbm-unit-label { font-size: 9.0px; fill: var(--qbm-ink-soft);
+                   font-weight: 600; letter-spacing: 0.01em; }
+/* Evidence tier is a border channel — a hypothesis looks provisional. */
+.tier-T1 { stroke-width: 2.6; }
+.tier-T2 { stroke-width: 1.7; }
+.tier-T3 { stroke-width: 1.5; stroke-dasharray: 7 5; }
+.tier-T4 { stroke-width: 0.9; stroke: var(--qbm-hairline); }
+
+.qbm-compartment { fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                    stroke-dasharray: 3 4; }
+.qbm-compartment-label { font-size: 11px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; }
+.qbm-edge { fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }
+.qbm-edge-inhibition { stroke: #D55E00; }
+.qbm-edge-electron_transfer { stroke: #0072B2; stroke-width: 2.0; }
+.qbm-edge-cofactor_insertion { stroke: #CC79A7; stroke-dasharray: 5 4; }
+.qbm-edge-redox_feedback { stroke: #E69F00; stroke-dasharray: 2 4; }
+.qbm-edge-energy_feedback { stroke: #009E73; stroke-dasharray: 2 4; }
+.qbm-edge-circadian_feedback { stroke: #CC79A7; stroke-dasharray: 2 4; }
+.qbm-edge-hormonal_feedback { stroke: #56B4E9; stroke-dasharray: 2 4; }
+.qbm-edge-indirect_influence { stroke-dasharray: 6 4; }
+.qbm-edge-label-bg { fill: var(--qbm-bg); stroke: none; }
+.qbm-edge-label { font-size: 9.5px; fill: var(--qbm-ink-soft); }
+
+/* Data overlay: transparent until qbio.project fills it. Declared as a class
+   rule rather than an inline style="fill:none" — an inline style outranks every
+   selector, so the per-node overlay rules would silently never apply. */
+.qbm-overlay { stroke: none; fill: none; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
+<rect class="qbm-canvas" x="0" y="0" width="780.56" height="1027.72"/>
+<text class="qbm-title" x="16" y="31.20">QBM-02 · Photosynthetic electron transport and plastid redox</text>
+<text class="qbm-subtitle" x="16" y="58.80">Magnetically addressable nodes of the chloroplast, from water oxidation to NADPH, with the evidence tier for each</text>
+<text class="qbm-subtitle" x="16" y="74.80">shown as a border style</text>
+<g transform="translate(52.00,242.60)"><g class="qbm-compartment-group" data-compartment="thylakoid_lumen"><rect class="qbm-compartment" data-compartment-rect="thylakoid_lumen" x="172.78" y="-46.00" width="330.99" height="119.44" rx="12" ry="12" style="stroke:#0b5c46"/><text class="qbm-compartment-label" x="186.78" y="-31.00" style="fill:#0b5c46">Thylakoid lumen</text></g><g class="qbm-compartment-group" data-compartment="thylakoid_membrane"><rect class="qbm-compartment" data-compartment-rect="thylakoid_membrane" x="48.20" y="91.44" width="580.15" height="334.32" rx="12" ry="12" style="stroke:#0b5c46"/><text class="qbm-compartment-label" x="62.20" y="106.44" style="fill:#0b5c46">Thylakoid membrane</text></g><g class="qbm-compartment-group" data-compartment="chloroplast_stroma"><rect class="qbm-compartment" data-compartment-rect="chloroplast_stroma" x="-26.00" y="443.76" width="728.56" height="119.44" rx="12" ry="12" style="stroke:#0b5c46"/><text class="qbm-compartment-label" x="-12.00" y="458.76" style="fill:#0b5c46">Chloroplast stroma</text></g><g class="qbm-edge-group" data-edge="H2O-&gt;PSII" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M235.76,41.04 L174.37,137.44" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="H2O-&gt;PSII" x="168.96" y="76.29" width="51.95" height="13.00" rx="3"/><text class="qbm-edge-label" x="194.94" y="86.09" text-anchor="middle">4e− + O2</text></g><g class="qbm-edge-group" data-edge="PSII-&gt;PLASTOQUINONE_POOL" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M233.77,161.16 L267.77,161.16" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="PSII-&gt;PLASTOQUINONE_POOL" x="238.70" y="154.66" width="24.15" height="13.00" rx="3"/><text class="qbm-edge-label" x="250.77" y="164.46" text-anchor="middle">2e−</text></g><g class="qbm-edge-group" data-edge="PLASTOQUINONE_POOL-&gt;PLASTOSEMIQUINONE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M412.95,161.16 L446.95,161.16" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="PLASTOQUINONE_POOL-&gt;PLASTOSEMIQUINONE" x="418.06" y="154.66" width="23.80" height="13.00" rx="3"/><text class="qbm-edge-label" x="429.95" y="164.46" text-anchor="middle">1e−</text></g><g class="qbm-edge-group" data-edge="PLASTOSEMIQUINONE-&gt;CYTB6F_RIESKE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M460.67,178.48 L235.58,244.88" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="PLASTOSEMIQUINONE-&gt;CYTB6F_RIESKE" x="339.01" y="205.18" width="18.24" height="13.00" rx="3"/><text class="qbm-edge-label" x="348.13" y="214.98" text-anchor="middle">Qo</text></g><g class="qbm-edge-group" data-edge="CYTB6F_RIESKE-&gt;CYT_B6" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M236.15,268.60 L270.15,268.60" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="CYTB6F_RIESKE-&gt;PLASTOCYANIN" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M179.21,244.88 L379.25,47.44" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="PLASTOCYANIN-&gt;PSI_FES" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M394.06,47.44 L275.60,352.32" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="PSI_FES-&gt;FERREDOXIN" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M233.27,399.76 L107.61,489.76" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="PSI_FES-&gt;FERREDOXIN" x="151.55" y="428.50" width="23.80" height="13.00" rx="3"/><text class="qbm-edge-label" x="163.45" y="438.30" text-anchor="middle">1e−</text></g><g class="qbm-edge-group" data-edge="FERREDOXIN-&gt;FNR" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M148.99,513.48 L182.99,513.48" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="FNR-&gt;NADPH_POOL" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M331.98,513.48 L365.98,513.48" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="FNR-&gt;NADPH_POOL" x="336.90" y="506.98" width="24.15" height="13.00" rx="3"/><text class="qbm-edge-label" x="348.98" y="516.78" text-anchor="middle">2e−</text></g><g class="qbm-edge-group" data-edge="FERREDOXIN-&gt;PGR5_PGRL1" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M118.40,489.76 L483.87,292.32" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="FERREDOXIN-&gt;PGR5_PGRL1" x="295.86" y="403.90" width="31.46" height="13.00" rx="3"/><text class="qbm-edge-label" x="311.59" y="413.70" text-anchor="middle">cyclic</text></g><g class="qbm-edge-group" data-edge="PGR5_PGRL1-&gt;PLASTOQUINONE_POOL" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M486.40,244.88 L370.58,178.48" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="PSII-&gt;THYLAKOID_ATP_SYNTHASE" data-edge-class="energy_feedback"><path class="qbm-edge qbm-edge-energy_feedback" d="M188.93,184.88 L398.39,352.32" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PSII-&gt;THYLAKOID_ATP_SYNTHASE" x="255.36" y="298.03" width="19.16" height="13.00" rx="3"/><text class="qbm-edge-label" x="264.94" y="307.83" text-anchor="middle">H+</text></g><g class="qbm-edge-group" data-edge="CYT_B6-&gt;THYLAKOID_ATP_SYNTHASE" data-edge-class="energy_feedback"><path class="qbm-edge qbm-edge-energy_feedback" d="M363.09,292.32 L409.66,352.32" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CYT_B6-&gt;THYLAKOID_ATP_SYNTHASE" x="376.79" y="315.82" width="19.16" height="13.00" rx="3"/><text class="qbm-edge-label" x="386.37" y="325.62" text-anchor="middle">H+</text></g><g class="qbm-edge-group" data-edge="PSI_FES-&gt;PLASTID_ROS" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M324.32,399.76 L544.13,489.76" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PSI_FES-&gt;PLASTID_ROS" x="420.01" y="427.15" width="37.52" height="13.00" rx="3"/><text class="qbm-edge-label" x="438.77" y="436.95" text-anchor="middle">Mehler</text></g><g class="qbm-edge-group" data-edge="PSII-&gt;PLASTID_ROS" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M189.07,184.88 L572.25,489.76" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PSII-&gt;PLASTID_ROS" x="368.88" y="330.82" width="23.57" height="13.00" rx="3"/><text class="qbm-edge-label" x="380.66" y="340.62" text-anchor="middle">1O2</text></g><g class="qbm-edge-group" data-edge="PLASTID_ROS-&gt;FERREDOXIN" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M527.57,513.48 L148.99,513.48" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PLASTID_ROS-&gt;FERREDOXIN" x="298.73" y="540.98" width="79.10" height="13.00" rx="3"/><text class="qbm-edge-label" x="338.28" y="550.78" text-anchor="middle">cluster damage</text></g><g class="qbm-edge-group" data-edge="NADPH_POOL-&gt;PLASTID_ROS" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M493.57,513.48 L527.57,513.48" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="NADPH_POOL-&gt;PLASTID_ROS" x="486.84" y="540.98" width="47.46" height="13.00" rx="3"/><text class="qbm-edge-label" x="510.57" y="550.78" text-anchor="middle">buffering</text></g><g class="qbm-node-group" data-node-id="H2O" data-tier="T4" data-qbo="QBO:H2O"><title>H2O
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="H2O" x="198.78" y="6.40" width="96.00" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="H2O" x="198.78" y="6.40" width="96.00" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="H2O" x="246.78" y="26.58" text-anchor="middle">H2O</text></g><g class="qbm-node-group" data-node-id="PLASTOCYANIN" data-tier="T3" data-qbo="QBO:PLASTOCYANIN"><title>Plastocyanin (PETE1/2)
+tier T3 (inferred)
+quantum class: spin_relaxation_modulated
+nuclei: 1H
+AGI: AT1G76100, AT1G20340
+rationale: A mononuclear Cu(II)/Cu(I) centre performing one-electron transfer, so formally paramagnetic in the oxidised state.
+
+caveat: Deliberately classed as spin_relaxation_modulated rather than as a radical-pair partner. A single copper centre relaxes fast and has no correlated partner, so coherent singlet-triplet mixing is not available here; only a relaxation-based effect could be argued, and none has been shown.
+</title><rect class="qbm-node tier-T3" data-node-rect="PLASTOCYANIN" x="328.78" y="0.00" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PLASTOCYANIN" x="328.78" y="0.00" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PLASTOCYANIN" x="403.28" y="20.18" text-anchor="middle">Plastocyanin</text><text class="qbm-sub" data-text-for="PLASTOCYANIN" x="403.28" y="36.82" text-anchor="middle">AT1G76100 · AT1G20340</text></g><g class="qbm-units" data-units-for="PLASTOCYANIN"><rect class="qbm-unit" data-unit-for="PLASTOCYANIN" x="378.38" y="-17.00" width="49.80" height="14.0" rx="3"/><text class="qbm-unit-label" x="403.28" y="-7.00" text-anchor="middle">type-I Cu</text></g><g class="qbm-node-group" data-node-id="PSII" data-tier="T3" data-qbo="QBO:PSII"><title>Photosystem II
+tier T3 (inferred)
+quantum class: semiquinone_radical, ros_leak_site
+nuclei: 1H
+AGI: ATCG00020, AT1G06680
+rationale: The QA/QB sites hold a kinetically stabilised plastosemiquinone, and PSII is a major singlet-oxygen source under excess light. Both are one-electron chemistry in a defined pocket, which is the setting a radical-pair argument needs.
+
+caveat: PSII&#x27;s dominant ROS species is singlet oxygen from the P680 triplet, not superoxide. Triplet chlorophyll formation is itself spin chemistry, so a field effect here would be more plausible than at most nodes — but it is also a route the review does not develop, and no measurement exists.
+</title><rect class="qbm-node tier-T3" data-node-rect="PSII" x="84.75" y="137.44" width="149.02" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PSII" x="84.75" y="137.44" width="149.02" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PSII" x="159.26" y="157.62" text-anchor="middle">Photosystem II</text><text class="qbm-sub" data-text-for="PSII" x="159.26" y="174.26" text-anchor="middle">ATCG00020 · AT1G06680</text></g><g class="qbm-units" data-units-for="PSII"><rect class="qbm-unit" data-unit-for="PSII" x="109.14" y="120.44" width="52.14" height="14.0" rx="3"/><text class="qbm-unit-label" x="135.20" y="130.44" text-anchor="middle">Mn4CaO5</text><rect class="qbm-unit" data-unit-for="PSII" x="165.27" y="120.44" width="44.11" height="14.0" rx="3"/><text class="qbm-unit-label" x="187.33" y="130.44" text-anchor="middle">QA / QB</text></g><g class="qbm-node-group" data-node-id="PLASTOQUINONE_POOL" data-tier="T4" data-qbo="QBO:PLASTOQUINONE_POOL"><title>Plastoquinone pool (PQ / PQH2)
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="PLASTOQUINONE_POOL" x="267.77" y="143.84" width="145.18" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="PLASTOQUINONE_POOL" x="267.77" y="143.84" width="145.18" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="PLASTOQUINONE_POOL" x="340.36" y="164.02" text-anchor="middle">Plastoquinone pool</text></g><g class="qbm-node-group" data-node-id="PLASTOSEMIQUINONE" data-tier="T3" data-qbo="QBO:PLASTOSEMIQUINONE"><title>Plastosemiquinone (PQ·−)
+tier T3 (inferred)
+quantum class: semiquinone_radical, radical_pair_donor, ros_leak_site
+nuclei: 1H
+rationale: The plastid counterpart of ubisemiquinone, and the same argument applies: a protein-bound organic radical with a measurable lifetime is the most credible site for field-dependent branching in the chain.
+</title><rect class="qbm-node tier-T3" data-node-rect="PLASTOSEMIQUINONE" x="446.95" y="143.84" width="144.85" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="PLASTOSEMIQUINONE" x="446.95" y="143.84" width="144.85" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="PLASTOSEMIQUINONE" x="519.38" y="164.02" text-anchor="middle">Plastosemiquinone</text></g><g class="qbm-units" data-units-for="PLASTOSEMIQUINONE"><rect class="qbm-unit" data-unit-for="PLASTOSEMIQUINONE" x="489.41" y="126.84" width="59.94" height="14.0" rx="3"/><text class="qbm-unit-label" x="519.38" y="136.84" text-anchor="middle">free radical</text></g><g class="qbm-node-group" data-node-id="CYTB6F_RIESKE" data-tier="T3" data-qbo="QBO:CYTB6F_RIESKE"><title>Cytochrome b6f Rieske [2Fe-2S] (PETC)
+tier T3 (inferred)
+quantum class: rieske_2Fe2S, semiquinone_radical
+nuclei: 57Fe, 33S, 1H
+AGI: AT4G03280
+rationale: Structurally and mechanistically the plastid twin of the mitochondrial Rieske centre (QBO:RIESKE_FES), with the same bifurcated Q-cycle chemistry. The review treats both as the same class of candidate target.
+</title><rect class="qbm-node tier-T3" data-node-rect="CYTB6F_RIESKE" x="74.20" y="244.88" width="161.95" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CYTB6F_RIESKE" x="74.20" y="244.88" width="161.95" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CYTB6F_RIESKE" x="155.18" y="265.06" text-anchor="middle">Cyt b6f Rieske centre</text><text class="qbm-sub" data-text-for="CYTB6F_RIESKE" x="155.18" y="281.70" text-anchor="middle">AT4G03280</text></g><g class="qbm-units" data-units-for="CYTB6F_RIESKE"><rect class="qbm-unit" data-unit-for="CYTB6F_RIESKE" x="112.33" y="227.88" width="39.47" height="14.0" rx="3"/><text class="qbm-unit-label" x="132.07" y="237.88" text-anchor="middle">2Fe-2S</text><rect class="qbm-unit" data-unit-for="CYTB6F_RIESKE" x="155.80" y="227.88" width="42.22" height="14.0" rx="3"/><text class="qbm-unit-label" x="176.91" y="237.88" text-anchor="middle">Q cycle</text></g><g class="qbm-node-group" data-node-id="CYT_B6" data-tier="T3" data-qbo="QBO:CYT_B6"><title>Cytochrome b6 / f hemes (PETA, PETB)
+tier T3 (inferred)
+quantum class: heme_electron_carrier
+nuclei: 57Fe, 1H
+AGI: ATCG00540, ATCG00720
+rationale: One-electron heme carriers, paramagnetic in the ferric state, adjacent to the semiquinone-generating Q cycle.
+</title><rect class="qbm-node tier-T3" data-node-rect="CYT_B6" x="270.15" y="244.88" width="149.05" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CYT_B6" x="270.15" y="244.88" width="149.05" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CYT_B6" x="344.68" y="265.06" text-anchor="middle">Cyt b6 / f hemes</text><text class="qbm-sub" data-text-for="CYT_B6" x="344.68" y="281.70" text-anchor="middle">ATCG00540 · ATCG00720</text></g><g class="qbm-units" data-units-for="CYT_B6"><rect class="qbm-unit" data-unit-for="CYT_B6" x="304.46" y="227.88" width="80.43" height="14.0" rx="3"/><text class="qbm-unit-label" x="344.68" y="237.88" text-anchor="middle">plastid-encoded</text></g><g class="qbm-node-group" data-node-id="PGR5_PGRL1" data-tier="T4" data-qbo="QBO:PGR5_PGRL1"><title>Cyclic electron flow (PGR5 / PGRL1)
+tier T4 (inferred)
+quantum class: structural_context
+AGI: AT2G05620, AT4G22890</title><rect class="qbm-node tier-T4" data-node-rect="PGR5_PGRL1" x="453.20" y="244.88" width="149.15" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PGR5_PGRL1" x="453.20" y="244.88" width="149.15" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PGR5_PGRL1" x="527.78" y="265.06" text-anchor="middle">Cyclic electron flow</text><text class="qbm-sub" data-text-for="PGR5_PGRL1" x="527.78" y="281.70" text-anchor="middle">AT2G05620 · AT4G22890</text></g><g class="qbm-units" data-units-for="PGR5_PGRL1"><rect class="qbm-unit" data-unit-for="PGR5_PGRL1" x="474.41" y="227.88" width="106.74" height="14.0" rx="3"/><text class="qbm-unit-label" x="527.78" y="237.88" text-anchor="middle">bypass — confounder</text></g><g class="qbm-node-group" data-node-id="PSI_FES" data-tier="T2" data-qbo="QBO:PSI_FES"><title>Photosystem I Fe/S centres (FX, FA, FB)
+tier T2 (reported)
+quantum class: iron_sulfur_4Fe4S, radical_pair_acceptor, triplet_yield_sensitive
+nuclei: 57Fe, 33S, 1H
+AGI: ATCG01060
+Parmagnani2023: The geomagnetic field is required for normal lima bean photosynthesis, PSI/LHCI content and ROS production; near-null field conditions altered photosynthetic electron transport.
+ [10.3390/ijms24032896]
+rationale: PSI is the strongest structural case in the whole atlas. Charge separation at P700 produces a genuine spin-correlated radical pair (P700·+ A1·−), which is the textbook example of the species the radical-pair mechanism describes — it is studied by exactly that formalism in photosynthesis spectroscopy. Three [4Fe-4S] clusters then carry the electron onward.
+
+caveat: The P700·+ A1·− pair is extremely short-lived, and the well-characterised magnetic-field effects on it are seen in isolated preparations at fields far above geomagnetic. Structural plausibility is high; relevance at 50 uT is not established.
+</title><rect class="qbm-node tier-T2" data-node-rect="PSI_FES" x="193.60" y="352.32" width="145.57" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PSI_FES" x="193.60" y="352.32" width="145.57" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PSI_FES" x="266.39" y="372.50" text-anchor="middle">Photosystem I Fe/S</text><text class="qbm-sub" data-text-for="PSI_FES" x="266.39" y="389.14" text-anchor="middle">ATCG01060</text></g><g class="qbm-units" data-units-for="PSI_FES"><rect class="qbm-unit" data-unit-for="PSI_FES" x="191.01" y="335.32" width="59.19" height="14.0" rx="3"/><text class="qbm-unit-label" x="220.61" y="345.32" text-anchor="middle">FX / FA / FB</text><rect class="qbm-unit" data-unit-for="PSI_FES" x="254.20" y="335.32" width="87.56" height="14.0" rx="3"/><text class="qbm-unit-label" x="297.98" y="345.32" text-anchor="middle">P700·+ A1·− pair</text></g><g class="qbm-node-group" data-node-id="THYLAKOID_ATP_SYNTHASE" data-tier="T4" data-qbo="QBO:THYLAKOID_ATP_SYNTHASE"><title>Thylakoid ATP synthase
+tier T4 (inferred)
+quantum class: structural_context
+AGI: AT4G04640</title><rect class="qbm-node tier-T4" data-node-rect="THYLAKOID_ATP_SYNTHASE" x="373.17" y="352.32" width="109.78" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="THYLAKOID_ATP_SYNTHASE" x="373.17" y="352.32" width="109.78" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="THYLAKOID_ATP_SYNTHASE" x="428.07" y="372.50" text-anchor="middle">ATP synthase</text><text class="qbm-sub" data-text-for="THYLAKOID_ATP_SYNTHASE" x="428.07" y="389.14" text-anchor="middle">AT4G04640</text></g><g class="qbm-units" data-units-for="THYLAKOID_ATP_SYNTHASE"><rect class="qbm-unit" data-unit-for="THYLAKOID_ATP_SYNTHASE" x="394.99" y="335.32" width="66.16" height="14.0" rx="3"/><text class="qbm-unit-label" x="428.07" y="345.32" text-anchor="middle">readout: ATP</text></g><g class="qbm-node-group" data-node-id="FERREDOXIN" data-tier="T2" data-qbo="QBO:FERREDOXIN"><title>Ferredoxin (FD1, FD2)
+tier T2 (reported)
+quantum class: iron_sulfur_2Fe2S
+nuclei: 57Fe, 33S
+AGI: AT1G10960, AT1G60950
+Vigani2021: Geomagnetic field conditions modulate iron-sulfur interplay in Arabidopsis, particularly under combined iron and sulfur deficiency.
+ [10.3390/ijms221810166]
+rationale: The distribution hub of plastid reducing power. A perturbation here reaches carbon fixation, nitrogen and sulfur assimilation and redox regulation at once, which is why the review nominates ferredoxin biogenesis specifically.
+</title><rect class="qbm-node tier-T2" data-node-rect="FERREDOXIN" x="0.00" y="489.76" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FERREDOXIN" x="0.00" y="489.76" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FERREDOXIN" x="74.49" y="509.94" text-anchor="middle">Ferredoxin</text><text class="qbm-sub" data-text-for="FERREDOXIN" x="74.49" y="526.58" text-anchor="middle">AT1G10960 · AT1G60950</text></g><g class="qbm-units" data-units-for="FERREDOXIN"><rect class="qbm-unit" data-unit-for="FERREDOXIN" x="44.76" y="472.76" width="59.46" height="14.0" rx="3"/><text class="qbm-unit-label" x="74.49" y="482.76" text-anchor="middle">2Fe-2S hub</text></g><g class="qbm-node-group" data-node-id="FNR" data-tier="T3" data-qbo="QBO:FNR"><title>Ferredoxin-NADP+ reductase (FNR1, FNR2)
+tier T3 (inferred)
+quantum class: flavin_semiquinone, ros_leak_site
+nuclei: 1H, 14N
+AGI: AT5G66190, AT1G20020
+rationale: FNR necessarily transits a flavin semiquinone: it is the step that converts one-electron chemistry into two-electron chemistry, so a half-reduced flavin is obligatory rather than incidental. That makes it the plastid&#x27;s clearest analogue of the cryptochrome flavin.
+</title><rect class="qbm-node tier-T3" data-node-rect="FNR" x="182.99" y="489.76" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FNR" x="182.99" y="489.76" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FNR" x="257.48" y="509.94" text-anchor="middle">FNR</text><text class="qbm-sub" data-text-for="FNR" x="257.48" y="526.58" text-anchor="middle">AT5G66190 · AT1G20020</text></g><g class="qbm-units" data-units-for="FNR"><rect class="qbm-unit" data-unit-for="FNR" x="213.00" y="472.76" width="26.03" height="14.0" rx="3"/><text class="qbm-unit-label" x="226.02" y="482.76" text-anchor="middle">FAD</text><rect class="qbm-unit" data-unit-for="FNR" x="243.03" y="472.76" width="58.93" height="14.0" rx="3"/><text class="qbm-unit-label" x="272.50" y="482.76" text-anchor="middle">1e− → 2e−</text></g><g class="qbm-node-group" data-node-id="NADPH_POOL" data-tier="T4" data-qbo="QBO:NADPH_POOL"><title>NADPH / NADP+
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="NADPH_POOL" x="365.98" y="496.16" width="127.59" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="NADPH_POOL" x="365.98" y="496.16" width="127.59" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="NADPH_POOL" x="429.77" y="516.34" text-anchor="middle">NADPH / NADP+</text></g><g class="qbm-node-group" data-node-id="PLASTID_ROS" data-tier="T2" data-qbo="QBO:PLASTID_ROS"><title>Plastid superoxide / H2O2
+tier T2 (reported)
+quantum class: ros_leak_site
+AGI: AT4G25100, AT2G28190
+Parmagnani2023: Reactive oxygen species production differed between geomagnetic and near-null field conditions in lima bean.
+ [10.3390/ijms24032896]
+Parmagnani2022: Near-null magnetic field alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+ [10.3390/biom12121824]
+rationale: As in the mitochondrion, the amplifier rather than the mechanism: threshold behaviour converts a small change in electron branching into a signal.
+</title><rect class="qbm-node tier-T2" data-node-rect="PLASTID_ROS" x="527.57" y="489.76" width="148.99" height="47.44" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="PLASTID_ROS" x="527.57" y="489.76" width="148.99" height="47.44" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="PLASTID_ROS" x="602.06" y="509.94" text-anchor="middle">Superoxide / H2O2</text><text class="qbm-sub" data-text-for="PLASTID_ROS" x="602.06" y="526.58" text-anchor="middle">AT4G25100 · AT2G28190</text></g><g class="qbm-units" data-units-for="PLASTID_ROS"><rect class="qbm-unit" data-unit-for="PLASTID_ROS" x="562.62" y="472.76" width="78.90" height="14.0" rx="3"/><text class="qbm-unit-label" x="602.06" y="482.76" text-anchor="middle">signal amplifier</text></g></g>
+<g transform="translate(0,97.60)"><g class="qbm-legend-group" transform="translate(16.00,0.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text><rect class="qbm-node tier-T2" x="0" y="14.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="25.00">T2 — Inferred</text><rect class="qbm-node tier-T3" x="0" y="35.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="46.00">T3 — Plausible</text><rect class="qbm-node tier-T4" x="0" y="56.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="67.00">T4 — Context</text></g></g>
+<text class="qbm-caption" x="16" y="849.80">The photosynthetic chain redrawn with each node&#x27;s quantum chemistry and the evidence behind it. Photosystem I is the</text>
+<text class="qbm-caption" x="16" y="864.52">strongest structural case in the atlas: charge separation at P700 makes a genuine spin-correlated radical pair, the species the</text>
+<text class="qbm-caption" x="16" y="879.24">radical-pair mechanism was written for. It is nevertheless only T2, because the one direct field measurement on photosynthesis</text>
+<text class="qbm-caption" x="16" y="893.96">in the review&#x27;s bibliography was made in lima bean rather than Arabidopsis, and because that pair is extremely short-lived and</text>
+<text class="qbm-caption" x="16" y="908.68">its known field effects are seen well above geomagnetic strength. Cyclic electron flow is drawn for the same reason alternative</text>
+<text class="qbm-caption" x="16" y="923.40">oxidase appears on QBM-01 — it lets a chloroplast rebalance ATP against NADPH without changing linear flux, so measuring</text>
+<text class="qbm-caption" x="16" y="938.12">linear electron transport alone cannot separate &quot;no effect&quot; from &quot;compensated effect&quot;. Four nodes are plastid-encoded (ATCG</text>
+<text class="qbm-caption" x="16" y="952.84">loci) and will receive no value from poly-A-selected RNA-seq, which is most of OSDR&#x27;s plant studies. Derived from: Figures 1B and</text>
+<text class="qbm-caption" x="16" y="967.56">5 of Porterfield &amp; Barker, &quot;Plant Responses to Near-Null Magnetic Fields&quot; — expanded to gene level and bound to Arabidopsis loci.</text>
+<text class="qbm-caption" x="16" y="982.28">Node counts by evidence tier: T2=3, T3=6, T4=5. Schematic topology only — no quantitative value is encoded in this base map;</text>
+<text class="qbm-caption" x="16" y="997.00">numbers appear only when measured data is projected onto it.</text>
+</svg>

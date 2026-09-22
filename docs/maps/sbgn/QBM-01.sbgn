@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3" xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">
+  <map id="QBM-01" language="process description">
+    <extension>
+      <qbo:mapNotes xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">Mitochondrial electron transport and oxidative phosphorylation. The respiratory chain redrawn so that each node carries its quantum chemistry and the evidence behind it. Solid heavy borders mark entities where a magnetic-field effect has been demonstrated (T1); solid light, where it has been shown for the containing process (T2); dashed, where a physical route exists but no field measurement has been made (T3); hairline, structural context with no quantum claim (T4). The map is almost entirely dashed, and that is the finding: the Arabidopsis near-null-field literature is developmental and nutritional, and has not yet measured a respiratory complex directly. Alternative oxidase and the type II NAD(P)H dehydrogenases are drawn because they are the confounders — a plant can route electrons around a lesion in complex I or complex IV, so respiration rate alone cannot test the hypothesis and cytochrome-versus-alternative flux must be partitioned. Derived from: Figures 1A and 4 of Porterfield &amp; Barker, "Plant Responses to Near-Null Magnetic Fields" — expanded to gene level and bound to Arabidopsis loci</qbo:mapNotes>
+    </extension>
+    <glyph id="mitochondrial_matrix" class="compartment">
+      <label text="Mitochondrial matrix" />
+      <bbox x="156.38" y="-26.00" w="423.91" h="86.64" />
+    </glyph>
+    <glyph id="mitochondrial_inner_membrane" class="compartment">
+      <label text="Inner mitochondrial membrane" />
+      <bbox x="9.67" y="98.64" w="717.35" h="339.92" />
+    </glyph>
+    <glyph id="mitochondrial_matrix" class="compartment">
+      <label text="Mitochondrial matrix" />
+      <bbox x="-26.00" y="476.56" w="788.68" h="99.44" />
+    </glyph>
+    <glyph id="NADH_POOL" class="simple chemical" compartmentRef="mitochondrial_matrix">
+      <label text="NADH / NAD+" />
+      <bbox x="182.38" y="0.00" w="111.91" h="34.64" />
+      <glyph id="NADH_POOL__u0" class="unit of information">
+        <label text="matrix redox couple" />
+        <bbox x="188.38" y="-9.00" w="133.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:NADH_POOL" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:57945</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:57540</qbo:xref>
+          <qbo:xref db="kegg">C00004</qbo:xref>
+          <qbo:xref db="kegg">C00003</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="SUCCINATE" class="simple chemical" compartmentRef="mitochondrial_matrix">
+      <label text="Succinate" />
+      <bbox x="328.30" y="0.00" w="96.00" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:SUCCINATE" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:30031</qbo:xref>
+          <qbo:xref db="kegg">C00042</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="O2" class="simple chemical" compartmentRef="mitochondrial_matrix">
+      <label text="O2" />
+      <bbox x="458.30" y="0.00" w="96.00" h="34.64" />
+      <glyph id="O2__u0" class="unit of information">
+        <label text="triplet ground state" />
+        <bbox x="464.30" y="-9.00" w="140.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:O2" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:15379</qbo:xref>
+          <qbo:xref db="kegg">C00007</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COMPLEX_I" class="complex" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Complex I" />
+      <bbox x="35.67" y="124.64" w="154.93" h="60.24" />
+      <glyph id="COMPLEX_I__u0" class="unit of information">
+        <label text="FMN" />
+        <bbox x="41.67" y="115.64" w="30.00" h="16.00" />
+      </glyph>
+      <glyph id="COMPLEX_I__u1" class="unit of information">
+        <label text="8 × Fe/S" />
+        <bbox x="41.67" y="115.64" w="56.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COMPLEX_I" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:cofactor>CHEBI:58210</qbo:cofactor>
+          <qbo:xref db="agi">AT5G37510</qbo:xref>
+          <qbo:xref db="agi">AT5G08530</qbo:xref>
+          <qbo:xref db="agi">AT4G02580</qbo:xref>
+          <qbo:xref db="agi">AT5G11770</qbo:xref>
+          <qbo:xref db="go_component">GO:0005747</qbo:xref>
+          <qbo:xref db="ec">7.1.1.2</qbo:xref>
+          <qbo:rationale>The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers — both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.
+</qbo:rationale>
+          <qbo:caveat>Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COMPLEX_I_FMN" class="simple chemical" compartmentRef="mitochondrial_matrix">
+      <label text="FMN site" />
+      <bbox x="224.60" y="131.04" w="98.56" h="47.44" />
+      <glyph id="COMPLEX_I_FMN__u0" class="unit of information">
+        <label text="flavin semiquinone" />
+        <bbox x="230.60" y="122.04" w="126.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COMPLEX_I_FMN" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:58210</qbo:cofactor>
+          <qbo:xref db="chebi">CHEBI:58210</qbo:xref>
+          <qbo:xref db="agi">AT5G08530</qbo:xref>
+          <qbo:rationale>A one-electron-reduced flavin is the best-characterised magnetosensitive species in biology; the same chemistry underlies the cryptochrome radical-pair model. The review's argument is precisely that this chemistry is not confined to photoreceptors.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COMPLEX_II" class="complex" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Complex II (SDH)" />
+      <bbox x="357.16" y="124.64" w="154.93" h="60.24" />
+      <glyph id="COMPLEX_II__u0" class="unit of information">
+        <label text="FAD" />
+        <bbox x="363.16" y="115.64" w="30.00" h="16.00" />
+      </glyph>
+      <glyph id="COMPLEX_II__u1" class="unit of information">
+        <label text="2Fe-2S / 4Fe-4S / 3Fe-4S" />
+        <bbox x="363.16" y="115.64" w="168.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COMPLEX_II" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>iron_sulfur_3Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT5G66760</qbo:xref>
+          <qbo:xref db="agi">AT3G27380</qbo:xref>
+          <qbo:xref db="agi">AT5G40650</qbo:xref>
+          <qbo:xref db="agi">AT5G09600</qbo:xref>
+          <qbo:xref db="agi">AT2G46505</qbo:xref>
+          <qbo:xref db="go_component">GO:0005749</qbo:xref>
+          <qbo:xref db="ec">1.3.5.1</qbo:xref>
+          <qbo:rationale>Carries all three cluster types plus a covalent flavin, and sits at the junction the review nominates as the bottleneck — a change here propagates into both TCA flux and respiratory electron flow.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="ALT_NADH_DH" class="macromolecule" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Type II NAD(P)H DH" />
+      <bbox x="546.09" y="124.64" w="154.93" h="60.24" />
+      <glyph id="ALT_NADH_DH__u0" class="unit of information">
+        <label text="bypass — confounder" />
+        <bbox x="552.09" y="115.64" w="133.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:ALT_NADH_DH" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT1G07180</qbo:xref>
+          <qbo:xref db="agi">AT2G29990</qbo:xref>
+          <qbo:xref db="agi">AT4G28220</qbo:xref>
+          <qbo:xref db="agi">AT4G05020</qbo:xref>
+          <qbo:xref db="agi">AT2G20800</qbo:xref>
+          <qbo:rationale>FAD-dependent, so the same flavin semiquinone chemistry applies. Included mainly as the second confounder alongside AOX — a plant can route around a complex I lesion, which blunts any phenotype and must be controlled for.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="UBIQUINONE_POOL" class="simple chemical" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Ubiquinone pool" />
+      <bbox x="129.57" y="257.68" w="127.47" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:UBIQUINONE_POOL" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:16389</qbo:xref>
+          <qbo:xref db="kegg">C00399</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="UBISEMIQUINONE" class="simple chemical" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Ubisemiquinone" />
+      <bbox x="291.04" y="257.68" w="127.14" h="34.64" />
+      <glyph id="UBISEMIQUINONE__u0" class="unit of information">
+        <label text="free radical" />
+        <bbox x="297.04" y="248.68" w="84.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:UBISEMIQUINONE" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_donor</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="chebi">CHEBI:16389</qbo:xref>
+          <qbo:rationale>A free-radical intermediate held in a protein pocket. If any respiratory species supports spin-correlated chemistry, this is the leading candidate.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="AOX" class="macromolecule" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Alternative oxidase" />
+      <bbox x="452.18" y="244.88" w="154.93" h="60.24" />
+      <glyph id="AOX__u0" class="unit of information">
+        <label text="bypass — confounder" />
+        <bbox x="458.18" y="235.88" w="133.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:AOX" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT3G22370</qbo:xref>
+          <qbo:xref db="agi">AT3G22360</qbo:xref>
+          <qbo:xref db="agi">AT3G27620</qbo:xref>
+          <qbo:xref db="agi">AT1G32350</qbo:xref>
+          <qbo:xref db="agi">AT5G64210</qbo:xref>
+          <qbo:xref db="go_component">GO:0005739</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="RIESKE_FES" class="macromolecule" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Complex III Rieske centre" />
+      <bbox x="97.25" y="365.12" w="187.50" h="47.44" />
+      <glyph id="RIESKE_FES__u0" class="unit of information">
+        <label text="2Fe-2S" />
+        <bbox x="103.25" y="356.12" w="42.00" h="16.00" />
+      </glyph>
+      <glyph id="RIESKE_FES__u1" class="unit of information">
+        <label text="Q cycle" />
+        <bbox x="103.25" y="356.12" w="49.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:RIESKE_FES" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>rieske_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT5G13430</qbo:xref>
+          <qbo:xref db="agi">AT5G13440</qbo:xref>
+          <qbo:xref db="go_component">GO:0005750</qbo:xref>
+          <qbo:rationale>The Qo site generates a kinetically stabilised ubisemiquinone — a genuine, comparatively long-lived organic radical in a defined protein pocket, which is the most favourable setting for a field-dependent branching effect anywhere in the respiratory chain.
+</qbo:rationale>
+          <qbo:caveat>Qo-site semiquinone is short-lived and its occupancy is debated; a field effect here would be easier to argue if lifetime were measured under the relevant conditions.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CYTOCHROME_C" class="macromolecule">
+      <label text="Cytochrome c" />
+      <bbox x="318.75" y="365.12" w="148.99" h="47.44" />
+      <glyph id="CYTOCHROME_C__u0" class="unit of information">
+        <label text="c-type heme" />
+        <bbox x="324.75" y="356.12" w="77.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CYTOCHROME_C" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>heme_electron_carrier</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT1G22840</qbo:xref>
+          <qbo:xref db="agi">AT4G10040</qbo:xref>
+          <qbo:xref db="go_component">GO:0005758</qbo:xref>
+          <qbo:evidence ref="Racca2022" doi="10.1111/nph.18287" direction="altered">Cytochrome c and the transcription factor ABI4 link mitochondrial status to ABA-dependent seed germination.
+</qbo:evidence>
+          <qbo:rationale>A one-electron heme carrier, paramagnetic in the ferric state. Included because Racca et al. place cytochrome c on the path from mitochondrial state to germination timing, which is the developmental window the review argues matters most.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COMPLEX_IV" class="complex" compartmentRef="mitochondrial_inner_membrane">
+      <label text="Complex IV (COX)" />
+      <bbox x="501.74" y="371.52" w="137.70" h="34.64" />
+      <glyph id="COMPLEX_IV__u0" class="unit of information">
+        <label text="heme a3 / CuB" />
+        <bbox x="507.74" y="362.52" w="91.00" h="16.00" />
+      </glyph>
+      <glyph id="COMPLEX_IV__u1" class="unit of information">
+        <label text="CuA" />
+        <bbox x="507.74" y="362.52" w="30.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COMPLEX_IV" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>heme_copper_binuclear</qbo:quantumClass>
+          <qbo:quantumClass>cu_a_binuclear</qbo:quantumClass>
+          <qbo:quantumClass>heme_electron_carrier</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="go_component">GO:0005751</qbo:xref>
+          <qbo:xref db="ec">7.1.1.9</qbo:xref>
+          <qbo:rationale>The review names cytochrome oxidase explicitly as a candidate direct metabolic target. The heme a3/CuB centre passes through paramagnetic oxygen intermediates (P, F, oxoferryl) whose spin states are, in principle, field-addressable.
+</qbo:rationale>
+          <qbo:caveat>Strongly exchange-coupled metal centres relax very fast, which argues against coherent spin effects. This is a mechanistically attractive but physically demanding hypothesis, and is labelled T3 for that reason.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="ATP_SYNTHASE" class="complex" compartmentRef="mitochondrial_inner_membrane">
+      <label text="ATP synthase" />
+      <bbox x="0.00" y="508.96" w="109.78" h="34.64" />
+      <glyph id="ATP_SYNTHASE__u0" class="unit of information">
+        <label text="readout: ATP/ADP" />
+        <bbox x="6.00" y="499.96" w="112.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:ATP_SYNTHASE" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="go_component">GO:0005753</qbo:xref>
+          <qbo:xref db="ec">7.1.2.2</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="MITO_SUPEROXIDE" class="simple chemical" compartmentRef="mitochondrial_matrix">
+      <label text="Superoxide / H2O2" />
+      <bbox x="143.78" y="502.56" w="143.93" h="47.44" />
+      <glyph id="MITO_SUPEROXIDE__u0" class="unit of information">
+        <label text="signal amplifier" />
+        <bbox x="149.78" y="493.56" w="112.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:MITO_SUPEROXIDE" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:18421</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:16240</qbo:xref>
+          <qbo:xref db="agi">AT3G10920</qbo:xref>
+          <qbo:evidence ref="Parmagnani2022" doi="10.3390/biom12121824" direction="altered" fieldRegime="NNMF">Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+</qbo:evidence>
+          <qbo:evidence ref="Farooq2021" doi="10.3389/fpls.2021.781734" direction="altered">Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.
+</qbo:evidence>
+          <qbo:rationale>Not a magnetosensitive mechanism itself — it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="ACONITASE" class="macromolecule" compartmentRef="mitochondrial_matrix">
+      <label text="Aconitase (ACO1/2/3)" />
+      <bbox x="321.72" y="502.56" w="216.62" h="47.44" />
+      <glyph id="ACONITASE__u0" class="unit of information">
+        <label text="4Fe-4S sentinel" />
+        <bbox x="327.72" y="493.56" w="105.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:ACONITASE" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:xref db="agi">AT4G35830</qbo:xref>
+          <qbo:xref db="agi">AT4G26970</qbo:xref>
+          <qbo:xref db="agi">AT2G05710</qbo:xref>
+          <qbo:xref db="ec">4.2.1.3</qbo:xref>
+          <qbo:rationale>The review nominates aconitase as the sentinel of Fe/S integrity, and the biochemistry supports it: the exposed cluster iron makes aconitase the first TCA activity to fall under oxidative stress, so it reports cluster damage before anything else does.
+</qbo:rationale>
+          <qbo:caveat>Precisely because aconitase responds to any oxidative insult, a change under NNMF would NOT by itself implicate a magnetic mechanism. It is a sensitive readout and a poor discriminator; it needs a paired ROS-independent control.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="LIPOYL_SYNTHASE" class="macromolecule" compartmentRef="mitochondrial_matrix">
+      <label text="Lipoyl synthase (LIP1)" />
+      <bbox x="572.34" y="502.56" w="164.35" h="47.44" />
+      <glyph id="LIPOYL_SYNTHASE__u0" class="unit of information">
+        <label text="radical SAM" />
+        <bbox x="578.34" y="493.56" w="77.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:LIPOYL_SYNTHASE" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_donor</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT2G20860</qbo:xref>
+          <qbo:xref db="ec">2.8.1.8</qbo:xref>
+          <qbo:rationale>A radical-SAM enzyme generating a 5'-deoxyadenosyl radical from a [4Fe-4S] cluster — genuine organic radical chemistry on an iron-sulfur centre, which is the tightest coupling of the review's two proposed mechanisms found anywhere in primary metabolism. Its product lipoylates pyruvate dehydrogenase and the 2-oxoglutarate dehydrogenase complex, so a defect propagates straight into TCA flux.
+</qbo:rationale>
+          <qbo:caveat>The radical is generated inside the active site and quenched within one turnover; whether a spin-correlated pair with a long enough lifetime to be field-sensitive ever forms is untested.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <arc id="arc0" class="consumption" source="NADH_POOL" target="COMPLEX_I">
+      <start x="238.34" y="17.32" />
+      <end x="113.13" y="154.76" />
+      <glyph id="arc0__lbl" class="annotation">
+        <label text="2e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc1" class="consumption" source="NADH_POOL" target="ALT_NADH_DH">
+      <start x="238.34" y="17.32" />
+      <end x="623.55" y="154.76" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc2" class="catalysis" source="COMPLEX_I" target="COMPLEX_I_FMN">
+      <start x="113.13" y="154.76" />
+      <end x="273.88" y="154.76" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">cofactor_insertion</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc3" class="consumption" source="SUCCINATE" target="COMPLEX_II">
+      <start x="376.30" y="17.32" />
+      <end x="434.62" y="154.76" />
+      <glyph id="arc3__lbl" class="annotation">
+        <label text="2e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc4" class="consumption" source="COMPLEX_I" target="UBIQUINONE_POOL">
+      <start x="113.13" y="154.76" />
+      <end x="193.31" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc5" class="consumption" source="COMPLEX_II" target="UBIQUINONE_POOL">
+      <start x="434.62" y="154.76" />
+      <end x="193.31" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc6" class="consumption" source="ALT_NADH_DH" target="UBIQUINONE_POOL">
+      <start x="623.55" y="154.76" />
+      <end x="193.31" y="275.00" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc7" class="consumption" source="UBIQUINONE_POOL" target="UBISEMIQUINONE">
+      <start x="193.31" y="275.00" />
+      <end x="354.61" y="275.00" />
+      <glyph id="arc7__lbl" class="annotation">
+        <label text="1e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc8" class="consumption" source="UBISEMIQUINONE" target="RIESKE_FES">
+      <start x="354.61" y="275.00" />
+      <end x="191.00" y="388.84" />
+      <glyph id="arc8__lbl" class="annotation">
+        <label text="Qo" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc9" class="consumption" source="UBIQUINONE_POOL" target="AOX">
+      <start x="193.31" y="275.00" />
+      <end x="529.64" y="275.00" />
+      <glyph id="arc9__lbl" class="annotation">
+        <label text="bypass" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc10" class="consumption" source="RIESKE_FES" target="CYTOCHROME_C">
+      <start x="191.00" y="388.84" />
+      <end x="393.24" y="388.84" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc11" class="consumption" source="CYTOCHROME_C" target="COMPLEX_IV">
+      <start x="393.24" y="388.84" />
+      <end x="570.59" y="388.84" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc12" class="consumption" source="COMPLEX_IV" target="O2">
+      <start x="570.59" y="388.84" />
+      <end x="506.30" y="17.32" />
+      <glyph id="arc12__lbl" class="annotation">
+        <label text="4e− → 2 H2O" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc13" class="consumption" source="AOX" target="O2">
+      <start x="529.64" y="275.00" />
+      <end x="506.30" y="17.32" />
+      <glyph id="arc13__lbl" class="annotation">
+        <label text="no H+ pumped" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc14" class="modulation" source="COMPLEX_I" target="ATP_SYNTHASE">
+      <start x="113.13" y="154.76" />
+      <end x="54.89" y="526.28" />
+      <glyph id="arc14__lbl" class="annotation">
+        <label text="H+" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc15" class="modulation" source="RIESKE_FES" target="ATP_SYNTHASE">
+      <start x="191.00" y="388.84" />
+      <end x="54.89" y="526.28" />
+      <glyph id="arc15__lbl" class="annotation">
+        <label text="H+" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc16" class="modulation" source="COMPLEX_IV" target="ATP_SYNTHASE">
+      <start x="570.59" y="388.84" />
+      <end x="54.89" y="526.28" />
+      <glyph id="arc16__lbl" class="annotation">
+        <label text="H+" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc17" class="stimulation" source="COMPLEX_I_FMN" target="MITO_SUPEROXIDE">
+      <start x="273.88" y="154.76" />
+      <end x="215.75" y="526.28" />
+      <glyph id="arc17__lbl" class="annotation">
+        <label text="leak" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc18" class="stimulation" source="UBISEMIQUINONE" target="MITO_SUPEROXIDE">
+      <start x="354.61" y="275.00" />
+      <end x="215.75" y="526.28" />
+      <glyph id="arc18__lbl" class="annotation">
+        <label text="leak" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc19" class="modulation" source="MITO_SUPEROXIDE" target="ACONITASE">
+      <start x="215.75" y="526.28" />
+      <end x="430.03" y="526.28" />
+      <glyph id="arc19__lbl" class="annotation">
+        <label text="cluster damage" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">redox_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc20" class="modulation" source="MITO_SUPEROXIDE" target="LIPOYL_SYNTHASE">
+      <start x="215.75" y="526.28" />
+      <end x="654.51" y="526.28" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">redox_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc21" class="modulation" source="LIPOYL_SYNTHASE" target="SUCCINATE">
+      <start x="654.51" y="526.28" />
+      <end x="376.30" y="17.32" />
+      <glyph id="arc21__lbl" class="annotation">
+        <label text="via 2-OGDH / PDH" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc22" class="modulation" source="ACONITASE" target="SUCCINATE">
+      <start x="430.03" y="526.28" />
+      <end x="376.30" y="17.32" />
+      <glyph id="arc22__lbl" class="annotation">
+        <label text="TCA flux" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+  </map>
+</sbgn>

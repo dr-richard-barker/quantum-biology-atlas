@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 560.00 1205.44" width="560.00" height="1205.44" role="img" aria-label="QBM-10 · Hormone and circadian integration of the flowering response">
+<style>:root {
+  --qbm-bg: #ffffff;
+  --qbm-ink: #16181d;
+  --qbm-ink-soft: #55606e;
+  --qbm-node-fill: #f7f8fa;
+  --qbm-node-stroke: #16181d;
+  --qbm-hairline: #9aa3b0;
+  --qbm-edge: #55606e;
+  --qbm-compartment-fill: rgba(0,0,0,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qbm-bg: #0f1115;
+    --qbm-ink: #e8eaee;
+    --qbm-ink-soft: #a3adbb;
+    --qbm-node-fill: #191d24;
+    --qbm-node-stroke: #e8eaee;
+    --qbm-hairline: #5b6572;
+    --qbm-edge: #a3adbb;
+    --qbm-compartment-fill: rgba(255,255,255,0.045);
+  }
+}
+:root[data-theme="dark"] {
+  --qbm-bg: #0f1115;
+  --qbm-ink: #e8eaee;
+  --qbm-ink-soft: #a3adbb;
+  --qbm-node-fill: #191d24;
+  --qbm-node-stroke: #e8eaee;
+  --qbm-hairline: #5b6572;
+  --qbm-edge: #a3adbb;
+  --qbm-compartment-fill: rgba(255,255,255,0.045);
+}
+
+.qbm-canvas { fill: var(--qbm-bg); }
+text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
+.qbm-title  { font-size: 20.0px; font-weight: 700; }
+.qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
+.qbm-caption { font-size: 11.5px; }
+.qbm-label  { font-size: 13.0px; font-weight: 600; }
+.qbm-sub    { font-size: 10.0px; fill: var(--qbm-ink-soft); font-weight: 400; }
+.qbm-legend { font-size: 11.0px; fill: var(--qbm-ink-soft); }
+
+.qbm-node { fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }
+.qbm-unit { fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }
+.qbm-unit-label { font-size: 9.0px; fill: var(--qbm-ink-soft);
+                   font-weight: 600; letter-spacing: 0.01em; }
+/* Evidence tier is a border channel — a hypothesis looks provisional. */
+.tier-T1 { stroke-width: 2.6; }
+.tier-T2 { stroke-width: 1.7; }
+.tier-T3 { stroke-width: 1.5; stroke-dasharray: 7 5; }
+.tier-T4 { stroke-width: 0.9; stroke: var(--qbm-hairline); }
+
+.qbm-compartment { fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                    stroke-dasharray: 3 4; }
+.qbm-compartment-label { font-size: 11px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; }
+.qbm-edge { fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }
+.qbm-edge-inhibition { stroke: #D55E00; }
+.qbm-edge-electron_transfer { stroke: #0072B2; stroke-width: 2.0; }
+.qbm-edge-cofactor_insertion { stroke: #CC79A7; stroke-dasharray: 5 4; }
+.qbm-edge-redox_feedback { stroke: #E69F00; stroke-dasharray: 2 4; }
+.qbm-edge-energy_feedback { stroke: #009E73; stroke-dasharray: 2 4; }
+.qbm-edge-circadian_feedback { stroke: #CC79A7; stroke-dasharray: 2 4; }
+.qbm-edge-hormonal_feedback { stroke: #56B4E9; stroke-dasharray: 2 4; }
+.qbm-edge-indirect_influence { stroke-dasharray: 6 4; }
+.qbm-edge-label-bg { fill: var(--qbm-bg); stroke: none; }
+.qbm-edge-label { font-size: 9.5px; fill: var(--qbm-ink-soft); }
+
+/* Data overlay: transparent until qbio.project fills it. Declared as a class
+   rule rather than an inline style="fill:none" — an inline style outranks every
+   selector, so the per-node overlay rules would silently never apply. */
+.qbm-overlay { stroke: none; fill: none; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
+<rect class="qbm-canvas" x="0" y="0" width="560.00" height="1205.44"/>
+<text class="qbm-title" x="16" y="31.20">QBM-10 · Hormone and circadian integration</text>
+<text class="qbm-title" x="16" y="56.80">of the flowering response</text>
+<text class="qbm-subtitle" x="16" y="84.40">How a photoreceptor effect becomes a phenotype — and why timing may explain</text>
+<text class="qbm-subtitle" x="16" y="100.40">the inconsistency in the literature</text>
+<g transform="translate(52.00,289.20)"><g class="qbm-compartment-group" data-compartment="nucleus"><rect class="qbm-compartment" data-compartment-rect="nucleus" x="-26.00" y="-46.00" width="494.52" height="239.68" rx="12" ry="12" style="stroke:#4a2a55"/><text class="qbm-compartment-label" x="-12.00" y="-31.00" style="fill:#4a2a55">Nucleus</text></g><g class="qbm-compartment-group" data-compartment="cell"><rect class="qbm-compartment" data-compartment-rect="cell" x="21.44" y="211.68" width="399.63" height="132.24" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="35.44" y="226.68" style="fill:#3d3d3d">Cell</text></g><g class="qbm-compartment-group" data-compartment="nucleus"><rect class="qbm-compartment" data-compartment-rect="nucleus" x="24.05" y="361.92" width="394.42" height="119.44" rx="12" ry="12" style="stroke:#4a2a55"/><text class="qbm-compartment-label" x="38.05" y="376.92" style="fill:#4a2a55">Nucleus</text></g><g class="qbm-compartment-group" data-compartment="organism"><rect class="qbm-compartment" data-compartment-rect="organism" x="43.30" y="499.36" width="355.93" height="106.64" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="57.30" y="514.36" style="fill:#3d3d3d">Organism</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M76.67,47.44 L117.16,120.24" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M204.04,47.44 L141.64,120.24" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="SINGLET_TRIPLET-&gt;COP1_SPA" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M137.90,154.88 L304.23,414.32" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="SINGLET_TRIPLET-&gt;COP1_SPA" x="173.28" y="240.49" width="75.85" height="13.00" rx="3"/><text class="qbm-edge-label" x="211.21" y="250.29" text-anchor="middle">signalling yield</text></g><g class="qbm-edge-group" data-edge="SINGLET_TRIPLET-&gt;CIRCADIAN_CLOCK" data-edge-class="circadian_feedback"><path class="qbm-edge qbm-edge-circadian_feedback" d="M213.50,137.56 L247.50,137.56" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="SINGLET_TRIPLET-&gt;CIRCADIAN_CLOCK" x="181.50" y="177.06" width="98.00" height="13.00" rx="3"/><text class="qbm-edge-label" x="230.50" y="186.86" text-anchor="middle">CRY is a clock input</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M78.12,47.44 L304.64,414.32" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M229.66,47.44 L311.47,414.32" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="PHYB-&gt;COP1_SPA" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M378.27,47.44 L318.17,414.32" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="COP1_SPA-&gt;FLOWERING_REGULATORS" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M238.18,431.64 L204.18,431.64" marker-end="url(#bar)"/><rect class="qbm-edge-label-bg" data-edge-label="COP1_SPA-&gt;FLOWERING_REGULATORS" x="187.92" y="391.14" width="66.53" height="13.00" rx="3"/><text class="qbm-edge-label" x="221.18" y="400.94" text-anchor="middle">degrades CO</text></g><g class="qbm-edge-group" data-edge="CIRCADIAN_CLOCK-&gt;FLOWERING_REGULATORS" data-edge-class="circadian_feedback"><path class="qbm-edge qbm-edge-circadian_feedback" d="M304.70,167.68 L143.07,407.92" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CIRCADIAN_CLOCK-&gt;FLOWERING_REGULATORS" x="194.06" y="240.19" width="61.94" height="13.00" rx="3"/><text class="qbm-edge-label" x="225.03" y="249.99" text-anchor="middle">photoperiod</text></g><g class="qbm-edge-group" data-edge="GA_SIGNALLING-&gt;FLOWERING_REGULATORS" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M126.86,317.92 L127.06,407.92" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="AUXIN_TRANSPORT-&gt;FLOWERING_REGULATORS" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M277.72,317.92 L158.53,407.92" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="CIRCADIAN_CLOCK-&gt;GA_SIGNALLING" data-edge-class="circadian_feedback"><path class="qbm-edge qbm-edge-circadian_feedback" d="M285.23,167.68 L166.52,257.68" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="FLOWERING_REGULATORS-&gt;FLOWERING_OUTPUT" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M127.39,455.36 L128.42,545.36" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="FLOWERING_OUTPUT-&gt;REPRODUCTIVE_OUTPUT" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M187.95,562.68 L221.95,562.68" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="AUXIN_TRANSPORT-&gt;REPRODUCTIVE_OUTPUT" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M315.42,317.92 L298.85,545.36" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="AUXIN_TRANSPORT-&gt;REPRODUCTIVE_OUTPUT" x="278.78" y="397.85" width="60.68" height="13.00" rx="3"/><text class="qbm-edge-label" x="309.12" y="407.65" text-anchor="middle">fruit growth</text></g><g class="qbm-node-group" data-node-id="CRY1" data-tier="T1" data-qbo="QBO:CRY1"><title>Cryptochrome 1 (CRY1)
+tier T1 (verified)
+quantum class: radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive
+nuclei: 1H, 14N
+AGI: AT4G08920
+Ahmad2007: Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.
+ [10.1007/s00425-006-0383-0]
+Solovyov2007: Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.
+ [10.1529/biophysj.106.097139]
+Harris2009: Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.
+ [10.1098/rsif.2008.0519]
+Pooam2019: Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.
+ [10.1007/s00425-018-3002-y]
+Xu2014: Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.
+ [10.1016/j.asr.2014.01.033]
+rationale: The reference case for the radical-pair mechanism in biology, and the entity from which the review&#x27;s whole argument is generalised outward.
+
+caveat: Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.
+</title><rect class="qbm-node tier-T1" data-node-rect="CRY1" x="0.00" y="0.00" width="126.95" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CRY1" x="0.00" y="0.00" width="126.95" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CRY1" x="63.47" y="20.18" text-anchor="middle">Cryptochrome 1</text><text class="qbm-sub" data-text-for="CRY1" x="63.47" y="36.82" text-anchor="middle">AT4G08920</text></g><g class="qbm-units" data-units-for="CRY1"><rect class="qbm-unit" data-unit-for="CRY1" x="23.42" y="-17.00" width="80.10" height="14.0" rx="3"/><text class="qbm-unit-label" x="63.47" y="-7.00" text-anchor="middle">FAD radical pair</text></g><g class="qbm-node-group" data-node-id="CRY2" data-tier="T2" data-qbo="QBO:CRY2"><title>Cryptochrome 2 (CRY2)
+tier T2 (reported)
+quantum class: radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive
+nuclei: 1H, 14N
+AGI: AT1G04400
+Xu2012: A near-null magnetic field affects cryptochrome-related hypocotyl growth and flowering in Arabidopsis.
+ [10.1016/j.asr.2011.12.004]
+Agliassa2018b: Geomagnetic field variation impacts cryptochrome and phytochrome signalling.
+ [10.1016/j.jphotobiol.2018.05.027]
+rationale: Same FAD/tryptophan-triad chemistry as CRY1. CRY2&#x27;s route to flowering time is the mechanistic link between the photoreceptor evidence and the most reproducible NNMF phenotype in the literature — delayed flowering.
+</title><rect class="qbm-node tier-T2" data-node-rect="CRY2" x="160.95" y="0.00" width="126.84" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CRY2" x="160.95" y="0.00" width="126.84" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CRY2" x="224.37" y="20.18" text-anchor="middle">Cryptochrome 2</text><text class="qbm-sub" data-text-for="CRY2" x="224.37" y="36.82" text-anchor="middle">AT1G04400</text></g><g class="qbm-units" data-units-for="CRY2"><rect class="qbm-unit" data-unit-for="CRY2" x="192.87" y="-17.00" width="62.99" height="14.0" rx="3"/><text class="qbm-unit-label" x="224.37" y="-7.00" text-anchor="middle">photoperiod</text></g><g class="qbm-node-group" data-node-id="PHYB" data-tier="T4" data-qbo="QBO:PHYB"><title>Phytochrome B
+tier T4 (reported)
+quantum class: structural_context
+AGI: AT2G18790</title><rect class="qbm-node tier-T4" data-node-rect="PHYB" x="321.79" y="0.00" width="120.73" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PHYB" x="321.79" y="0.00" width="120.73" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PHYB" x="382.16" y="20.18" text-anchor="middle">Phytochrome B</text><text class="qbm-sub" data-text-for="PHYB" x="382.16" y="36.82" text-anchor="middle">AT2G18790</text></g><g class="qbm-units" data-units-for="PHYB"><rect class="qbm-unit" data-unit-for="PHYB" x="348.15" y="-17.00" width="68.02" height="14.0" rx="3"/><text class="qbm-unit-label" x="382.16" y="-7.00" text-anchor="middle">no spin route</text></g><g class="qbm-node-group" data-node-id="SINGLET_TRIPLET" data-tier="T2" data-qbo="QBO:SINGLET_TRIPLET"><title>Singlet ⇄ triplet interconversion
+tier T2 (reported)
+quantum class: triplet_yield_sensitive, spin_correlated_pair, hyperfine_coupled
+nuclei: 1H, 14N
+Ritz2000: A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.
+ [10.1016/S0006-3495(00)76629-X]
+ZadehHaghighi2022: Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.
+ [10.1098/rsif.2022.0325]
+rationale: This is the mechanism itself rather than a molecule. It is on the map because the review&#x27;s argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.
+
+caveat: For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate — roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.
+</title><rect class="qbm-node tier-T2" data-node-rect="SINGLET_TRIPLET" x="40.10" y="120.24" width="173.40" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="SINGLET_TRIPLET" x="40.10" y="120.24" width="173.40" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="SINGLET_TRIPLET" x="126.80" y="140.42" text-anchor="middle">Singlet ⇄ triplet mixing</text></g><g class="qbm-node-group" data-node-id="CIRCADIAN_CLOCK" data-tier="T3" data-qbo="QBO:CIRCADIAN_CLOCK"><title>Circadian clock (CCA1, LHY, TOC1, PRR5/7/9, GI, ELF4)
+tier T3 (inferred)
+quantum class: structural_context
+AGI: AT2G46830, AT1G01060, AT5G61380, AT5G24470, AT5G02810, AT2G46790, AT1G22770, AT2G40080
+rationale: No spin route of its own, and no direct field measurement on clock components in the bibliography. It is on the map because cryptochrome is a clock input, so a field effect at CRY would necessarily arrive here — and because a clock is a gate, meaning the same perturbation can produce opposite outcomes depending on when it is applied. That alone could explain some of the inconsistency in near-null-field results, and it is testable.
+
+caveat: This is the atlas&#x27;s most speculative causal claim and is flagged as such. It is offered as an experimental design consideration, not a finding.
+</title><rect class="qbm-node tier-T3" data-node-rect="CIRCADIAN_CLOCK" x="247.50" y="107.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CIRCADIAN_CLOCK" x="247.50" y="107.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CIRCADIAN_CLOCK" x="324.96" y="127.62" text-anchor="middle">Circadian clock</text><text class="qbm-sub" data-text-for="CIRCADIAN_CLOCK" x="324.96" y="144.26" text-anchor="middle">AT2G46830 · AT1G01060 ·</text><text class="qbm-sub" data-text-for="CIRCADIAN_CLOCK" x="324.96" y="157.06" text-anchor="middle">AT5G61380…</text></g><g class="qbm-units" data-units-for="CIRCADIAN_CLOCK"><rect class="qbm-unit" data-unit-for="CIRCADIAN_CLOCK" x="265.33" y="90.44" width="119.25" height="14.0" rx="3"/><text class="qbm-unit-label" x="324.96" y="100.44" text-anchor="middle">a gate — timing matters</text></g><g class="qbm-node-group" data-node-id="GA_SIGNALLING" data-tier="T2" data-qbo="QBO:GA_SIGNALLING"><title>Gibberellin signalling (GA3OX1, GA20OX1, RGA, GAI, RGL2)
+tier T2 (verified)
+quantum class: structural_context
+AGI: AT1G15550, AT4G25420, AT2G01570, AT1G14920, AT3G03450
+Xu2017: Gibberellins are involved in the effect of a near-null magnetic field on Arabidopsis flowering.
+ [10.1002/bem.22004]
+rationale: Demonstrated field evidence with no proposed quantum route. Xu et al. showed gibberellins are involved in the near-null-field effect on flowering, which makes this a real link in the causal chain — but GA signalling is ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism is claimed.
+</title><rect class="qbm-node tier-T2" data-node-rect="GA_SIGNALLING" x="47.44" y="257.68" width="158.70" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="GA_SIGNALLING" x="47.44" y="257.68" width="158.70" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="GA_SIGNALLING" x="126.80" y="277.86" text-anchor="middle">Gibberellin signalling</text><text class="qbm-sub" data-text-for="GA_SIGNALLING" x="126.80" y="294.50" text-anchor="middle">AT1G15550 · AT4G25420 ·</text><text class="qbm-sub" data-text-for="GA_SIGNALLING" x="126.80" y="307.30" text-anchor="middle">AT2G01570…</text></g><g class="qbm-units" data-units-for="GA_SIGNALLING"><rect class="qbm-unit" data-unit-for="GA_SIGNALLING" x="103.50" y="240.68" width="46.60" height="14.0" rx="3"/><text class="qbm-unit-label" x="126.80" y="250.68" text-anchor="middle">Xu 2017</text></g><g class="qbm-comp-tag" data-comp-tag-for="GA_SIGNALLING"><rect class="qbm-unit" x="104.55" y="320.92" width="44.49" height="14.0" rx="7"/><text class="qbm-unit-label" x="126.80" y="330.92" text-anchor="middle">Nucleus</text></g><g class="qbm-node-group" data-node-id="AUXIN_TRANSPORT" data-tier="T2" data-qbo="QBO:AUXIN_TRANSPORT"><title>Auxin transport and signalling (PIN1/2/3, AUX1, TIR1, ARF7)
+tier T2 (verified)
+quantum class: structural_context
+AGI: AT1G73590, AT5G57090, AT1G70940, AT2G38120, AT3G62980, AT5G20730
+Xu2018: Suppression of Arabidopsis flowering by a near-null magnetic field is mediated by auxin.
+ [10.1002/bem.22086]
+Xu2021: A near-null magnetic field suppresses fruit growth in Arabidopsis.
+ [10.1002/bem.22363]
+rationale: As with gibberellin: a demonstrated field effect with no proposed spin route. Xu et al. showed auxin mediates near-null-field suppression of flowering.
+</title><rect class="qbm-node tier-T2" data-node-rect="AUXIN_TRANSPORT" x="240.15" y="257.68" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="AUXIN_TRANSPORT" x="240.15" y="257.68" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="AUXIN_TRANSPORT" x="317.61" y="277.86" text-anchor="middle">Auxin transport</text><text class="qbm-sub" data-text-for="AUXIN_TRANSPORT" x="317.61" y="294.50" text-anchor="middle">AT1G73590 · AT5G57090 ·</text><text class="qbm-sub" data-text-for="AUXIN_TRANSPORT" x="317.61" y="307.30" text-anchor="middle">AT1G70940…</text></g><g class="qbm-units" data-units-for="AUXIN_TRANSPORT"><rect class="qbm-unit" data-unit-for="AUXIN_TRANSPORT" x="294.24" y="240.68" width="46.75" height="14.0" rx="3"/><text class="qbm-unit-label" x="317.61" y="250.68" text-anchor="middle">Xu 2018</text></g><g class="qbm-comp-tag" data-comp-tag-for="AUXIN_TRANSPORT"><rect class="qbm-unit" x="271.04" y="320.92" width="93.15" height="14.0" rx="7"/><text class="qbm-unit-label" x="317.61" y="330.92" text-anchor="middle">Plasma membrane</text></g><g class="qbm-node-group" data-node-id="FLOWERING_REGULATORS" data-tier="T2" data-qbo="QBO:FLOWERING_REGULATORS"><title>Flowering regulators (CO, FT, FLC, SOC1)
+tier T2 (verified)
+quantum class: structural_context
+AGI: AT5G10140, AT2G45660
+Agliassa2018a: Reduction of the geomagnetic field delays Arabidopsis flowering through downregulation of flowering-related genes.
+ [10.1002/bem.22123]
+rationale: Demonstrated field evidence, no mechanism claimed. Agliassa et al. reported downregulation of flowering-related genes under field reduction below 100 nT, which is a transcriptional readout rather than a spin-chemical one.
+</title><rect class="qbm-node tier-T2" data-node-rect="FLOWERING_REGULATORS" x="50.05" y="407.92" width="154.13" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FLOWERING_REGULATORS" x="50.05" y="407.92" width="154.13" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FLOWERING_REGULATORS" x="127.12" y="428.10" text-anchor="middle">CO / FT / FLC / SOC1</text><text class="qbm-sub" data-text-for="FLOWERING_REGULATORS" x="127.12" y="444.74" text-anchor="middle">AT5G10140 · AT2G45660</text></g><g class="qbm-units" data-units-for="FLOWERING_REGULATORS"><rect class="qbm-unit" data-unit-for="FLOWERING_REGULATORS" x="88.28" y="390.92" width="77.67" height="14.0" rx="3"/><text class="qbm-unit-label" x="127.12" y="400.92" text-anchor="middle">Agliassa 2018a</text></g><g class="qbm-node-group" data-node-id="COP1_SPA" data-tier="T4" data-qbo="QBO:COP1_SPA"><title>COP1 / SPA complex
+tier T4 (inferred)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="COP1_SPA" x="238.18" y="414.32" width="154.29" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="COP1_SPA" x="238.18" y="414.32" width="154.29" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="COP1_SPA" x="315.33" y="434.50" text-anchor="middle">COP1 / SPA complex</text></g><g class="qbm-node-group" data-node-id="FLOWERING_OUTPUT" data-tier="T4" data-qbo="QBO:FLOWERING_OUTPUT"><title>Flowering time (CO → FT)
+tier T4 (reported)
+quantum class: structural_context
+Agliassa2018a: Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.
+ [10.1002/bem.22123]
+Xu2015: Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.
+ [10.1002/bem.21927]
+Xu2013: Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.
+ [10.1002/bem.21788]</title><rect class="qbm-node tier-T4" data-node-rect="FLOWERING_OUTPUT" x="69.30" y="545.36" width="118.66" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FLOWERING_OUTPUT" x="69.30" y="545.36" width="118.66" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FLOWERING_OUTPUT" x="128.62" y="565.54" text-anchor="middle">Flowering time</text></g><g class="qbm-units" data-units-for="FLOWERING_OUTPUT"><rect class="qbm-unit" data-unit-for="FLOWERING_OUTPUT" x="76.97" y="528.36" width="103.31" height="14.0" rx="3"/><text class="qbm-unit-label" x="128.62" y="538.36" text-anchor="middle">delayed under NNMF</text></g><g class="qbm-node-group" data-node-id="REPRODUCTIVE_OUTPUT" data-tier="T2" data-qbo="QBO:REPRODUCTIVE_OUTPUT"><title>Reproductive output (siliques, seed yield)
+tier T2 (verified)
+quantum class: structural_context
+Xu2013: Removal of the local geomagnetic field affects reproductive growth in Arabidopsis, reducing silique number and seed yield.
+ [10.1002/bem.21788]
+Xu2021: Near-null magnetic field suppresses fruit growth in Arabidopsis.
+ [10.1002/bem.22363]
+rationale: A phenotype with demonstrated field evidence and, necessarily, no quantum route of its own. It is the accumulated consequence of everything upstream, which is what makes it reproducible and also what makes it uninformative about mechanism.
+</title><rect class="qbm-node tier-T2" data-node-rect="REPRODUCTIVE_OUTPUT" x="221.95" y="545.36" width="151.28" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="REPRODUCTIVE_OUTPUT" x="221.95" y="545.36" width="151.28" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="REPRODUCTIVE_OUTPUT" x="297.59" y="565.54" text-anchor="middle">Siliques / seed yield</text></g><g class="qbm-units" data-units-for="REPRODUCTIVE_OUTPUT"><rect class="qbm-unit" data-unit-for="REPRODUCTIVE_OUTPUT" x="245.69" y="528.36" width="103.80" height="14.0" rx="3"/><text class="qbm-unit-label" x="297.59" y="538.36" text-anchor="middle">reduced under NNMF</text></g></g>
+<g transform="translate(0,123.20)"><g class="qbm-legend-group" transform="translate(16.00,0.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text><rect class="qbm-node tier-T1" x="0" y="14.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="25.00">T1 — Demonstrated</text><rect class="qbm-node tier-T2" x="0" y="35.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="46.00">T2 — Inferred</text><rect class="qbm-node tier-T3" x="0" y="56.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="67.00">T3 — Plausible</text><rect class="qbm-node tier-T4" x="0" y="77.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="88.00">T4 — Context</text></g></g>
+<text class="qbm-caption" x="16" y="939.20">The second map the review motivates but does not draw, covering the other area where</text>
+<text class="qbm-caption" x="16" y="953.92">direct Arabidopsis evidence is strongest. Delayed flowering is the most reproducible</text>
+<text class="qbm-caption" x="16" y="968.64">near-null-field phenotype in the whole literature, and separate studies have implicated</text>
+<text class="qbm-caption" x="16" y="983.36">cryptochrome, gibberellin and auxin in producing it. Drawn together, the route from a</text>
+<text class="qbm-caption" x="16" y="998.08">photoreceptor to a phenotype becomes concrete and testable with existing mutants —</text>
+<text class="qbm-caption" x="16" y="1012.80">which is what the review&#x27;s call for cry1 cry2, phytochrome and hormone genetics amounts</text>
+<text class="qbm-caption" x="16" y="1027.52">to. The clock is the map&#x27;s most speculative element and is marked T3: no field</text>
+<text class="qbm-caption" x="16" y="1042.24">measurement on clock components exists in the bibliography. It is drawn because a clock is</text>
+<text class="qbm-caption" x="16" y="1056.96">a gate, so the same perturbation applied at different times can produce opposite outcomes</text>
+<text class="qbm-caption" x="16" y="1071.68">— which could explain some of the inconsistency across near-null-field studies, and is</text>
+<text class="qbm-caption" x="16" y="1086.40">testable rather than merely plausible. That is offered as an experimental design</text>
+<text class="qbm-caption" x="16" y="1101.12">consideration, not a finding. Derived from: Motivated by section 8 and the Xu</text>
+<text class="qbm-caption" x="16" y="1115.84">2012/2017/2018/2021 and Agliassa 2018 evidence in Porterfield &amp; Barker, &quot;Plant</text>
+<text class="qbm-caption" x="16" y="1130.56">Responses to Near-Null Magnetic Fields&quot; — no corresponding figure exists in the</text>
+<text class="qbm-caption" x="16" y="1145.28">manuscript. Node counts by evidence tier: T1=1, T2=6, T3=1, T4=3. Schematic topology</text>
+<text class="qbm-caption" x="16" y="1160.00">only — no quantitative value is encoded in this base map; numbers appear only when</text>
+<text class="qbm-caption" x="16" y="1174.72">measured data is projected onto it.</text>
+</svg>

@@ -1,0 +1,511 @@
+{
+  "name": "Quantum Biology Atlas",
+  "description": "Identifier-bound SBGN-ML pathway maps annotated with quantum-mechanistic descriptors and an explicit evidence tier per node.",
+  "qbo_version": "0.1.0",
+  "base_url": "https://dr-richard-barker.github.io/quantum-biology-atlas",
+  "license": {
+    "maps": "CC-BY-4.0",
+    "ontology": "CC-BY-4.0",
+    "code": "MIT"
+  },
+  "evidence_tiers": [
+    {
+      "id": "T1",
+      "label": "Demonstrated",
+      "definition": "A magnetic-field manipulation has been applied and an effect measured on THIS entity, or on an activity for which this entity is the accepted direct readout. Requires at least one resolved DOI in `evidence`."
+    },
+    {
+      "id": "T2",
+      "label": "Inferred",
+      "definition": "A magnetic-field effect has been demonstrated on the complex, pathway or process that contains this entity, but not resolved to the entity itself. Requires at least one resolved DOI in `evidence`."
+    },
+    {
+      "id": "T3",
+      "label": "Plausible",
+      "definition": "The entity carries a qualifying quantum_class (a radical-pair-forming cofactor, an Fe/S cluster, a heme-copper centre) and therefore a physical route by which a weak field could act, but NO magnetic-field measurement on it exists. A hypothesis, and labelled as one."
+    },
+    {
+      "id": "T4",
+      "label": "Context",
+      "definition": "Structural or topological context only. No quantum claim of any kind is being made. Present so the maps are readable as biology rather than as a list of magnetically interesting nodes."
+    }
+  ],
+  "totals": {
+    "maps": 10,
+    "nodes": 126,
+    "edges": 168,
+    "distinct_agi_loci": 125,
+    "entities": 83,
+    "references": 42,
+    "nodes_by_tier": {
+      "T4": 47,
+      "T3": 44,
+      "T2": 31,
+      "T1": 4
+    }
+  },
+  "reading_note": "Evidence tier is a border channel on every rendered map: T1 solid heavy, T2 solid light, T3 dashed, T4 hairline. The maps are mostly dashed, which is the finding rather than a defect \u2014 the near-null-field literature is developmental and nutritional and has not measured a respiratory complex directly. No base map encodes a quantitative value; numbers appear only when measured data is projected onto one.",
+  "maps": [
+    {
+      "id": "QBM-01",
+      "title": "Mitochondrial electron transport and oxidative phosphorylation",
+      "subtitle": "Magnetically addressable nodes of the plant respiratory chain, with the evidence tier for each shown as a border style",
+      "caption": "The respiratory chain redrawn so that each node carries its quantum chemistry and the evidence behind it. Solid heavy borders mark entities where a magnetic-field effect has been demonstrated (T1); solid light, where it has been shown for the containing process (T2); dashed, where a physical route exists but no field measurement has been made (T3); hairline, structural context with no quantum claim (T4). The map is almost entirely dashed, and that is the finding: the Arabidopsis near-null-field literature is developmental and nutritional, and has not yet measured a respiratory complex directly. Alternative oxidase and the type II NAD(P)H dehydrogenases are drawn because they are the confounders \u2014 a plant can route electrons around a lesion in complex I or complex IV, so respiration rate alone cannot test the hypothesis and cytochrome-versus-alternative flux must be partitioned.",
+      "derived_from": "Figures 1A and 4 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to gene level and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 17,
+      "edges": 23,
+      "tiers": {
+        "T4": 6,
+        "T3": 10,
+        "T2": 1
+      },
+      "compartments": [
+        "mitochondrial_inner_membrane",
+        "mitochondrial_matrix"
+      ],
+      "agi_loci": [
+        "AT1G07180",
+        "AT1G22840",
+        "AT1G32350",
+        "AT2G05710",
+        "AT2G20800",
+        "AT2G20860",
+        "AT2G29990",
+        "AT2G46505",
+        "AT3G10920",
+        "AT3G22360",
+        "AT3G22370",
+        "AT3G27380",
+        "AT3G27620",
+        "AT4G02580",
+        "AT4G05020",
+        "AT4G10040",
+        "AT4G26970",
+        "AT4G28220",
+        "AT4G35830",
+        "AT5G08530",
+        "AT5G09600",
+        "AT5G11770",
+        "AT5G13430",
+        "AT5G13440",
+        "AT5G37510",
+        "AT5G40650",
+        "AT5G64210",
+        "AT5G66760"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-01.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-01.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-01.json"
+    },
+    {
+      "id": "QBM-02",
+      "title": "Photosynthetic electron transport and plastid redox",
+      "subtitle": "Magnetically addressable nodes of the chloroplast, from water oxidation to NADPH, with the evidence tier for each shown as a border style",
+      "caption": "The photosynthetic chain redrawn with each node's quantum chemistry and the evidence behind it. Photosystem I is the strongest structural case in the atlas: charge separation at P700 makes a genuine spin-correlated radical pair, the species the radical-pair mechanism was written for. It is nevertheless only T2, because the one direct field measurement on photosynthesis in the review's bibliography was made in lima bean rather than Arabidopsis, and because that pair is extremely short-lived and its known field effects are seen well above geomagnetic strength. Cyclic electron flow is drawn for the same reason alternative oxidase appears on QBM-01 \u2014 it lets a chloroplast rebalance ATP against NADPH without changing linear flux, so measuring linear electron transport alone cannot separate \"no effect\" from \"compensated effect\". Four nodes are plastid-encoded (ATCG loci) and will receive no value from poly-A-selected RNA-seq, which is most of OSDR's plant studies.",
+      "derived_from": "Figures 1B and 5 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to gene level and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 14,
+      "edges": 18,
+      "tiers": {
+        "T4": 5,
+        "T3": 6,
+        "T2": 3
+      },
+      "compartments": [
+        "chloroplast_stroma",
+        "thylakoid_lumen",
+        "thylakoid_membrane"
+      ],
+      "agi_loci": [
+        "AT1G06680",
+        "AT1G10960",
+        "AT1G20020",
+        "AT1G20340",
+        "AT1G60950",
+        "AT1G76100",
+        "AT2G05620",
+        "AT2G28190",
+        "AT4G03280",
+        "AT4G04640",
+        "AT4G22890",
+        "AT4G25100",
+        "AT5G66190",
+        "ATCG00020",
+        "ATCG00540",
+        "ATCG00720",
+        "ATCG01060"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-02.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-02.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-02.json"
+    },
+    {
+      "id": "QBM-03",
+      "title": "Cryptochrome radical-pair photochemistry",
+      "subtitle": "The reference mechanism \u2014 and the failed replication that has to travel with it",
+      "caption": "Cryptochrome is the only plant entity in the review's bibliography where a magnetic field was applied and an effect measured on the protein's own chemistry rather than on a downstream phenotype, so it carries the atlas's only T1 annotations. The hyperfine partners that make this pair field-sensitive are the flavin's own nitrogens and protons \u2014 14N at 99.6% natural abundance and 1H at essentially 100% \u2014 so unlike the 57Fe route argued for iron-sulfur clusters, this one is not abundance-limited. That asymmetry is much of why cryptochrome is the strongest case here and the Fe/S nodes elsewhere are not. Phytochrome B is drawn deliberately as context with no quantum claim: its photochemistry is a Z/E isomerisation offering no spin-based route, so reported field effects on phytochrome signalling are most simply a downstream consequence of cryptochrome. Note also that one blinded replication (Harris et al. 2009) did NOT reproduce cryptochrome-dependent field effects; that result is recorded in the ontology on the same footing as the positive reports.",
+      "derived_from": "Figure 3 panel A of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to the photocycle and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 8,
+      "edges": 12,
+      "tiers": {
+        "T1": 2,
+        "T2": 3,
+        "T4": 3
+      },
+      "compartments": [
+        "nucleus",
+        "organism"
+      ],
+      "agi_loci": [
+        "AT1G04400",
+        "AT2G18790",
+        "AT4G08920"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-03.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-03.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-03.json"
+    },
+    {
+      "id": "QBM-04",
+      "title": "Iron-sulfur cluster biogenesis \u2014 ISC, SUF and CIA",
+      "subtitle": "The upstream dependency of every Fe/S node in the atlas, and where the review's mechanism is most attractive and least tested",
+      "caption": "Every Fe/S node on QBM-01, QBM-02 and QBM-05 depends on one of these three systems, so a defect here sits upstream of the whole atlas and would appear as a metabolic lesion well before any visible phenotype. Read the tiers carefully, because they mark a distinction that is easy to blur: the near-null-field evidence in this area (Islam 2020, Vigani 2021, Narayana 2018) measured iron UPTAKE and Fe-S interplay \u2014 nutritional physiology \u2014 and is attached to the Fe/S supply node, which is therefore T2. No experiment in the bibliography applied a magnetic field and measured cluster assembly itself, so every assembly node remains T3 no matter how attractive the mechanism looks. The single arrow from mitochondrial export to the CIA system is the reason this map reaches beyond bioenergetics: CIA clients include the DNA replication and repair enzymes, so a mitochondrial lesion propagates to genome maintenance.",
+      "derived_from": "Figure 3 panel B of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to the three assembly systems and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 11,
+      "edges": 14,
+      "tiers": {
+        "T2": 1,
+        "T4": 3,
+        "T3": 7
+      },
+      "compartments": [
+        "cell",
+        "chloroplast_stroma",
+        "cytosol",
+        "mitochondrial_inner_membrane",
+        "mitochondrial_matrix"
+      ],
+      "agi_loci": [
+        "AT1G08490",
+        "AT1G10960",
+        "AT1G51390",
+        "AT1G68310",
+        "AT2G20860",
+        "AT2G21790",
+        "AT2G26060",
+        "AT3G15660",
+        "AT3G20970",
+        "AT3G24430",
+        "AT4G03240",
+        "AT4G03280",
+        "AT4G16440",
+        "AT4G22220",
+        "AT4G26500",
+        "AT4G35830",
+        "AT5G06410",
+        "AT5G13430",
+        "AT5G48120",
+        "AT5G50960",
+        "AT5G58270",
+        "AT5G65720",
+        "AT5G66760"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-04.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-04.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-04.json"
+    },
+    {
+      "id": "QBM-05",
+      "title": "TCA cycle and the Fe/S-dependent steps",
+      "subtitle": "Drawn as an actual cycle, so a lesion at aconitase or succinate dehydrogenase throttles flux around the loop rather than stopping a line",
+      "caption": "The review's Figure 4 renders this as a linear chain from glucose to oxaloacetate with no OAA-to-citrate closure, which the draft's own margin note flags. The closure matters: it is what shows that the two Fe/S-dependent steps throttle flux around the whole loop instead of interrupting a line. Aconitase and succinate dehydrogenase are the review's sentinel nodes and are annotated once on QBM-01, referenced here rather than re-declared, so one entity cannot carry different evidence on two maps. The citrate-to-isocitrate ratio is the most direct available in-vivo proxy for Fe/S cluster integrity and is worth measuring in any near-null-field metabolomics experiment. Note that plant mitochondrial fumarase is a class-II enzyme with no Fe/S cluster, unlike the class-I bacterial form it is sometimes confused with.",
+      "derived_from": "Figure 4 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 redrawn as a closed cycle, expanded to gene level and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 13,
+      "edges": 17,
+      "tiers": {
+        "T4": 9,
+        "T3": 3,
+        "T2": 1
+      },
+      "compartments": [
+        "mitochondrial_matrix"
+      ],
+      "agi_loci": [
+        "AT1G53240",
+        "AT2G05710",
+        "AT2G17130",
+        "AT2G20860",
+        "AT2G44350",
+        "AT2G46505",
+        "AT2G47510",
+        "AT3G10920",
+        "AT3G27380",
+        "AT4G26970",
+        "AT4G35260",
+        "AT4G35830",
+        "AT5G09600",
+        "AT5G40650",
+        "AT5G66760"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-05.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-05.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-05.json"
+    },
+    {
+      "id": "QBM-06",
+      "title": "Seed germination before photosynthesis",
+      "subtitle": "The review's highest-leverage window \u2014 and the experiment nobody has run",
+      "caption": "Before chloroplasts mature, an oilseed embryo is entirely heterotrophic: stored triacylglycerol must be mobilised, run through peroxisomal beta-oxidation and the glyoxylate cycle, and converted to ATP by mitochondrial respiration. That makes the first 0-72 hours after imbibition the window where a respiratory or Fe/S lesion would have most leverage, and the reason Arabidopsis and Brassica are comparable systems for the review's argument. The original Figure 6 carried a summary table of \"normalized trend ranges\" for germination rate, radicle length, ATP status and seedling vigour; those were qualitative cross-study impressions rather than measured values, so no number from them is reproduced here. The map shows the route and the endpoints; any quantity has to arrive from projected data. Every node on this map is T3 or T4, which is the honest state of the field: the review's central proposal is a geomagnetic-versus-near-null imbibition time course, and no such experiment exists in its bibliography.",
+      "derived_from": "Figure 6 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to the reserve-mobilisation route and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 11,
+      "edges": 15,
+      "tiers": {
+        "T4": 5,
+        "T3": 5,
+        "T2": 1
+      },
+      "compartments": [
+        "cell",
+        "mitochondrial_matrix",
+        "organism",
+        "peroxisome"
+      ],
+      "agi_loci": [
+        "AT1G22840",
+        "AT2G05710",
+        "AT3G10920",
+        "AT3G21720",
+        "AT4G02580",
+        "AT4G10040",
+        "AT4G26970",
+        "AT4G35830",
+        "AT5G03860",
+        "AT5G08530",
+        "AT5G11770",
+        "AT5G37510"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-06.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-06.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-06.json"
+    },
+    {
+      "id": "QBM-07",
+      "title": "ROS production, scavenging and redox buffering",
+      "subtitle": "The amplifier that makes the review's hypothesis testable \u2014 and the reason it cannot identify a mechanism on its own",
+      "caption": "A weak-field effect on an electron-transfer branching ratio may be far too small to measure as a rate change, but ROS signalling is threshold-like, so the same small change can register as a transcriptional response. That is why the ROS-responsive programme is the best-evidenced node in the whole atlas, and equally why it cannot identify a mechanism: an amplifier reports that something moved upstream, never what. The map deliberately includes enzymes with no spin route at all \u2014 the peroxiredoxin/thioredoxin system is pure two-electron thiol chemistry with no radical intermediate and no metal \u2014 so that \"redox\" is not read as a synonym for \"magnetically addressable\". The heme peroxidases do cycle through a genuine porphyrin radical, but it is exchange-coupled to the ferryl iron and extremely short-lived, and that caveat travels with the annotation.",
+      "derived_from": "Figure 3 panel C and Figure 5 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded to the scavenging network and bound to Arabidopsis loci",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 12,
+      "edges": 14,
+      "tiers": {
+        "T3": 5,
+        "T2": 3,
+        "T4": 4
+      },
+      "compartments": [
+        "cell",
+        "cytosol",
+        "nucleus"
+      ],
+      "agi_loci": [
+        "AT1G07890",
+        "AT1G08830",
+        "AT1G19570",
+        "AT1G20620",
+        "AT1G20630",
+        "AT2G28190",
+        "AT3G06050",
+        "AT3G09640",
+        "AT3G10920",
+        "AT3G24170",
+        "AT3G52880",
+        "AT4G02580",
+        "AT4G25100",
+        "AT4G35090",
+        "AT5G08530",
+        "AT5G11770",
+        "AT5G37510"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-07.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-07.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-07.json"
+    },
+    {
+      "id": "QBM-08",
+      "title": "From magnetic environment to plant phenotype",
+      "subtitle": "The review's integrated model \u2014 an architecture for designing experiments, not a demonstrated causal network",
+      "caption": "The flagship map, and the one that has to be read most carefully. The review states that its Figure 7 is designed for hypothesis generation and experimental planning rather than as a proven causal network, and the tiers here preserve that distinction: the input perturbation and the developmental outputs carry real evidence, while the molecular route between them does not. Read the border styles from left to right and the shape of the field's problem is visible \u2014 the evidence is concentrated at the two ends, on the perturbation and on the phenotypes, while the middle, where the mechanism would have to live, is almost entirely dashed. Primary metabolism, the review's central thesis, is drawn as T4 on purpose: the metabolic route is argued rather than demonstrated, and the map should not let it borrow credibility from the developmental evidence beside it. The model is explicitly modular \u2014 cryptochrome may dominate in blue-light-grown seedlings, mitochondria in dark-imbibed seeds, plastids in greening tissue, and nutrient uptake in roots \u2014 so a single phenotype may be produced by different weightings of the same components depending on tissue, stage and light regime.",
+      "derived_from": "Figure 7 of Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 expanded and tier-annotated",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 19,
+      "edges": 27,
+      "tiers": {
+        "T4": 6,
+        "T1": 1,
+        "T3": 4,
+        "T2": 8
+      },
+      "compartments": [
+        "cell",
+        "environment",
+        "nucleus",
+        "organism"
+      ],
+      "agi_loci": [
+        "AT1G01060",
+        "AT1G10960",
+        "AT1G14920",
+        "AT1G15550",
+        "AT1G22770",
+        "AT1G70940",
+        "AT1G73590",
+        "AT2G01570",
+        "AT2G20860",
+        "AT2G21790",
+        "AT2G38120",
+        "AT2G40080",
+        "AT2G46790",
+        "AT2G46830",
+        "AT3G03450",
+        "AT3G10920",
+        "AT3G62980",
+        "AT4G02580",
+        "AT4G03280",
+        "AT4G08920",
+        "AT4G25420",
+        "AT4G35830",
+        "AT5G02810",
+        "AT5G08530",
+        "AT5G11770",
+        "AT5G13430",
+        "AT5G13440",
+        "AT5G20730",
+        "AT5G24470",
+        "AT5G37510",
+        "AT5G57090",
+        "AT5G61380",
+        "AT5G66760",
+        "ATCG01060"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-08.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-08.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-08.json"
+    },
+    {
+      "id": "QBM-09",
+      "title": "Iron uptake and sulfate assimilation",
+      "subtitle": "Where the Arabidopsis near-null-field evidence is strongest \u2014 and where the review draws no figure",
+      "caption": "One of two maps the review motivates but does not draw. That is an odd gap, because mineral nutrition is where the direct Arabidopsis near-null-field evidence is strongest: three separate studies report effects on root mineral nutrition, iron uptake efficiency and Fe-S interplay. The map makes the loop visible. Sulfate assimilation supplies the sulfide that every cluster on QBM-04 is built from, and sulfite reductase is itself a ferredoxin-dependent siroheme-[4Fe-4S] enzyme drawing on plastid reducing power from QBM-02 \u2014 so iron and sulfur status are not two inputs but one feedback system, which is exactly why Vigani et al. found the effect most pronounced under combined Fe and S deficiency. Note the tier pattern: uptake and assimilation are T2 on real evidence, but they are classed as structural context because no quantum route is proposed for them. A demonstrated effect with no mechanism is recorded here as precisely that.",
+      "derived_from": "Motivated by section 6 and the Islam 2020 / Vigani 2021 / Narayana 2018 evidence in Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 no corresponding figure exists in the manuscript",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 10,
+      "edges": 13,
+      "tiers": {
+        "T2": 4,
+        "T4": 3,
+        "T3": 3
+      },
+      "compartments": [
+        "apoplast",
+        "cell",
+        "cytosol",
+        "mitochondrial_matrix",
+        "plasma_membrane"
+      ],
+      "agi_loci": [
+        "AT1G01580",
+        "AT1G08490",
+        "AT1G10960",
+        "AT1G23020",
+        "AT1G55920",
+        "AT1G56430",
+        "AT1G60950",
+        "AT1G62180",
+        "AT1G78000",
+        "AT2G20860",
+        "AT2G21790",
+        "AT2G23150",
+        "AT2G28160",
+        "AT2G40300",
+        "AT3G12750",
+        "AT3G22890",
+        "AT3G56970",
+        "AT3G56980",
+        "AT4G03280",
+        "AT4G04610",
+        "AT4G08620",
+        "AT4G14880",
+        "AT4G19690",
+        "AT4G21990",
+        "AT4G22220",
+        "AT4G26500",
+        "AT4G35830",
+        "AT5G01600",
+        "AT5G04590",
+        "AT5G10180",
+        "AT5G13430",
+        "AT5G65720",
+        "AT5G66760",
+        "AT5G67330"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-09.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-09.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-09.json"
+    },
+    {
+      "id": "QBM-10",
+      "title": "Hormone and circadian integration of the flowering response",
+      "subtitle": "How a photoreceptor effect becomes a phenotype \u2014 and why timing may explain the inconsistency in the literature",
+      "caption": "The second map the review motivates but does not draw, covering the other area where direct Arabidopsis evidence is strongest. Delayed flowering is the most reproducible near-null-field phenotype in the whole literature, and separate studies have implicated cryptochrome, gibberellin and auxin in producing it. Drawn together, the route from a photoreceptor to a phenotype becomes concrete and testable with existing mutants \u2014 which is what the review's call for cry1 cry2, phytochrome and hormone genetics amounts to. The clock is the map's most speculative element and is marked T3: no field measurement on clock components exists in the bibliography. It is drawn because a clock is a gate, so the same perturbation applied at different times can produce opposite outcomes \u2014 which could explain some of the inconsistency across near-null-field studies, and is testable rather than merely plausible. That is offered as an experimental design consideration, not a finding.",
+      "derived_from": "Motivated by section 8 and the Xu 2012/2017/2018/2021 and Agliassa 2018 evidence in Porterfield & Barker, \"Plant Responses to Near-Null Magnetic Fields\" \u2014 no corresponding figure exists in the manuscript",
+      "species_anchor": "arabidopsis_thaliana",
+      "nodes": 11,
+      "edges": 15,
+      "tiers": {
+        "T1": 1,
+        "T2": 6,
+        "T4": 3,
+        "T3": 1
+      },
+      "compartments": [
+        "cell",
+        "nucleus",
+        "organism"
+      ],
+      "agi_loci": [
+        "AT1G01060",
+        "AT1G04400",
+        "AT1G14920",
+        "AT1G15550",
+        "AT1G22770",
+        "AT1G70940",
+        "AT1G73590",
+        "AT2G01570",
+        "AT2G18790",
+        "AT2G38120",
+        "AT2G40080",
+        "AT2G45660",
+        "AT2G46790",
+        "AT2G46830",
+        "AT3G03450",
+        "AT3G62980",
+        "AT4G08920",
+        "AT4G25420",
+        "AT5G02810",
+        "AT5G10140",
+        "AT5G20730",
+        "AT5G24470",
+        "AT5G57090",
+        "AT5G61380"
+      ],
+      "sbgn_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/sbgn/QBM-10.sbgn",
+      "svg_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/maps/svg/QBM-10.svg",
+      "qbo_url": "https://dr-richard-barker.github.io/quantum-biology-atlas/catalog/qbo/QBM-10.json"
+    }
+  ]
+}

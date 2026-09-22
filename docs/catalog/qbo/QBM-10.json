@@ -1,0 +1,403 @@
+{
+  "map": "QBM-10",
+  "title": "Hormone and circadian integration of the flowering response",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "CRY1",
+      "qbo": "QBO:CRY1",
+      "label": "Cryptochrome 1 (CRY1)",
+      "kind": "macromolecule",
+      "compartment": "nucleus",
+      "evidence_tier": "T1",
+      "confidence": "verified",
+      "quantum_class": [
+        "radical_pair_acceptor",
+        "flavin_semiquinone",
+        "triplet_yield_sensitive"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [
+        "AT4G08920"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The reference case for the radical-pair mechanism in biology, and the entity from which the review's whole argument is generalised outward.\n",
+      "caveat": "Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.\n",
+      "evidence": [
+        {
+          "ref": "Ahmad2007",
+          "doi": "10.1007/s00425-006-0383-0",
+          "claim": "Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Solovyov2007",
+          "doi": "10.1529/biophysj.106.097139",
+          "claim": "Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Harris2009",
+          "doi": "10.1098/rsif.2008.0519",
+          "claim": "Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.\n",
+          "direction": "no_effect",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Pooam2019",
+          "doi": "10.1007/s00425-018-3002-y",
+          "claim": "Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.\n",
+          "direction": "altered",
+          "field_regime": "static_MF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2014",
+          "doi": "10.1016/j.asr.2014.01.033",
+          "claim": "Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "CRY2",
+      "qbo": "QBO:CRY2",
+      "label": "Cryptochrome 2 (CRY2)",
+      "kind": "macromolecule",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "radical_pair_acceptor",
+        "flavin_semiquinone",
+        "triplet_yield_sensitive"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [
+        "AT1G04400"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Same FAD/tryptophan-triad chemistry as CRY1. CRY2's route to flowering time is the mechanistic link between the photoreceptor evidence and the most reproducible NNMF phenotype in the literature \u2014 delayed flowering.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2012",
+          "doi": "10.1016/j.asr.2011.12.004",
+          "claim": "A near-null magnetic field affects cryptochrome-related hypocotyl growth and flowering in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Agliassa2018b",
+          "doi": "10.1016/j.jphotobiol.2018.05.027",
+          "claim": "Geomagnetic field variation impacts cryptochrome and phytochrome signalling.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "PHYB",
+      "qbo": "QBO:PHYB",
+      "label": "Phytochrome B",
+      "kind": "macromolecule",
+      "compartment": "nucleus",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G18790"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "SINGLET_TRIPLET",
+      "qbo": "QBO:SINGLET_TRIPLET",
+      "label": "Singlet \u21c4 triplet interconversion",
+      "kind": "process",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "triplet_yield_sensitive",
+        "spin_correlated_pair",
+        "hyperfine_coupled"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [],
+      "magnetically_addressable": true,
+      "rationale": "This is the mechanism itself rather than a molecule. It is on the map because the review's argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.\n",
+      "caveat": "For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate \u2014 roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.\n",
+      "evidence": [
+        {
+          "ref": "Ritz2000",
+          "doi": "10.1016/S0006-3495(00)76629-X",
+          "claim": "A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.\n",
+          "direction": "altered",
+          "field_regime": "GMF",
+          "species": "not applicable"
+        },
+        {
+          "ref": "ZadehHaghighi2022",
+          "doi": "10.1098/rsif.2022.0325",
+          "claim": "Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.\n",
+          "direction": "altered",
+          "field_regime": "GMF",
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "CIRCADIAN_CLOCK",
+      "qbo": "QBO:CIRCADIAN_CLOCK",
+      "label": "Circadian clock (CCA1, LHY, TOC1, PRR5/7/9, GI, ELF4)",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G46830",
+        "AT1G01060",
+        "AT5G61380",
+        "AT5G24470",
+        "AT5G02810",
+        "AT2G46790",
+        "AT1G22770",
+        "AT2G40080"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "No spin route of its own, and no direct field measurement on clock components in the bibliography. It is on the map because cryptochrome is a clock input, so a field effect at CRY would necessarily arrive here \u2014 and because a clock is a gate, meaning the same perturbation can produce opposite outcomes depending on when it is applied. That alone could explain some of the inconsistency in near-null-field results, and it is testable.\n",
+      "caveat": "This is the atlas's most speculative causal claim and is flagged as such. It is offered as an experimental design consideration, not a finding.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "GA_SIGNALLING",
+      "qbo": "QBO:GA_SIGNALLING",
+      "label": "Gibberellin signalling (GA3OX1, GA20OX1, RGA, GAI, RGL2)",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G15550",
+        "AT4G25420",
+        "AT2G01570",
+        "AT1G14920",
+        "AT3G03450"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Demonstrated field evidence with no proposed quantum route. Xu et al. showed gibberellins are involved in the near-null-field effect on flowering, which makes this a real link in the causal chain \u2014 but GA signalling is ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism is claimed.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2017",
+          "doi": "10.1002/bem.22004",
+          "claim": "Gibberellins are involved in the effect of a near-null magnetic field on Arabidopsis flowering.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "AUXIN_TRANSPORT",
+      "qbo": "QBO:AUXIN_TRANSPORT",
+      "label": "Auxin transport and signalling (PIN1/2/3, AUX1, TIR1, ARF7)",
+      "kind": "complex",
+      "compartment": "plasma_membrane",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G73590",
+        "AT5G57090",
+        "AT1G70940",
+        "AT2G38120",
+        "AT3G62980",
+        "AT5G20730"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "As with gibberellin: a demonstrated field effect with no proposed spin route. Xu et al. showed auxin mediates near-null-field suppression of flowering.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2018",
+          "doi": "10.1002/bem.22086",
+          "claim": "Suppression of Arabidopsis flowering by a near-null magnetic field is mediated by auxin.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2021",
+          "doi": "10.1002/bem.22363",
+          "claim": "A near-null magnetic field suppresses fruit growth in Arabidopsis.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "FLOWERING_REGULATORS",
+      "qbo": "QBO:FLOWERING_REGULATORS",
+      "label": "Flowering regulators (CO, FT, FLC, SOC1)",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT5G10140",
+        "AT2G45660"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Demonstrated field evidence, no mechanism claimed. Agliassa et al. reported downregulation of flowering-related genes under field reduction below 100 nT, which is a transcriptional readout rather than a spin-chemical one.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Agliassa2018a",
+          "doi": "10.1002/bem.22123",
+          "claim": "Reduction of the geomagnetic field delays Arabidopsis flowering through downregulation of flowering-related genes.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "COP1_SPA",
+      "qbo": "QBO:COP1_SPA",
+      "label": "COP1 / SPA complex",
+      "kind": "complex",
+      "compartment": "nucleus",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "FLOWERING_OUTPUT",
+      "qbo": "QBO:FLOWERING_OUTPUT",
+      "label": "Flowering time (CO \u2192 FT)",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Agliassa2018a",
+          "doi": "10.1002/bem.22123",
+          "claim": "Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2015",
+          "doi": "10.1002/bem.21927",
+          "claim": "Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2013",
+          "doi": "10.1002/bem.21788",
+          "claim": "Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "REPRODUCTIVE_OUTPUT",
+      "qbo": "QBO:REPRODUCTIVE_OUTPUT",
+      "label": "Reproductive output (siliques, seed yield)",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "A phenotype with demonstrated field evidence and, necessarily, no quantum route of its own. It is the accumulated consequence of everything upstream, which is what makes it reproducible and also what makes it uninformative about mechanism.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Xu2013",
+          "doi": "10.1002/bem.21788",
+          "claim": "Removal of the local geomagnetic field affects reproductive growth in Arabidopsis, reducing silique number and seed yield.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Xu2021",
+          "doi": "10.1002/bem.22363",
+          "claim": "Near-null magnetic field suppresses fruit growth in Arabidopsis.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    }
+  ]
+}

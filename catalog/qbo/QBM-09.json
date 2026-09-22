@@ -1,0 +1,307 @@
+{
+  "map": "QBM-09",
+  "title": "Iron uptake and sulfate assimilation",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "FE_SUPPLY",
+      "qbo": "QBO:FE_SUPPLY",
+      "label": "Cellular Fe / S supply",
+      "kind": "simple_chemical",
+      "compartment": "cytosol",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "Note carefully what the cited work does and does not show. Islam 2020 and Vigani 2021 measured iron uptake and Fe-S interplay under altered field conditions \u2014 nutritional physiology. Neither measured cluster assembly. This entity is T2 because the field effect is demonstrated for the process it names; the assembly entities above remain T3 because that evidence does not reach them.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Islam2020",
+          "doi": "10.3389/fpls.2020.00325",
+          "claim": "The geomagnetic field contributes to efficient iron uptake in Arabidopsis; reducing it to near-null affects root metal reductase activity.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Vigani2021",
+          "doi": "10.3390/ijms221810166",
+          "claim": "Geomagnetic-field-dependent modulation of iron-sulfur interplay in Arabidopsis, most pronounced under combined Fe and S deficiency.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Narayana2018",
+          "doi": "10.1016/j.lssr.2018.08.005",
+          "claim": "Reduction of the geomagnetic field to near-null affects Arabidopsis root mineral nutrition.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "FE_UPTAKE",
+      "qbo": "QBO:FE_UPTAKE",
+      "label": "Root iron uptake (FRO2, IRT1, FIT)",
+      "kind": "complex",
+      "compartment": "plasma_membrane",
+      "evidence_tier": "T2",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G01580",
+        "AT4G19690",
+        "AT2G28160",
+        "AT3G56970",
+        "AT3G56980",
+        "AT1G23020"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Carries demonstrated near-null-field evidence and NO proposed quantum route, and is classed structural_context to say so. Islam et al. measured reduced root metal reductase activity under field reduction \u2014 a real, reproducible effect with no mechanism attached. FRO2 is a flavocytochrome with FAD and two hemes, so a spin route could be argued; the review does not argue it, and no measurement supports it, so it is not claimed here.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Islam2020",
+          "doi": "10.3389/fpls.2020.00325",
+          "claim": "The geomagnetic field contributes to efficient iron uptake in Arabidopsis; near-null conditions affect root metal reductase activity.\n",
+          "direction": "decrease",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Narayana2018",
+          "doi": "10.1016/j.lssr.2018.08.005",
+          "claim": "Near-null magnetic field conditions affect Arabidopsis root mineral nutrition.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "S_ASSIMILATION",
+      "qbo": "QBO:S_ASSIMILATION",
+      "label": "Sulfate assimilation (SULTR, APS1, APR, SIR)",
+      "kind": "complex",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G08620",
+        "AT1G78000",
+        "AT5G10180",
+        "AT3G22890",
+        "AT4G04610",
+        "AT1G62180",
+        "AT4G21990",
+        "AT5G04590"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Sulfite reductase carries a siroheme-[4Fe-4S] cofactor and is ferredoxin- dependent, so this pathway both consumes plastid reducing power and contains an Fe/S centre. It also supplies the sulfide that every cluster on QBM-04 is built from \u2014 a genuine feedback loop rather than a linear dependency.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Vigani2021",
+          "doi": "10.3390/ijms221810166",
+          "claim": "Field conditions modulate Fe-S interplay in Arabidopsis, most strongly under combined iron and sulfur deficiency.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "FE_STORAGE",
+      "qbo": "QBO:FE_STORAGE",
+      "label": "Iron storage and distribution (FER1/4, NAS4, NRAMP3/4)",
+      "kind": "macromolecule",
+      "compartment": "cell",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT5G01600",
+        "AT2G40300",
+        "AT1G56430",
+        "AT2G23150",
+        "AT5G67330",
+        "AT3G12750"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CYSTEINE_SYNTHESIS",
+      "qbo": "QBO:CYSTEINE_SYNTHESIS",
+      "label": "Cysteine synthesis (SAT1, OASA1)",
+      "kind": "complex",
+      "compartment": "cytosol",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT1G55920",
+        "AT4G14880"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "NFS1",
+      "qbo": "QBO:NFS1",
+      "label": "Cysteine desulfurase NFS1 (ISC)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT5G65720"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ISU1",
+      "qbo": "QBO:ISU1",
+      "label": "Scaffold ISU1 (ISC)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_2Fe2S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G22220"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Holds a transient, solvent-exposed [2Fe-2S] cluster whose assembly involves iron redox chemistry and sulfide transfer. A nascent cluster on a scaffold is more exposed and shorter-lived than a mature one buried in a protein, which makes it a more credible point of perturbation than the finished product.\n",
+      "caveat": "Entirely untested. No experiment has measured scaffold occupancy or transfer rate under any magnetic field condition.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "SUF_SYSTEM",
+      "qbo": "QBO:SUF_SYSTEM",
+      "label": "SUF system (plastid assembly)",
+      "kind": "complex",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT1G08490",
+        "AT4G26500"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Builds every cluster in the chloroplast, including PSI's FX/FA/FB and ferredoxin's [2Fe-2S]. It is the single upstream dependency of QBM-02's strongest nodes.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "FES_CLIENTS",
+      "qbo": "QBO:FES_CLIENTS",
+      "label": "Fe/S client proteins",
+      "kind": "complex",
+      "compartment": "cell",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_2Fe2S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G35830",
+        "AT5G66760",
+        "AT5G13430",
+        "AT4G03280",
+        "AT1G10960",
+        "AT2G20860",
+        "AT2G21790"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Collected here so the map can show, in one edge, that a single assembly defect reaches respiration, photosynthesis, the TCA cycle, nitrogen and sulfur assimilation and DNA replication simultaneously. That breadth is the review's argument for why Fe/S biology deserves attention ahead of cryptochrome.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "FERREDOXIN",
+      "qbo": "QBO:FERREDOXIN",
+      "label": "Ferredoxin (FD1, FD2)",
+      "kind": "macromolecule",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "iron_sulfur_2Fe2S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT1G10960",
+        "AT1G60950"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The distribution hub of plastid reducing power. A perturbation here reaches carbon fixation, nitrogen and sulfur assimilation and redox regulation at once, which is why the review nominates ferredoxin biogenesis specifically.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Vigani2021",
+          "doi": "10.3390/ijms221810166",
+          "claim": "Geomagnetic field conditions modulate iron-sulfur interplay in Arabidopsis, particularly under combined iron and sulfur deficiency.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    }
+  ]
+}

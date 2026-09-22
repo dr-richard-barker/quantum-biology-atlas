@@ -1,0 +1,351 @@
+{
+  "map": "QBM-02",
+  "title": "Photosynthetic electron transport and plastid redox",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "H2O",
+      "qbo": "QBO:H2O",
+      "label": "H2O",
+      "kind": "simple_chemical",
+      "compartment": "thylakoid_lumen",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PLASTOCYANIN",
+      "qbo": "QBO:PLASTOCYANIN",
+      "label": "Plastocyanin (PETE1/2)",
+      "kind": "macromolecule",
+      "compartment": "thylakoid_lumen",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "spin_relaxation_modulated"
+      ],
+      "nuclei": [
+        "1H"
+      ],
+      "agi": [
+        "AT1G76100",
+        "AT1G20340"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "A mononuclear Cu(II)/Cu(I) centre performing one-electron transfer, so formally paramagnetic in the oxidised state.\n",
+      "caveat": "Deliberately classed as spin_relaxation_modulated rather than as a radical-pair partner. A single copper centre relaxes fast and has no correlated partner, so coherent singlet-triplet mixing is not available here; only a relaxation-based effect could be argued, and none has been shown.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "PSII",
+      "qbo": "QBO:PSII",
+      "label": "Photosystem II",
+      "kind": "complex",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "semiquinone_radical",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H"
+      ],
+      "agi": [
+        "ATCG00020",
+        "AT1G06680"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The QA/QB sites hold a kinetically stabilised plastosemiquinone, and PSII is a major singlet-oxygen source under excess light. Both are one-electron chemistry in a defined pocket, which is the setting a radical-pair argument needs.\n",
+      "caveat": "PSII's dominant ROS species is singlet oxygen from the P680 triplet, not superoxide. Triplet chlorophyll formation is itself spin chemistry, so a field effect here would be more plausible than at most nodes \u2014 but it is also a route the review does not develop, and no measurement exists.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "PLASTOQUINONE_POOL",
+      "qbo": "QBO:PLASTOQUINONE_POOL",
+      "label": "Plastoquinone pool (PQ / PQH2)",
+      "kind": "simple_chemical",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PLASTOSEMIQUINONE",
+      "qbo": "QBO:PLASTOSEMIQUINONE",
+      "label": "Plastosemiquinone (PQ\u00b7\u2212)",
+      "kind": "simple_chemical",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "semiquinone_radical",
+        "radical_pair_donor",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H"
+      ],
+      "agi": [],
+      "magnetically_addressable": true,
+      "rationale": "The plastid counterpart of ubisemiquinone, and the same argument applies: a protein-bound organic radical with a measurable lifetime is the most credible site for field-dependent branching in the chain.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CYTB6F_RIESKE",
+      "qbo": "QBO:CYTB6F_RIESKE",
+      "label": "Cytochrome b6f Rieske [2Fe-2S] (PETC)",
+      "kind": "macromolecule",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "rieske_2Fe2S",
+        "semiquinone_radical"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S",
+        "1H"
+      ],
+      "agi": [
+        "AT4G03280"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "Structurally and mechanistically the plastid twin of the mitochondrial Rieske centre (QBO:RIESKE_FES), with the same bifurcated Q-cycle chemistry. The review treats both as the same class of candidate target.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "CYT_B6",
+      "qbo": "QBO:CYT_B6",
+      "label": "Cytochrome b6 / f hemes (PETA, PETB)",
+      "kind": "macromolecule",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "heme_electron_carrier"
+      ],
+      "nuclei": [
+        "57Fe",
+        "1H"
+      ],
+      "agi": [
+        "ATCG00540",
+        "ATCG00720"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "One-electron heme carriers, paramagnetic in the ferric state, adjacent to the semiquinone-generating Q cycle.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PGR5_PGRL1",
+      "qbo": "QBO:PGR5_PGRL1",
+      "label": "Cyclic electron flow (PGR5 / PGRL1)",
+      "kind": "complex",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT2G05620",
+        "AT4G22890"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PSI_FES",
+      "qbo": "QBO:PSI_FES",
+      "label": "Photosystem I Fe/S centres (FX, FA, FB)",
+      "kind": "complex",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S",
+        "radical_pair_acceptor",
+        "triplet_yield_sensitive"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S",
+        "1H"
+      ],
+      "agi": [
+        "ATCG01060"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "PSI is the strongest structural case in the whole atlas. Charge separation at P700 produces a genuine spin-correlated radical pair (P700\u00b7+ A1\u00b7\u2212), which is the textbook example of the species the radical-pair mechanism describes \u2014 it is studied by exactly that formalism in photosynthesis spectroscopy. Three [4Fe-4S] clusters then carry the electron onward.\n",
+      "caveat": "The P700\u00b7+ A1\u00b7\u2212 pair is extremely short-lived, and the well-characterised magnetic-field effects on it are seen in isolated preparations at fields far above geomagnetic. Structural plausibility is high; relevance at 50 uT is not established.\n",
+      "evidence": [
+        {
+          "ref": "Parmagnani2023",
+          "doi": "10.3390/ijms24032896",
+          "claim": "The geomagnetic field is required for normal lima bean photosynthesis, PSI/LHCI content and ROS production; near-null field conditions altered photosynthetic electron transport.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Phaseolus lunatus"
+        }
+      ]
+    },
+    {
+      "node_id": "THYLAKOID_ATP_SYNTHASE",
+      "qbo": "QBO:THYLAKOID_ATP_SYNTHASE",
+      "label": "Thylakoid ATP synthase",
+      "kind": "complex",
+      "compartment": "thylakoid_membrane",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT4G04640"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "FERREDOXIN",
+      "qbo": "QBO:FERREDOXIN",
+      "label": "Ferredoxin (FD1, FD2)",
+      "kind": "macromolecule",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "iron_sulfur_2Fe2S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT1G10960",
+        "AT1G60950"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The distribution hub of plastid reducing power. A perturbation here reaches carbon fixation, nitrogen and sulfur assimilation and redox regulation at once, which is why the review nominates ferredoxin biogenesis specifically.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Vigani2021",
+          "doi": "10.3390/ijms221810166",
+          "claim": "Geomagnetic field conditions modulate iron-sulfur interplay in Arabidopsis, particularly under combined iron and sulfur deficiency.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "FNR",
+      "qbo": "QBO:FNR",
+      "label": "Ferredoxin-NADP+ reductase (FNR1, FNR2)",
+      "kind": "macromolecule",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H",
+        "14N"
+      ],
+      "agi": [
+        "AT5G66190",
+        "AT1G20020"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "FNR necessarily transits a flavin semiquinone: it is the step that converts one-electron chemistry into two-electron chemistry, so a half-reduced flavin is obligatory rather than incidental. That makes it the plastid's clearest analogue of the cryptochrome flavin.\n",
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "NADPH_POOL",
+      "qbo": "QBO:NADPH_POOL",
+      "label": "NADPH / NADP+",
+      "kind": "simple_chemical",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "PLASTID_ROS",
+      "qbo": "QBO:PLASTID_ROS",
+      "label": "Plastid superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "chloroplast_stroma",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT4G25100",
+        "AT2G28190"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "As in the mitochondrion, the amplifier rather than the mechanism: threshold behaviour converts a small change in electron branching into a signal.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2023",
+          "doi": "10.3390/ijms24032896",
+          "claim": "Reactive oxygen species production differed between geomagnetic and near-null field conditions in lima bean.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Phaseolus lunatus"
+        },
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    }
+  ]
+}

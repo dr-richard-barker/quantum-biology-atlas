@@ -1,0 +1,242 @@
+{
+  "preregistration": "PRE-REGISTRATION \u2014 written before the test was run, and not edited after.",
+  "inputs": {
+    "conservation_table": "data/external/Table_S8_organelle_conservation_final.csv",
+    "conservation_rows": 1210,
+    "distinct_genes": 832,
+    "conserved_down": 343,
+    "conserved_up": 247,
+    "dropped_mixed_or_conflicting": 242,
+    "uniprot_set_sizes": {
+      "iron-sulfur": 71,
+      "flavoprotein": 126,
+      "heme": 137,
+      "mitochondrion": 1505,
+      "electron transport": 130
+    }
+  },
+  "tests": [
+    {
+      "name": "primary: any spin-bearing cofactor, conserved-down vs conserved-up",
+      "down_with": 13,
+      "down_without": 330,
+      "up_with": 6,
+      "up_without": 241,
+      "odds_ratio": 1.582,
+      "ci95": [
+        0.587,
+        3.925
+      ],
+      "p": 0.4797391962865578,
+      "significant": false
+    },
+    {
+      "name": "class: iron-sulfur",
+      "down_with": 5,
+      "down_without": 338,
+      "up_with": 4,
+      "up_without": 243,
+      "odds_ratio": 0.899,
+      "ci95": [
+        0.25,
+        3.089
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "class: flavoprotein",
+      "underpowered": true,
+      "down_with": 4,
+      "up_with": 0
+    },
+    {
+      "name": "class: heme",
+      "down_with": 4,
+      "down_without": 339,
+      "up_with": 2,
+      "up_without": 245,
+      "odds_ratio": 1.445,
+      "ci95": [
+        0.275,
+        6.162
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Nucleus",
+      "down_with": 5,
+      "down_without": 162,
+      "up_with": 1,
+      "up_without": 39,
+      "odds_ratio": 1.204,
+      "ci95": [
+        0.142,
+        5.604
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Plasma membrane",
+      "down_with": 0,
+      "down_without": 59,
+      "up_with": 1,
+      "up_without": 122,
+      "odds_ratio": 0.0,
+      "ci95": [
+        0.028,
+        17.101
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Cytoskeleton",
+      "down_with": 1,
+      "down_without": 83,
+      "up_with": 0,
+      "up_without": 27,
+      "odds_ratio": Infinity,
+      "ci95": [
+        0.039,
+        24.966
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Cell wall/Extracellular matrix",
+      "down_with": 0,
+      "down_without": 46,
+      "up_with": 0,
+      "up_without": 34,
+      "odds_ratio": NaN,
+      "ci95": [
+        0.014,
+        38.328
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Extracellular",
+      "down_with": 1,
+      "down_without": 16,
+      "up_with": 0,
+      "up_without": 53,
+      "odds_ratio": Infinity,
+      "ci95": [
+        0.378,
+        250.345
+      ],
+      "p": 0.24285714285714277,
+      "significant": false
+    },
+    {
+      "name": "stratum: Membrane transport",
+      "down_with": 3,
+      "down_without": 44,
+      "up_with": 0,
+      "up_without": 3,
+      "odds_ratio": Infinity,
+      "ci95": [
+        0.023,
+        12.934
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Ribosome",
+      "down_with": 0,
+      "down_without": 16,
+      "up_with": 0,
+      "up_without": 15,
+      "odds_ratio": NaN,
+      "ci95": [
+        0.018,
+        50.316
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Endoplasmic Reticulum",
+      "down_with": 4,
+      "down_without": 17,
+      "up_with": 1,
+      "up_without": 5,
+      "odds_ratio": 1.176,
+      "ci95": [
+        0.118,
+        7.559
+      ],
+      "p": 1.0,
+      "significant": false
+    },
+    {
+      "name": "stratum: Chloroplast/Plastid",
+      "underpowered": true,
+      "n": 13
+    },
+    {
+      "name": "stratum: Lipid particle",
+      "underpowered": true,
+      "n": 13
+    },
+    {
+      "name": "stratum: Proteasome",
+      "underpowered": true,
+      "n": 6
+    },
+    {
+      "name": "stratum: Peroxisome",
+      "underpowered": true,
+      "n": 6
+    },
+    {
+      "name": "stratum: Golgi apparatus",
+      "underpowered": true,
+      "n": 2
+    }
+  ],
+  "confound": {
+    "mitochondrion": {
+      "spin_genes_in_universe": 19,
+      "also_in_context": 10,
+      "fraction": 0.5263
+    },
+    "electron transport": {
+      "spin_genes_in_universe": 19,
+      "also_in_context": 3,
+      "fraction": 0.1579
+    }
+  },
+  "power": {
+    "curve": [
+      {
+        "true_odds_ratio": 1.5,
+        "power": 0.09
+      },
+      {
+        "true_odds_ratio": 2.0,
+        "power": 0.26
+      },
+      {
+        "true_odds_ratio": 2.5,
+        "power": 0.494
+      },
+      {
+        "true_odds_ratio": 3.0,
+        "power": 0.691
+      },
+      {
+        "true_odds_ratio": 4.0,
+        "power": 0.932
+      }
+    ],
+    "min_detectable_or_at_80pct_power": 4.0
+  }
+}

@@ -1,0 +1,301 @@
+{
+  "map": "QBM-06",
+  "title": "Seed germination before photosynthesis",
+  "qbo_version": "0.1.0",
+  "nodes": [
+    {
+      "node_id": "TAG_LIPASE",
+      "qbo": "QBO:TAG_LIPASE",
+      "label": "TAG lipase (SDP1)",
+      "kind": "macromolecule",
+      "compartment": "peroxisome",
+      "evidence_tier": "T4",
+      "confidence": "inferred",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "BETA_OXIDATION",
+      "qbo": "QBO:BETA_OXIDATION",
+      "label": "Peroxisomal beta-oxidation",
+      "kind": "process",
+      "compartment": "peroxisome",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": "Acyl-CoA oxidase is a flavoprotein that reduces O2 directly to H2O2 as part of its normal catalytic cycle \u2014 one of the few places in the cell where peroxide production is the intended chemistry rather than a leak. During germination that makes the peroxisome a major ROS source at exactly the stage the review argues matters most.\n",
+      "caveat": "A flavin semiquinone is not well established in the acyl-CoA oxidase mechanism, and the enzyme's own catalase-rich compartment quenches the product quickly. Classed only as a ROS source, not as a radical-pair site.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "GLYOXYLATE_CYCLE",
+      "qbo": "QBO:GLYOXYLATE_CYCLE",
+      "label": "Glyoxylate cycle (ICL, MLS)",
+      "kind": "complex",
+      "compartment": "peroxisome",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G21720",
+        "AT5G03860"
+      ],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "ACETYL_COA",
+      "qbo": "QBO:ACETYL_COA",
+      "label": "Acetyl-CoA",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T4",
+      "confidence": "verified",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": []
+    },
+    {
+      "node_id": "COMPLEX_I",
+      "qbo": "QBO:COMPLEX_I",
+      "label": "Complex I (NADH:ubiquinone oxidoreductase)",
+      "kind": "complex",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "flavin_semiquinone",
+        "iron_sulfur_4Fe4S",
+        "iron_sulfur_2Fe2S",
+        "ros_leak_site"
+      ],
+      "nuclei": [
+        "1H",
+        "14N",
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT5G37510",
+        "AT5G08530",
+        "AT4G02580",
+        "AT5G11770"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The FMN site forms a flavin semiquinone during turnover and is a known superoxide-producing leak site, and the Fe/S chain performs sequential one-electron transfers \u2014 both of the physical routes the radical-pair and hyperfine arguments require. No published experiment has applied a near-null field and measured plant complex I activity, so this is a hypothesis with a mechanism, not a result.\n",
+      "caveat": "Electron transfer along the Fe/S chain is fast relative to plausible singlet-triplet mixing times, so a coherent radical-pair effect here is harder to argue than at the flavin. Treat the flavin and the cluster chain as separate hypotheses rather than one.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "COMPLEX_IV",
+      "qbo": "QBO:COMPLEX_IV",
+      "label": "Complex IV (cytochrome c oxidase)",
+      "kind": "complex",
+      "compartment": "mitochondrial_inner_membrane",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "heme_copper_binuclear",
+        "cu_a_binuclear",
+        "heme_electron_carrier"
+      ],
+      "nuclei": [
+        "57Fe",
+        "1H"
+      ],
+      "agi": [],
+      "magnetically_addressable": true,
+      "rationale": "The review names cytochrome oxidase explicitly as a candidate direct metabolic target. The heme a3/CuB centre passes through paramagnetic oxygen intermediates (P, F, oxoferryl) whose spin states are, in principle, field-addressable.\n",
+      "caveat": "Strongly exchange-coupled metal centres relax very fast, which argues against coherent spin effects. This is a mechanistically attractive but physically demanding hypothesis, and is labelled T3 for that reason.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "ACONITASE",
+      "qbo": "QBO:ACONITASE",
+      "label": "Aconitase (ACO1/2/3)",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "iron_sulfur_4Fe4S"
+      ],
+      "nuclei": [
+        "57Fe",
+        "33S"
+      ],
+      "agi": [
+        "AT4G35830",
+        "AT4G26970",
+        "AT2G05710"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "The review nominates aconitase as the sentinel of Fe/S integrity, and the biochemistry supports it: the exposed cluster iron makes aconitase the first TCA activity to fall under oxidative stress, so it reports cluster damage before anything else does.\n",
+      "caveat": "Precisely because aconitase responds to any oxidative insult, a change under NNMF would NOT by itself implicate a magnetic mechanism. It is a sensitive readout and a poor discriminator; it needs a paired ROS-independent control.\n",
+      "evidence": []
+    },
+    {
+      "node_id": "GERMINATION_ATP",
+      "qbo": "QBO:GERMINATION_ATP",
+      "label": "ATP / ADP ratio (pre-photosynthetic)",
+      "kind": "simple_chemical",
+      "compartment": "cell",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Nietzel2020",
+          "doi": "10.1073/pnas.1910501117",
+          "claim": "Mitochondrial energy metabolism is redox-kick-started during seed germination, establishing that respiratory competence is restored before photosynthesis.\n",
+          "direction": "increase",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Rosental2014",
+          "doi": "10.1017/S0960258513000391",
+          "claim": "Primary metabolism is activated and regulated during seed germination, with respiration supplying the energy for reserve mobilisation and cell expansion.\n",
+          "direction": "increase",
+          "field_regime": null,
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "MITO_SUPEROXIDE",
+      "qbo": "QBO:MITO_SUPEROXIDE",
+      "label": "Mitochondrial superoxide / H2O2",
+      "kind": "simple_chemical",
+      "compartment": "mitochondrial_matrix",
+      "evidence_tier": "T2",
+      "confidence": "reported",
+      "quantum_class": [
+        "ros_leak_site"
+      ],
+      "nuclei": [],
+      "agi": [
+        "AT3G10920"
+      ],
+      "magnetically_addressable": false,
+      "rationale": "Not a magnetosensitive mechanism itself \u2014 it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Parmagnani2022",
+          "doi": "10.3390/biom12121824",
+          "claim": "Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.\n",
+          "direction": "altered",
+          "field_regime": "NNMF",
+          "species": "Arabidopsis thaliana"
+        },
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        }
+      ]
+    },
+    {
+      "node_id": "CYTOCHROME_C",
+      "qbo": "QBO:CYTOCHROME_C",
+      "label": "Cytochrome c",
+      "kind": "macromolecule",
+      "compartment": "mitochondrial_intermembrane_space",
+      "evidence_tier": "T3",
+      "confidence": "inferred",
+      "quantum_class": [
+        "heme_electron_carrier"
+      ],
+      "nuclei": [
+        "57Fe",
+        "1H"
+      ],
+      "agi": [
+        "AT1G22840",
+        "AT4G10040"
+      ],
+      "magnetically_addressable": true,
+      "rationale": "A one-electron heme carrier, paramagnetic in the ferric state. Included because Racca et al. place cytochrome c on the path from mitochondrial state to germination timing, which is the developmental window the review argues matters most.\n",
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Racca2022",
+          "doi": "10.1111/nph.18287",
+          "claim": "Cytochrome c and the transcription factor ABI4 link mitochondrial status to ABA-dependent seed germination.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    },
+    {
+      "node_id": "RADICLE_EMERGENCE",
+      "qbo": "QBO:RADICLE_EMERGENCE",
+      "label": "Radicle emergence",
+      "kind": "phenotype",
+      "compartment": "organism",
+      "evidence_tier": "T4",
+      "confidence": "reported",
+      "quantum_class": [
+        "structural_context"
+      ],
+      "nuclei": [],
+      "agi": [],
+      "magnetically_addressable": false,
+      "rationale": null,
+      "caveat": null,
+      "evidence": [
+        {
+          "ref": "Farooq2021",
+          "doi": "10.3389/fpls.2021.781734",
+          "claim": "Reactive oxygen species and mitochondria jointly regulate seed germination, defining the window in which a respiratory lesion would have most leverage.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "multiple"
+        },
+        {
+          "ref": "Eckardt2005",
+          "doi": "10.1105/tpc.105.034843",
+          "claim": "Peroxisomal citrate synthase provides the exit route from fatty acid metabolism in oilseeds, linking reserve mobilisation to the TCA cycle.\n",
+          "direction": "altered",
+          "field_regime": null,
+          "species": "Arabidopsis thaliana"
+        }
+      ]
+    }
+  ]
+}

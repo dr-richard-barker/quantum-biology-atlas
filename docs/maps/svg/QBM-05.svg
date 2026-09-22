@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 770.46 871.16" width="770.46" height="871.16" role="img" aria-label="QBM-05 · TCA cycle and the Fe/S-dependent steps">
+<style>:root {
+  --qbm-bg: #ffffff;
+  --qbm-ink: #16181d;
+  --qbm-ink-soft: #55606e;
+  --qbm-node-fill: #f7f8fa;
+  --qbm-node-stroke: #16181d;
+  --qbm-hairline: #9aa3b0;
+  --qbm-edge: #55606e;
+  --qbm-compartment-fill: rgba(0,0,0,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qbm-bg: #0f1115;
+    --qbm-ink: #e8eaee;
+    --qbm-ink-soft: #a3adbb;
+    --qbm-node-fill: #191d24;
+    --qbm-node-stroke: #e8eaee;
+    --qbm-hairline: #5b6572;
+    --qbm-edge: #a3adbb;
+    --qbm-compartment-fill: rgba(255,255,255,0.045);
+  }
+}
+:root[data-theme="dark"] {
+  --qbm-bg: #0f1115;
+  --qbm-ink: #e8eaee;
+  --qbm-ink-soft: #a3adbb;
+  --qbm-node-fill: #191d24;
+  --qbm-node-stroke: #e8eaee;
+  --qbm-hairline: #5b6572;
+  --qbm-edge: #a3adbb;
+  --qbm-compartment-fill: rgba(255,255,255,0.045);
+}
+
+.qbm-canvas { fill: var(--qbm-bg); }
+text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
+.qbm-title  { font-size: 20.0px; font-weight: 700; }
+.qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
+.qbm-caption { font-size: 11.5px; }
+.qbm-label  { font-size: 13.0px; font-weight: 600; }
+.qbm-sub    { font-size: 10.0px; fill: var(--qbm-ink-soft); font-weight: 400; }
+.qbm-legend { font-size: 11.0px; fill: var(--qbm-ink-soft); }
+
+.qbm-node { fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }
+.qbm-unit { fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }
+.qbm-unit-label { font-size: 9.0px; fill: var(--qbm-ink-soft);
+                   font-weight: 600; letter-spacing: 0.01em; }
+/* Evidence tier is a border channel — a hypothesis looks provisional. */
+.tier-T1 { stroke-width: 2.6; }
+.tier-T2 { stroke-width: 1.7; }
+.tier-T3 { stroke-width: 1.5; stroke-dasharray: 7 5; }
+.tier-T4 { stroke-width: 0.9; stroke: var(--qbm-hairline); }
+
+.qbm-compartment { fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                    stroke-dasharray: 3 4; }
+.qbm-compartment-label { font-size: 11px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; }
+.qbm-edge { fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }
+.qbm-edge-inhibition { stroke: #D55E00; }
+.qbm-edge-electron_transfer { stroke: #0072B2; stroke-width: 2.0; }
+.qbm-edge-cofactor_insertion { stroke: #CC79A7; stroke-dasharray: 5 4; }
+.qbm-edge-redox_feedback { stroke: #E69F00; stroke-dasharray: 2 4; }
+.qbm-edge-energy_feedback { stroke: #009E73; stroke-dasharray: 2 4; }
+.qbm-edge-circadian_feedback { stroke: #CC79A7; stroke-dasharray: 2 4; }
+.qbm-edge-hormonal_feedback { stroke: #56B4E9; stroke-dasharray: 2 4; }
+.qbm-edge-indirect_influence { stroke-dasharray: 6 4; }
+.qbm-edge-label-bg { fill: var(--qbm-bg); stroke: none; }
+.qbm-edge-label { font-size: 9.5px; fill: var(--qbm-ink-soft); }
+
+/* Data overlay: transparent until qbio.project fills it. Declared as a class
+   rule rather than an inline style="fill:none" — an inline style outranks every
+   selector, so the per-node overlay rules would silently never apply. */
+.qbm-overlay { stroke: none; fill: none; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
+<rect class="qbm-canvas" x="0" y="0" width="770.46" height="871.16"/>
+<text class="qbm-title" x="16" y="31.20">QBM-05 · TCA cycle and the Fe/S-dependent steps</text>
+<text class="qbm-subtitle" x="16" y="58.80">Drawn as an actual cycle, so a lesion at aconitase or succinate dehydrogenase throttles flux around the loop rather</text>
+<text class="qbm-subtitle" x="16" y="74.80">than stopping a line</text>
+<g transform="translate(52.00,242.60)"><g class="qbm-compartment-group" data-compartment="mitochondrial_matrix"><rect class="qbm-compartment" data-compartment-rect="mitochondrial_matrix" x="-26.00" y="-46.00" width="718.46" height="467.36" rx="12" ry="12" style="stroke:#7a4a12"/><text class="qbm-compartment-label" x="-12.00" y="-31.00" style="fill:#7a4a12">Mitochondrial matrix</text></g><g class="qbm-edge-group" data-edge="ACETYL_COA-&gt;CITRATE_SYNTHASE" data-edge-class="catalysis"><path class="qbm-edge qbm-edge-catalysis" d="M151.55,41.04 L119.28,113.84" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="OXALOACETATE-&gt;CITRATE_SYNTHASE" data-edge-class="catalysis"><path class="qbm-edge qbm-edge-catalysis" d="M267.42,41.04 L147.75,113.84" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="CITRATE_SYNTHASE-&gt;CITRATE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M173.60,137.56 L207.60,137.56" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="CITRATE-&gt;ACONITASE" data-edge-class="catalysis"><path class="qbm-edge qbm-edge-catalysis" d="M303.60,137.56 L337.60,137.56" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="ACONITASE-&gt;ISOCITRATE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M492.54,137.56 L526.54,137.56" marker-end="url(#arrow-electron)"/></g><g class="qbm-edge-group" data-edge="ISOCITRATE-&gt;ISOCITRATE_DH" data-edge-class="catalysis"><path class="qbm-edge qbm-edge-catalysis" d="M526.54,149.57 L187.66,234.33" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="ISOCITRATE_DH-&gt;NADH_POOL" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M125.17,281.52 L221.38,354.32" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="ISOCITRATE_DH-&gt;NADH_POOL" x="157.17" y="311.42" width="32.20" height="13.00" rx="3"/><text class="qbm-edge-label" x="173.27" y="321.22" text-anchor="middle">NADH</text></g><g class="qbm-edge-group" data-edge="ISOCITRATE_DH-&gt;COMPLEX_II" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M187.66,257.80 L378.96,257.80" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="ISOCITRATE_DH-&gt;COMPLEX_II" x="226.28" y="285.30" width="114.06" height="13.00" rx="3"/><text class="qbm-edge-label" x="283.31" y="295.10" text-anchor="middle">via 2-OG, succinyl-CoA</text></g><g class="qbm-edge-group" data-edge="COMPLEX_II-&gt;FUMARASE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M533.90,257.80 L567.90,257.80" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="COMPLEX_II-&gt;FUMARASE" x="526.39" y="297.30" width="49.01" height="13.00" rx="3"/><text class="qbm-edge-label" x="550.90" y="307.10" text-anchor="middle">fumarate</text></g><g class="qbm-edge-group" data-edge="FUMARASE-&gt;MALATE_DH" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M602.25,234.08 L484.81,47.44" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="FUMARASE-&gt;MALATE_DH" x="528.60" y="163.05" width="37.74" height="13.00" rx="3"/><text class="qbm-edge-label" x="547.47" y="172.85" text-anchor="middle">malate</text></g><g class="qbm-edge-group" data-edge="MALATE_DH-&gt;OXALOACETATE" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M384.54,23.72 L350.54,23.72" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="MALATE_DH-&gt;OXALOACETATE" x="336.54" y="-16.78" width="62.00" height="13.00" rx="3"/><text class="qbm-edge-label" x="367.54" y="-6.98" text-anchor="middle">cycle closes</text></g><g class="qbm-edge-group" data-edge="MALATE_DH-&gt;NADH_POOL" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M454.50,47.44 L255.49,354.32" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="MALATE_DH-&gt;NADH_POOL" x="338.90" y="194.38" width="32.20" height="13.00" rx="3"/><text class="qbm-edge-label" x="355.00" y="204.18" text-anchor="middle">NADH</text></g><g class="qbm-edge-group" data-edge="COMPLEX_II-&gt;NADH_POOL" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M400.29,287.92 L276.54,354.32" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="COMPLEX_II-&gt;NADH_POOL" x="320.56" y="314.62" width="35.72" height="13.00" rx="3"/><text class="qbm-edge-label" x="338.42" y="324.42" text-anchor="middle">FADH2</text></g><g class="qbm-edge-group" data-edge="LIPOYL_SYNTHASE-&gt;ISOCITRATE_DH" data-edge-class="cofactor_insertion"><path class="qbm-edge qbm-edge-cofactor_insertion" d="M221.66,257.80 L187.66,257.80" marker-end="url(#arrow-cofactor)"/><rect class="qbm-edge-label-bg" data-edge-label="LIPOYL_SYNTHASE-&gt;ISOCITRATE_DH" x="158.68" y="217.30" width="91.95" height="13.00" rx="3"/><text class="qbm-edge-label" x="204.66" y="227.10" text-anchor="middle">lipoylates 2-OGDH</text></g><g class="qbm-edge-group" data-edge="MITO_SUPEROXIDE-&gt;ACONITASE" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M407.09,347.92 L413.93,167.68" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="MITO_SUPEROXIDE-&gt;ACONITASE" x="369.45" y="290.95" width="79.10" height="13.00" rx="3"/><text class="qbm-edge-label" x="409.00" y="300.75" text-anchor="middle">cluster damage</text></g><g class="qbm-edge-group" data-edge="MITO_SUPEROXIDE-&gt;LIPOYL_SYNTHASE" data-edge-class="redox_feedback"><path class="qbm-edge qbm-edge-redox_feedback" d="M380.58,347.92 L308.91,281.52" marker-end="url(#arrow)"/></g><g class="qbm-edge-group" data-edge="COMPLEX_II-&gt;MITO_SUPEROXIDE" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M443.14,287.92 L416.65,347.92" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="COMPLEX_II-&gt;MITO_SUPEROXIDE" x="417.45" y="311.42" width="24.88" height="13.00" rx="3"/><text class="qbm-edge-label" x="429.90" y="321.22" text-anchor="middle">leak</text></g><g class="qbm-node-group" data-node-id="ACETYL_COA" data-tier="T4" data-qbo="QBO:ACETYL_COA"><title>Acetyl-CoA
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="ACETYL_COA" x="111.23" y="6.40" width="96.00" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="ACETYL_COA" x="111.23" y="6.40" width="96.00" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="ACETYL_COA" x="159.23" y="26.58" text-anchor="middle">Acetyl-CoA</text></g><g class="qbm-node-group" data-node-id="OXALOACETATE" data-tier="T4" data-qbo="QBO:OXALOACETATE"><title>Oxaloacetate
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="OXALOACETATE" x="241.23" y="6.40" width="109.31" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="OXALOACETATE" x="241.23" y="6.40" width="109.31" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="OXALOACETATE" x="295.88" y="26.58" text-anchor="middle">Oxaloacetate</text></g><g class="qbm-node-group" data-node-id="MALATE_DH" data-tier="T4" data-qbo="QBO:MALATE_DH"><title>Malate dehydrogenase (MMDH1)
+tier T4 (verified)
+quantum class: structural_context
+AGI: AT1G53240</title><rect class="qbm-node tier-T4" data-node-rect="MALATE_DH" x="384.54" y="0.00" width="170.69" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="MALATE_DH" x="384.54" y="0.00" width="170.69" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="MALATE_DH" x="469.88" y="20.18" text-anchor="middle">Malate dehydrogenase</text><text class="qbm-sub" data-text-for="MALATE_DH" x="469.88" y="36.82" text-anchor="middle">AT1G53240</text></g><g class="qbm-node-group" data-node-id="CITRATE_SYNTHASE" data-tier="T4" data-qbo="QBO:CITRATE_SYNTHASE"><title>Citrate synthase (CSY4)
+tier T4 (verified)
+quantum class: structural_context
+AGI: AT2G44350</title><rect class="qbm-node tier-T4" data-node-rect="CITRATE_SYNTHASE" x="43.92" y="113.84" width="129.68" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CITRATE_SYNTHASE" x="43.92" y="113.84" width="129.68" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CITRATE_SYNTHASE" x="108.76" y="134.02" text-anchor="middle">Citrate synthase</text><text class="qbm-sub" data-text-for="CITRATE_SYNTHASE" x="108.76" y="150.66" text-anchor="middle">AT2G44350</text></g><g class="qbm-units" data-units-for="CITRATE_SYNTHASE"><rect class="qbm-unit" data-unit-for="CITRATE_SYNTHASE" x="68.44" y="96.84" width="80.65" height="14.0" rx="3"/><text class="qbm-unit-label" x="108.76" y="106.84" text-anchor="middle">closes the cycle</text></g><g class="qbm-node-group" data-node-id="CITRATE" data-tier="T4" data-qbo="QBO:CITRATE"><title>Citrate
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="CITRATE" x="207.60" y="120.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="CITRATE" x="207.60" y="120.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="CITRATE" x="255.60" y="140.42" text-anchor="middle">Citrate</text></g><g class="qbm-node-group" data-node-id="ACONITASE" data-tier="T3" data-qbo="QBO:ACONITASE"><title>Aconitase (ACO1/2/3)
+tier T3 (inferred)
+quantum class: iron_sulfur_4Fe4S
+nuclei: 57Fe, 33S
+AGI: AT4G35830, AT4G26970, AT2G05710
+rationale: The review nominates aconitase as the sentinel of Fe/S integrity, and the biochemistry supports it: the exposed cluster iron makes aconitase the first TCA activity to fall under oxidative stress, so it reports cluster damage before anything else does.
+
+caveat: Precisely because aconitase responds to any oxidative insult, a change under NNMF would NOT by itself implicate a magnetic mechanism. It is a sensitive readout and a poor discriminator; it needs a paired ROS-independent control.
+</title><rect class="qbm-node tier-T3" data-node-rect="ACONITASE" x="337.60" y="107.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="ACONITASE" x="337.60" y="107.44" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="ACONITASE" x="415.07" y="127.62" text-anchor="middle">Aconitase</text><text class="qbm-sub" data-text-for="ACONITASE" x="415.07" y="144.26" text-anchor="middle">AT4G35830 · AT4G26970 ·</text><text class="qbm-sub" data-text-for="ACONITASE" x="415.07" y="157.06" text-anchor="middle">AT2G05710</text></g><g class="qbm-units" data-units-for="ACONITASE"><rect class="qbm-unit" data-unit-for="ACONITASE" x="376.12" y="90.44" width="77.91" height="14.0" rx="3"/><text class="qbm-unit-label" x="415.07" y="100.44" text-anchor="middle">4Fe-4S sentinel</text></g><g class="qbm-node-group" data-node-id="ISOCITRATE" data-tier="T4" data-qbo="QBO:ISOCITRATE"><title>Isocitrate
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="ISOCITRATE" x="526.54" y="120.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="ISOCITRATE" x="526.54" y="120.24" width="96.00" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="ISOCITRATE" x="574.54" y="140.42" text-anchor="middle">Isocitrate</text></g><g class="qbm-units" data-units-for="ISOCITRATE"><rect class="qbm-unit" data-unit-for="ISOCITRATE" x="520.99" y="103.24" width="107.09" height="14.0" rx="3"/><text class="qbm-unit-label" x="574.54" y="113.24" text-anchor="middle">cit/isocit = Fe/S proxy</text></g><g class="qbm-node-group" data-node-id="ISOCITRATE_DH" data-tier="T4" data-qbo="QBO:ISOCITRATE_DH"><title>Isocitrate dehydrogenase (IDH1, IDH2)
+tier T4 (verified)
+quantum class: structural_context
+AGI: AT4G35260, AT2G17130</title><rect class="qbm-node tier-T4" data-node-rect="ISOCITRATE_DH" x="0.00" y="234.08" width="187.66" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="ISOCITRATE_DH" x="0.00" y="234.08" width="187.66" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="ISOCITRATE_DH" x="93.83" y="254.26" text-anchor="middle">Isocitrate dehydrogenase</text><text class="qbm-sub" data-text-for="ISOCITRATE_DH" x="93.83" y="270.90" text-anchor="middle">AT4G35260 · AT2G17130</text></g><g class="qbm-node-group" data-node-id="LIPOYL_SYNTHASE" data-tier="T3" data-qbo="QBO:LIPOYL_SYNTHASE"><title>Lipoyl synthase (LIP1)
+tier T3 (inferred)
+quantum class: iron_sulfur_4Fe4S, radical_pair_donor
+nuclei: 57Fe, 33S, 1H
+AGI: AT2G20860
+rationale: A radical-SAM enzyme generating a 5&#x27;-deoxyadenosyl radical from a [4Fe-4S] cluster — genuine organic radical chemistry on an iron-sulfur centre, which is the tightest coupling of the review&#x27;s two proposed mechanisms found anywhere in primary metabolism. Its product lipoylates pyruvate dehydrogenase and the 2-oxoglutarate dehydrogenase complex, so a defect propagates straight into TCA flux.
+
+caveat: The radical is generated inside the active site and quenched within one turnover; whether a spin-correlated pair with a long enough lifetime to be field-sensitive ever forms is untested.
+</title><rect class="qbm-node tier-T3" data-node-rect="LIPOYL_SYNTHASE" x="221.66" y="234.08" width="123.31" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="LIPOYL_SYNTHASE" x="221.66" y="234.08" width="123.31" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="LIPOYL_SYNTHASE" x="283.31" y="254.26" text-anchor="middle">Lipoyl synthase</text><text class="qbm-sub" data-text-for="LIPOYL_SYNTHASE" x="283.31" y="270.90" text-anchor="middle">AT2G20860</text></g><g class="qbm-units" data-units-for="LIPOYL_SYNTHASE"><rect class="qbm-unit" data-unit-for="LIPOYL_SYNTHASE" x="252.63" y="217.08" width="61.36" height="14.0" rx="3"/><text class="qbm-unit-label" x="283.31" y="227.08" text-anchor="middle">radical SAM</text></g><g class="qbm-node-group" data-node-id="COMPLEX_II" data-tier="T3" data-qbo="QBO:COMPLEX_II"><title>Complex II (succinate dehydrogenase)
+tier T3 (inferred)
+quantum class: flavin_semiquinone, iron_sulfur_2Fe2S, iron_sulfur_4Fe4S, iron_sulfur_3Fe4S, ros_leak_site
+nuclei: 1H, 14N, 57Fe, 33S
+AGI: AT5G66760, AT3G27380, AT5G40650, AT5G09600, AT2G46505
+rationale: Carries all three cluster types plus a covalent flavin, and sits at the junction the review nominates as the bottleneck — a change here propagates into both TCA flux and respiratory electron flow.
+</title><rect class="qbm-node tier-T3" data-node-rect="COMPLEX_II" x="378.96" y="227.68" width="154.93" height="60.24" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="COMPLEX_II" x="378.96" y="227.68" width="154.93" height="60.24" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="COMPLEX_II" x="456.43" y="247.86" text-anchor="middle">SDH (complex II)</text><text class="qbm-sub" data-text-for="COMPLEX_II" x="456.43" y="264.50" text-anchor="middle">AT5G66760 · AT3G27380 ·</text><text class="qbm-sub" data-text-for="COMPLEX_II" x="456.43" y="277.30" text-anchor="middle">AT5G40650…</text></g><g class="qbm-units" data-units-for="COMPLEX_II"><rect class="qbm-unit" data-unit-for="COMPLEX_II" x="418.03" y="210.68" width="26.03" height="14.0" rx="3"/><text class="qbm-unit-label" x="431.05" y="220.68" text-anchor="middle">FAD</text><rect class="qbm-unit" data-unit-for="COMPLEX_II" x="448.06" y="210.68" width="46.77" height="14.0" rx="3"/><text class="qbm-unit-label" x="471.44" y="220.68" text-anchor="middle">3 × Fe/S</text></g><g class="qbm-comp-tag" data-comp-tag-for="COMPLEX_II"><rect class="qbm-unit" x="381.93" y="290.92" width="148.99" height="14.0" rx="7"/><text class="qbm-unit-label" x="456.43" y="300.92" text-anchor="middle">Inner mitochondrial membrane</text></g><g class="qbm-node-group" data-node-id="FUMARASE" data-tier="T4" data-qbo="QBO:FUMARASE"><title>Fumarase (FUM1)
+tier T4 (verified)
+quantum class: structural_context
+AGI: AT2G47510</title><rect class="qbm-node tier-T4" data-node-rect="FUMARASE" x="567.90" y="234.08" width="98.56" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FUMARASE" x="567.90" y="234.08" width="98.56" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FUMARASE" x="617.18" y="254.26" text-anchor="middle">Fumarase</text><text class="qbm-sub" data-text-for="FUMARASE" x="617.18" y="270.90" text-anchor="middle">AT2G47510</text></g><g class="qbm-units" data-units-for="FUMARASE"><rect class="qbm-unit" data-unit-for="FUMARASE" x="573.54" y="217.08" width="87.27" height="14.0" rx="3"/><text class="qbm-unit-label" x="617.18" y="227.08" text-anchor="middle">class II — no Fe/S</text></g><g class="qbm-node-group" data-node-id="NADH_POOL" data-tier="T4" data-qbo="QBO:NADH_POOL"><title>NADH / NAD+
+tier T4 (verified)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="NADH_POOL" x="188.31" y="354.32" width="111.91" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="NADH_POOL" x="188.31" y="354.32" width="111.91" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="NADH_POOL" x="244.26" y="374.50" text-anchor="middle">NADH / NAD+</text></g><g class="qbm-node-group" data-node-id="MITO_SUPEROXIDE" data-tier="T2" data-qbo="QBO:MITO_SUPEROXIDE"><title>Mitochondrial superoxide / H2O2
+tier T2 (reported)
+quantum class: ros_leak_site
+AGI: AT3G10920
+Parmagnani2022: Near-null magnetic field exposure alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+ [10.3390/biom12121824]
+Farooq2021: Reactive oxygen species and mitochondria jointly regulate seed germination, establishing the route from mitochondrial ROS to a developmental outcome.
+ [10.3389/fpls.2021.781734]
+rationale: Not a magnetosensitive mechanism itself — it is the amplifier. A field effect too small to measure as a rate change can still register here, because ROS signalling is threshold-like.
+</title><rect class="qbm-node tier-T2" data-node-rect="MITO_SUPEROXIDE" x="334.22" y="347.92" width="143.93" height="47.44" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="MITO_SUPEROXIDE" x="334.22" y="347.92" width="143.93" height="47.44" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="MITO_SUPEROXIDE" x="406.19" y="368.10" text-anchor="middle">Superoxide / H2O2</text><text class="qbm-sub" data-text-for="MITO_SUPEROXIDE" x="406.19" y="384.74" text-anchor="middle">AT3G10920</text></g><g class="qbm-units" data-units-for="MITO_SUPEROXIDE"><rect class="qbm-unit" data-unit-for="MITO_SUPEROXIDE" x="366.74" y="330.92" width="78.90" height="14.0" rx="3"/><text class="qbm-unit-label" x="406.19" y="340.92" text-anchor="middle">signal amplifier</text></g></g>
+<g transform="translate(0,97.60)"><g class="qbm-legend-group" transform="translate(16.00,0.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text><rect class="qbm-node tier-T2" x="0" y="14.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="25.00">T2 — Inferred</text><rect class="qbm-node tier-T3" x="0" y="35.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="46.00">T3 — Plausible</text><rect class="qbm-node tier-T4" x="0" y="56.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="67.00">T4 — Context</text></g></g>
+<text class="qbm-caption" x="16" y="707.96">The review&#x27;s Figure 4 renders this as a linear chain from glucose to oxaloacetate with no OAA-to-citrate closure, which the</text>
+<text class="qbm-caption" x="16" y="722.68">draft&#x27;s own margin note flags. The closure matters: it is what shows that the two Fe/S-dependent steps throttle flux around the</text>
+<text class="qbm-caption" x="16" y="737.40">whole loop instead of interrupting a line. Aconitase and succinate dehydrogenase are the review&#x27;s sentinel nodes and are</text>
+<text class="qbm-caption" x="16" y="752.12">annotated once on QBM-01, referenced here rather than re-declared, so one entity cannot carry different evidence on two</text>
+<text class="qbm-caption" x="16" y="766.84">maps. The citrate-to-isocitrate ratio is the most direct available in-vivo proxy for Fe/S cluster integrity and is worth measuring in</text>
+<text class="qbm-caption" x="16" y="781.56">any near-null-field metabolomics experiment. Note that plant mitochondrial fumarase is a class-II enzyme with no Fe/S cluster,</text>
+<text class="qbm-caption" x="16" y="796.28">unlike the class-I bacterial form it is sometimes confused with. Derived from: Figure 4 of Porterfield &amp; Barker, &quot;Plant Responses</text>
+<text class="qbm-caption" x="16" y="811.00">to Near-Null Magnetic Fields&quot; — redrawn as a closed cycle, expanded to gene level and bound to Arabidopsis loci. Node counts</text>
+<text class="qbm-caption" x="16" y="825.72">by evidence tier: T2=1, T3=3, T4=9. Schematic topology only — no quantitative value is encoded in this base map; numbers</text>
+<text class="qbm-caption" x="16" y="840.44">appear only when measured data is projected onto it.</text>
+</svg>

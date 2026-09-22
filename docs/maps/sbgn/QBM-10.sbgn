@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3" xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">
+  <map id="QBM-10" language="process description">
+    <extension>
+      <qbo:mapNotes xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">Hormone and circadian integration of the flowering response. The second map the review motivates but does not draw, covering the other area where direct Arabidopsis evidence is strongest. Delayed flowering is the most reproducible near-null-field phenotype in the whole literature, and separate studies have implicated cryptochrome, gibberellin and auxin in producing it. Drawn together, the route from a photoreceptor to a phenotype becomes concrete and testable with existing mutants — which is what the review's call for cry1 cry2, phytochrome and hormone genetics amounts to. The clock is the map's most speculative element and is marked T3: no field measurement on clock components exists in the bibliography. It is drawn because a clock is a gate, so the same perturbation applied at different times can produce opposite outcomes — which could explain some of the inconsistency across near-null-field studies, and is testable rather than merely plausible. That is offered as an experimental design consideration, not a finding. Derived from: Motivated by section 8 and the Xu 2012/2017/2018/2021 and Agliassa 2018 evidence in Porterfield &amp; Barker, "Plant Responses to Near-Null Magnetic Fields" — no corresponding figure exists in the manuscript</qbo:mapNotes>
+    </extension>
+    <glyph id="nucleus" class="compartment">
+      <label text="Nucleus" />
+      <bbox x="-26.00" y="-26.00" w="494.52" h="219.68" />
+    </glyph>
+    <glyph id="cell" class="compartment">
+      <label text="Cell" />
+      <bbox x="21.44" y="231.68" w="399.63" h="112.24" />
+    </glyph>
+    <glyph id="nucleus" class="compartment">
+      <label text="Nucleus" />
+      <bbox x="24.05" y="381.92" w="394.42" h="99.44" />
+    </glyph>
+    <glyph id="organism" class="compartment">
+      <label text="Organism" />
+      <bbox x="43.30" y="519.36" w="355.93" h="86.64" />
+    </glyph>
+    <glyph id="CRY1" class="macromolecule" compartmentRef="nucleus">
+      <label text="Cryptochrome 1" />
+      <bbox x="0.00" y="0.00" w="126.95" h="47.44" />
+      <glyph id="CRY1__u0" class="unit of information">
+        <label text="FAD radical pair" />
+        <bbox x="6.00" y="-9.00" w="112.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CRY1" evidenceTier="T1" confidence="verified">
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT4G08920</qbo:xref>
+          <qbo:xref db="go_component">GO:0005634</qbo:xref>
+          <qbo:evidence ref="Ahmad2007" doi="10.1007/s00425-006-0383-0" direction="altered" fieldRegime="static_MF">Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.
+</qbo:evidence>
+          <qbo:evidence ref="Solovyov2007" doi="10.1529/biophysj.106.097139" direction="altered" fieldRegime="static_MF">Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.
+</qbo:evidence>
+          <qbo:evidence ref="Harris2009" doi="10.1098/rsif.2008.0519" direction="no_effect" fieldRegime="static_MF">Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.
+</qbo:evidence>
+          <qbo:evidence ref="Pooam2019" doi="10.1007/s00425-018-3002-y" direction="altered" fieldRegime="static_MF">Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2014" doi="10.1016/j.asr.2014.01.033" direction="altered" fieldRegime="NNMF">Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>The reference case for the radical-pair mechanism in biology, and the entity from which the review's whole argument is generalised outward.
+</qbo:rationale>
+          <qbo:caveat>Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CRY2" class="macromolecule" compartmentRef="nucleus">
+      <label text="Cryptochrome 2" />
+      <bbox x="160.95" y="0.00" w="126.84" h="47.44" />
+      <glyph id="CRY2__u0" class="unit of information">
+        <label text="photoperiod" />
+        <bbox x="166.95" y="-9.00" w="77.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CRY2" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT1G04400</qbo:xref>
+          <qbo:xref db="go_component">GO:0005634</qbo:xref>
+          <qbo:evidence ref="Xu2012" doi="10.1016/j.asr.2011.12.004" direction="altered" fieldRegime="NNMF">A near-null magnetic field affects cryptochrome-related hypocotyl growth and flowering in Arabidopsis.
+</qbo:evidence>
+          <qbo:evidence ref="Agliassa2018b" doi="10.1016/j.jphotobiol.2018.05.027" direction="altered" fieldRegime="NNMF">Geomagnetic field variation impacts cryptochrome and phytochrome signalling.
+</qbo:evidence>
+          <qbo:rationale>Same FAD/tryptophan-triad chemistry as CRY1. CRY2's route to flowering time is the mechanistic link between the photoreceptor evidence and the most reproducible NNMF phenotype in the literature — delayed flowering.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PHYB" class="macromolecule" compartmentRef="nucleus">
+      <label text="Phytochrome B" />
+      <bbox x="321.79" y="0.00" w="120.73" h="47.44" />
+      <glyph id="PHYB__u0" class="unit of information">
+        <label text="no spin route" />
+        <bbox x="327.79" y="-9.00" w="91.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PHYB" evidenceTier="T4" confidence="reported">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT2G18790</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="SINGLET_TRIPLET" class="process" compartmentRef="nucleus">
+      <label text="Singlet ⇄ triplet mixing" />
+      <bbox x="40.10" y="120.24" w="173.40" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:SINGLET_TRIPLET" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:quantumClass>spin_correlated_pair</qbo:quantumClass>
+          <qbo:quantumClass>hyperfine_coupled</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:evidence ref="Ritz2000" doi="10.1016/S0006-3495(00)76629-X" direction="altered" fieldRegime="GMF">A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.
+</qbo:evidence>
+          <qbo:evidence ref="ZadehHaghighi2022" doi="10.1098/rsif.2022.0325" direction="altered" fieldRegime="GMF">Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.
+</qbo:evidence>
+          <qbo:rationale>This is the mechanism itself rather than a molecule. It is on the map because the review's argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.
+</qbo:rationale>
+          <qbo:caveat>For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate — roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CIRCADIAN_CLOCK" class="complex" compartmentRef="nucleus">
+      <label text="Circadian clock" />
+      <bbox x="247.50" y="107.44" w="154.93" h="60.24" />
+      <glyph id="CIRCADIAN_CLOCK__u0" class="unit of information">
+        <label text="a gate — timing matters" />
+        <bbox x="253.50" y="98.44" w="161.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CIRCADIAN_CLOCK" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT2G46830</qbo:xref>
+          <qbo:xref db="agi">AT1G01060</qbo:xref>
+          <qbo:xref db="agi">AT5G61380</qbo:xref>
+          <qbo:xref db="agi">AT5G24470</qbo:xref>
+          <qbo:xref db="agi">AT5G02810</qbo:xref>
+          <qbo:xref db="agi">AT2G46790</qbo:xref>
+          <qbo:xref db="agi">AT1G22770</qbo:xref>
+          <qbo:xref db="agi">AT2G40080</qbo:xref>
+          <qbo:rationale>No spin route of its own, and no direct field measurement on clock components in the bibliography. It is on the map because cryptochrome is a clock input, so a field effect at CRY would necessarily arrive here — and because a clock is a gate, meaning the same perturbation can produce opposite outcomes depending on when it is applied. That alone could explain some of the inconsistency in near-null-field results, and it is testable.
+</qbo:rationale>
+          <qbo:caveat>This is the atlas's most speculative causal claim and is flagged as such. It is offered as an experimental design consideration, not a finding.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="GA_SIGNALLING" class="complex" compartmentRef="nucleus">
+      <label text="Gibberellin signalling" />
+      <bbox x="47.44" y="257.68" w="158.70" h="60.24" />
+      <glyph id="GA_SIGNALLING__u0" class="unit of information">
+        <label text="Xu 2017" />
+        <bbox x="53.44" y="248.68" w="49.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:GA_SIGNALLING" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT1G15550</qbo:xref>
+          <qbo:xref db="agi">AT4G25420</qbo:xref>
+          <qbo:xref db="agi">AT2G01570</qbo:xref>
+          <qbo:xref db="agi">AT1G14920</qbo:xref>
+          <qbo:xref db="agi">AT3G03450</qbo:xref>
+          <qbo:evidence ref="Xu2017" doi="10.1002/bem.22004" direction="altered" fieldRegime="NNMF">Gibberellins are involved in the effect of a near-null magnetic field on Arabidopsis flowering.
+</qbo:evidence>
+          <qbo:rationale>Demonstrated field evidence with no proposed quantum route. Xu et al. showed gibberellins are involved in the near-null-field effect on flowering, which makes this a real link in the causal chain — but GA signalling is ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism is claimed.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="AUXIN_TRANSPORT" class="complex">
+      <label text="Auxin transport" />
+      <bbox x="240.15" y="257.68" w="154.93" h="60.24" />
+      <glyph id="AUXIN_TRANSPORT__u0" class="unit of information">
+        <label text="Xu 2018" />
+        <bbox x="246.15" y="248.68" w="49.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:AUXIN_TRANSPORT" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT1G73590</qbo:xref>
+          <qbo:xref db="agi">AT5G57090</qbo:xref>
+          <qbo:xref db="agi">AT1G70940</qbo:xref>
+          <qbo:xref db="agi">AT2G38120</qbo:xref>
+          <qbo:xref db="agi">AT3G62980</qbo:xref>
+          <qbo:xref db="agi">AT5G20730</qbo:xref>
+          <qbo:evidence ref="Xu2018" doi="10.1002/bem.22086" direction="decrease" fieldRegime="NNMF">Suppression of Arabidopsis flowering by a near-null magnetic field is mediated by auxin.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2021" doi="10.1002/bem.22363" direction="decrease" fieldRegime="NNMF">A near-null magnetic field suppresses fruit growth in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>As with gibberellin: a demonstrated field effect with no proposed spin route. Xu et al. showed auxin mediates near-null-field suppression of flowering.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FLOWERING_REGULATORS" class="complex" compartmentRef="nucleus">
+      <label text="CO / FT / FLC / SOC1" />
+      <bbox x="50.05" y="407.92" w="154.13" h="47.44" />
+      <glyph id="FLOWERING_REGULATORS__u0" class="unit of information">
+        <label text="Agliassa 2018a" />
+        <bbox x="56.05" y="398.92" w="98.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FLOWERING_REGULATORS" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT5G10140</qbo:xref>
+          <qbo:xref db="agi">AT2G45660</qbo:xref>
+          <qbo:evidence ref="Agliassa2018a" doi="10.1002/bem.22123" direction="decrease" fieldRegime="NNMF">Reduction of the geomagnetic field delays Arabidopsis flowering through downregulation of flowering-related genes.
+</qbo:evidence>
+          <qbo:rationale>Demonstrated field evidence, no mechanism claimed. Agliassa et al. reported downregulation of flowering-related genes under field reduction below 100 nT, which is a transcriptional readout rather than a spin-chemical one.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="COP1_SPA" class="complex" compartmentRef="nucleus">
+      <label text="COP1 / SPA complex" />
+      <bbox x="238.18" y="414.32" w="154.29" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:COP1_SPA" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FLOWERING_OUTPUT" class="phenotype" compartmentRef="organism">
+      <label text="Flowering time" />
+      <bbox x="69.30" y="545.36" w="118.66" h="34.64" />
+      <glyph id="FLOWERING_OUTPUT__u0" class="unit of information">
+        <label text="delayed under NNMF" />
+        <bbox x="75.30" y="536.36" w="126.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FLOWERING_OUTPUT" evidenceTier="T4" confidence="reported">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Agliassa2018a" doi="10.1002/bem.22123" direction="decrease" fieldRegime="NNMF">Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2015" doi="10.1002/bem.21927" direction="decrease" fieldRegime="NNMF">Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2013" doi="10.1002/bem.21788" direction="decrease" fieldRegime="NNMF">Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.
+</qbo:evidence>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="REPRODUCTIVE_OUTPUT" class="phenotype" compartmentRef="organism">
+      <label text="Siliques / seed yield" />
+      <bbox x="221.95" y="545.36" w="151.28" h="34.64" />
+      <glyph id="REPRODUCTIVE_OUTPUT__u0" class="unit of information">
+        <label text="reduced under NNMF" />
+        <bbox x="227.95" y="536.36" w="126.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:REPRODUCTIVE_OUTPUT" evidenceTier="T2" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:evidence ref="Xu2013" doi="10.1002/bem.21788" direction="decrease" fieldRegime="NNMF">Removal of the local geomagnetic field affects reproductive growth in Arabidopsis, reducing silique number and seed yield.
+</qbo:evidence>
+          <qbo:evidence ref="Xu2021" doi="10.1002/bem.22363" direction="decrease" fieldRegime="NNMF">Near-null magnetic field suppresses fruit growth in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>A phenotype with demonstrated field evidence and, necessarily, no quantum route of its own. It is the accumulated consequence of everything upstream, which is what makes it reproducible and also what makes it uninformative about mechanism.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <arc id="arc0" class="stimulation" source="CRY1" target="SINGLET_TRIPLET">
+      <start x="63.47" y="23.72" />
+      <end x="126.80" y="137.56" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc1" class="stimulation" source="CRY2" target="SINGLET_TRIPLET">
+      <start x="224.37" y="23.72" />
+      <end x="126.80" y="137.56" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc2" class="stimulation" source="SINGLET_TRIPLET" target="COP1_SPA">
+      <start x="126.80" y="137.56" />
+      <end x="315.33" y="431.64" />
+      <glyph id="arc2__lbl" class="annotation">
+        <label text="signalling yield" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc3" class="modulation" source="SINGLET_TRIPLET" target="CIRCADIAN_CLOCK">
+      <start x="126.80" y="137.56" />
+      <end x="324.96" y="137.56" />
+      <glyph id="arc3__lbl" class="annotation">
+        <label text="CRY is a clock input" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">circadian_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc4" class="inhibition" source="CRY1" target="COP1_SPA">
+      <start x="63.47" y="23.72" />
+      <end x="315.33" y="431.64" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">inhibition</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc5" class="inhibition" source="CRY2" target="COP1_SPA">
+      <start x="224.37" y="23.72" />
+      <end x="315.33" y="431.64" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">inhibition</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc6" class="modulation" source="PHYB" target="COP1_SPA">
+      <start x="382.16" y="23.72" />
+      <end x="315.33" y="431.64" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">indirect_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc7" class="inhibition" source="COP1_SPA" target="FLOWERING_REGULATORS">
+      <start x="315.33" y="431.64" />
+      <end x="127.12" y="431.64" />
+      <glyph id="arc7__lbl" class="annotation">
+        <label text="degrades CO" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">inhibition</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc8" class="modulation" source="CIRCADIAN_CLOCK" target="FLOWERING_REGULATORS">
+      <start x="324.96" y="137.56" />
+      <end x="127.12" y="431.64" />
+      <glyph id="arc8__lbl" class="annotation">
+        <label text="photoperiod" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">circadian_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc9" class="modulation" source="GA_SIGNALLING" target="FLOWERING_REGULATORS">
+      <start x="126.80" y="287.80" />
+      <end x="127.12" y="431.64" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc10" class="modulation" source="AUXIN_TRANSPORT" target="FLOWERING_REGULATORS">
+      <start x="317.61" y="287.80" />
+      <end x="127.12" y="431.64" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc11" class="modulation" source="CIRCADIAN_CLOCK" target="GA_SIGNALLING">
+      <start x="324.96" y="137.56" />
+      <end x="126.80" y="287.80" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">circadian_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc12" class="stimulation" source="FLOWERING_REGULATORS" target="FLOWERING_OUTPUT">
+      <start x="127.12" y="431.64" />
+      <end x="128.62" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc13" class="stimulation" source="FLOWERING_OUTPUT" target="REPRODUCTIVE_OUTPUT">
+      <start x="128.62" y="562.68" />
+      <end x="297.59" y="562.68" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc14" class="modulation" source="AUXIN_TRANSPORT" target="REPRODUCTIVE_OUTPUT">
+      <start x="317.61" y="287.80" />
+      <end x="297.59" y="562.68" />
+      <glyph id="arc14__lbl" class="annotation">
+        <label text="fruit growth" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">hormonal_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+  </map>
+</sbgn>

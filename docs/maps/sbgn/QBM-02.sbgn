@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbgn xmlns="http://sbgn.org/libsbgn/0.3" xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">
+  <map id="QBM-02" language="process description">
+    <extension>
+      <qbo:mapNotes xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">Photosynthetic electron transport and plastid redox. The photosynthetic chain redrawn with each node's quantum chemistry and the evidence behind it. Photosystem I is the strongest structural case in the atlas: charge separation at P700 makes a genuine spin-correlated radical pair, the species the radical-pair mechanism was written for. It is nevertheless only T2, because the one direct field measurement on photosynthesis in the review's bibliography was made in lima bean rather than Arabidopsis, and because that pair is extremely short-lived and its known field effects are seen well above geomagnetic strength. Cyclic electron flow is drawn for the same reason alternative oxidase appears on QBM-01 — it lets a chloroplast rebalance ATP against NADPH without changing linear flux, so measuring linear electron transport alone cannot separate "no effect" from "compensated effect". Four nodes are plastid-encoded (ATCG loci) and will receive no value from poly-A-selected RNA-seq, which is most of OSDR's plant studies. Derived from: Figures 1B and 5 of Porterfield &amp; Barker, "Plant Responses to Near-Null Magnetic Fields" — expanded to gene level and bound to Arabidopsis loci</qbo:mapNotes>
+    </extension>
+    <glyph id="thylakoid_lumen" class="compartment">
+      <label text="Thylakoid lumen" />
+      <bbox x="172.78" y="-26.00" w="330.99" h="99.44" />
+    </glyph>
+    <glyph id="thylakoid_membrane" class="compartment">
+      <label text="Thylakoid membrane" />
+      <bbox x="48.20" y="111.44" w="580.15" h="314.32" />
+    </glyph>
+    <glyph id="chloroplast_stroma" class="compartment">
+      <label text="Chloroplast stroma" />
+      <bbox x="-26.00" y="463.76" w="728.56" h="99.44" />
+    </glyph>
+    <glyph id="H2O" class="simple chemical" compartmentRef="thylakoid_lumen">
+      <label text="H2O" />
+      <bbox x="198.78" y="6.40" w="96.00" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:H2O" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:15377</qbo:xref>
+          <qbo:xref db="kegg">C00001</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PLASTOCYANIN" class="macromolecule" compartmentRef="thylakoid_lumen">
+      <label text="Plastocyanin" />
+      <bbox x="328.78" y="0.00" w="148.99" h="47.44" />
+      <glyph id="PLASTOCYANIN__u0" class="unit of information">
+        <label text="type-I Cu" />
+        <bbox x="334.78" y="-9.00" w="63.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PLASTOCYANIN" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>spin_relaxation_modulated</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT1G76100</qbo:xref>
+          <qbo:xref db="agi">AT1G20340</qbo:xref>
+          <qbo:xref db="go_component">GO:0009543</qbo:xref>
+          <qbo:rationale>A mononuclear Cu(II)/Cu(I) centre performing one-electron transfer, so formally paramagnetic in the oxidised state.
+</qbo:rationale>
+          <qbo:caveat>Deliberately classed as spin_relaxation_modulated rather than as a radical-pair partner. A single copper centre relaxes fast and has no correlated partner, so coherent singlet-triplet mixing is not available here; only a relaxation-based effect could be argued, and none has been shown.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PSII" class="complex" compartmentRef="thylakoid_membrane">
+      <label text="Photosystem II" />
+      <bbox x="84.75" y="137.44" w="149.02" h="47.44" />
+      <glyph id="PSII__u0" class="unit of information">
+        <label text="Mn4CaO5" />
+        <bbox x="90.75" y="128.44" w="49.00" h="16.00" />
+      </glyph>
+      <glyph id="PSII__u1" class="unit of information">
+        <label text="QA / QB" />
+        <bbox x="90.75" y="128.44" w="49.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PSII" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">ATCG00020</qbo:xref>
+          <qbo:xref db="agi">AT1G06680</qbo:xref>
+          <qbo:xref db="go_component">GO:0009523</qbo:xref>
+          <qbo:xref db="ec">1.10.3.9</qbo:xref>
+          <qbo:rationale>The QA/QB sites hold a kinetically stabilised plastosemiquinone, and PSII is a major singlet-oxygen source under excess light. Both are one-electron chemistry in a defined pocket, which is the setting a radical-pair argument needs.
+</qbo:rationale>
+          <qbo:caveat>PSII's dominant ROS species is singlet oxygen from the P680 triplet, not superoxide. Triplet chlorophyll formation is itself spin chemistry, so a field effect here would be more plausible than at most nodes — but it is also a route the review does not develop, and no measurement exists.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PLASTOQUINONE_POOL" class="simple chemical" compartmentRef="thylakoid_membrane">
+      <label text="Plastoquinone pool" />
+      <bbox x="267.77" y="143.84" w="145.18" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PLASTOQUINONE_POOL" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:28377</qbo:xref>
+          <qbo:xref db="kegg">C02061</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PLASTOSEMIQUINONE" class="simple chemical" compartmentRef="thylakoid_membrane">
+      <label text="Plastosemiquinone" />
+      <bbox x="446.95" y="143.84" w="144.85" h="34.64" />
+      <glyph id="PLASTOSEMIQUINONE__u0" class="unit of information">
+        <label text="free radical" />
+        <bbox x="452.95" y="134.84" w="84.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PLASTOSEMIQUINONE" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_donor</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="chebi">CHEBI:28377</qbo:xref>
+          <qbo:rationale>The plastid counterpart of ubisemiquinone, and the same argument applies: a protein-bound organic radical with a measurable lifetime is the most credible site for field-dependent branching in the chain.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CYTB6F_RIESKE" class="macromolecule" compartmentRef="thylakoid_membrane">
+      <label text="Cyt b6f Rieske centre" />
+      <bbox x="74.20" y="244.88" w="161.95" h="47.44" />
+      <glyph id="CYTB6F_RIESKE__u0" class="unit of information">
+        <label text="2Fe-2S" />
+        <bbox x="80.20" y="235.88" w="42.00" h="16.00" />
+      </glyph>
+      <glyph id="CYTB6F_RIESKE__u1" class="unit of information">
+        <label text="Q cycle" />
+        <bbox x="80.20" y="235.88" w="49.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CYTB6F_RIESKE" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>rieske_2Fe2S</qbo:quantumClass>
+          <qbo:quantumClass>semiquinone_radical</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">AT4G03280</qbo:xref>
+          <qbo:xref db="go_component">GO:0009512</qbo:xref>
+          <qbo:rationale>Structurally and mechanistically the plastid twin of the mitochondrial Rieske centre (QBO:RIESKE_FES), with the same bifurcated Q-cycle chemistry. The review treats both as the same class of candidate target.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="CYT_B6" class="macromolecule" compartmentRef="thylakoid_membrane">
+      <label text="Cyt b6 / f hemes" />
+      <bbox x="270.15" y="244.88" w="149.05" h="47.44" />
+      <glyph id="CYT_B6__u0" class="unit of information">
+        <label text="plastid-encoded" />
+        <bbox x="276.15" y="235.88" w="105.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CYT_B6" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>heme_electron_carrier</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">ATCG00540</qbo:xref>
+          <qbo:xref db="agi">ATCG00720</qbo:xref>
+          <qbo:xref db="go_component">GO:0009512</qbo:xref>
+          <qbo:rationale>One-electron heme carriers, paramagnetic in the ferric state, adjacent to the semiquinone-generating Q cycle.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PGR5_PGRL1" class="complex" compartmentRef="thylakoid_membrane">
+      <label text="Cyclic electron flow" />
+      <bbox x="453.20" y="244.88" w="149.15" h="47.44" />
+      <glyph id="PGR5_PGRL1__u0" class="unit of information">
+        <label text="bypass — confounder" />
+        <bbox x="459.20" y="235.88" w="133.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PGR5_PGRL1" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT2G05620</qbo:xref>
+          <qbo:xref db="agi">AT4G22890</qbo:xref>
+          <qbo:xref db="go_component">GO:0009767</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PSI_FES" class="complex" compartmentRef="thylakoid_membrane">
+      <label text="Photosystem I Fe/S" />
+      <bbox x="193.60" y="352.32" w="145.57" h="47.44" />
+      <glyph id="PSI_FES__u0" class="unit of information">
+        <label text="FX / FA / FB" />
+        <bbox x="199.60" y="343.32" w="84.00" h="16.00" />
+      </glyph>
+      <glyph id="PSI_FES__u1" class="unit of information">
+        <label text="P700·+ A1·− pair" />
+        <bbox x="199.60" y="343.32" w="112.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PSI_FES" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
+          <qbo:quantumClass>radical_pair_acceptor</qbo:quantumClass>
+          <qbo:quantumClass>triplet_yield_sensitive</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:xref db="agi">ATCG01060</qbo:xref>
+          <qbo:xref db="go_component">GO:0009522</qbo:xref>
+          <qbo:xref db="ec">1.97.1.12</qbo:xref>
+          <qbo:evidence ref="Parmagnani2023" doi="10.3390/ijms24032896" direction="altered" fieldRegime="NNMF">The geomagnetic field is required for normal lima bean photosynthesis, PSI/LHCI content and ROS production; near-null field conditions altered photosynthetic electron transport.
+</qbo:evidence>
+          <qbo:rationale>PSI is the strongest structural case in the whole atlas. Charge separation at P700 produces a genuine spin-correlated radical pair (P700·+ A1·−), which is the textbook example of the species the radical-pair mechanism describes — it is studied by exactly that formalism in photosynthesis spectroscopy. Three [4Fe-4S] clusters then carry the electron onward.
+</qbo:rationale>
+          <qbo:caveat>The P700·+ A1·− pair is extremely short-lived, and the well-characterised magnetic-field effects on it are seen in isolated preparations at fields far above geomagnetic. Structural plausibility is high; relevance at 50 uT is not established.
+</qbo:caveat>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="THYLAKOID_ATP_SYNTHASE" class="complex" compartmentRef="thylakoid_membrane">
+      <label text="ATP synthase" />
+      <bbox x="373.17" y="352.32" w="109.78" h="47.44" />
+      <glyph id="THYLAKOID_ATP_SYNTHASE__u0" class="unit of information">
+        <label text="readout: ATP" />
+        <bbox x="379.17" y="343.32" w="84.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:THYLAKOID_ATP_SYNTHASE" evidenceTier="T4" confidence="inferred">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT4G04640</qbo:xref>
+          <qbo:xref db="go_component">GO:0009535</qbo:xref>
+          <qbo:xref db="ec">7.1.2.2</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FERREDOXIN" class="macromolecule" compartmentRef="chloroplast_stroma">
+      <label text="Ferredoxin" />
+      <bbox x="0.00" y="489.76" w="148.99" h="47.44" />
+      <glyph id="FERREDOXIN__u0" class="unit of information">
+        <label text="2Fe-2S hub" />
+        <bbox x="6.00" y="480.76" w="70.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FERREDOXIN" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>iron_sulfur_2Fe2S</qbo:quantumClass>
+          <qbo:nucleus>57Fe</qbo:nucleus>
+          <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:xref db="agi">AT1G10960</qbo:xref>
+          <qbo:xref db="agi">AT1G60950</qbo:xref>
+          <qbo:xref db="go_component">GO:0009570</qbo:xref>
+          <qbo:evidence ref="Vigani2021" doi="10.3390/ijms221810166" direction="altered" fieldRegime="NNMF">Geomagnetic field conditions modulate iron-sulfur interplay in Arabidopsis, particularly under combined iron and sulfur deficiency.
+</qbo:evidence>
+          <qbo:rationale>The distribution hub of plastid reducing power. A perturbation here reaches carbon fixation, nitrogen and sulfur assimilation and redox regulation at once, which is why the review nominates ferredoxin biogenesis specifically.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="FNR" class="macromolecule" compartmentRef="chloroplast_stroma">
+      <label text="FNR" />
+      <bbox x="182.99" y="489.76" w="148.99" h="47.44" />
+      <glyph id="FNR__u0" class="unit of information">
+        <label text="FAD" />
+        <bbox x="188.99" y="480.76" w="30.00" h="16.00" />
+      </glyph>
+      <glyph id="FNR__u1" class="unit of information">
+        <label text="1e− → 2e−" />
+        <bbox x="188.99" y="480.76" w="63.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FNR" evidenceTier="T3" confidence="inferred">
+          <qbo:quantumClass>flavin_semiquinone</qbo:quantumClass>
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:nucleus>1H</qbo:nucleus>
+          <qbo:nucleus>14N</qbo:nucleus>
+          <qbo:cofactor>CHEBI:57692</qbo:cofactor>
+          <qbo:xref db="agi">AT5G66190</qbo:xref>
+          <qbo:xref db="agi">AT1G20020</qbo:xref>
+          <qbo:xref db="ec">1.18.1.2</qbo:xref>
+          <qbo:rationale>FNR necessarily transits a flavin semiquinone: it is the step that converts one-electron chemistry into two-electron chemistry, so a half-reduced flavin is obligatory rather than incidental. That makes it the plastid's clearest analogue of the cryptochrome flavin.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="NADPH_POOL" class="simple chemical" compartmentRef="chloroplast_stroma">
+      <label text="NADPH / NADP+" />
+      <bbox x="365.98" y="496.16" w="127.59" h="34.64" />
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:NADPH_POOL" evidenceTier="T4" confidence="verified">
+          <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:57783</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:58349</qbo:xref>
+          <qbo:xref db="kegg">C00005</qbo:xref>
+          <qbo:xref db="kegg">C00006</qbo:xref>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <glyph id="PLASTID_ROS" class="simple chemical" compartmentRef="chloroplast_stroma">
+      <label text="Superoxide / H2O2" />
+      <bbox x="527.57" y="489.76" w="148.99" h="47.44" />
+      <glyph id="PLASTID_ROS__u0" class="unit of information">
+        <label text="signal amplifier" />
+        <bbox x="533.57" y="480.76" w="112.00" h="16.00" />
+      </glyph>
+      <extension>
+        <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:PLASTID_ROS" evidenceTier="T2" confidence="reported">
+          <qbo:quantumClass>ros_leak_site</qbo:quantumClass>
+          <qbo:xref db="chebi">CHEBI:18421</qbo:xref>
+          <qbo:xref db="chebi">CHEBI:16240</qbo:xref>
+          <qbo:xref db="agi">AT4G25100</qbo:xref>
+          <qbo:xref db="agi">AT2G28190</qbo:xref>
+          <qbo:evidence ref="Parmagnani2023" doi="10.3390/ijms24032896" direction="altered" fieldRegime="NNMF">Reactive oxygen species production differed between geomagnetic and near-null field conditions in lima bean.
+</qbo:evidence>
+          <qbo:evidence ref="Parmagnani2022" doi="10.3390/biom12121824" direction="altered" fieldRegime="NNMF">Near-null magnetic field alters ROS-associated transcriptomic and metabolomic programmes in Arabidopsis.
+</qbo:evidence>
+          <qbo:rationale>As in the mitochondrion, the amplifier rather than the mechanism: threshold behaviour converts a small change in electron branching into a signal.
+</qbo:rationale>
+        </qbo:annotation>
+      </extension>
+    </glyph>
+    <arc id="arc0" class="consumption" source="H2O" target="PSII">
+      <start x="246.78" y="23.72" />
+      <end x="159.26" y="161.16" />
+      <glyph id="arc0__lbl" class="annotation">
+        <label text="4e− + O2" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc1" class="consumption" source="PSII" target="PLASTOQUINONE_POOL">
+      <start x="159.26" y="161.16" />
+      <end x="340.36" y="161.16" />
+      <glyph id="arc1__lbl" class="annotation">
+        <label text="2e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc2" class="consumption" source="PLASTOQUINONE_POOL" target="PLASTOSEMIQUINONE">
+      <start x="340.36" y="161.16" />
+      <end x="519.38" y="161.16" />
+      <glyph id="arc2__lbl" class="annotation">
+        <label text="1e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc3" class="consumption" source="PLASTOSEMIQUINONE" target="CYTB6F_RIESKE">
+      <start x="519.38" y="161.16" />
+      <end x="155.18" y="268.60" />
+      <glyph id="arc3__lbl" class="annotation">
+        <label text="Qo" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc4" class="consumption" source="CYTB6F_RIESKE" target="CYT_B6">
+      <start x="155.18" y="268.60" />
+      <end x="344.68" y="268.60" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc5" class="consumption" source="CYTB6F_RIESKE" target="PLASTOCYANIN">
+      <start x="155.18" y="268.60" />
+      <end x="403.28" y="23.72" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc6" class="consumption" source="PLASTOCYANIN" target="PSI_FES">
+      <start x="403.28" y="23.72" />
+      <end x="266.39" y="376.04" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc7" class="consumption" source="PSI_FES" target="FERREDOXIN">
+      <start x="266.39" y="376.04" />
+      <end x="74.49" y="513.48" />
+      <glyph id="arc7__lbl" class="annotation">
+        <label text="1e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc8" class="consumption" source="FERREDOXIN" target="FNR">
+      <start x="74.49" y="513.48" />
+      <end x="257.48" y="513.48" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc9" class="consumption" source="FNR" target="NADPH_POOL">
+      <start x="257.48" y="513.48" />
+      <end x="429.77" y="513.48" />
+      <glyph id="arc9__lbl" class="annotation">
+        <label text="2e−" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc10" class="consumption" source="FERREDOXIN" target="PGR5_PGRL1">
+      <start x="74.49" y="513.48" />
+      <end x="527.78" y="268.60" />
+      <glyph id="arc10__lbl" class="annotation">
+        <label text="cyclic" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc11" class="consumption" source="PGR5_PGRL1" target="PLASTOQUINONE_POOL">
+      <start x="527.78" y="268.60" />
+      <end x="340.36" y="161.16" />
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">electron_transfer</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc12" class="modulation" source="PSII" target="THYLAKOID_ATP_SYNTHASE">
+      <start x="159.26" y="161.16" />
+      <end x="428.07" y="376.04" />
+      <glyph id="arc12__lbl" class="annotation">
+        <label text="H+" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc13" class="modulation" source="CYT_B6" target="THYLAKOID_ATP_SYNTHASE">
+      <start x="344.68" y="268.60" />
+      <end x="428.07" y="376.04" />
+      <glyph id="arc13__lbl" class="annotation">
+        <label text="H+" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">energy_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc14" class="stimulation" source="PSI_FES" target="PLASTID_ROS">
+      <start x="266.39" y="376.04" />
+      <end x="602.06" y="513.48" />
+      <glyph id="arc14__lbl" class="annotation">
+        <label text="Mehler" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc15" class="stimulation" source="PSII" target="PLASTID_ROS">
+      <start x="159.26" y="161.16" />
+      <end x="602.06" y="513.48" />
+      <glyph id="arc15__lbl" class="annotation">
+        <label text="1O2" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc16" class="modulation" source="PLASTID_ROS" target="FERREDOXIN">
+      <start x="602.06" y="513.48" />
+      <end x="74.49" y="513.48" />
+      <glyph id="arc16__lbl" class="annotation">
+        <label text="cluster damage" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">redox_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+    <arc id="arc17" class="modulation" source="NADPH_POOL" target="PLASTID_ROS">
+      <start x="429.77" y="513.48" />
+      <end x="602.06" y="513.48" />
+      <glyph id="arc17__lbl" class="annotation">
+        <label text="buffering" />
+      </glyph>
+      <extension>
+        <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">redox_feedback</qbo:edgeClass>
+      </extension>
+    </arc>
+  </map>
+</sbgn>
