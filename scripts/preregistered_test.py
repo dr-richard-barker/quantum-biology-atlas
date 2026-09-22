@@ -307,3 +307,37 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def minimum_detectable_or(
+    n_down: int, n_up: int, baseline_rate: float, n_sim: int = 4000, alpha: float = 0.05
+) -> dict:
+    """What odds ratio would this design have detected 80% of the time?
+
+    Reported because "p = 0.48, not significant" is uninterpretable on its own: it
+    could mean the effect is absent, or that the design could never have seen it.
+    This simulates the observed marginals at a range of true odds ratios and finds
+    where power reaches 80%. It is a prospective calculation on the realised design,
+    not post-hoc power on the observed effect, which would be circular.
+    """
+    import random
+    from scipy.stats import fisher_exact
+
+    rng = random.Random(20260922)
+    out = []
+    for true_or in (1.5, 2.0, 2.5, 3.0, 4.0, 5.0, 7.0, 10.0):
+        # Odds in the 'up' (reference) arm from the observed baseline rate.
+        odds_ref = baseline_rate / (1 - baseline_rate)
+        p_down = (odds_ref * true_or) / (1 + odds_ref * true_or)
+        hits = 0
+        for _ in range(n_sim):
+            a = sum(rng.random() < p_down for _ in range(n_down))
+            c = sum(rng.random() < baseline_rate for _ in range(n_up))
+            _, p = fisher_exact([[a, n_down - a], [c, n_up - c]], alternative="two-sided")
+            hits += p < alpha
+        power = hits / n_sim
+        out.append({"true_odds_ratio": true_or, "power": round(power, 3)})
+        if power >= 0.80:
+            break
+    detectable = next((r["true_odds_ratio"] for r in out if r["power"] >= 0.80), None)
+    return {"curve": out, "min_detectable_or_at_80pct_power": detectable}
