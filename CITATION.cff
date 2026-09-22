@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Quantum Biology Atlas: a cross-species ontology and SBGN pathway maps for quantum-biological processes"
+type: software
+authors:
+  - family-names: Barker
+    given-names: Richard
+    orcid: "https://orcid.org/0000-0001-5681-9857"
+    affiliation: "University of Wisconsin–Madison"
+repository-code: "https://github.com/dr-richard-barker/quantum-biology-atlas"
+url: "https://dr-richard-barker.github.io/quantum-biology-atlas/"
+abstract: >-
+  A cross-species ontology and SBGN-ML pathway-map toolkit for quantum-biological
+  processes. Separates what quantum chemistry an entity carries from how much is known
+  about its magnetic-field sensitivity, and refuses to record the latter without a
+  CrossRef-resolved DOI. Includes 10 identifier-bound maps, the QBO ontology
+  (83 entities), 42 verified references, cross-species
+  orthology projection, NASA OSDR data overlay, and a pre-registered statistical test
+  reported with its null result and power analysis.
+keywords:
+  - "quantum biology"
+  - "magnetobiology"
+  - "radical pair mechanism"
+  - "iron-sulfur clusters"
+  - "cryptochrome"
+  - "near-null magnetic field"
+  - "hypomagnetic field"
+  - "SBGN"
+  - "pathway visualization"
+  - "ontology"
+  - "Arabidopsis thaliana"
+  - "NASA OSDR"
+  - "space biology"
+  - "FAIR data"
+  - "electron transport chain"
+  - "orthology"
+license: CC-BY-4.0
+# The companion review is in preparation. No DOI is asserted for it, and no placeholder
+# is recorded, because a plausible-looking placeholder is how a fabricated citation
+# enters a bibliography and stays there.

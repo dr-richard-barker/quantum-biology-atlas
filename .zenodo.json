@@ -1,0 +1,55 @@
+{
+  "title": "Quantum Biology Atlas: a cross-species ontology and SBGN pathway maps for quantum-biological processes",
+  "upload_type": "software",
+  "description": "<p><strong>A cross-species ontology and SBGN pathway-map toolkit for\nquantum-biological processes.</strong> Companion software to a review of plant responses\nto near-null magnetic fields (Porterfield &amp; Barker, in preparation).</p>\n\n<p>The atlas separates two questions that are routinely conflated: what quantum chemistry\na molecular entity carries, and how much is actually known about its magnetic-field\nsensitivity. The first is structural and largely uncontroversial; the second is where the\nclaims live. An evidence tier that asserts a demonstrated or inferred field effect cannot\nvalidate without a DOI resolved against CrossRef, and the tier is rendered as a border\nstyle on every map, so a hypothesis looks provisional on the page.</p>\n\n<p>Contents: 10 identifier-bound pathway maps (126 annotated nodes,\n168 edges, 125 Arabidopsis loci) published as SBGN-ML\nProcess Description with quantum annotations in extension blocks; the QBO ontology\n(83 entities); an evidence base of 42 references, every one\nCrossRef-resolved and title-matched; a Python package for cross-species orthology\nprojection and NASA OSDR data overlay; and a pre-registered statistical test whose null\nresult and power analysis are reported in full.</p>\n\n<p>Node counts by evidence tier: T1 4, T2 31, T3 44, T4 47.\nThe maps are mostly tier T3 \u2014 a plausible physical route with no field measurement behind\nit \u2014 which is the finding rather than a defect: the near-null-field literature is\ndevelopmental and nutritional and has not yet measured a respiratory complex directly.</p>\n\n<p><strong>The companion review is in preparation and has no DOI.</strong> Please cite this\nsoftware by its own DOI and the review by URL until one is issued.</p>",
+  "creators": [
+    {
+      "name": "Barker, Richard",
+      "orcid": "0000-0001-5681-9857",
+      "affiliation": "University of Wisconsin\u2013Madison"
+    }
+  ],
+  "keywords": [
+    "quantum biology",
+    "magnetobiology",
+    "radical pair mechanism",
+    "iron-sulfur clusters",
+    "cryptochrome",
+    "near-null magnetic field",
+    "hypomagnetic field",
+    "SBGN",
+    "pathway visualization",
+    "ontology",
+    "Arabidopsis thaliana",
+    "NASA OSDR",
+    "space biology",
+    "FAIR data",
+    "electron transport chain",
+    "orthology"
+  ],
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/dr-richard-barker/quantum-biology-atlas",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://dr-richard-barker.github.io/quantum-biology-atlas/",
+      "relation": "isDocumentedBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/dr-richard-barker/SBGN-Pathway-viewer",
+      "relation": "isCompiledBy",
+      "scheme": "url"
+    },
+    {
+      "identifier": "https://github.com/dr-richard-barker/OSDR_X-species_V2",
+      "relation": "references",
+      "scheme": "url"
+    }
+  ],
+  "notes": "The companion review is in preparation and no DOI has been issued for it; no placeholder is recorded here deliberately. Code is MIT; the ontology, maps and evidence base are CC-BY-4.0."
+}
