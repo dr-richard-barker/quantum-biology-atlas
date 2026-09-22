@@ -60,27 +60,43 @@ a respiratory complex directly.
 
 ```
 ontology/
-  qbo-core.yaml              controlled vocabulary: tiers, nuclei, quantum classes,
-                             field regimes, edge classes
-  entities/*.yaml            the annotated entities
-  schema/entity.schema.json  JSON Schema enforcing the tier/DOI rule
+  qbo-core.yaml               controlled vocabulary: tiers, nuclei, quantum
+                              classes, field regimes, edge classes
+  entities/*.yaml             the annotated entities (7 files)
+  schema/entity.schema.json   JSON Schema enforcing the tier/DOI rule
 evidence/
-  references.yaml            42 references, every one CrossRef-resolved (see below)
+  references.yaml             42 references, every one CrossRef-resolved
 maps/
-  src/*.yaml                 declarative map sources — no coordinates anywhere
-  sbgn/*.sbgn                compiled SBGN-ML PD, QBO annotations in <extension>
-  svg/*.svg                  compiled standalone SVG, light + dark
+  src/*.yaml                  declarative map sources — no coordinates anywhere
+  sbgn/*.sbgn                 compiled SBGN-ML PD, QBO annotations in <extension>
+  svg/*.svg                   compiled standalone SVG, light + dark
+catalog/
+  manifest.json               the published catalogue
+  qbo/*.json                  per-map annotation sidecars
+results/
+  preregistered_test.json     machine-readable result + power curve
+  preregistered_test_report.md
+docs/                         generated GitHub Pages site (self-contained)
 src/qbio/
   ontology.py   load, validate and query QBO
   layout.py     measured-text layout — box sizes derive from text, never the reverse
   render.py     SVG emitter, Okabe-Ito, tier-as-border-channel
   sbgn.py       SBGN-ML PD emitter with the QBO annotation extension
   maps.py       map model and compiler
+  ortho.py      cross-species projection, two backbones, disagreement reported
+  osdr.py       NASA OSDR ingestion
+  project.py    join expression data onto map nodes
 scripts/
-  build_evidence_base.py     builds references.yaml from the manuscript bibliography
-  resolve_loci.py            resolves gene symbols to AGI loci via Ensembl Plants
+  build_evidence_base.py      builds references.yaml from the bibliography
+  resolve_loci.py             resolves gene symbols to AGI loci via Ensembl
+  build_catalog.py            builds catalog/ from the maps and ontology
+  build_site.py               builds docs/ from the catalog
+  preregistered_test.py       the pre-registered enrichment test
 tests/
-  legibility_probe.js        browser-side figure legibility assertions
+  test_ontology.py            schema, tiers, DOIs, loci (40 tests total)
+  test_maps.py                SBGN validity, no-synthetic-data guard
+  test_projection.py          orthology, OSDR parsing, projection refusals
+  legibility_probe.js         browser-side figure legibility assertions
 ```
 
 ### Maps
@@ -103,6 +119,21 @@ All ten are built. 126 nodes, 168 edges, 125 distinct Arabidopsis loci.
 QBM-09 and QBM-10 cover the two areas where the direct Arabidopsis evidence is
 strongest — mineral nutrition and flowering-time control — and neither has a figure
 in the manuscript.
+
+### Verification
+
+40 pytest tests, all passing. Four reach the network and are marked `network`
+(skip with `-m "not network"`); they are the point of several assertions, since a
+DOI that resolves only in a cached copy is not a verified DOI:
+
+```bash
+python3 -m pytest tests/ -q                 # everything, ~9 min
+python3 -m pytest tests/ -q -m "not network"  # offline, ~75 s
+```
+
+Figure legibility is asserted separately by `tests/legibility_probe.js`, which
+measures what a browser actually painted rather than re-running the compiler's
+arithmetic. All ten maps pass across 1,447 elements.
 
 ## Two findings from building it
 
