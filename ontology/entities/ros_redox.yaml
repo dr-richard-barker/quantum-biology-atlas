@@ -1,0 +1,184 @@
+# QBO entities — ROS production, scavenging and redox buffering.
+#
+# Backs QBM-07, and supplies the amplifier nodes that appear across the atlas.
+#
+# The conceptual point this map has to carry: ROS is where the review's argument
+# becomes testable. A weak-field effect on an electron-transfer branching ratio may
+# be far too small to measure as a rate change, but ROS signalling is threshold-like,
+# so the same small change can register as a transcriptional response. That is why
+# Parmagnani 2022's transcriptomic and metabolomic evidence is the most substantial
+# near-null-field dataset in the bibliography, and also why it cannot by itself
+# identify a mechanism — an amplifier reports that something moved upstream, not what.
+#
+# Locus resolution caught three more symbol collisions while this file was authored:
+# `CAT2` and `CAT3` both resolve to CATIONIC AMINO ACID TRANSPORTERS (AT1G58030,
+# AT5G36940), not catalases — the catalases are AT4G35090 and AT1G20620, verified by
+# direct id lookup. `KAT2` resolves to a potassium channel (AT4G18290), not the
+# peroxisomal 3-ketoacyl-CoA thiolase (AT2G33150, display name PKT3). The ontology
+# stores loci, never symbols, precisely because of cases like these.
+
+entities:
+
+  # ======================================================================
+  # Production
+  # ======================================================================
+  - id: QBO:SUPEROXIDE_DISMUTASES
+    label: "Superoxide dismutases (CSD1/2, MSD1, FSD1)"
+    kind: macromolecule
+    compartment: cell
+    description: >
+      Cu/Zn, Mn and Fe superoxide dismutases converting superoxide to hydrogen
+      peroxide in the cytosol, chloroplast and mitochondrial matrix respectively.
+    xref:
+      agi: [AT1G08830, AT2G28190, AT3G10920, AT4G25100]
+      ec: ["1.15.1.1"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Context rather than target. The metal centres are paramagnetic, but dismutation
+      is a fast two-step one-electron cycle at a single metal with no correlated
+      partner, so there is no radical pair to act on. Included because SOD isoform
+      abundance sets where superoxide is converted, and therefore which compartment
+      registers an upstream change.
+
+  - id: QBO:ASCORBATE_PEROXIDASE
+    label: "Ascorbate peroxidase (APX1, APX2)"
+    kind: macromolecule
+    compartment: cytosol
+    description: >
+      Heme peroxidases reducing H2O2 at the expense of ascorbate; the first step of
+      the ascorbate-glutathione cycle.
+    xref:
+      agi: [AT1G07890, AT3G09640]
+      ec: ["1.11.1.11"]
+    quantum_class: [heme_electron_carrier]
+    nuclei: ["57Fe", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Catalysis proceeds through Compound I, an oxoferryl porphyrin pi-cation radical —
+      a genuine protein-based radical intermediate, and one of the few in the redox
+      network rather than the electron transport chains.
+    caveat: >
+      The porphyrin radical is strongly exchange-coupled to the ferryl iron and
+      extremely short-lived. Structurally it is a radical; whether it could ever be a
+      spin-correlated pair with a geomagnetically relevant lifetime is untested and
+      doubtful.
+
+  - id: QBO:CATALASE
+    label: "Catalase (CAT1, CAT2, CAT3)"
+    kind: macromolecule
+    compartment: peroxisome
+    description: >
+      Heme enzymes dismutating H2O2 to water and oxygen, dominant in the peroxisome
+      where beta-oxidation generates peroxide by design.
+    xref:
+      agi: [AT1G20630, AT4G35090, AT1G20620]
+      ec: ["1.11.1.6"]
+    quantum_class: [heme_electron_carrier]
+    nuclei: ["57Fe", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Like ascorbate peroxidase, catalase cycles through a Compound I porphyrin
+      radical. Its relevance here is positional: it is the enzyme standing between
+      germination beta-oxidation and oxidative damage.
+    note: >
+      Loci verified by direct id lookup after the symbols CAT2 and CAT3 were found to
+      resolve to cationic amino acid transporters — see the file header.
+
+  # ======================================================================
+  # The ascorbate-glutathione cycle
+  # ======================================================================
+  - id: QBO:ASC_GSH_CYCLE
+    label: "Ascorbate-glutathione cycle (GR1, DHAR1, MDAR1)"
+    kind: complex
+    compartment: cytosol
+    description: >
+      Glutathione reductase, dehydroascorbate reductase and monodehydroascorbate
+      reductase, regenerating ascorbate and glutathione at the cost of NAD(P)H.
+    xref:
+      agi: [AT3G24170, AT1G19570, AT3G52880]
+      ec: ["1.8.1.7", "1.8.5.1", "1.6.5.4"]
+    quantum_class: [flavin_semiquinone]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Glutathione reductase and monodehydroascorbate reductase are FAD enzymes, so
+      the same flavin semiquinone chemistry applies here as at complex I and FNR.
+      MDAR is notable for acting on a stable organic radical — monodehydroascorbate —
+      as its actual substrate.
+    caveat: >
+      The monodehydroascorbate radical is free in solution rather than held in a
+      protein pocket, so it has no correlated partner and tumbles freely. It is a
+      radical, not a radical pair.
+
+  - id: QBO:PEROXIREDOXIN_TRX
+    label: "Peroxiredoxin / thioredoxin system (PRXIIF)"
+    kind: complex
+    compartment: mitochondrial_matrix
+    description: >
+      Thiol-based peroxide reduction, regenerated by thioredoxin. The mitochondrial
+      matrix's main peroxide sink.
+    xref:
+      agi: [AT3G06050]
+      ec: ["1.11.1.24"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Purely two-electron thiol chemistry with no radical intermediate and no metal —
+      the clearest example on this map of a redox enzyme that offers no spin route at
+      all. Drawn deliberately, so the map does not imply that "redox" and
+      "magnetically addressable" are the same thing.
+
+  - id: QBO:REDOX_POOLS
+    label: "Ascorbate / glutathione / NAD(P)H pools"
+    kind: simple_chemical
+    compartment: cell
+    description: >
+      The cell's redox buffers. Their ratios, not their totals, are what a
+      near-null-field metabolomics experiment should report.
+    xref:
+      chebi: ["CHEBI:29073", "CHEBI:57925", "CHEBI:57783"]
+      kegg: ["C00072", "C00051", "C00005"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:ROS_TRANSCRIPTIONAL_RESPONSE
+    label: "ROS-responsive transcriptional programme"
+    kind: process
+    compartment: nucleus
+    description: >
+      The downstream gene-expression response to a shift in redox poise — the layer
+      at which the most substantial near-null-field dataset was actually measured.
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      This entity carries demonstrated near-null-field evidence but NO proposed
+      quantum route, and is classed structural_context to say so explicitly. It is
+      the amplifier's output: threshold-like signalling turns an upstream change too
+      small to measure directly into a transcriptional response. That sensitivity is
+      what makes it the best-evidenced node in the atlas and simultaneously a poor
+      discriminator — it reports that something moved upstream, never what.
+    evidence:
+      - ref: Parmagnani2022
+        claim: >
+          Transcriptomics and metabolomics of ROS modulation in near-null magnetic
+          field-induced Arabidopsis: field reduction alters ROS-associated
+          transcriptional and metabolic programmes.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+      - ref: Zsigmond2008
+        claim: >
+          Arabidopsis PPR40 connects abiotic stress responses to mitochondrial electron
+          transport, establishing a route from respiratory state to stress signalling.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: altered

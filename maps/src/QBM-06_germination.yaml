@@ -1,0 +1,105 @@
+id: QBM-06
+title: Seed germination before photosynthesis
+subtitle: >-
+  The review's highest-leverage window — and the experiment nobody has run
+derived_from: >-
+  Figure 6 of Porterfield & Barker, "Plant Responses to Near-Null Magnetic Fields" —
+  expanded to the reserve-mobilisation route and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  Before chloroplasts mature, an oilseed embryo is entirely heterotrophic: stored
+  triacylglycerol must be mobilised, run through peroxisomal beta-oxidation and the
+  glyoxylate cycle, and converted to ATP by mitochondrial respiration. That makes the
+  first 0-72 hours after imbibition the window where a respiratory or Fe/S lesion would
+  have most leverage, and the reason Arabidopsis and Brassica are comparable systems
+  for the review's argument. The original Figure 6 carried a summary table of
+  "normalized trend ranges" for germination rate, radicle length, ATP status and
+  seedling vigour; those were qualitative cross-study impressions rather than measured
+  values, so no number from them is reproduced here. The map shows the route and the
+  endpoints; any quantity has to arrive from projected data. Every node on this map is
+  T3 or T4, which is the honest state of the field: the review's central proposal is a
+  geomagnetic-versus-near-null imbibition time course, and no such experiment exists in
+  its bibliography.
+
+lanes:
+  - id: reserves
+    compartment: peroxisome
+    node_width: 180
+    nodes: [TAG_LIPASE, BETA_OXIDATION, GLYOXYLATE_CYCLE]
+
+  - id: respiration
+    compartment: mitochondrial_matrix
+    node_width: 180
+    nodes: [ACETYL_COA, COMPLEX_I, COMPLEX_IV, ACONITASE]
+
+  - id: energy
+    compartment: cell
+    node_width: 190
+    nodes: [GERMINATION_ATP, MITO_SUPEROXIDE, CYTOCHROME_C]
+
+  - id: outcome
+    compartment: organism
+    node_width: 220
+    nodes: [RADICLE_EMERGENCE]
+
+nodes:
+  - id: TAG_LIPASE
+    qbo: QBO:TAG_LIPASE
+    label: "TAG lipase (SDP1)"
+    units: ["oil body"]
+  - id: BETA_OXIDATION
+    qbo: QBO:BETA_OXIDATION
+    label: "Beta-oxidation"
+    units: ["H2O2 by design"]
+  - id: GLYOXYLATE_CYCLE
+    qbo: QBO:GLYOXYLATE_CYCLE
+    label: "Glyoxylate cycle"
+    units: ["ICL / MLS"]
+  - id: ACETYL_COA
+    qbo: QBO:ACETYL_COA
+  - id: COMPLEX_I
+    qbo: QBO:COMPLEX_I
+    label: "Complex I"
+    units: ["FMN", "8 × Fe/S"]
+  - id: COMPLEX_IV
+    qbo: QBO:COMPLEX_IV
+    label: "Complex IV (COX)"
+    units: ["heme a3 / CuB"]
+  - id: ACONITASE
+    qbo: QBO:ACONITASE
+    label: "Aconitase"
+    units: ["4Fe-4S sentinel"]
+  - id: GERMINATION_ATP
+    qbo: QBO:GERMINATION_ATP
+    label: "ATP / ADP ratio"
+    units: ["the missing measurement"]
+  - id: MITO_SUPEROXIDE
+    qbo: QBO:MITO_SUPEROXIDE
+    label: "ROS signalling window"
+    units: ["too little / too much"]
+  - id: CYTOCHROME_C
+    qbo: QBO:CYTOCHROME_C
+    label: "Cytochrome c"
+    units: ["→ ABI4 / ABA"]
+  - id: RADICLE_EMERGENCE
+    qbo: QBO:RADICLE_EMERGENCE
+    label: "Radicle emergence"
+    units: ["0–72 h endpoint"]
+
+edges:
+  - [TAG_LIPASE, BETA_OXIDATION, catalysis, "fatty acids"]
+  - [BETA_OXIDATION, GLYOXYLATE_CYCLE, electron_transfer, ""]
+  - [BETA_OXIDATION, MITO_SUPEROXIDE, direct_influence, "H2O2"]
+  - [GLYOXYLATE_CYCLE, ACETYL_COA, electron_transfer, ""]
+  - [ACETYL_COA, ACONITASE, indirect_influence, "via citrate"]
+  - [ACETYL_COA, COMPLEX_I, indirect_influence, "via NADH"]
+  - [COMPLEX_I, COMPLEX_IV, electron_transfer, ""]
+  - [COMPLEX_IV, GERMINATION_ATP, energy_feedback, ""]
+  - [COMPLEX_I, MITO_SUPEROXIDE, direct_influence, "leak"]
+  - [COMPLEX_IV, CYTOCHROME_C, electron_transfer, ""]
+  - [CYTOCHROME_C, RADICLE_EMERGENCE, hormonal_feedback, "ABI4 / ABA"]
+  - [GERMINATION_ATP, RADICLE_EMERGENCE, energy_feedback, "sets the pace"]
+  - [MITO_SUPEROXIDE, RADICLE_EMERGENCE, redox_feedback, "signalling window"]
+  - [MITO_SUPEROXIDE, ACONITASE, redox_feedback, "cluster damage"]
+  - [ACONITASE, GERMINATION_ATP, indirect_influence, "TCA flux"]

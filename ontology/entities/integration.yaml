@@ -1,0 +1,330 @@
+# QBO entities — the magnetic environment, nutrient physiology, hormone and
+# circadian integration, and the developmental outputs.
+#
+# Backs QBM-08 (the integrated model), QBM-09 (Fe uptake and S assimilation) and
+# QBM-10 (hormone and circadian integration).
+#
+# QBM-08 is the flagship and the one that has to be most careful. The review is
+# explicit that its Figure 7 is "designed for hypothesis generation and experimental
+# planning rather than as a proven causal network", and the entities below preserve
+# that: the input perturbation and the developmental outputs carry real evidence,
+# while the arrows between them are a proposed architecture, not a demonstrated one.
+#
+# QBM-09 and QBM-10 are the two maps the review motivates but does not draw. They
+# exist because the Arabidopsis near-null-field literature is overwhelmingly about
+# mineral nutrition (Narayana, Islam, Vigani) and about flowering-time control
+# (Xu, Agliassa) — the two areas with the most direct evidence in the whole
+# bibliography, and neither has a figure in the paper.
+
+entities:
+
+  # ======================================================================
+  # Input
+  # ======================================================================
+  - id: QBO:NNMF_INPUT
+    label: "Near-null magnetic field (< 1 uT)"
+    kind: perturbation
+    compartment: environment
+    description: >
+      The experimental condition: the local geomagnetic field actively compensated
+      or shielded to nanotesla-to-low-microtesla values.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      The perturbation itself, not a target. Recorded here so every map can point at
+      a single declared input rather than each restating it. The review's own
+      reporting standard applies to any experiment using this node: vector
+      components, total intensity, coil or shield configuration, temporal noise,
+      sham controls, temperature, vibration, light spectrum and the magnetic history
+      of the seed all have to be stated, or the condition is not reproducible.
+
+  - id: QBO:GMF_REFERENCE
+    label: "Geomagnetic field (25-65 uT)"
+    kind: perturbation
+    compartment: environment
+    description: The ambient terrestrial field — the reference condition, not a treatment.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  # ======================================================================
+  # Nutrient physiology — where the strongest Arabidopsis evidence lives
+  # ======================================================================
+  - id: QBO:FE_UPTAKE
+    label: "Root iron uptake (FRO2, IRT1, FIT)"
+    kind: complex
+    compartment: plasma_membrane
+    description: >
+      Strategy I iron acquisition: ferric chelate reductase FRO2 reduces Fe(III) at
+      the root surface, IRT1 transports Fe(II), and the bHLH transcription factor FIT
+      coordinates both.
+    xref:
+      agi: [AT1G01580, AT4G19690, AT2G28160, AT3G56970, AT3G56980, AT1G23020]
+      go_component: [GO:0005886]
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      Carries demonstrated near-null-field evidence and NO proposed quantum route,
+      and is classed structural_context to say so. Islam et al. measured reduced root
+      metal reductase activity under field reduction — a real, reproducible effect
+      with no mechanism attached. FRO2 is a flavocytochrome with FAD and two hemes,
+      so a spin route could be argued; the review does not argue it, and no
+      measurement supports it, so it is not claimed here.
+    evidence:
+      - ref: Islam2020
+        claim: >
+          The geomagnetic field contributes to efficient iron uptake in Arabidopsis;
+          near-null conditions affect root metal reductase activity.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        tissue: root
+      - ref: Narayana2018
+        claim: >
+          Near-null magnetic field conditions affect Arabidopsis root mineral nutrition.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+        tissue: root
+
+  - id: QBO:FE_STORAGE
+    label: "Iron storage and distribution (FER1/4, NAS4, NRAMP3/4)"
+    kind: macromolecule
+    compartment: cell
+    description: >
+      Ferritin storage, nicotianamine-mediated distribution and vacuolar remobilisation
+      — the buffering between uptake and the assembly systems on QBM-04.
+    xref:
+      agi: [AT5G01600, AT2G40300, AT1G56430, AT2G23150, AT5G67330, AT3G12750]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Ferritin holds a mineral iron core rather than a defined redox cofactor, so no
+      spin claim is made. On the map because seed ferritin is the iron source for the
+      first hours of germination, which links QBM-09 to QBM-06.
+
+  - id: QBO:S_ASSIMILATION
+    label: "Sulfate assimilation (SULTR, APS1, APR, SIR)"
+    kind: complex
+    compartment: chloroplast_stroma
+    description: >
+      Sulfate uptake and reduction to sulfide: transporters, ATP sulfurylase, APS
+      reductase and the Fe/S-containing sulfite reductase.
+    xref:
+      agi: [AT4G08620, AT1G78000, AT5G10180, AT3G22890, AT4G04610, AT1G62180, AT4G21990, AT5G04590]
+      ec: ["2.7.7.4", "1.8.4.9", "1.8.7.1"]
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      Sulfite reductase carries a siroheme-[4Fe-4S] cofactor and is ferredoxin-
+      dependent, so this pathway both consumes plastid reducing power and contains an
+      Fe/S centre. It also supplies the sulfide that every cluster on QBM-04 is built
+      from — a genuine feedback loop rather than a linear dependency.
+    evidence:
+      - ref: Vigani2021
+        claim: >
+          Field conditions modulate Fe-S interplay in Arabidopsis, most strongly under
+          combined iron and sulfur deficiency.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+
+  - id: QBO:CYSTEINE_SYNTHESIS
+    label: "Cysteine synthesis (SAT1, OASA1)"
+    kind: complex
+    compartment: cytosol
+    description: >
+      Serine acetyltransferase and O-acetylserine(thiol)lyase, producing the cysteine
+      that is the sulfur donor for Fe/S assembly.
+    xref:
+      agi: [AT1G55920, AT4G14880]
+      ec: ["2.3.1.30", "2.5.1.47"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      The link back to QBM-04: NFS1 and the SUF desulfurase both take their sulfur
+      from cysteine made here.
+
+  # ======================================================================
+  # Hormone and circadian integration
+  # ======================================================================
+  - id: QBO:GA_SIGNALLING
+    label: "Gibberellin signalling (GA3OX1, GA20OX1, RGA, GAI, RGL2)"
+    kind: complex
+    compartment: nucleus
+    description: >
+      GA biosynthesis and the DELLA repressors it degrades. Controls germination
+      potential and flowering time.
+    xref:
+      agi: [AT1G15550, AT4G25420, AT2G01570, AT1G14920, AT3G03450]
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      Demonstrated field evidence with no proposed quantum route. Xu et al. showed
+      gibberellins are involved in the near-null-field effect on flowering, which
+      makes this a real link in the causal chain — but GA signalling is
+      ubiquitin-proteasome chemistry with no radical or metal centre, so no mechanism
+      is claimed.
+    evidence:
+      - ref: Xu2017
+        claim: >
+          Gibberellins are involved in the effect of a near-null magnetic field on
+          Arabidopsis flowering.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+        developmental_stage: reproductive
+
+  - id: QBO:AUXIN_TRANSPORT
+    label: "Auxin transport and signalling (PIN1/2/3, AUX1, TIR1, ARF7)"
+    kind: complex
+    compartment: plasma_membrane
+    description: >
+      Polar auxin efflux carriers, influx carrier, receptor and response factor —
+      the machinery that sets root and shoot architecture.
+    xref:
+      agi: [AT1G73590, AT5G57090, AT1G70940, AT2G38120, AT3G62980, AT5G20730]
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      As with gibberellin: a demonstrated field effect with no proposed spin route.
+      Xu et al. showed auxin mediates near-null-field suppression of flowering.
+    evidence:
+      - ref: Xu2018
+        claim: >
+          Suppression of Arabidopsis flowering by a near-null magnetic field is mediated
+          by auxin.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
+      - ref: Xu2021
+        claim: >
+          A near-null magnetic field suppresses fruit growth in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
+
+  - id: QBO:CIRCADIAN_CLOCK
+    label: "Circadian clock (CCA1, LHY, TOC1, PRR5/7/9, GI, ELF4)"
+    kind: complex
+    compartment: nucleus
+    description: >
+      The transcriptional-translational oscillator gating light input and
+      photoperiodic flowering.
+    xref:
+      agi: [AT2G46830, AT1G01060, AT5G61380, AT5G24470, AT5G02810, AT2G46790, AT1G22770, AT2G40080]
+    quantum_class: [structural_context]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      No spin route of its own, and no direct field measurement on clock components in
+      the bibliography. It is on the map because cryptochrome is a clock input, so a
+      field effect at CRY would necessarily arrive here — and because a clock is a
+      gate, meaning the same perturbation can produce opposite outcomes depending on
+      when it is applied. That alone could explain some of the inconsistency in
+      near-null-field results, and it is testable.
+    caveat: >
+      This is the atlas's most speculative causal claim and is flagged as such. It is
+      offered as an experimental design consideration, not a finding.
+
+  - id: QBO:FLOWERING_REGULATORS
+    label: "Flowering regulators (CO, FT, FLC, SOC1)"
+    kind: complex
+    compartment: nucleus
+    description: >
+      The photoperiod and vernalisation integrators through which the clock and
+      cryptochrome set flowering time.
+    xref:
+      agi: [AT5G10140, AT2G45660]
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      Demonstrated field evidence, no mechanism claimed. Agliassa et al. reported
+      downregulation of flowering-related genes under field reduction below 100 nT,
+      which is a transcriptional readout rather than a spin-chemical one.
+    evidence:
+      - ref: Agliassa2018a
+        claim: >
+          Reduction of the geomagnetic field delays Arabidopsis flowering through
+          downregulation of flowering-related genes.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        field_uT: 0.1
+        direction: decrease
+        developmental_stage: reproductive
+
+  # ======================================================================
+  # Outputs
+  # ======================================================================
+  - id: QBO:REPRODUCTIVE_OUTPUT
+    label: "Reproductive output (siliques, seed yield)"
+    kind: phenotype
+    compartment: organism
+    description: >
+      Silique number, fruit growth and seed yield — the agronomic endpoint, and the
+      reason the review argues the question matters for crop support.
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      A phenotype with demonstrated field evidence and, necessarily, no quantum route
+      of its own. It is the accumulated consequence of everything upstream, which is
+      what makes it reproducible and also what makes it uninformative about mechanism.
+    evidence:
+      - ref: Xu2013
+        claim: >
+          Removal of the local geomagnetic field affects reproductive growth in
+          Arabidopsis, reducing silique number and seed yield.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
+      - ref: Xu2021
+        claim: >
+          Near-null magnetic field suppresses fruit growth in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
+
+  - id: QBO:PRIMARY_METABOLISM
+    label: "Primary metabolism"
+    kind: process
+    compartment: cell
+    description: >
+      ATP supply, NAD(P)H balance, carbon skeleton flux — the layer the review argues
+      has been overlooked in favour of photoreceptor signalling.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Deliberately T4 despite being the review's central thesis. That is the finding:
+      the metabolic route is argued, not demonstrated, and the map should say so
+      rather than borrow credibility from the developmental evidence beside it.
+
+  - id: QBO:BRASSICA_TRANSLATION
+    label: "Brassica crop translation"
+    kind: phenotype
+    compartment: organism
+    description: >
+      Seed vigour, oil mobilisation, chloroplast establishment and yield in
+      B. napus and B. oleracea.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Drawn as an explicit gap. The review is clear that direct near-null-field data
+      for Brassica is essentially absent and that Arabidopsis-derived mechanisms are
+      hypotheses requiring dedicated testing. This node exists so the map shows the
+      translational claim as untested rather than implying it.

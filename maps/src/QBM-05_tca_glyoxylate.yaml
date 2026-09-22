@@ -1,0 +1,104 @@
+id: QBM-05
+title: TCA cycle and the Fe/S-dependent steps
+subtitle: >-
+  Drawn as an actual cycle, so a lesion at aconitase or succinate dehydrogenase
+  throttles flux around the loop rather than stopping a line
+derived_from: >-
+  Figure 4 of Porterfield & Barker, "Plant Responses to Near-Null Magnetic Fields" —
+  redrawn as a closed cycle, expanded to gene level and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  The review's Figure 4 renders this as a linear chain from glucose to oxaloacetate with
+  no OAA-to-citrate closure, which the draft's own margin note flags. The closure
+  matters: it is what shows that the two Fe/S-dependent steps throttle flux around the
+  whole loop instead of interrupting a line. Aconitase and succinate dehydrogenase are
+  the review's sentinel nodes and are annotated once on QBM-01, referenced here rather
+  than re-declared, so one entity cannot carry different evidence on two maps. The
+  citrate-to-isocitrate ratio is the most direct available in-vivo proxy for Fe/S
+  cluster integrity and is worth measuring in any near-null-field metabolomics
+  experiment. Note that plant mitochondrial fumarase is a class-II enzyme with no Fe/S
+  cluster, unlike the class-I bacterial form it is sometimes confused with.
+
+lanes:
+  - id: entry
+    compartment: mitochondrial_matrix
+    node_width: 160
+    nodes: [ACETYL_COA, OXALOACETATE, MALATE_DH]
+
+  - id: fes_steps
+    compartment: mitochondrial_matrix
+    node_width: 185
+    nodes: [CITRATE_SYNTHASE, CITRATE, ACONITASE, ISOCITRATE]
+
+  - id: oxidative
+    compartment: mitochondrial_matrix
+    node_width: 180
+    nodes: [ISOCITRATE_DH, LIPOYL_SYNTHASE, COMPLEX_II, FUMARASE]
+
+  - id: readout
+    compartment: mitochondrial_matrix
+    node_width: 190
+    nodes: [NADH_POOL, MITO_SUPEROXIDE]
+
+nodes:
+  - id: ACETYL_COA
+    qbo: QBO:ACETYL_COA
+  - id: OXALOACETATE
+    qbo: QBO:OXALOACETATE
+  - id: MALATE_DH
+    qbo: QBO:MALATE_DH
+    label: "Malate dehydrogenase"
+  - id: CITRATE_SYNTHASE
+    qbo: QBO:CITRATE_SYNTHASE
+    label: "Citrate synthase"
+    units: ["closes the cycle"]
+  - id: CITRATE
+    qbo: QBO:CITRATE
+  - id: ACONITASE
+    qbo: QBO:ACONITASE
+    label: "Aconitase"
+    units: ["4Fe-4S sentinel"]
+  - id: ISOCITRATE
+    qbo: QBO:ISOCITRATE
+    units: ["cit/isocit = Fe/S proxy"]
+  - id: ISOCITRATE_DH
+    qbo: QBO:ISOCITRATE_DH
+    label: "Isocitrate dehydrogenase"
+  - id: LIPOYL_SYNTHASE
+    qbo: QBO:LIPOYL_SYNTHASE
+    label: "Lipoyl synthase"
+    units: ["radical SAM"]
+  - id: COMPLEX_II
+    qbo: QBO:COMPLEX_II
+    label: "SDH (complex II)"
+    units: ["FAD", "3 × Fe/S"]
+  - id: FUMARASE
+    qbo: QBO:FUMARASE
+    label: "Fumarase"
+    units: ["class II — no Fe/S"]
+  - id: NADH_POOL
+    qbo: QBO:NADH_POOL
+  - id: MITO_SUPEROXIDE
+    qbo: QBO:MITO_SUPEROXIDE
+    label: "Superoxide / H2O2"
+    units: ["signal amplifier"]
+
+edges:
+  - [ACETYL_COA, CITRATE_SYNTHASE, catalysis, ""]
+  - [OXALOACETATE, CITRATE_SYNTHASE, catalysis, ""]
+  - [CITRATE_SYNTHASE, CITRATE, electron_transfer, ""]
+  - [CITRATE, ACONITASE, catalysis, ""]
+  - [ACONITASE, ISOCITRATE, electron_transfer, ""]
+  - [ISOCITRATE, ISOCITRATE_DH, catalysis, ""]
+  - [ISOCITRATE_DH, NADH_POOL, electron_transfer, "NADH"]
+  - [ISOCITRATE_DH, COMPLEX_II, indirect_influence, "via 2-OG, succinyl-CoA"]
+  - [COMPLEX_II, FUMARASE, electron_transfer, "fumarate"]
+  - [FUMARASE, MALATE_DH, electron_transfer, "malate"]
+  - [MALATE_DH, OXALOACETATE, electron_transfer, "cycle closes"]
+  - [MALATE_DH, NADH_POOL, electron_transfer, "NADH"]
+  - [COMPLEX_II, NADH_POOL, indirect_influence, "FADH2"]
+  - [LIPOYL_SYNTHASE, ISOCITRATE_DH, cofactor_insertion, "lipoylates 2-OGDH"]
+  - [MITO_SUPEROXIDE, ACONITASE, redox_feedback, "cluster damage"]
+  - [MITO_SUPEROXIDE, LIPOYL_SYNTHASE, redox_feedback, ""]
+  - [COMPLEX_II, MITO_SUPEROXIDE, direct_influence, "leak"]

@@ -6,3 +6,4 @@ data/manuscript_text.txt
 .ortho_cache/
 .osdr_cache/
 data/external/
+maps/svg/_probe_all.svg

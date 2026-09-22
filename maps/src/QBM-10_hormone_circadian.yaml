@@ -1,0 +1,111 @@
+id: QBM-10
+title: Hormone and circadian integration of the flowering response
+subtitle: >-
+  How a photoreceptor effect becomes a phenotype — and why timing may explain the
+  inconsistency in the literature
+derived_from: >-
+  Motivated by section 8 and the Xu 2012/2017/2018/2021 and Agliassa 2018 evidence in
+  Porterfield & Barker, "Plant Responses to Near-Null Magnetic Fields" — no
+  corresponding figure exists in the manuscript
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  The second map the review motivates but does not draw, covering the other area where
+  direct Arabidopsis evidence is strongest. Delayed flowering is the most reproducible
+  near-null-field phenotype in the whole literature, and separate studies have
+  implicated cryptochrome, gibberellin and auxin in producing it. Drawn together, the
+  route from a photoreceptor to a phenotype becomes concrete and testable with existing
+  mutants — which is what the review's call for cry1 cry2, phytochrome and hormone
+  genetics amounts to. The clock is the map's most speculative element and is marked
+  T3: no field measurement on clock components exists in the bibliography. It is drawn
+  because a clock is a gate, so the same perturbation applied at different times can
+  produce opposite outcomes — which could explain some of the inconsistency across
+  near-null-field studies, and is testable rather than merely plausible. That is offered
+  as an experimental design consideration, not a finding.
+
+lanes:
+  - id: perception
+    compartment: nucleus
+    node_width: 180
+    nodes: [CRY1, CRY2, PHYB]
+
+  - id: gating
+    compartment: nucleus
+    node_width: 195
+    nodes: [SINGLET_TRIPLET, CIRCADIAN_CLOCK]
+
+  - id: hormones
+    compartment: cell
+    node_width: 190
+    nodes: [GA_SIGNALLING, AUXIN_TRANSPORT]
+
+  - id: integrators
+    compartment: nucleus
+    node_width: 205
+    nodes: [FLOWERING_REGULATORS, COP1_SPA]
+
+  - id: outputs
+    compartment: organism
+    node_width: 195
+    nodes: [FLOWERING_OUTPUT, REPRODUCTIVE_OUTPUT]
+
+nodes:
+  - id: CRY1
+    qbo: QBO:CRY1
+    label: "Cryptochrome 1"
+    units: ["FAD radical pair"]
+  - id: CRY2
+    qbo: QBO:CRY2
+    label: "Cryptochrome 2"
+    units: ["photoperiod"]
+  - id: PHYB
+    qbo: QBO:PHYB
+    label: "Phytochrome B"
+    units: ["no spin route"]
+  - id: SINGLET_TRIPLET
+    qbo: QBO:SINGLET_TRIPLET
+    label: "Singlet ⇄ triplet mixing"
+  - id: CIRCADIAN_CLOCK
+    qbo: QBO:CIRCADIAN_CLOCK
+    label: "Circadian clock"
+    units: ["a gate — timing matters"]
+  - id: GA_SIGNALLING
+    qbo: QBO:GA_SIGNALLING
+    label: "Gibberellin signalling"
+    units: ["Xu 2017"]
+  - id: AUXIN_TRANSPORT
+    qbo: QBO:AUXIN_TRANSPORT
+    label: "Auxin transport"
+    units: ["Xu 2018"]
+  - id: FLOWERING_REGULATORS
+    qbo: QBO:FLOWERING_REGULATORS
+    label: "CO / FT / FLC / SOC1"
+    units: ["Agliassa 2018a"]
+  - id: COP1_SPA
+    qbo: QBO:COP1_SPA
+    label: "COP1 / SPA complex"
+  - id: FLOWERING_OUTPUT
+    qbo: QBO:FLOWERING_OUTPUT
+    label: "Flowering time"
+    units: ["delayed under NNMF"]
+  - id: REPRODUCTIVE_OUTPUT
+    qbo: QBO:REPRODUCTIVE_OUTPUT
+    label: "Siliques / seed yield"
+    units: ["reduced under NNMF"]
+
+edges:
+  - [CRY1, SINGLET_TRIPLET, direct_influence, ""]
+  - [CRY2, SINGLET_TRIPLET, direct_influence, ""]
+  - [SINGLET_TRIPLET, COP1_SPA, direct_influence, "signalling yield"]
+  - [SINGLET_TRIPLET, CIRCADIAN_CLOCK, circadian_feedback, "CRY is a clock input"]
+  - [CRY1, COP1_SPA, inhibition, ""]
+  - [CRY2, COP1_SPA, inhibition, ""]
+  - [PHYB, COP1_SPA, indirect_influence, ""]
+  - [COP1_SPA, FLOWERING_REGULATORS, inhibition, "degrades CO"]
+  - [CIRCADIAN_CLOCK, FLOWERING_REGULATORS, circadian_feedback, "photoperiod"]
+  - [GA_SIGNALLING, FLOWERING_REGULATORS, hormonal_feedback, ""]
+  - [AUXIN_TRANSPORT, FLOWERING_REGULATORS, hormonal_feedback, ""]
+  - [CIRCADIAN_CLOCK, GA_SIGNALLING, circadian_feedback, ""]
+  - [FLOWERING_REGULATORS, FLOWERING_OUTPUT, direct_influence, ""]
+  - [FLOWERING_OUTPUT, REPRODUCTIVE_OUTPUT, direct_influence, ""]
+  - [AUXIN_TRANSPORT, REPRODUCTIVE_OUTPUT, hormonal_feedback, "fruit growth"]

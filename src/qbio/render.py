@@ -29,6 +29,7 @@ from .layout import (
     LaidOutNode,
     edge_anchors,
     measure,
+    text_block,
 )
 
 # Okabe-Ito, the portfolio's standing palette.
@@ -451,11 +452,26 @@ def document(
     was empty so it looked fine there; QBM-03's is not, and the legend landed on a
     compartment label. Reserving the space makes that impossible on any map.
     """
-    header_h = 64.0 + (legend_h + 10.0 if legend else 0.0)
+    # Title and subtitle are WRAPPED against the page width and the header is sized
+    # from the resulting line count. They used to be single unwrapped lines, which fit
+    # on QBM-01 and ran off the right edge of the narrower QBM-02 — the same class of
+    # bug as an unwrapped caption, just at the top of the page.
+    page_w_provisional = max(canvas.w, 560.0)
+    title_lines, _, _ = text_block(title, TITLE_SIZE, page_w_provisional - 32, weight="700")
+    subtitle_lines, _, _ = (
+        text_block(subtitle, SUBTITLE_SIZE, page_w_provisional - 32) if subtitle else ([], 0.0, 0.0)
+    )
+    text_header = (
+        14.0
+        + len(title_lines) * TITLE_SIZE * LINE_SPACING
+        + (len(subtitle_lines) * SUBTITLE_SIZE * LINE_SPACING + 6.0 if subtitle_lines else 0.0)
+        + 12.0
+    )
+    header_h = text_header + (legend_h + 10.0 if legend else 0.0)
     # Wrap the caption against the final canvas width, then take the footer height
     # from the number of lines that actually resulted — sizing the footer from an
     # estimate is how a caption ends up running off the bottom of the image.
-    total_w = max(canvas.w, 560.0)
+    total_w = page_w_provisional
     caption_lines, _, _ = _caption_block(caption, total_w - 32)
     footer_h = len(caption_lines) * CAPTION_SIZE * LINE_SPACING + 34.0
     total_h = canvas.h + header_h + footer_h
@@ -467,13 +483,22 @@ def document(
         f"<style>{_stylesheet()}</style>",
         _defs(),
         f'<rect class="qbm-canvas" x="0" y="0" width="{total_w:.2f}" height="{total_h:.2f}"/>',
-        f'<text class="qbm-title" x="16" y="30">{esc(title)}</text>',
-        f'<text class="qbm-subtitle" x="16" y="50">{esc(subtitle)}</text>',
         f'<g transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
     ]
+
+    hy = 14.0 + TITLE_SIZE * 0.86
+    for line in title_lines:
+        parts.insert(-1, f'<text class="qbm-title" x="16" y="{hy:.2f}">{esc(line)}</text>')
+        hy += TITLE_SIZE * LINE_SPACING
+    if subtitle_lines:
+        hy += 2.0
+        for line in subtitle_lines:
+            parts.insert(-1, f'<text class="qbm-subtitle" x="16" y="{hy:.2f}">{esc(line)}</text>')
+            hy += SUBTITLE_SIZE * LINE_SPACING
     if legend:
-        # Inside the reserved header band, above the drawing — never over it.
-        parts.append(f'<g transform="translate(0,{72.0:.2f})">{legend}</g>')
+        # Inside the reserved header band, below the wrapped title block and above the
+        # drawing — so it can collide with neither.
+        parts.append(f'<g transform="translate(0,{text_header + 8.0:.2f})">{legend}</g>')
 
     y = canvas.h + header_h + 18.0
     for line in caption_lines:

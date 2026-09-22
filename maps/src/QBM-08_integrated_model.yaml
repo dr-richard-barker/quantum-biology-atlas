@@ -1,0 +1,153 @@
+id: QBM-08
+title: From magnetic environment to plant phenotype
+subtitle: >-
+  The review's integrated model — an architecture for designing experiments, not a
+  demonstrated causal network
+derived_from: >-
+  Figure 7 of Porterfield & Barker, "Plant Responses to Near-Null Magnetic Fields" —
+  expanded and tier-annotated
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  The flagship map, and the one that has to be read most carefully. The review states
+  that its Figure 7 is designed for hypothesis generation and experimental planning
+  rather than as a proven causal network, and the tiers here preserve that distinction:
+  the input perturbation and the developmental outputs carry real evidence, while the
+  molecular route between them does not. Read the border styles from left to right and
+  the shape of the field's problem is visible — the evidence is concentrated at the two
+  ends, on the perturbation and on the phenotypes, while the middle, where the
+  mechanism would have to live, is almost entirely dashed. Primary metabolism, the
+  review's central thesis, is drawn as T4 on purpose: the metabolic route is argued
+  rather than demonstrated, and the map should not let it borrow credibility from the
+  developmental evidence beside it. The model is explicitly modular — cryptochrome may
+  dominate in blue-light-grown seedlings, mitochondria in dark-imbibed seeds, plastids
+  in greening tissue, and nutrient uptake in roots — so a single phenotype may be
+  produced by different weightings of the same components depending on tissue, stage
+  and light regime.
+
+lanes:
+  - id: input
+    compartment: environment
+    node_width: 195
+    nodes: [NNMF_INPUT, GMF_REFERENCE]
+
+  - id: molecular
+    compartment: cell
+    node_width: 175
+    nodes: [CRY1, COMPLEX_I, RIESKE_FES, PSI_FES, FE_SUPPLY]
+
+  - id: cellular
+    compartment: cell
+    node_width: 180
+    nodes: [SINGLET_TRIPLET, FES_CLIENTS, MITO_SUPEROXIDE, PRIMARY_METABOLISM]
+
+  - id: signalling
+    compartment: nucleus
+    node_width: 185
+    nodes: [ROS_TRANSCRIPTIONAL_RESPONSE, GA_SIGNALLING, AUXIN_TRANSPORT, CIRCADIAN_CLOCK]
+
+  - id: outputs
+    compartment: organism
+    node_width: 190
+    nodes: [RADICLE_EMERGENCE, FLOWERING_OUTPUT, REPRODUCTIVE_OUTPUT, BRASSICA_TRANSLATION]
+
+nodes:
+  - id: NNMF_INPUT
+    qbo: QBO:NNMF_INPUT
+    label: "Near-null field (< 1 uT)"
+    units: ["report geometry + noise"]
+  - id: GMF_REFERENCE
+    qbo: QBO:GMF_REFERENCE
+    label: "Geomagnetic field"
+    units: ["reference, not treatment"]
+  - id: CRY1
+    qbo: QBO:CRY1
+    label: "Cryptochrome"
+    units: ["the only T1"]
+  - id: COMPLEX_I
+    qbo: QBO:COMPLEX_I
+    label: "Respiratory complexes"
+    units: ["FMN + Fe/S"]
+  - id: RIESKE_FES
+    qbo: QBO:RIESKE_FES
+    label: "Rieske centres"
+    units: ["2Fe-2S"]
+  - id: PSI_FES
+    qbo: QBO:PSI_FES
+    label: "Photosystem I Fe/S"
+    units: ["spin-correlated pair"]
+  - id: FE_SUPPLY
+    qbo: QBO:FE_SUPPLY
+    label: "Fe / S supply"
+    units: ["evidence, no mechanism"]
+  - id: SINGLET_TRIPLET
+    qbo: QBO:SINGLET_TRIPLET
+    label: "Singlet ⇄ triplet mixing"
+    units: ["needs ~us lifetime"]
+  - id: FES_CLIENTS
+    qbo: QBO:FES_CLIENTS
+    label: "Fe/S client proteins"
+  - id: MITO_SUPEROXIDE
+    qbo: QBO:MITO_SUPEROXIDE
+    label: "ROS homeostasis"
+    units: ["amplifier"]
+  - id: PRIMARY_METABOLISM
+    qbo: QBO:PRIMARY_METABOLISM
+    label: "Primary metabolism"
+    units: ["the thesis — still T4"]
+  - id: ROS_TRANSCRIPTIONAL_RESPONSE
+    qbo: QBO:ROS_TRANSCRIPTIONAL_RESPONSE
+    label: "ROS-responsive transcription"
+  - id: GA_SIGNALLING
+    qbo: QBO:GA_SIGNALLING
+    label: "Gibberellin signalling"
+  - id: AUXIN_TRANSPORT
+    qbo: QBO:AUXIN_TRANSPORT
+    label: "Auxin transport"
+  - id: CIRCADIAN_CLOCK
+    qbo: QBO:CIRCADIAN_CLOCK
+    label: "Circadian clock"
+    units: ["a gate — timing matters"]
+  - id: RADICLE_EMERGENCE
+    qbo: QBO:RADICLE_EMERGENCE
+    label: "Germination"
+  - id: FLOWERING_OUTPUT
+    qbo: QBO:FLOWERING_OUTPUT
+    label: "Flowering time"
+    units: ["most reproducible"]
+  - id: REPRODUCTIVE_OUTPUT
+    qbo: QBO:REPRODUCTIVE_OUTPUT
+    label: "Seed yield"
+  - id: BRASSICA_TRANSLATION
+    qbo: QBO:BRASSICA_TRANSLATION
+    label: "Brassica translation"
+    units: ["untested gap"]
+
+edges:
+  - [NNMF_INPUT, CRY1, direct_influence, ""]
+  - [NNMF_INPUT, COMPLEX_I, direct_influence, "proposed"]
+  - [NNMF_INPUT, RIESKE_FES, direct_influence, "proposed"]
+  - [NNMF_INPUT, PSI_FES, direct_influence, "proposed"]
+  - [NNMF_INPUT, FE_SUPPLY, direct_influence, "observed"]
+  - [GMF_REFERENCE, NNMF_INPUT, indirect_influence, "compensated"]
+  - [CRY1, SINGLET_TRIPLET, direct_influence, ""]
+  - [COMPLEX_I, MITO_SUPEROXIDE, direct_influence, ""]
+  - [RIESKE_FES, MITO_SUPEROXIDE, direct_influence, ""]
+  - [PSI_FES, MITO_SUPEROXIDE, direct_influence, ""]
+  - [FE_SUPPLY, FES_CLIENTS, cofactor_insertion, ""]
+  - [FES_CLIENTS, PRIMARY_METABOLISM, direct_influence, ""]
+  - [MITO_SUPEROXIDE, PRIMARY_METABOLISM, redox_feedback, ""]
+  - [SINGLET_TRIPLET, ROS_TRANSCRIPTIONAL_RESPONSE, indirect_influence, ""]
+  - [MITO_SUPEROXIDE, ROS_TRANSCRIPTIONAL_RESPONSE, direct_influence, "threshold"]
+  - [PRIMARY_METABOLISM, GA_SIGNALLING, energy_feedback, ""]
+  - [PRIMARY_METABOLISM, AUXIN_TRANSPORT, energy_feedback, ""]
+  - [SINGLET_TRIPLET, CIRCADIAN_CLOCK, indirect_influence, "CRY is a clock input"]
+  - [PRIMARY_METABOLISM, RADICLE_EMERGENCE, energy_feedback, "ATP sets the pace"]
+  - [GA_SIGNALLING, RADICLE_EMERGENCE, hormonal_feedback, ""]
+  - [GA_SIGNALLING, FLOWERING_OUTPUT, hormonal_feedback, ""]
+  - [AUXIN_TRANSPORT, FLOWERING_OUTPUT, hormonal_feedback, ""]
+  - [CIRCADIAN_CLOCK, FLOWERING_OUTPUT, circadian_feedback, "photoperiod"]
+  - [ROS_TRANSCRIPTIONAL_RESPONSE, REPRODUCTIVE_OUTPUT, indirect_influence, ""]
+  - [FLOWERING_OUTPUT, REPRODUCTIVE_OUTPUT, direct_influence, ""]
+  - [RADICLE_EMERGENCE, BRASSICA_TRANSLATION, indirect_influence, "untested"]
+  - [REPRODUCTIVE_OUTPUT, BRASSICA_TRANSLATION, indirect_influence, "untested"]

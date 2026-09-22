@@ -152,6 +152,8 @@ entities:
     description: >
       NifU-like scaffold and the [4Fe-4S] carrier required for photosystem I
       assembly.
+    xref:
+      agi: [AT3G24430]
     quantum_class: [iron_sulfur_4Fe4S]
     nuclei: ["57Fe", "33S"]
     evidence_tier: T3
@@ -160,7 +162,9 @@ entities:
       The review names CnfU explicitly: Yabe et al. showed the chloroplastic
       NifU-like protein acts as a scaffold and is required for photosystem I
       biogenesis, which makes it the direct upstream dependency of QBO:PSI_FES.
-    note: Loci not yet bound — resolution pending, not omitted.
+    note: >
+      HCF101 (AT3G24430) bound; the CnfU loci themselves are not yet resolved —
+      pending, not omitted.
     evidence:
       - ref: Yabe2004
         claim: >
@@ -181,6 +185,8 @@ entities:
       Cytosolic iron-sulfur assembly machinery maturing cytosolic and nuclear Fe/S
       proteins, including DNA polymerases, primase, helicases and ribonucleotide
       reductase.
+    xref:
+      agi: [AT5G50960, AT4G16440, AT2G26060, AT1G68310, AT5G48120]
     quantum_class: [iron_sulfur_4Fe4S]
     nuclei: ["57Fe", "33S"]
     evidence_tier: T3
@@ -189,7 +195,6 @@ entities:
       The reason this map matters beyond bioenergetics: CIA clients include the
       enzymes of DNA replication and repair, so an assembly defect reaches genome
       maintenance, not just ATP supply.
-    note: Component loci (NBP35, NAR1, CIA1, AE7, MET18) not yet bound.
 
   - id: QBO:ATM3_EXPORT
     label: "ATM3 / ABCB25 sulfur export"
@@ -198,6 +203,8 @@ entities:
     description: >
       Inner-membrane ABC transporter exporting a sulfur-containing intermediate
       from the mitochondrion to the cytosol.
+    xref:
+      agi: [AT5G58270]
     quantum_class: [structural_context]
     evidence_tier: T4
     confidence: reported

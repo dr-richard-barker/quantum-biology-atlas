@@ -1,0 +1,106 @@
+id: QBM-09
+title: Iron uptake and sulfate assimilation
+subtitle: >-
+  Where the Arabidopsis near-null-field evidence is strongest — and where the review
+  draws no figure
+derived_from: >-
+  Motivated by section 6 and the Islam 2020 / Vigani 2021 / Narayana 2018 evidence in
+  Porterfield & Barker, "Plant Responses to Near-Null Magnetic Fields" — no
+  corresponding figure exists in the manuscript
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  One of two maps the review motivates but does not draw. That is an odd gap, because
+  mineral nutrition is where the direct Arabidopsis near-null-field evidence is
+  strongest: three separate studies report effects on root mineral nutrition, iron
+  uptake efficiency and Fe-S interplay. The map makes the loop visible. Sulfate
+  assimilation supplies the sulfide that every cluster on QBM-04 is built from, and
+  sulfite reductase is itself a ferredoxin-dependent siroheme-[4Fe-4S] enzyme drawing
+  on plastid reducing power from QBM-02 — so iron and sulfur status are not two inputs
+  but one feedback system, which is exactly why Vigani et al. found the effect most
+  pronounced under combined Fe and S deficiency. Note the tier pattern: uptake and
+  assimilation are T2 on real evidence, but they are classed as structural context
+  because no quantum route is proposed for them. A demonstrated effect with no
+  mechanism is recorded here as precisely that.
+
+lanes:
+  - id: environment
+    compartment: apoplast
+    node_width: 190
+    nodes: [FE_SUPPLY]
+
+  - id: uptake
+    compartment: plasma_membrane
+    node_width: 205
+    nodes: [FE_UPTAKE, S_ASSIMILATION]
+
+  - id: distribution
+    compartment: cytosol
+    node_width: 195
+    nodes: [FE_STORAGE, CYSTEINE_SYNTHESIS]
+
+  - id: assembly
+    compartment: mitochondrial_matrix
+    node_width: 180
+    nodes: [NFS1, ISU1, SUF_SYSTEM]
+
+  - id: clients
+    compartment: cell
+    node_width: 250
+    nodes: [FES_CLIENTS, FERREDOXIN]
+
+nodes:
+  - id: FE_SUPPLY
+    qbo: QBO:FE_SUPPLY
+    label: "Soil Fe / S availability"
+    units: ["the NNMF evidence sits here"]
+  - id: FE_UPTAKE
+    qbo: QBO:FE_UPTAKE
+    label: "Root Fe uptake (FRO2 / IRT1 / FIT)"
+    units: ["reductase activity ↓ under NNMF"]
+  - id: S_ASSIMILATION
+    qbo: QBO:S_ASSIMILATION
+    label: "Sulfate assimilation"
+    units: ["SiR = siroheme + 4Fe-4S"]
+  - id: FE_STORAGE
+    qbo: QBO:FE_STORAGE
+    label: "Fe storage / distribution"
+    units: ["ferritin, NA, NRAMP"]
+  - id: CYSTEINE_SYNTHESIS
+    qbo: QBO:CYSTEINE_SYNTHESIS
+    label: "Cysteine synthesis"
+    units: ["S donor for assembly"]
+  - id: NFS1
+    qbo: QBO:NFS1
+    label: "NFS1 desulfurase"
+  - id: ISU1
+    qbo: QBO:ISU1
+    label: "ISU1 scaffold"
+    units: ["nascent 2Fe-2S"]
+  - id: SUF_SYSTEM
+    qbo: QBO:SUF_SYSTEM
+    label: "SUF system"
+    units: ["plastid assembly"]
+  - id: FES_CLIENTS
+    qbo: QBO:FES_CLIENTS
+    label: "Fe/S client proteins"
+    units: ["respiration", "photosynthesis", "DNA replication"]
+  - id: FERREDOXIN
+    qbo: QBO:FERREDOXIN
+    label: "Ferredoxin"
+    units: ["closes the loop"]
+
+edges:
+  - [FE_SUPPLY, FE_UPTAKE, direct_influence, "Fe(III) → Fe(II)"]
+  - [FE_SUPPLY, S_ASSIMILATION, direct_influence, "sulfate"]
+  - [FE_UPTAKE, FE_STORAGE, direct_influence, ""]
+  - [S_ASSIMILATION, CYSTEINE_SYNTHESIS, direct_influence, "sulfide"]
+  - [FE_STORAGE, ISU1, cofactor_insertion, "Fe"]
+  - [CYSTEINE_SYNTHESIS, NFS1, direct_influence, "cysteine"]
+  - [NFS1, ISU1, cofactor_insertion, "persulfide"]
+  - [FE_STORAGE, SUF_SYSTEM, cofactor_insertion, ""]
+  - [CYSTEINE_SYNTHESIS, SUF_SYSTEM, direct_influence, ""]
+  - [ISU1, FES_CLIENTS, cofactor_insertion, ""]
+  - [SUF_SYSTEM, FERREDOXIN, cofactor_insertion, ""]
+  - [FERREDOXIN, S_ASSIMILATION, redox_feedback, "SiR needs reduced Fd"]
+  - [FES_CLIENTS, FE_UPTAKE, redox_feedback, "Fe demand signalling"]

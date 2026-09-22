@@ -8,10 +8,11 @@ Companion software to the review *"Plant Responses to Near-Null Magnetic Fields:
 Geomagnetism, Bioenergetics, and Primary Metabolism in Arabidopsis and Brassica"*
 (D. M. Porterfield & R. Barker, Purdue University).
 
-> **Status: in development.** The ontology, map compiler and legibility test are
-> working and verified. Orthology projection, OSDR ingestion, the remaining maps
-> and the manuscript are not yet built. Sections below marked **(pending)** do not
-> exist yet — this README describes only what is in the repository.
+> **Status: in development.** The ontology, all ten maps, the map compiler, the
+> orthology projection, OSDR ingestion and the legibility test are working and
+> verified. The manuscript, the Pages site, the viewer integration and the Zenodo
+> deposit are not yet built. Sections marked **(pending)** do not exist yet — this
+> README describes only what is in the repository.
 
 ---
 
@@ -84,10 +85,24 @@ tests/
 
 ### Maps
 
-| Map | Status | Derived from |
+All ten are built. 126 nodes, 168 edges, 125 distinct Arabidopsis loci.
+
+| Map | Nodes | Derived from |
 |---|---|---|
-| QBM-01 Mitochondrial ETC & oxidative phosphorylation | **built** | Figures 1A, 4 |
-| QBM-02 … QBM-10 | pending | Figures 1B, 2, 3, 5, 6, 7 + two extensions |
+| QBM-01 Mitochondrial ETC & oxidative phosphorylation | 17 | Figures 1A, 4 |
+| QBM-02 Photosynthetic electron transport & plastid redox | 14 | Figures 1B, 5 |
+| QBM-03 Cryptochrome radical-pair photochemistry | 8 | Figure 3A |
+| QBM-04 Fe/S biogenesis — ISC, SUF, CIA | 11 | Figure 3B |
+| QBM-05 TCA cycle & the Fe/S-dependent steps | 13 | Figure 4, redrawn as a closed cycle |
+| QBM-06 Germination before photosynthesis | 11 | Figure 6 |
+| QBM-07 ROS production, scavenging & redox buffering | 12 | Figures 3C, 5 |
+| QBM-08 Magnetic environment → phenotype (flagship) | 19 | Figure 7 |
+| QBM-09 Iron uptake & sulfate assimilation | 10 | *new* — motivated, not drawn in the review |
+| QBM-10 Hormone & circadian integration | 11 | *new* — motivated, not drawn in the review |
+
+QBM-09 and QBM-10 cover the two areas where the direct Arabidopsis evidence is
+strongest — mineral nutrition and flowering-time control — and neither has a figure
+in the manuscript.
 
 ## Two findings from building it
 
@@ -103,11 +118,19 @@ this repository's evidence base is built from the bibliography and not from that
 `scripts/build_evidence_base.py` re-verifies all 42 on every run and refuses to write
 its output if any fails.
 
-**2. Gene symbols are not safe to type from memory.** Resolving symbols during
-authoring caught two collisions that would have put the wrong gene on a map: `ACO2`
-returns **ACC oxidase 2** (AT1G62380), not aconitase 2 (AT4G26970); `LIP1` returns a
-**lipase** (AT2G15230), not lipoyl synthase (AT2G20860). The ontology therefore stores
-AGI loci, never symbols, and every locus is re-checked against Ensembl by the tests.
+**2. Gene symbols are not safe to type from memory.** Resolving every symbol during
+authoring caught five collisions that would each have put the wrong gene on a map:
+
+| Symbol | Resolves to | The gene actually wanted |
+|---|---|---|
+| `ACO2` | ACC oxidase 2 (AT1G62380) | aconitase 2 (AT4G26970) |
+| `LIP1` | a lipase (AT2G15230) | lipoyl synthase (AT2G20860) |
+| `CAT2` | cationic amino acid transporter 2 (AT1G58030) | catalase 2 (AT4G35090) |
+| `CAT3` | cationic amino acid transporter 3 (AT5G36940) | catalase 3 (AT1G20620) |
+| `KAT2` | a potassium channel (AT4G18290) | 3-ketoacyl-CoA thiolase (AT2G33150) |
+
+The ontology therefore stores AGI loci, never symbols, and every locus is re-checked
+against Ensembl by the tests.
 
 ## Figure legibility is a test, not a review step
 
@@ -152,17 +175,33 @@ Rebuild the evidence base (network, ~30 s):
 python3 scripts/build_evidence_base.py --manuscript data/manuscript_text.txt --out evidence/references.yaml
 ```
 
+## Cross-species projection
+
+`qbio.ortho` runs two independent backbones and reports their disagreement rather than
+picking a winner:
+
+- **Ensembl Compara `pan_homology`** — the only division that crosses kingdoms
+  (`plants` does not), confirmed live: human *NDUFS1* returns an *A. thaliana*
+  ortholog, At*CRY1* returns *D. melanogaster*.
+- **OrthoDB v12** — the committed human-anchored matrix from `OSDR_X-species_V2`.
+
+Projecting the QBO loci to human maps 15 of 28, with the two methods agreeing on 6 and
+disagreeing on 0. The unmapped set is itself the validation: every alternative-oxidase
+and type II NAD(P)H dehydrogenase locus fails to map, which is correct — humans have
+neither.
+
+Every projection reports coverage, and a projection that matches nothing **raises**
+rather than returning an empty frame that would render as a blank map.
+
 ## Pending
 
-- **(pending)** QBM-02 … QBM-10
-- **(pending)** `qbio.ortho` — cross-species projection via Ensembl Compara
-  `pan_homology` (confirmed to bridge kingdoms: human *NDUFS1* → *A. thaliana*;
-  At*CRY1* → *D. melanogaster*) cross-checked against OrthoDB v12
-- **(pending)** `qbio.osdr` / `qbio.project` — NASA OSDR ingestion and data overlay
+- **(pending)** The pre-registered enrichment test against `OSDR_X-species_V2`'s
+  conserved mitochondrial suppression
 - **(pending)** Integration with the
   [SBGN Pathway Visualizer](https://dr-richard-barker.github.io/SBGN-Pathway-viewer/app/)
   via a published map catalogue
 - **(pending)** GitHub Pages site, manuscript, Zenodo deposit
+- **(pending)** Repair of the 49 DOIs in `magnetobiology-nnmf-review`
 
 ## Licensing
 

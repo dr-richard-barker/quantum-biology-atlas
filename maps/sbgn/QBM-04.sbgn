@@ -14,15 +14,15 @@
     </glyph>
     <glyph id="mitochondrial_inner_membrane" class="compartment">
       <label text="Inner mitochondrial membrane" />
-      <bbox x="311.59" y="236.08" w="198.06" h="86.64" />
+      <bbox x="311.59" y="236.08" w="198.06" h="99.44" />
     </glyph>
     <glyph id="chloroplast_stroma" class="compartment">
       <label text="Chloroplast stroma" />
-      <bbox x="169.50" y="360.72" w="482.25" h="99.44" />
+      <bbox x="140.03" y="373.52" w="541.19" h="112.24" />
     </glyph>
     <glyph id="cell" class="compartment">
       <label text="Cell" />
-      <bbox x="271.56" y="498.16" w="278.13" h="99.44" />
+      <bbox x="271.56" y="523.76" w="278.13" h="99.44" />
     </glyph>
     <glyph id="FE_SUPPLY" class="simple chemical" compartmentRef="cytosol">
       <label text="Cellular Fe / S supply" />
@@ -139,7 +139,7 @@
     </glyph>
     <glyph id="ATM3_EXPORT" class="macromolecule" compartmentRef="mitochondrial_inner_membrane">
       <label text="ATM3 sulfur export" />
-      <bbox x="337.59" y="262.08" w="146.06" h="34.64" />
+      <bbox x="337.59" y="262.08" w="146.06" h="47.44" />
       <glyph id="ATM3_EXPORT__u0" class="unit of information">
         <label text="single point of failure" />
         <bbox x="343.59" y="253.08" w="161.00" h="16.00" />
@@ -147,6 +147,7 @@
       <extension>
         <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:ATM3_EXPORT" evidenceTier="T4" confidence="reported">
           <qbo:quantumClass>structural_context</qbo:quantumClass>
+          <qbo:xref db="agi">AT5G58270</qbo:xref>
           <qbo:evidence ref="Lill2006" doi="10.1146/annurev.cellbio.22.010305.104538" direction="altered">Cytosolic Fe/S protein biogenesis depends on export of a sulfur-containing intermediate from the mitochondrion.
 </qbo:evidence>
         </qbo:annotation>
@@ -154,10 +155,10 @@
     </glyph>
     <glyph id="SUF_SYSTEM" class="complex" compartmentRef="chloroplast_stroma">
       <label text="SUF system" />
-      <bbox x="195.50" y="386.72" w="148.99" h="47.44" />
+      <bbox x="166.03" y="405.92" w="148.99" h="47.44" />
       <glyph id="SUF_SYSTEM__u0" class="unit of information">
         <label text="plastid assembly" />
-        <bbox x="201.50" y="377.72" w="112.00" h="16.00" />
+        <bbox x="172.03" y="396.92" w="112.00" h="16.00" />
       </glyph>
       <extension>
         <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:SUF_SYSTEM" evidenceTier="T3" confidence="inferred">
@@ -173,16 +174,17 @@
     </glyph>
     <glyph id="CNFU_HCF101" class="macromolecule" compartmentRef="chloroplast_stroma">
       <label text="CnfU / HCF101" />
-      <bbox x="378.48" y="393.12" w="117.27" h="34.64" />
+      <bbox x="349.02" y="405.92" w="117.27" h="47.44" />
       <glyph id="CNFU_HCF101__u0" class="unit of information">
         <label text="PSI assembly" />
-        <bbox x="384.48" y="384.12" w="84.00" h="16.00" />
+        <bbox x="355.02" y="396.92" w="84.00" h="16.00" />
       </glyph>
       <extension>
         <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CNFU_HCF101" evidenceTier="T3" confidence="reported">
           <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
           <qbo:nucleus>57Fe</qbo:nucleus>
           <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:xref db="agi">AT3G24430</qbo:xref>
           <qbo:evidence ref="Yabe2004" doi="10.1105/tpc.020511" direction="altered">The chloroplastic NifU-like protein CnfU can act as an Fe-S cluster scaffold and is required for biogenesis of ferredoxin and photosystem I.
 </qbo:evidence>
           <qbo:rationale>The review names CnfU explicitly: Yabe et al. showed the chloroplastic NifU-like protein acts as a scaffold and is required for photosystem I biogenesis, which makes it the direct upstream dependency of QBO:PSI_FES.
@@ -192,16 +194,21 @@
     </glyph>
     <glyph id="CIA_SYSTEM" class="complex" compartmentRef="cytosol">
       <label text="CIA system" />
-      <bbox x="529.75" y="393.12" w="96.00" h="34.64" />
+      <bbox x="500.28" y="399.52" w="154.93" h="60.24" />
       <glyph id="CIA_SYSTEM__u0" class="unit of information">
         <label text="cytosol + nucleus" />
-        <bbox x="535.75" y="384.12" w="119.00" h="16.00" />
+        <bbox x="506.28" y="390.52" w="119.00" h="16.00" />
       </glyph>
       <extension>
         <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:CIA_SYSTEM" evidenceTier="T3" confidence="reported">
           <qbo:quantumClass>iron_sulfur_4Fe4S</qbo:quantumClass>
           <qbo:nucleus>57Fe</qbo:nucleus>
           <qbo:nucleus>33S</qbo:nucleus>
+          <qbo:xref db="agi">AT5G50960</qbo:xref>
+          <qbo:xref db="agi">AT4G16440</qbo:xref>
+          <qbo:xref db="agi">AT2G26060</qbo:xref>
+          <qbo:xref db="agi">AT1G68310</qbo:xref>
+          <qbo:xref db="agi">AT5G48120</qbo:xref>
           <qbo:rationale>The reason this map matters beyond bioenergetics: CIA clients include the enzymes of DNA replication and repair, so an assembly defect reaches genome maintenance, not just ATP supply.
 </qbo:rationale>
         </qbo:annotation>
@@ -209,22 +216,22 @@
     </glyph>
     <glyph id="FES_CLIENTS" class="complex" compartmentRef="cell">
       <label text="Fe/S client proteins" />
-      <bbox x="297.56" y="524.16" w="226.13" h="47.44" />
+      <bbox x="297.56" y="549.76" w="226.13" h="47.44" />
       <glyph id="FES_CLIENTS__u0" class="unit of information">
         <label text="respiration" />
-        <bbox x="303.56" y="515.16" w="77.00" h="16.00" />
+        <bbox x="303.56" y="540.76" w="77.00" h="16.00" />
       </glyph>
       <glyph id="FES_CLIENTS__u1" class="unit of information">
         <label text="photosynthesis" />
-        <bbox x="303.56" y="515.16" w="98.00" h="16.00" />
+        <bbox x="303.56" y="540.76" w="98.00" h="16.00" />
       </glyph>
       <glyph id="FES_CLIENTS__u2" class="unit of information">
         <label text="TCA" />
-        <bbox x="303.56" y="515.16" w="30.00" h="16.00" />
+        <bbox x="303.56" y="540.76" w="30.00" h="16.00" />
       </glyph>
       <glyph id="FES_CLIENTS__u3" class="unit of information">
         <label text="DNA replication" />
-        <bbox x="303.56" y="515.16" w="105.00" h="16.00" />
+        <bbox x="303.56" y="540.76" w="105.00" h="16.00" />
       </glyph>
       <extension>
         <qbo:annotation xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0" entity="QBO:FES_CLIENTS" evidenceTier="T3" confidence="inferred">
@@ -266,7 +273,7 @@
     </arc>
     <arc id="arc2" class="stimulation" source="FE_SUPPLY" target="SUF_SYSTEM">
       <start x="410.62" y="17.32" />
-      <end x="269.99" y="410.44" />
+      <end x="240.52" y="429.64" />
       <extension>
         <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
       </extension>
@@ -310,7 +317,7 @@
     </arc>
     <arc id="arc7" class="catalysis" source="NFU_CARRIERS" target="FES_CLIENTS">
       <start x="742.17" y="148.36" />
-      <end x="410.62" y="547.88" />
+      <end x="410.62" y="573.48" />
       <glyph id="arc7__lbl" class="annotation">
         <label text="mito clients" />
       </glyph>
@@ -320,14 +327,14 @@
     </arc>
     <arc id="arc8" class="stimulation" source="ISU1" target="ATM3_EXPORT">
       <start x="222.64" y="148.36" />
-      <end x="410.62" y="279.40" />
+      <end x="410.62" y="285.80" />
       <extension>
         <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">direct_influence</qbo:edgeClass>
       </extension>
     </arc>
     <arc id="arc9" class="stimulation" source="ATM3_EXPORT" target="CIA_SYSTEM">
-      <start x="410.62" y="279.40" />
-      <end x="577.75" y="410.44" />
+      <start x="410.62" y="285.80" />
+      <end x="577.75" y="429.64" />
       <glyph id="arc9__lbl" class="annotation">
         <label text="X-S intermediate" />
       </glyph>
@@ -336,15 +343,15 @@
       </extension>
     </arc>
     <arc id="arc10" class="catalysis" source="SUF_SYSTEM" target="CNFU_HCF101">
-      <start x="269.99" y="410.44" />
-      <end x="437.12" y="410.44" />
+      <start x="240.52" y="429.64" />
+      <end x="407.65" y="429.64" />
       <extension>
         <qbo:edgeClass xmlns:qbo="https://dr-richard-barker.github.io/quantum-biology-atlas/qbo/1.0">cofactor_insertion</qbo:edgeClass>
       </extension>
     </arc>
     <arc id="arc11" class="catalysis" source="CNFU_HCF101" target="FES_CLIENTS">
-      <start x="437.12" y="410.44" />
-      <end x="410.62" y="547.88" />
+      <start x="407.65" y="429.64" />
+      <end x="410.62" y="573.48" />
       <glyph id="arc11__lbl" class="annotation">
         <label text="PSI, ferredoxin" />
       </glyph>
@@ -353,8 +360,8 @@
       </extension>
     </arc>
     <arc id="arc12" class="catalysis" source="CIA_SYSTEM" target="FES_CLIENTS">
-      <start x="577.75" y="410.44" />
-      <end x="410.62" y="547.88" />
+      <start x="577.75" y="429.64" />
+      <end x="410.62" y="573.48" />
       <glyph id="arc12__lbl" class="annotation">
         <label text="RNR, DNA pol" />
       </glyph>
@@ -364,7 +371,7 @@
     </arc>
     <arc id="arc13" class="modulation" source="FRATAXIN" target="SUF_SYSTEM">
       <start x="362.63" y="148.36" />
-      <end x="269.99" y="410.44" />
+      <end x="240.52" y="429.64" />
       <glyph id="arc13__lbl" class="annotation">
         <label text="dual localisation" />
       </glyph>

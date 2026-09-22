@@ -1,0 +1,259 @@
+# QBO entities — TCA cycle, glyoxylate cycle and reserve mobilisation.
+#
+# Backs QBM-05 and QBM-06.
+#
+# Drawn as an actual cycle. The review's Figure 4 renders the TCA cycle as a linear
+# chain from glucose to oxaloacetate with no OAA → citrate closure — which the draft's
+# own margin note flags ("the TCA cycle needs some work"). A cycle that does not close
+# cannot show the thing that matters here: that a lesion at aconitase or succinate
+# dehydrogenase throttles flux around the whole loop rather than stopping a line.
+#
+# The two Fe/S-dependent steps, aconitase and succinate dehydrogenase, are annotated on
+# QBM-01 and referenced here rather than duplicated, so a single entity cannot claim
+# different evidence on two maps.
+#
+# Every AGI locus resolved against Ensembl Plants. Note CSY4 (AT2G44350) for citrate
+# synthase: the Arabidopsis citrate synthases are a small family and the symbol "CS"
+# does not resolve, which is exactly the class of guess the resolver exists to prevent.
+
+entities:
+
+  # ======================================================================
+  # The cycle proper
+  # ======================================================================
+  - id: QBO:CITRATE_SYNTHASE
+    label: "Citrate synthase (CSY4)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      Condenses acetyl-CoA with oxaloacetate to close the cycle. The step that makes
+      the TCA cycle a cycle.
+    xref:
+      agi: [AT2G44350]
+      ec: ["2.3.3.1"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      No spin-bearing cofactor. Present because without it the diagram is a chain,
+      and a chain cannot show flux throttling around a loop.
+
+  - id: QBO:ISOCITRATE_DH
+    label: "Isocitrate dehydrogenase (IDH1, IDH2)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      Oxidative decarboxylation of isocitrate to 2-oxoglutarate, generating NADH.
+    xref:
+      agi: [AT4G35260, AT2G17130]
+      ec: ["1.1.1.41"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Context. Included because it sits immediately downstream of aconitase, so it is
+      the first activity that would register an aconitase lesion as reduced flux.
+
+  - id: QBO:FUMARASE
+    label: "Fumarase (FUM1)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    xref:
+      agi: [AT2G47510]
+      ec: ["4.2.1.2"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Context. The plant mitochondrial fumarase is a class-II enzyme and carries no
+      Fe/S cluster, unlike the class-I fumarases of some bacteria — worth stating
+      explicitly, because "fumarase" is sometimes listed among Fe/S enzymes on the
+      strength of the bacterial form.
+
+  - id: QBO:MALATE_DH
+    label: "Malate dehydrogenase (MMDH1)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    xref:
+      agi: [AT1G53240]
+      ec: ["1.1.1.37"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:CITRATE
+    label: "Citrate"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:16947"]
+      kegg: ["C00158"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:ISOCITRATE
+    label: "Isocitrate"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:16087"]
+      kegg: ["C00311"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      The citrate/isocitrate ratio is the classic readout of aconitase activity, and
+      therefore the most direct available proxy for Fe/S cluster integrity in vivo.
+      Worth measuring in any near-null-field metabolomics experiment.
+
+  - id: QBO:OXALOACETATE
+    label: "Oxaloacetate"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:16452"]
+      kegg: ["C00036"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:ACETYL_COA
+    label: "Acetyl-CoA"
+    kind: simple_chemical
+    compartment: mitochondrial_matrix
+    xref:
+      chebi: ["CHEBI:15351"]
+      kegg: ["C00024"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  # ======================================================================
+  # Reserve mobilisation — the germination window
+  # ======================================================================
+  - id: QBO:TAG_LIPASE
+    label: "TAG lipase (SDP1)"
+    kind: macromolecule
+    compartment: peroxisome
+    description: >
+      Initiates triacylglycerol breakdown in the oil body, releasing fatty acids for
+      beta-oxidation. The first committed step of oilseed reserve mobilisation.
+    xref:
+      ec: ["3.1.1.3"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Locus not yet bound (SDP1 did not resolve in this build). Context node: no spin
+      chemistry, but it gates everything downstream in an oilseed, which is what makes
+      Arabidopsis and Brassica comparable for the review's germination argument.
+
+  - id: QBO:BETA_OXIDATION
+    label: "Peroxisomal beta-oxidation"
+    kind: process
+    compartment: peroxisome
+    description: >
+      Converts stored fatty acids to acetyl-CoA, feeding the glyoxylate cycle during
+      heterotrophic establishment.
+    xref:
+      ec: ["1.3.3.6"]
+    quantum_class: [ros_leak_site]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Acyl-CoA oxidase is a flavoprotein that reduces O2 directly to H2O2 as part of
+      its normal catalytic cycle — one of the few places in the cell where peroxide
+      production is the intended chemistry rather than a leak. During germination
+      that makes the peroxisome a major ROS source at exactly the stage the review
+      argues matters most.
+    caveat: >
+      A flavin semiquinone is not well established in the acyl-CoA oxidase mechanism,
+      and the enzyme's own catalase-rich compartment quenches the product quickly.
+      Classed only as a ROS source, not as a radical-pair site.
+
+  - id: QBO:GLYOXYLATE_CYCLE
+    label: "Glyoxylate cycle (ICL, MLS)"
+    kind: complex
+    compartment: peroxisome
+    description: >
+      Isocitrate lyase and malate synthase bypass the two decarboxylating steps of the
+      TCA cycle, letting a seedling make sugars from stored lipid.
+    xref:
+      agi: [AT3G21720, AT5G03860]
+      ec: ["4.1.3.1", "2.3.3.9"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      The reason oilseeds are the right system for the review's argument: an
+      Arabidopsis or Brassica seedling must run this bypass to convert stored
+      triacylglycerol into the carbon skeletons for growth, and the whole route
+      depends on mitochondrial ATP before any photosynthesis exists.
+
+  - id: QBO:GERMINATION_ATP
+    label: "ATP / ADP ratio (pre-photosynthetic)"
+    kind: simple_chemical
+    compartment: cell
+    description: >
+      Adenylate energy charge during imbibition and radicle emergence, supplied almost
+      entirely by mitochondrial respiration.
+    xref:
+      chebi: ["CHEBI:30616", "CHEBI:456216"]
+      kegg: ["C00002", "C00008"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: reported
+    note: >
+      The measurement the review asks for and nobody has made under a near-null field.
+      Drawn as context because an adenylate pool has no spin chemistry — it is the
+      readout, not the target.
+    evidence:
+      - ref: Nietzel2020
+        claim: >
+          Mitochondrial energy metabolism is redox-kick-started during seed germination,
+          establishing that respiratory competence is restored before photosynthesis.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: increase
+        developmental_stage: germination
+      - ref: Rosental2014
+        claim: >
+          Primary metabolism is activated and regulated during seed germination, with
+          respiration supplying the energy for reserve mobilisation and cell expansion.
+        species: multiple
+        field_regime: null
+        direction: increase
+        developmental_stage: germination
+
+  - id: QBO:RADICLE_EMERGENCE
+    label: "Radicle emergence"
+    kind: phenotype
+    compartment: organism
+    description: >
+      The completion of germination, and the earliest visible endpoint at which a
+      pre-photosynthetic metabolic lesion could be detected.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: reported
+    note: >
+      The review's central experimental proposal is a 0-72 h imbibition time course
+      comparing geomagnetic and near-null conditions, ending here. No such experiment
+      exists in the bibliography — this node is the gap, drawn.
+    evidence:
+      - ref: Farooq2021
+        claim: >
+          Reactive oxygen species and mitochondria jointly regulate seed germination,
+          defining the window in which a respiratory lesion would have most leverage.
+        species: multiple
+        field_regime: null
+        direction: altered
+        developmental_stage: germination
+      - ref: Eckardt2005
+        claim: >
+          Peroxisomal citrate synthase provides the exit route from fatty acid
+          metabolism in oilseeds, linking reserve mobilisation to the TCA cycle.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: altered
+        developmental_stage: germination

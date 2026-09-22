@@ -1,0 +1,113 @@
+id: QBM-07
+title: ROS production, scavenging and redox buffering
+subtitle: >-
+  The amplifier that makes the review's hypothesis testable — and the reason it
+  cannot identify a mechanism on its own
+derived_from: >-
+  Figure 3 panel C and Figure 5 of Porterfield & Barker, "Plant Responses to Near-Null
+  Magnetic Fields" — expanded to the scavenging network and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  A weak-field effect on an electron-transfer branching ratio may be far too small to
+  measure as a rate change, but ROS signalling is threshold-like, so the same small
+  change can register as a transcriptional response. That is why the ROS-responsive
+  programme is the best-evidenced node in the whole atlas, and equally why it cannot
+  identify a mechanism: an amplifier reports that something moved upstream, never what.
+  The map deliberately includes enzymes with no spin route at all — the
+  peroxiredoxin/thioredoxin system is pure two-electron thiol chemistry with no radical
+  intermediate and no metal — so that "redox" is not read as a synonym for
+  "magnetically addressable". The heme peroxidases do cycle through a genuine porphyrin
+  radical, but it is exchange-coupled to the ferryl iron and extremely short-lived, and
+  that caveat travels with the annotation.
+
+lanes:
+  - id: sources
+    compartment: cell
+    node_width: 175
+    nodes: [COMPLEX_I, PLASTID_ROS, BETA_OXIDATION]
+
+  - id: primary
+    compartment: cell
+    node_width: 195
+    nodes: [MITO_SUPEROXIDE, SUPEROXIDE_DISMUTASES]
+
+  - id: scavenging
+    compartment: cytosol
+    node_width: 190
+    nodes: [ASCORBATE_PEROXIDASE, CATALASE, PEROXIREDOXIN_TRX, ASC_GSH_CYCLE]
+
+  - id: buffers
+    compartment: cell
+    node_width: 200
+    nodes: [REDOX_POOLS, NADPH_POOL]
+
+  - id: output
+    compartment: nucleus
+    node_width: 235
+    nodes: [ROS_TRANSCRIPTIONAL_RESPONSE]
+
+nodes:
+  - id: COMPLEX_I
+    qbo: QBO:COMPLEX_I
+    label: "Complex I (FMN leak)"
+    units: ["mitochondrial source"]
+  - id: PLASTID_ROS
+    qbo: QBO:PLASTID_ROS
+    label: "PSI / PSII leak"
+    units: ["plastid source"]
+  - id: BETA_OXIDATION
+    qbo: QBO:BETA_OXIDATION
+    label: "Beta-oxidation"
+    units: ["peroxisomal source"]
+  - id: MITO_SUPEROXIDE
+    qbo: QBO:MITO_SUPEROXIDE
+    label: "Superoxide / H2O2"
+    units: ["the amplifier"]
+  - id: SUPEROXIDE_DISMUTASES
+    qbo: QBO:SUPEROXIDE_DISMUTASES
+    label: "Superoxide dismutases"
+    units: ["Cu/Zn · Mn · Fe"]
+  - id: ASCORBATE_PEROXIDASE
+    qbo: QBO:ASCORBATE_PEROXIDASE
+    label: "Ascorbate peroxidase"
+    units: ["Compound I radical"]
+  - id: CATALASE
+    qbo: QBO:CATALASE
+    label: "Catalase"
+    units: ["Compound I radical"]
+  - id: PEROXIREDOXIN_TRX
+    qbo: QBO:PEROXIREDOXIN_TRX
+    label: "Peroxiredoxin / TRX"
+    units: ["no spin route"]
+  - id: ASC_GSH_CYCLE
+    qbo: QBO:ASC_GSH_CYCLE
+    label: "Ascorbate-glutathione cycle"
+    units: ["FAD enzymes"]
+  - id: REDOX_POOLS
+    qbo: QBO:REDOX_POOLS
+    label: "ASC / GSH pools"
+    units: ["report ratios, not totals"]
+  - id: NADPH_POOL
+    qbo: QBO:NADPH_POOL
+    label: "NADPH / NADP+"
+  - id: ROS_TRANSCRIPTIONAL_RESPONSE
+    qbo: QBO:ROS_TRANSCRIPTIONAL_RESPONSE
+    label: "ROS-responsive transcription"
+    units: ["best-evidenced node", "worst discriminator"]
+
+edges:
+  - [COMPLEX_I, MITO_SUPEROXIDE, direct_influence, "leak"]
+  - [PLASTID_ROS, MITO_SUPEROXIDE, direct_influence, "Mehler"]
+  - [BETA_OXIDATION, MITO_SUPEROXIDE, direct_influence, "H2O2"]
+  - [MITO_SUPEROXIDE, SUPEROXIDE_DISMUTASES, catalysis, "O2·− → H2O2"]
+  - [SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE, electron_transfer, ""]
+  - [SUPEROXIDE_DISMUTASES, CATALASE, electron_transfer, ""]
+  - [SUPEROXIDE_DISMUTASES, PEROXIREDOXIN_TRX, electron_transfer, ""]
+  - [ASCORBATE_PEROXIDASE, ASC_GSH_CYCLE, redox_feedback, "regeneration"]
+  - [ASC_GSH_CYCLE, REDOX_POOLS, redox_feedback, ""]
+  - [NADPH_POOL, ASC_GSH_CYCLE, energy_feedback, "reducing power"]
+  - [REDOX_POOLS, ROS_TRANSCRIPTIONAL_RESPONSE, redox_feedback, "poise"]
+  - [MITO_SUPEROXIDE, ROS_TRANSCRIPTIONAL_RESPONSE, direct_influence, "threshold"]
+  - [PEROXIREDOXIN_TRX, REDOX_POOLS, redox_feedback, ""]
+  - [CATALASE, REDOX_POOLS, redox_feedback, ""]
