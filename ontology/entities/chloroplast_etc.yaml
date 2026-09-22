@@ -1,0 +1,322 @@
+# QBO entities — photosynthetic electron transport and plastid redox.
+#
+# Backs QBM-02.
+#
+# Every AGI locus resolved against Ensembl Plants by scripts/resolve_loci.py and
+# re-checked by tests/test_ontology.py. Note the ATCG* loci: PSAC, PSBA, PETA and
+# PETB are plastid-encoded, so they sit on the chloroplast genome rather than a
+# nuclear chromosome. That matters for data projection — plastid transcripts are
+# absent or unreliable in poly-A-selected RNA-seq, which is most of OSDR's plant
+# studies, so these nodes will often legitimately receive no value.
+#
+# The chloroplast is the second half of the review's argument, and a weaker half
+# on purpose: the only direct field measurement on photosynthesis in the
+# bibliography is in lima bean (Parmagnani 2023), not Arabidopsis. So the plastid
+# nodes here are T2 at best where that paper covers the process, T3 elsewhere.
+
+entities:
+
+  # ======================================================================
+  # Photosystem II and the plastoquinone pool
+  # ======================================================================
+  - id: QBO:PSII
+    label: "Photosystem II"
+    kind: complex
+    compartment: thylakoid_membrane
+    description: >
+      Water-plastoquinone photo-oxidoreductase. Splits water at the Mn4CaO5
+      cluster and reduces plastoquinone through the QA/QB sites.
+    xref:
+      agi: [ATCG00020, AT1G06680]
+      go_component: [GO:0009523]
+      ec: ["1.10.3.9"]
+    quantum_class: [semiquinone_radical, ros_leak_site]
+    nuclei: ["1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The QA/QB sites hold a kinetically stabilised plastosemiquinone, and PSII is
+      a major singlet-oxygen source under excess light. Both are one-electron
+      chemistry in a defined pocket, which is the setting a radical-pair argument
+      needs.
+    caveat: >
+      PSII's dominant ROS species is singlet oxygen from the P680 triplet, not
+      superoxide. Triplet chlorophyll formation is itself spin chemistry, so a
+      field effect here would be more plausible than at most nodes — but it is
+      also a route the review does not develop, and no measurement exists.
+
+  - id: QBO:PLASTOQUINONE_POOL
+    label: "Plastoquinone pool (PQ / PQH2)"
+    kind: simple_chemical
+    compartment: thylakoid_membrane
+    description: >
+      Mobile two-electron carrier between PSII and cytochrome b6f. Its redox
+      poise is the plastid's central regulatory signal.
+    xref:
+      chebi: ["CHEBI:28377"]
+      kegg: ["C02061"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Drawn as context rather than a target, but worth noting that PQ pool redox
+      state gates state transitions, LHCII phosphorylation and retrograde
+      signalling — so a small change upstream is amplified here into a
+      transcriptional response.
+
+  - id: QBO:PLASTOSEMIQUINONE
+    label: "Plastosemiquinone (PQ·−)"
+    kind: simple_chemical
+    compartment: thylakoid_membrane
+    description: One-electron-reduced plastoquinone at the QA/QB and Qo sites.
+    xref:
+      chebi: ["CHEBI:28377"]
+    quantum_class: [semiquinone_radical, radical_pair_donor, ros_leak_site]
+    nuclei: ["1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      The plastid counterpart of ubisemiquinone, and the same argument applies: a
+      protein-bound organic radical with a measurable lifetime is the most
+      credible site for field-dependent branching in the chain.
+
+  # ======================================================================
+  # Cytochrome b6f — the plastid Rieske centre
+  # ======================================================================
+  - id: QBO:CYTB6F_RIESKE
+    label: "Cytochrome b6f Rieske [2Fe-2S] (PETC)"
+    kind: macromolecule
+    compartment: thylakoid_membrane
+    description: >
+      His/Cys-ligated [2Fe-2S] centre of the cytochrome b6f complex, driving the
+      plastid Q cycle and contributing to the proton motive force.
+    xref:
+      agi: [AT4G03280]
+      go_component: [GO:0009512]
+    quantum_class: [rieske_2Fe2S, semiquinone_radical]
+    nuclei: ["57Fe", "33S", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Structurally and mechanistically the plastid twin of the mitochondrial
+      Rieske centre (QBO:RIESKE_FES), with the same bifurcated Q-cycle chemistry.
+      The review treats both as the same class of candidate target.
+    note: >
+      PETC is also the rate-limiting step of linear electron flow, so a change here
+      propagates to everything downstream — which makes it a sensitive readout and,
+      for the same reason, a poor discriminator of mechanism.
+
+  - id: QBO:CYT_B6
+    label: "Cytochrome b6 / f hemes (PETA, PETB)"
+    kind: macromolecule
+    compartment: thylakoid_membrane
+    description: >
+      The b- and f-type hemes of the b6f complex, including the unusual covalently
+      bound heme ci.
+    xref:
+      agi: [ATCG00540, ATCG00720]
+      go_component: [GO:0009512]
+    quantum_class: [heme_electron_carrier]
+    nuclei: ["57Fe", "1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      One-electron heme carriers, paramagnetic in the ferric state, adjacent to the
+      semiquinone-generating Q cycle.
+
+  - id: QBO:PLASTOCYANIN
+    label: "Plastocyanin (PETE1/2)"
+    kind: macromolecule
+    compartment: thylakoid_lumen
+    description: Mobile type-I copper carrier from cytochrome b6f to photosystem I.
+    xref:
+      agi: [AT1G76100, AT1G20340]
+      go_component: [GO:0009543]
+    quantum_class: [spin_relaxation_modulated]
+    nuclei: ["1H"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      A mononuclear Cu(II)/Cu(I) centre performing one-electron transfer, so
+      formally paramagnetic in the oxidised state.
+    caveat: >
+      Deliberately classed as spin_relaxation_modulated rather than as a
+      radical-pair partner. A single copper centre relaxes fast and has no
+      correlated partner, so coherent singlet-triplet mixing is not available here;
+      only a relaxation-based effect could be argued, and none has been shown.
+
+  # ======================================================================
+  # Photosystem I — the Fe/S end of the chain
+  # ======================================================================
+  - id: QBO:PSI_FES
+    label: "Photosystem I Fe/S centres (FX, FA, FB)"
+    kind: complex
+    compartment: thylakoid_membrane
+    description: >
+      Three [4Fe-4S] clusters carrying electrons from the P700 primary acceptors to
+      ferredoxin. FX sits on the PsaA/PsaB heterodimer; FA and FB on PsaC.
+    xref:
+      agi: [ATCG01060]
+      go_component: [GO:0009522]
+      ec: ["1.97.1.12"]
+    quantum_class: [iron_sulfur_4Fe4S, radical_pair_acceptor, triplet_yield_sensitive]
+    nuclei: ["57Fe", "33S", "1H"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      PSI is the strongest structural case in the whole atlas. Charge separation at
+      P700 produces a genuine spin-correlated radical pair (P700·+ A1·−), which is
+      the textbook example of the species the radical-pair mechanism describes —
+      it is studied by exactly that formalism in photosynthesis spectroscopy. Three
+      [4Fe-4S] clusters then carry the electron onward.
+    caveat: >
+      The P700·+ A1·− pair is extremely short-lived, and the well-characterised
+      magnetic-field effects on it are seen in isolated preparations at fields far
+      above geomagnetic. Structural plausibility is high; relevance at 50 uT is not
+      established.
+    evidence:
+      - ref: Parmagnani2023
+        claim: >
+          The geomagnetic field is required for normal lima bean photosynthesis,
+          PSI/LHCI content and ROS production; near-null field conditions altered
+          photosynthetic electron transport.
+        species: Phaseolus lunatus
+        field_regime: NNMF
+        direction: altered
+        tissue: leaf
+
+  - id: QBO:FERREDOXIN
+    label: "Ferredoxin (FD1, FD2)"
+    kind: macromolecule
+    compartment: chloroplast_stroma
+    description: >
+      Soluble [2Fe-2S] one-electron carrier distributing electrons from PSI to
+      FNR, nitrite reductase, sulfite reductase, glutamate synthase and the
+      thioredoxin system.
+    xref:
+      agi: [AT1G10960, AT1G60950]
+      go_component: [GO:0009570]
+    quantum_class: [iron_sulfur_2Fe2S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      The distribution hub of plastid reducing power. A perturbation here reaches
+      carbon fixation, nitrogen and sulfur assimilation and redox regulation at
+      once, which is why the review nominates ferredoxin biogenesis specifically.
+    evidence:
+      - ref: Vigani2021
+        claim: >
+          Geomagnetic field conditions modulate iron-sulfur interplay in Arabidopsis,
+          particularly under combined iron and sulfur deficiency.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+
+  - id: QBO:FNR
+    label: "Ferredoxin-NADP+ reductase (FNR1, FNR2)"
+    kind: macromolecule
+    compartment: chloroplast_stroma
+    description: >
+      FAD enzyme converting two one-electron transfers from ferredoxin into the
+      two-electron reduction of NADP+.
+    xref:
+      agi: [AT5G66190, AT1G20020]
+      ec: ["1.18.1.2"]
+    quantum_class: [flavin_semiquinone, ros_leak_site]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      FNR necessarily transits a flavin semiquinone: it is the step that converts
+      one-electron chemistry into two-electron chemistry, so a half-reduced flavin
+      is obligatory rather than incidental. That makes it the plastid's clearest
+      analogue of the cryptochrome flavin.
+
+  - id: QBO:PGR5_PGRL1
+    label: "Cyclic electron flow (PGR5 / PGRL1)"
+    kind: complex
+    compartment: thylakoid_membrane
+    description: >
+      Antimycin-sensitive cyclic route returning electrons from ferredoxin to the
+      plastoquinone pool, raising ATP yield relative to NADPH.
+    xref:
+      agi: [AT2G05620, AT4G22890]
+      go_component: [GO:0009767]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      The plastid counterpart of the AOX confounder on QBM-01: cyclic flow lets a
+      chloroplast rebalance ATP/NADPH without changing linear flux, so a
+      measurement of linear electron transport alone cannot distinguish "no effect"
+      from "compensated effect".
+
+  - id: QBO:NADPH_POOL
+    label: "NADPH / NADP+"
+    kind: simple_chemical
+    compartment: chloroplast_stroma
+    xref:
+      chebi: ["CHEBI:57783", "CHEBI:58349"]
+      kegg: ["C00005", "C00006"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+
+  - id: QBO:PLASTID_ROS
+    label: "Plastid superoxide / H2O2"
+    kind: simple_chemical
+    compartment: chloroplast_stroma
+    description: >
+      ROS from the PSI acceptor side (Mehler reaction) and PSII, dismutated by
+      stromal FeSOD and CuZnSOD.
+    xref:
+      chebi: ["CHEBI:18421", "CHEBI:16240"]
+      agi: [AT4G25100, AT2G28190]
+    quantum_class: [ros_leak_site]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      As in the mitochondrion, the amplifier rather than the mechanism: threshold
+      behaviour converts a small change in electron branching into a signal.
+    evidence:
+      - ref: Parmagnani2023
+        claim: >
+          Reactive oxygen species production differed between geomagnetic and
+          near-null field conditions in lima bean.
+        species: Phaseolus lunatus
+        field_regime: NNMF
+        direction: altered
+      - ref: Parmagnani2022
+        claim: >
+          Near-null magnetic field alters ROS-associated transcriptomic and
+          metabolomic programmes in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+
+  - id: QBO:THYLAKOID_ATP_SYNTHASE
+    label: "Thylakoid ATP synthase"
+    kind: complex
+    compartment: thylakoid_membrane
+    description: Uses the thylakoid proton motive force to phosphorylate ADP.
+    xref:
+      agi: [AT4G04640]
+      go_component: [GO:0009535]
+      ec: ["7.1.2.2"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: Readout node, as on QBM-01. No spin-bearing cofactor.
+
+  - id: QBO:H2O
+    label: "H2O"
+    kind: simple_chemical
+    compartment: thylakoid_lumen
+    xref:
+      chebi: ["CHEBI:15377"]
+      kegg: ["C00001"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified

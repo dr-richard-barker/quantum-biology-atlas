@@ -1,0 +1,126 @@
+# QBM-02 — Photosynthetic electron transport and plastid redox
+# Re-authoring of Figures 1B / 5 of the review. No coordinates: geometry is derived.
+
+id: QBM-02
+title: Photosynthetic electron transport and plastid redox
+subtitle: >-
+  Magnetically addressable nodes of the chloroplast, from water oxidation to NADPH,
+  with the evidence tier for each shown as a border style
+derived_from: >-
+  Figures 1B and 5 of Porterfield & Barker, "Plant Responses to Near-Null Magnetic
+  Fields" — expanded to gene level and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  The photosynthetic chain redrawn with each node's quantum chemistry and the evidence
+  behind it. Photosystem I is the strongest structural case in the atlas: charge
+  separation at P700 makes a genuine spin-correlated radical pair, the species the
+  radical-pair mechanism was written for. It is nevertheless only T2, because the one
+  direct field measurement on photosynthesis in the review's bibliography was made in
+  lima bean rather than Arabidopsis, and because that pair is extremely short-lived
+  and its known field effects are seen well above geomagnetic strength. Cyclic electron
+  flow is drawn for the same reason alternative oxidase appears on QBM-01 — it lets a
+  chloroplast rebalance ATP against NADPH without changing linear flux, so measuring
+  linear electron transport alone cannot separate "no effect" from "compensated
+  effect". Four nodes are plastid-encoded (ATCG loci) and will receive no value from
+  poly-A-selected RNA-seq, which is most of OSDR's plant studies.
+
+lanes:
+  - id: input
+    compartment: thylakoid_lumen
+    node_width: 150
+    nodes: [H2O, PLASTOCYANIN]
+
+  - id: photosystem_ii
+    compartment: thylakoid_membrane
+    node_width: 200
+    nodes: [PSII, PLASTOQUINONE_POOL, PLASTOSEMIQUINONE]
+
+  - id: cytochrome_b6f
+    compartment: thylakoid_membrane
+    node_width: 200
+    nodes: [CYTB6F_RIESKE, CYT_B6, PGR5_PGRL1]
+
+  - id: photosystem_i
+    compartment: thylakoid_membrane
+    node_width: 200
+    nodes: [PSI_FES, THYLAKOID_ATP_SYNTHASE]
+
+  - id: stroma
+    compartment: chloroplast_stroma
+    node_width: 190
+    nodes: [FERREDOXIN, FNR, NADPH_POOL, PLASTID_ROS]
+
+nodes:
+  - id: H2O
+    qbo: QBO:H2O
+  - id: PLASTOCYANIN
+    qbo: QBO:PLASTOCYANIN
+    label: "Plastocyanin"
+    units: ["type-I Cu"]
+  - id: PSII
+    qbo: QBO:PSII
+    label: "Photosystem II"
+    units: ["Mn4CaO5", "QA / QB"]
+  - id: PLASTOQUINONE_POOL
+    qbo: QBO:PLASTOQUINONE_POOL
+    label: "Plastoquinone pool"
+  - id: PLASTOSEMIQUINONE
+    qbo: QBO:PLASTOSEMIQUINONE
+    label: "Plastosemiquinone"
+    units: ["free radical"]
+  - id: CYTB6F_RIESKE
+    qbo: QBO:CYTB6F_RIESKE
+    label: "Cyt b6f Rieske centre"
+    units: ["2Fe-2S", "Q cycle"]
+  - id: CYT_B6
+    qbo: QBO:CYT_B6
+    label: "Cyt b6 / f hemes"
+    units: ["plastid-encoded"]
+  - id: PGR5_PGRL1
+    qbo: QBO:PGR5_PGRL1
+    label: "Cyclic electron flow"
+    units: ["bypass — confounder"]
+  - id: PSI_FES
+    qbo: QBO:PSI_FES
+    label: "Photosystem I Fe/S"
+    units: ["FX / FA / FB", "P700·+ A1·− pair"]
+  - id: THYLAKOID_ATP_SYNTHASE
+    qbo: QBO:THYLAKOID_ATP_SYNTHASE
+    label: "ATP synthase"
+    units: ["readout: ATP"]
+  - id: FERREDOXIN
+    qbo: QBO:FERREDOXIN
+    label: "Ferredoxin"
+    units: ["2Fe-2S hub"]
+  - id: FNR
+    qbo: QBO:FNR
+    label: "FNR"
+    units: ["FAD", "1e− → 2e−"]
+  - id: NADPH_POOL
+    qbo: QBO:NADPH_POOL
+    label: "NADPH / NADP+"
+  - id: PLASTID_ROS
+    qbo: QBO:PLASTID_ROS
+    label: "Superoxide / H2O2"
+    units: ["signal amplifier"]
+
+edges:
+  - [H2O, PSII, electron_transfer, "4e− + O2"]
+  - [PSII, PLASTOQUINONE_POOL, electron_transfer, "2e−"]
+  - [PLASTOQUINONE_POOL, PLASTOSEMIQUINONE, electron_transfer, "1e−"]
+  - [PLASTOSEMIQUINONE, CYTB6F_RIESKE, electron_transfer, "Qo"]
+  - [CYTB6F_RIESKE, CYT_B6, electron_transfer, ""]
+  - [CYTB6F_RIESKE, PLASTOCYANIN, electron_transfer, ""]
+  - [PLASTOCYANIN, PSI_FES, electron_transfer, ""]
+  - [PSI_FES, FERREDOXIN, electron_transfer, "1e−"]
+  - [FERREDOXIN, FNR, electron_transfer, ""]
+  - [FNR, NADPH_POOL, electron_transfer, "2e−"]
+  - [FERREDOXIN, PGR5_PGRL1, electron_transfer, "cyclic"]
+  - [PGR5_PGRL1, PLASTOQUINONE_POOL, electron_transfer, ""]
+  - [PSII, THYLAKOID_ATP_SYNTHASE, energy_feedback, "H+"]
+  - [CYT_B6, THYLAKOID_ATP_SYNTHASE, energy_feedback, "H+"]
+  - [PSI_FES, PLASTID_ROS, direct_influence, "Mehler"]
+  - [PSII, PLASTID_ROS, direct_influence, "1O2"]
+  - [PLASTID_ROS, FERREDOXIN, redox_feedback, "cluster damage"]
+  - [NADPH_POOL, PLASTID_ROS, redox_feedback, "buffering"]

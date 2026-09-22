@@ -204,7 +204,29 @@
     }
   }
 
-  // ---- 9. the map must carry a caption naming its data source ------------
+  // ---- 9. the tier legend must sit clear of the drawing ------------------
+  // It used to be drawn at a fixed top-left position inside the canvas group, which
+  // happened to be empty on QBM-01 and was not on QBM-03, where it landed on the
+  // NUCLEUS band label. It now gets reserved header height; this asserts that.
+  const tierLegend = svg.querySelector('.qbm-legend-group');
+  if (!tierLegend) {
+    failures.push('no evidence-tier legend — every map must show how to read its borders');
+  } else {
+    const lb = rel(tierLegend);
+    ids.forEach((id) => {
+      if (overlaps(lb, rects[id], PENETRATE_TOL)) failures.push(`TIER LEGEND covers node "${id}"`);
+    });
+    bands.forEach((b) => {
+      if (overlaps(lb, b.box, PENETRATE_TOL))
+        failures.push(`TIER LEGEND covers compartment band "${b.name}"`);
+    });
+    svg.querySelectorAll('.qbm-compartment-label, .qbm-title, .qbm-subtitle').forEach((c) => {
+      if (overlaps(lb, rel(c), PENETRATE_TOL))
+        failures.push(`TIER LEGEND covers "${c.textContent.slice(0, 30)}"`);
+    });
+  }
+
+  // ---- 10. the map must carry a caption naming its data source -----------
   const caption = Array.from(svg.querySelectorAll('.qbm-caption'))
     .map((n) => n.textContent)
     .join(' ');

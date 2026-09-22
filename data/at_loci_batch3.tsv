@@ -1,0 +1,42 @@
+symbol	agi	ensembl_symbol	description
+PSBA	ATCG00020	psbA	photosystem II protein D1
+PSBP1	AT1G06680	PSBP-1	photosystem II subunit P-1
+PETA	ATCG00540	petA	cytochrome f
+PETB	ATCG00720	petB	cytochrome b6
+PETD	ATCG00730	petD	cytochrome b6/f complex subunit IV
+PETE1	AT1G76100	PETE1	plastocyanin 1
+PETE2	AT1G20340	DRT112	Cupredoxin superfamily protein
+PSAA	ATCG00350	psaA	photosystem I P700 chlorophyll a apoprotein A1
+PSAB	ATCG00340	psaB	photosystem I P700 chlorophyll a apoprotein A2
+PSAD-1	AT4G02770	PSAD-1	photosystem I subunit D-1
+PSAE-1	AT4G28750	PSAE-1	Photosystem I reaction centre subunit IV / PsaE protein
+FD2	AT1G60950	FED A	2Fe-2S ferredoxin-like superfamily protein
+FNR2	AT1G20020	FNR2	ferredoxin-NADP[+]-oxidoreductase 2
+PGR5	AT2G05620	PGR5	proton gradient regulation 5
+PGRL1A	AT4G22890	PGR5-LIKE A	PGR5-LIKE A
+ATPC1	AT4G04640	ATPC1	ATPase, F1 complex, gamma subunit protein
+LHCA1	AT3G54890	LHCA1	chlorophyll a-b binding protein 6
+LHCB1.1	AT1G29920	CAB2	chlorophyll A/B-binding protein 2
+COP1	AT2G32950	COP1	Transducin/WD40 repeat-like superfamily protein
+SPA1	AT2G46340	SPA1	SPA (suppressor of phyA-105) protein family
+HY5	AT5G11260	HY5	Basic-leucine zipper (bZIP) transcription factor family protein
+CO	AT5G15840	CO	B-box type zinc finger protein with CCT domain-containing protein
+FT	AT1G65480	FT	PEBP (phosphatidylethanolamine-binding protein) family protein
+CIB1	AT4G34530	CIB1	cryptochrome-interacting basic-helix-loop-helix 1
+PHYA	AT1G09570	PHYA	phytochrome A
+HSCB	AT5G06410	AT5G06410	DNAJ heat shock N-terminal domain-containing protein
+GRXS15	AT3G15660	GRX4	glutaredoxin 4
+HCF101	AT3G24430	HCF101	ATP binding protein
+NBP35	AT5G50960	NBP35	nucleotide binding protein 35
+NAR1	AT4G16440	NAR1	ferredoxin hydrogenase
+CIA1	AT2G26060	emb1345	Transducin/WD40 repeat-like superfamily protein
+AE7	AT1G68310	AE7	MIP18 family protein (DUF59)
+MET18	AT5G48120	MET18	ARM repeat superfamily protein
+ATM3	AT5G58270	ABCB25	ABC transporter of the mitochondrion 3
+CSY4	AT2G44350	ATCS	Citrate synthase family protein
+IDH1	AT4G35260	IDH1	isocitrate dehydrogenase 1
+IDH2	AT2G17130	IDH2	isocitrate dehydrogenase subunit 2
+FUM1	AT2G47510	FUM1	fumarase 1
+MMDH1	AT1G53240	mMDH1	Lactate/malate dehydrogenase family protein
+MLS	AT5G03860	MLS	malate synthase
+ICL	AT3G21720	ICL	isocitrate lyase

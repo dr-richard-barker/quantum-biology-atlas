@@ -1,0 +1,94 @@
+# QBM-03 — Cryptochrome radical-pair photochemistry
+# Re-authoring of Figure 3 panel A. The one map where T1 is earned.
+
+id: QBM-03
+title: Cryptochrome radical-pair photochemistry
+subtitle: >-
+  The reference mechanism — and the failed replication that has to travel with it
+derived_from: >-
+  Figure 3 panel A of Porterfield & Barker, "Plant Responses to Near-Null Magnetic
+  Fields" — expanded to the photocycle and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  Cryptochrome is the only plant entity in the review's bibliography where a magnetic
+  field was applied and an effect measured on the protein's own chemistry rather than
+  on a downstream phenotype, so it carries the atlas's only T1 annotations. The
+  hyperfine partners that make this pair field-sensitive are the flavin's own nitrogens
+  and protons — 14N at 99.6% natural abundance and 1H at essentially 100% — so unlike
+  the 57Fe route argued for iron-sulfur clusters, this one is not abundance-limited.
+  That asymmetry is much of why cryptochrome is the strongest case here and the Fe/S
+  nodes elsewhere are not. Phytochrome B is drawn deliberately as context with no
+  quantum claim: its photochemistry is a Z/E isomerisation offering no spin-based
+  route, so reported field effects on phytochrome signalling are most simply a
+  downstream consequence of cryptochrome. Note also that one blinded replication
+  (Harris et al. 2009) did NOT reproduce cryptochrome-dependent field effects; that
+  result is recorded in the ontology on the same footing as the positive reports.
+
+lanes:
+  - id: photoreceptors
+    compartment: nucleus
+    node_width: 180
+    nodes: [CRY1, CRY2, PHYB]
+
+  - id: chemistry
+    compartment: nucleus
+    node_width: 190
+    nodes: [CRY_FAD, TRP_TRIAD, SINGLET_TRIPLET]
+
+  - id: signalling
+    compartment: nucleus
+    node_width: 190
+    nodes: [COP1_SPA]
+
+  - id: output
+    compartment: organism
+    node_width: 210
+    nodes: [FLOWERING_OUTPUT]
+
+nodes:
+  - id: CRY1
+    qbo: QBO:CRY1
+    label: "Cryptochrome 1"
+    units: ["FAD", "Trp triad"]
+  - id: CRY2
+    qbo: QBO:CRY2
+    label: "Cryptochrome 2"
+    units: ["FAD", "flowering"]
+  - id: PHYB
+    qbo: QBO:PHYB
+    label: "Phytochrome B"
+    units: ["no spin route"]
+  - id: CRY_FAD
+    qbo: QBO:CRY_FAD
+    label: "FAD (FADox / FAD·− / FADH·)"
+    units: ["14N 99.6%", "1H ~100%"]
+  - id: TRP_TRIAD
+    qbo: QBO:TRP_TRIAD
+    label: "Tryptophan triad"
+    units: ["Trp·+ donor"]
+  - id: SINGLET_TRIPLET
+    qbo: QBO:SINGLET_TRIPLET
+    label: "Singlet ⇄ triplet mixing"
+    units: ["needs ~us lifetime"]
+  - id: COP1_SPA
+    qbo: QBO:COP1_SPA
+    label: "COP1 / SPA complex"
+  - id: FLOWERING_OUTPUT
+    qbo: QBO:FLOWERING_OUTPUT
+    label: "Flowering time (CO → FT)"
+    units: ["NNMF delays this"]
+
+edges:
+  - [CRY1, CRY_FAD, cofactor_insertion, ""]
+  - [CRY2, CRY_FAD, cofactor_insertion, ""]
+  - [CRY_FAD, TRP_TRIAD, electron_transfer, "1e−"]
+  - [TRP_TRIAD, SINGLET_TRIPLET, direct_influence, "pair born"]
+  - [CRY_FAD, SINGLET_TRIPLET, direct_influence, "hyperfine"]
+  - [SINGLET_TRIPLET, COP1_SPA, direct_influence, "signalling yield"]
+  - [CRY1, COP1_SPA, inhibition, ""]
+  - [CRY2, COP1_SPA, inhibition, ""]
+  - [COP1_SPA, FLOWERING_OUTPUT, indirect_influence, "degrades CO"]
+  - [CRY2, FLOWERING_OUTPUT, hormonal_feedback, "photoperiod"]
+  - [PHYB, FLOWERING_OUTPUT, indirect_influence, "red/far-red"]
+  - [PHYB, COP1_SPA, indirect_influence, ""]

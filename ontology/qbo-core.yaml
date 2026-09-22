@@ -180,6 +180,28 @@ quantum_classes:
       changing any activation energy.
     magnetically_addressable: true
 
+  - id: spin_correlated_pair
+    label: Spin-correlated radical pair
+    definition: >
+      A radical pair born in a well-defined singlet or triplet state and held
+      long enough for coherent spin evolution — the entity the radical-pair
+      mechanism is actually about, as distinct from either radical alone.
+      Applied to the pair or the process, not to one partner.
+    magnetically_addressable: true
+    typical_nuclei: ["1H", "14N"]
+
+  - id: hyperfine_coupled
+    label: Hyperfine-coupled
+    definition: >
+      Carries spin-bearing nuclei close enough to an unpaired electron to couple
+      to it, setting the rate of singlet-triplet mixing. This is what makes a
+      radical pair field-sensitive at all: with no hyperfine coupling there is no
+      internal field for an external one to compete with. Always paired with the
+      specific nuclei in `nuclei`, because abundance decides whether the route is
+      available at all (compare 14N at 99.6% with 57Fe at 2.1%).
+    magnetically_addressable: true
+    typical_nuclei: ["1H", "14N", "57Fe", "33S"]
+
   - id: semiquinone_radical
     label: Quinone semiquinone radical
     definition: >

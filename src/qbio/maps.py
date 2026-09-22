@@ -369,7 +369,7 @@ def render_svg(
         body.append(render.compartment_tag_svg(n))
 
     tiers = sorted({n.payload.get("evidence_tier", "T4") for n in nodes})
-    legend, _ = render.tier_legend_svg(x=16.0, y=18.0, tiers_present=tiers)
+    legend, legend_h = render.tier_legend_svg(x=16.0, y=0.0, tiers_present=tiers)
 
     caption = spec.caption
     if spec.derived_from:
@@ -388,6 +388,7 @@ def render_svg(
         body="".join(body),
         canvas=canvas,
         legend=legend,
+        legend_h=legend_h,
     )
     return svg, {"dropped_edge_labels": dropped}
 

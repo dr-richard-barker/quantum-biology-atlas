@@ -247,10 +247,26 @@ class Ontology:
                     f"{where}: tier {e.evidence_tier} asserts a magnetic-field effect "
                     f"but cites no evidence"
                 )
-            if "structural_context" in e.quantum_class and e.evidence_tier != "T4":
+            # structural_context + T1/T2 is ALLOWED, and is a category the field
+            # genuinely needs: a demonstrated magnetic-field effect on something with
+            # no proposed quantum route. Arabidopsis iron uptake is exactly that —
+            # Islam 2020 measured it, and nobody claims a spin mechanism for a
+            # nutrient pool. An earlier version of this rule forbade the combination,
+            # which quietly re-coupled the two axes the ontology exists to separate
+            # and would have forced such findings to be mislabelled as mechanism.
+            #
+            # What it must not do is pass silently: an unexplained effect has to be
+            # marked as unexplained, so it cannot be read as mechanistic support.
+            if (
+                "structural_context" in e.quantum_class
+                and e.asserts_sensitivity
+                and not (e.caveat or e.note or e.rationale)
+            ):
                 problems.append(
-                    f"{where}: structural_context makes no quantum claim, so it cannot be "
-                    f"tier {e.evidence_tier}"
+                    f"{where}: tier {e.evidence_tier} asserts a magnetic-field effect on an "
+                    f"entity classed structural_context, i.e. with no proposed quantum route. "
+                    f"That is a legitimate finding but it must say so — add a `rationale`, "
+                    f"`note` or `caveat` stating that no mechanism is claimed"
                 )
             # T3 is a hypothesis; the reasoning is the annotation, so say it out loud.
             if e.evidence_tier == "T3" and not e.rationale:

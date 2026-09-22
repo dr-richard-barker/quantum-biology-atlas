@@ -312,12 +312,21 @@ def _place_edge_label(
     """
     w = measure(label, EDGE_LABEL_SIZE)[0] + 6.0
     obstacles = list(obstacles)
-    # Try along the edge, then offset perpendicular to it.
     dx, dy = ex - sx, ey - sy
     length = max(1e-6, (dx * dx + dy * dy) ** 0.5)
     nx, ny = -dy / length, dx / length          # unit normal
-    for t in (0.5, 0.38, 0.62, 0.28, 0.72):
-        for offset in (0.0, 11.0, -11.0, 20.0, -20.0):
+
+    # Search along the edge AND well off to either side of it.
+    #
+    # Small offsets alone are not enough: when a third node sits between the two
+    # endpoints — the ubiquinone pool and alternative oxidase have ubisemiquinone
+    # between them — the entire straight path is blocked, and no amount of extra
+    # lane width opens it, because the blocking node widens along with the lane.
+    # Measured: going from ±20 to ±56 recovers labels that a 14% wider map did not.
+    # The offset is capped so a label stays visibly associated with its own edge.
+    offsets = (0.0, 12.0, -12.0, 22.0, -22.0, 34.0, -34.0, 46.0, -46.0, 56.0, -56.0)
+    for t in (0.5, 0.38, 0.62, 0.28, 0.72, 0.18, 0.82):
+        for offset in offsets:
             cx = sx + dx * t + nx * offset
             cy = sy + dy * t + ny * offset
             box = Box(cx - w / 2.0, cy - EDGE_LABEL_H / 2.0, w, EDGE_LABEL_H)
@@ -433,9 +442,16 @@ def document(
     body: str,
     canvas: Box,
     legend: str = "",
+    legend_h: float = 0.0,
 ) -> str:
-    """Assemble the SVG. The viewBox comes from the measured content, so nothing clips."""
-    header_h = 64.0
+    """Assemble the SVG. The viewBox comes from the measured content, so nothing clips.
+
+    The tier legend gets RESERVED height in the header rather than being drawn over
+    whatever happens to be empty at the top-left of the drawing. QBM-01's left margin
+    was empty so it looked fine there; QBM-03's is not, and the legend landed on a
+    compartment label. Reserving the space makes that impossible on any map.
+    """
+    header_h = 64.0 + (legend_h + 10.0 if legend else 0.0)
     # Wrap the caption against the final canvas width, then take the footer height
     # from the number of lines that actually resulted — sizing the footer from an
     # estimate is how a caption ends up running off the bottom of the image.
@@ -456,7 +472,8 @@ def document(
         f'<g transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
     ]
     if legend:
-        parts.append(f'<g transform="translate(0,{header_h:.2f})">{legend}</g>')
+        # Inside the reserved header band, above the drawing — never over it.
+        parts.append(f'<g transform="translate(0,{72.0:.2f})">{legend}</g>')
 
     y = canvas.h + header_h + 18.0
     for line in caption_lines:

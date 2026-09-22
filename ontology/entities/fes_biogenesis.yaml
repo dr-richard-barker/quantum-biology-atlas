@@ -1,0 +1,284 @@
+# QBO entities — iron-sulfur cluster biogenesis: ISC, SUF and CIA.
+#
+# Backs QBM-04.
+#
+# This map is the review's structural argument in one picture. Every Fe/S node on
+# QBM-01, QBM-02 and QBM-05 depends on one of these three assembly systems, so a
+# perturbation here is upstream of the whole atlas — and, crucially, it would show
+# up as a *metabolic* defect long before any visible phenotype.
+#
+# A deliberate caution runs through the tiers below. Fe/S assembly is where the
+# review's mechanism is most attractive and least tested: no experiment in the
+# bibliography applied a magnetic field and measured cluster assembly. What Islam
+# 2020 and Vigani 2021 actually show is that field conditions alter iron UPTAKE and
+# Fe-S *interplay* at the nutritional level. That is a real result and it is cited
+# here, but it is not a measurement of assembly chemistry, and the entities record
+# that difference rather than blurring it.
+
+entities:
+
+  # ======================================================================
+  # ISC — mitochondrial assembly
+  # ======================================================================
+  - id: QBO:NFS1
+    label: "Cysteine desulfurase NFS1 (ISC)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      PLP-dependent cysteine desulfurase supplying persulfide sulfur for
+      mitochondrial cluster assembly. The sulfur entry point of the ISC pathway.
+    xref:
+      agi: [AT5G65720]
+      ec: ["2.8.1.7"]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: >
+      Carries no spin-bearing cofactor of its own — the PLP-persulfide chemistry is
+      two-electron. On the map as the pathway's start, not as a target.
+
+  - id: QBO:ISU1
+    label: "Scaffold ISU1 (ISC)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      The scaffold on which a nascent [2Fe-2S] cluster is built before transfer to
+      a recipient apoprotein.
+    xref:
+      agi: [AT4G22220]
+    quantum_class: [iron_sulfur_2Fe2S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Holds a transient, solvent-exposed [2Fe-2S] cluster whose assembly involves
+      iron redox chemistry and sulfide transfer. A nascent cluster on a scaffold is
+      more exposed and shorter-lived than a mature one buried in a protein, which
+      makes it a more credible point of perturbation than the finished product.
+    caveat: >
+      Entirely untested. No experiment has measured scaffold occupancy or transfer
+      rate under any magnetic field condition.
+
+  - id: QBO:FRATAXIN
+    label: "Frataxin (FH)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: >
+      Iron chaperone/regulator of ISC assembly, dual-targeted to mitochondria and
+      chloroplasts in Arabidopsis and required for chloroplast Fe-S protein function.
+    xref:
+      agi: [AT4G03240]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: verified
+    note: >
+      Named in the review because Turowski et al. showed its dual localisation makes
+      it a determinant of both mitochondrial and plastid Fe/S protein function — so
+      a single lesion here propagates into both organelles at once.
+    evidence:
+      - ref: Turowski2015
+        claim: >
+          Frataxin is localised to both chloroplast and mitochondrion and is involved
+          in chloroplast Fe-S protein function in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: altered
+
+  - id: QBO:HSCB_GRXS15
+    label: "Transfer machinery (HSCB, GRXS15)"
+    kind: complex
+    compartment: mitochondrial_matrix
+    description: >
+      Co-chaperone and monothiol glutaredoxin handling cluster release from the
+      scaffold and delivery to recipients.
+    xref:
+      agi: [AT5G06410, AT3G15660]
+    quantum_class: [iron_sulfur_2Fe2S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      GRXS15 binds a bridging [2Fe-2S] cluster in its dimeric form, so the cluster
+      is genuinely in transit and solvent-accessible here rather than buried.
+    note: >
+      GRXS15 resolves in Ensembl under the display name GRX4 (AT3G15660) — the
+      ontology stores the locus, not the symbol.
+
+  - id: QBO:NFU_CARRIERS
+    label: "NFU carriers (NFU4, NFU5)"
+    kind: macromolecule
+    compartment: mitochondrial_matrix
+    description: Late-acting carrier proteins delivering clusters to specific apoproteins.
+    xref:
+      agi: [AT3G20970, AT1G51390]
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Transiently hold clusters destined for aconitase, succinate dehydrogenase and
+      lipoyl synthase — precisely the QBM-01/QBM-05 nodes the review nominates. If
+      assembly were field-sensitive, this is the step that would show it first.
+
+  # ======================================================================
+  # SUF — plastid assembly
+  # ======================================================================
+  - id: QBO:SUF_SYSTEM
+    label: "SUF system (plastid assembly)"
+    kind: complex
+    compartment: chloroplast_stroma
+    description: >
+      The plastid's sulfur-mobilisation machinery: the SUFB-C-D scaffold complex
+      with the SUFE-activated cysteine desulfurase CpNifS.
+    xref:
+      agi: [AT1G08490, AT4G26500]
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Builds every cluster in the chloroplast, including PSI's FX/FA/FB and
+      ferredoxin's [2Fe-2S]. It is the single upstream dependency of QBM-02's
+      strongest nodes.
+    note: >
+      SUFS resolves to AT1G08490, the same locus as NFS2/CPNIFS — the plastid
+      cysteine desulfurase goes by all three names. SUFB, SUFC and SUFD loci are
+      not yet bound; pending, not omitted.
+
+  - id: QBO:CNFU_HCF101
+    label: "Plastid cluster carriers (CnfU, HCF101)"
+    kind: macromolecule
+    compartment: chloroplast_stroma
+    description: >
+      NifU-like scaffold and the [4Fe-4S] carrier required for photosystem I
+      assembly.
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: reported
+    rationale: >
+      The review names CnfU explicitly: Yabe et al. showed the chloroplastic
+      NifU-like protein acts as a scaffold and is required for photosystem I
+      biogenesis, which makes it the direct upstream dependency of QBO:PSI_FES.
+    note: Loci not yet bound — resolution pending, not omitted.
+    evidence:
+      - ref: Yabe2004
+        claim: >
+          The chloroplastic NifU-like protein CnfU can act as an Fe-S cluster scaffold
+          and is required for biogenesis of ferredoxin and photosystem I.
+        species: Arabidopsis thaliana
+        field_regime: null
+        direction: altered
+
+  # ======================================================================
+  # CIA — cytosolic/nuclear assembly, and its dependency on the mitochondrion
+  # ======================================================================
+  - id: QBO:CIA_SYSTEM
+    label: "CIA system (cytosolic assembly)"
+    kind: complex
+    compartment: cytosol
+    description: >
+      Cytosolic iron-sulfur assembly machinery maturing cytosolic and nuclear Fe/S
+      proteins, including DNA polymerases, primase, helicases and ribonucleotide
+      reductase.
+    quantum_class: [iron_sulfur_4Fe4S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: reported
+    rationale: >
+      The reason this map matters beyond bioenergetics: CIA clients include the
+      enzymes of DNA replication and repair, so an assembly defect reaches genome
+      maintenance, not just ATP supply.
+    note: Component loci (NBP35, NAR1, CIA1, AE7, MET18) not yet bound.
+
+  - id: QBO:ATM3_EXPORT
+    label: "ATM3 / ABCB25 sulfur export"
+    kind: macromolecule
+    compartment: mitochondrial_inner_membrane
+    description: >
+      Inner-membrane ABC transporter exporting a sulfur-containing intermediate
+      from the mitochondrion to the cytosol.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: reported
+    note: >
+      The single point of failure the review's Fe/S argument turns on: CIA depends
+      on mitochondrial export, so a mitochondrial lesion propagates to cytosolic and
+      nuclear Fe/S proteins. Drawn as context because the transporter itself carries
+      no cluster. Locus not yet bound.
+    evidence:
+      - ref: Lill2006
+        claim: >
+          Cytosolic Fe/S protein biogenesis depends on export of a sulfur-containing
+          intermediate from the mitochondrion.
+        species: multiple
+        field_regime: null
+        direction: altered
+
+  # ======================================================================
+  # Nutritional input, and what the field evidence actually covers
+  # ======================================================================
+  - id: QBO:FE_SUPPLY
+    label: "Cellular Fe / S supply"
+    kind: simple_chemical
+    compartment: cytosol
+    description: >
+      The iron and sulfur pools every assembly system draws on. Where the review's
+      actual near-null-field evidence sits.
+    xref:
+      chebi: ["CHEBI:29033", "CHEBI:29034", "CHEBI:16189"]
+    quantum_class: [structural_context]
+    evidence_tier: T2
+    confidence: verified
+    rationale: >
+      Note carefully what the cited work does and does not show. Islam 2020 and
+      Vigani 2021 measured iron uptake and Fe-S interplay under altered field
+      conditions — nutritional physiology. Neither measured cluster assembly. This
+      entity is T2 because the field effect is demonstrated for the process it
+      names; the assembly entities above remain T3 because that evidence does not
+      reach them.
+    evidence:
+      - ref: Islam2020
+        claim: >
+          The geomagnetic field contributes to efficient iron uptake in Arabidopsis;
+          reducing it to near-null affects root metal reductase activity.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        tissue: root
+      - ref: Vigani2021
+        claim: >
+          Geomagnetic-field-dependent modulation of iron-sulfur interplay in
+          Arabidopsis, most pronounced under combined Fe and S deficiency.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+      - ref: Narayana2018
+        claim: >
+          Reduction of the geomagnetic field to near-null affects Arabidopsis root
+          mineral nutrition.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+        tissue: root
+
+  - id: QBO:FES_CLIENTS
+    label: "Fe/S client proteins"
+    kind: complex
+    compartment: cell
+    description: >
+      Everything downstream: aconitase, succinate dehydrogenase, the Rieske
+      centres, PSI, ferredoxin, lipoyl synthase, ribonucleotide reductase, nitrite
+      and sulfite reductases, glutamate synthase, and the DNA replication and repair
+      enzymes.
+    xref:
+      agi: [AT4G35830, AT5G66760, AT5G13430, AT4G03280, AT1G10960, AT2G20860, AT2G21790]
+    quantum_class: [iron_sulfur_4Fe4S, iron_sulfur_2Fe2S]
+    nuclei: ["57Fe", "33S"]
+    evidence_tier: T3
+    confidence: inferred
+    rationale: >
+      Collected here so the map can show, in one edge, that a single assembly defect
+      reaches respiration, photosynthesis, the TCA cycle, nitrogen and sulfur
+      assimilation and DNA replication simultaneously. That breadth is the review's
+      argument for why Fe/S biology deserves attention ahead of cryptochrome.

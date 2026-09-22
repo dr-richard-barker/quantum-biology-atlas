@@ -1,0 +1,113 @@
+# QBM-04 — Iron-sulfur cluster biogenesis: ISC, SUF and CIA
+# Re-authoring of Figure 3 panel B, expanded to the three assembly systems.
+
+id: QBM-04
+title: Iron-sulfur cluster biogenesis — ISC, SUF and CIA
+subtitle: >-
+  The upstream dependency of every Fe/S node in the atlas, and where the review's
+  mechanism is most attractive and least tested
+derived_from: >-
+  Figure 3 panel B of Porterfield & Barker, "Plant Responses to Near-Null Magnetic
+  Fields" — expanded to the three assembly systems and bound to Arabidopsis loci
+species_anchor: arabidopsis_thaliana
+
+caption: >-
+  Every Fe/S node on QBM-01, QBM-02 and QBM-05 depends on one of these three systems,
+  so a defect here sits upstream of the whole atlas and would appear as a metabolic
+  lesion well before any visible phenotype. Read the tiers carefully, because they mark
+  a distinction that is easy to blur: the near-null-field evidence in this area
+  (Islam 2020, Vigani 2021, Narayana 2018) measured iron UPTAKE and Fe-S interplay —
+  nutritional physiology — and is attached to the Fe/S supply node, which is therefore
+  T2. No experiment in the bibliography applied a magnetic field and measured cluster
+  assembly itself, so every assembly node remains T3 no matter how attractive the
+  mechanism looks. The single arrow from mitochondrial export to the CIA system is the
+  reason this map reaches beyond bioenergetics: CIA clients include the DNA replication
+  and repair enzymes, so a mitochondrial lesion propagates to genome maintenance.
+
+lanes:
+  - id: supply
+    compartment: cytosol
+    node_width: 190
+    nodes: [FE_SUPPLY]
+
+  - id: isc
+    compartment: mitochondrial_matrix
+    node_width: 175
+    nodes: [NFS1, ISU1, FRATAXIN, HSCB_GRXS15, NFU_CARRIERS]
+
+  - id: export
+    compartment: mitochondrial_inner_membrane
+    node_width: 200
+    nodes: [ATM3_EXPORT]
+
+  - id: plastid_cytosol
+    compartment: chloroplast_stroma
+    node_width: 195
+    nodes: [SUF_SYSTEM, CNFU_HCF101, CIA_SYSTEM]
+
+  - id: clients
+    compartment: cell
+    node_width: 260
+    nodes: [FES_CLIENTS]
+
+nodes:
+  - id: FE_SUPPLY
+    qbo: QBO:FE_SUPPLY
+    label: "Cellular Fe / S supply"
+    units: ["where the NNMF evidence is"]
+  - id: NFS1
+    qbo: QBO:NFS1
+    label: "NFS1 desulfurase"
+    units: ["S entry"]
+  - id: ISU1
+    qbo: QBO:ISU1
+    label: "ISU1 scaffold"
+    units: ["nascent 2Fe-2S"]
+  - id: FRATAXIN
+    qbo: QBO:FRATAXIN
+    label: "Frataxin (FH)"
+    units: ["dual-targeted"]
+  - id: HSCB_GRXS15
+    qbo: QBO:HSCB_GRXS15
+    label: "HSCB / GRXS15 transfer"
+    units: ["cluster in transit"]
+  - id: NFU_CARRIERS
+    qbo: QBO:NFU_CARRIERS
+    label: "NFU4 / NFU5 carriers"
+    units: ["4Fe-4S delivery"]
+  - id: ATM3_EXPORT
+    qbo: QBO:ATM3_EXPORT
+    label: "ATM3 sulfur export"
+    units: ["single point of failure"]
+  - id: SUF_SYSTEM
+    qbo: QBO:SUF_SYSTEM
+    label: "SUF system"
+    units: ["plastid assembly"]
+  - id: CNFU_HCF101
+    qbo: QBO:CNFU_HCF101
+    label: "CnfU / HCF101"
+    units: ["PSI assembly"]
+  - id: CIA_SYSTEM
+    qbo: QBO:CIA_SYSTEM
+    label: "CIA system"
+    units: ["cytosol + nucleus"]
+  - id: FES_CLIENTS
+    qbo: QBO:FES_CLIENTS
+    label: "Fe/S client proteins"
+    units: ["respiration", "photosynthesis", "TCA", "DNA replication"]
+
+edges:
+  - [FE_SUPPLY, NFS1, direct_influence, "S"]
+  - [FE_SUPPLY, ISU1, direct_influence, "Fe"]
+  - [FE_SUPPLY, SUF_SYSTEM, direct_influence, ""]
+  - [NFS1, ISU1, cofactor_insertion, "persulfide"]
+  - [FRATAXIN, ISU1, cofactor_insertion, "Fe donation"]
+  - [ISU1, HSCB_GRXS15, cofactor_insertion, "release"]
+  - [HSCB_GRXS15, NFU_CARRIERS, cofactor_insertion, ""]
+  - [NFU_CARRIERS, FES_CLIENTS, cofactor_insertion, "mito clients"]
+  - [ISU1, ATM3_EXPORT, direct_influence, ""]
+  - [ATM3_EXPORT, CIA_SYSTEM, direct_influence, "X-S intermediate"]
+  - [SUF_SYSTEM, CNFU_HCF101, cofactor_insertion, ""]
+  - [CNFU_HCF101, FES_CLIENTS, cofactor_insertion, "PSI, ferredoxin"]
+  - [CIA_SYSTEM, FES_CLIENTS, cofactor_insertion, "RNR, DNA pol"]
+  - [FRATAXIN, SUF_SYSTEM, indirect_influence, "dual localisation"]

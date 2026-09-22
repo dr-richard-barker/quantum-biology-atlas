@@ -1,0 +1,276 @@
+# QBO entities — cryptochrome radical-pair photochemistry.
+#
+# Backs QBM-03.
+#
+# This is the one map where T1 is earned. Cryptochrome is the only plant entity in
+# the review's bibliography where a magnetic field was applied and an effect
+# measured on the protein's own chemistry rather than on a downstream phenotype.
+#
+# It is also the one map that has to carry a failed replication. Harris et al. 2009
+# did not reproduce cryptochrome-dependent magnetic-field effects under blinded
+# conditions. That is recorded here as evidence with direction `no_effect`, on the
+# same footing as the positive reports, because an ontology that files only the
+# confirmations is a marketing document. The review's own framing is that
+# magnetobiology needs stringent controls and adequate replication, and this is
+# where that shows.
+
+entities:
+
+  - id: QBO:CRY1
+    label: "Cryptochrome 1 (CRY1)"
+    kind: macromolecule
+    compartment: nucleus
+    description: >
+      Blue-light photoreceptor with a non-covalently bound FAD. Photoreduction
+      proceeds through a conserved tryptophan triad, generating a
+      FAD·−/Trp·+ radical pair.
+    xref:
+      agi: [AT4G08920]
+      go_component: [GO:0005634]
+    quantum_class: [radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T1
+    confidence: verified
+    rationale: >
+      The reference case for the radical-pair mechanism in biology, and the entity
+      from which the review's whole argument is generalised outward.
+    caveat: >
+      Direction of effect is not consistent across the literature, and one blinded
+      replication attempt failed (see Harris2009 below). Treat the magnitude as
+      unsettled even though the mechanism is well characterised.
+    evidence:
+      - ref: Ahmad2007
+        claim: >
+          Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis
+          thaliana.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: altered
+      - ref: Solovyov2007
+        claim: >
+          Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields
+          could alter activation yields through radical-pair spin dynamics.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: altered
+      - ref: Harris2009
+        claim: >
+          Under blinded conditions, cryptochrome-dependent magnetic-field effects in
+          Arabidopsis were NOT reproduced.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: no_effect
+      - ref: Pooam2019
+        claim: >
+          Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during
+          flavin reoxidation in the dark, not during photoreduction.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: altered
+      - ref: Xu2014
+        claim: >
+          Blue-light-dependent phosphorylation of cryptochromes is affected by
+          magnetic fields in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+
+  - id: QBO:CRY2
+    label: "Cryptochrome 2 (CRY2)"
+    kind: macromolecule
+    compartment: nucleus
+    description: >
+      Blue-light receptor governing photoperiodic flowering through CO and FT.
+      Light-labile, unlike CRY1.
+    xref:
+      agi: [AT1G04400]
+      go_component: [GO:0005634]
+    quantum_class: [radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      Same FAD/tryptophan-triad chemistry as CRY1. CRY2's route to flowering time is
+      the mechanistic link between the photoreceptor evidence and the most
+      reproducible NNMF phenotype in the literature — delayed flowering.
+    evidence:
+      - ref: Xu2012
+        claim: >
+          A near-null magnetic field affects cryptochrome-related hypocotyl growth and
+          flowering in Arabidopsis.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+        developmental_stage: vegetative
+      - ref: Agliassa2018b
+        claim: >
+          Geomagnetic field variation impacts cryptochrome and phytochrome signalling.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: altered
+
+  - id: QBO:CRY_FAD
+    label: "Cryptochrome FAD cofactor"
+    kind: cofactor
+    compartment: nucleus
+    description: >
+      The flavin adenine dinucleotide whose redox state (FADox / FAD·− / FADH·)
+      carries the photoreceptor's signalling state.
+    xref:
+      chebi: ["CHEBI:57692"]
+    quantum_class: [flavin_semiquinone, radical_pair_acceptor, triplet_yield_sensitive]
+    nuclei: ["1H", "14N"]
+    cofactors: ["CHEBI:57692"]
+    evidence_tier: T1
+    confidence: verified
+    rationale: >
+      The hyperfine partners that make this radical pair field-sensitive are the
+      isoalloxazine ring's own nitrogens and protons — 14N at 99.6% abundance and
+      1H at essentially 100%. Unlike the 57Fe route argued for Fe/S clusters, this
+      one is not abundance-limited, which is a large part of why cryptochrome is
+      the strongest case in the atlas.
+    evidence:
+      - ref: Pooam2019
+        claim: >
+          The magnetically sensitive step is flavin reoxidation in the dark rather than
+          photoreduction, implying a longer-lived radical pair than first assumed.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: altered
+
+  - id: QBO:TRP_TRIAD
+    label: "Tryptophan triad (Trp·+)"
+    kind: macromolecule
+    compartment: nucleus
+    description: >
+      Three conserved tryptophans conducting an electron from the protein surface
+      to the flavin, leaving a tryptophanyl radical as the pair's second member.
+    xref:
+      agi: [AT4G08920, AT1G04400]
+    quantum_class: [radical_pair_donor, hyperfine_coupled]
+    nuclei: ["1H", "14N"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      The donor half of the canonical pair. Its indole nitrogen and ring protons
+      supply the hyperfine coupling on the donor side.
+    evidence:
+      - ref: Solovyov2007
+        claim: >
+          Spin dynamics of the FAD-tryptophan radical pair in Arabidopsis
+          cryptochrome-1 can be modulated by an applied magnetic field.
+        species: Arabidopsis thaliana
+        field_regime: static_MF
+        direction: altered
+
+  - id: QBO:SINGLET_TRIPLET
+    label: "Singlet ⇄ triplet interconversion"
+    kind: process
+    compartment: nucleus
+    description: >
+      Coherent mixing of the radical pair's spin states, at a rate set by hyperfine
+      couplings and modulated by an external field. The step at which a weak field
+      can change a chemical yield without changing any activation energy.
+    quantum_class: [triplet_yield_sensitive, spin_correlated_pair, hyperfine_coupled]
+    nuclei: ["1H", "14N"]
+    evidence_tier: T2
+    confidence: reported
+    rationale: >
+      This is the mechanism itself rather than a molecule. It is on the map because
+      the review's argument is that this step, not the protein, is what generalises
+      to other flavoproteins and Fe/S centres.
+    caveat: >
+      For a field of geomagnetic magnitude to compete, the radical pair must live
+      long enough for mixing to accumulate — roughly the microsecond scale. That
+      lifetime requirement is what most candidate sites elsewhere in this atlas
+      have not been shown to meet.
+    evidence:
+      - ref: Ritz2000
+        claim: >
+          A photoreceptor-based radical-pair model can in principle transduce a
+          geomagnetic-strength field into a change in signalling yield.
+        species: not applicable
+        field_regime: GMF
+        direction: altered
+      - ref: ZadehHaghighi2022
+        claim: >
+          Review of magnetic field effects in biology from the radical-pair
+          perspective, covering the lifetime and hyperfine conditions required.
+        species: multiple
+        field_regime: GMF
+        direction: altered
+
+  - id: QBO:PHYB
+    label: "Phytochrome B"
+    kind: macromolecule
+    compartment: nucleus
+    description: >
+      Red/far-red photoreceptor with a bilin chromophore, acting with cryptochrome
+      on flowering and hypocotyl growth.
+    xref:
+      agi: [AT2G18790]
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: reported
+    note: >
+      Deliberately T4. Phytochrome's photochemistry is a Z/E isomerisation, not
+      radical-pair chemistry, so it offers no spin-based route and makes no quantum
+      claim here. It is on the map because Agliassa 2018b reports field effects on
+      phytochrome *signalling* — which, if real, is most simply explained as a
+      downstream consequence of cryptochrome rather than direct magnetoreception by
+      phytochrome, and the map should let a reader see that distinction.
+
+  - id: QBO:COP1_SPA
+    label: "COP1 / SPA complex"
+    kind: complex
+    compartment: nucleus
+    description: >
+      E3 ubiquitin ligase complex inhibited by photoactivated cryptochrome;
+      degrades HY5 and CO in darkness.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: inferred
+    note: The first strictly downstream step. Loci not yet bound.
+
+  - id: QBO:FLOWERING_OUTPUT
+    label: "Flowering time (CO → FT)"
+    kind: phenotype
+    compartment: organism
+    description: >
+      Photoperiodic flowering output. The most reproducible near-null-field
+      phenotype in the Arabidopsis literature.
+    quantum_class: [structural_context]
+    evidence_tier: T4
+    confidence: reported
+    note: >
+      A phenotype, so it carries no quantum class of its own — but it is the anchor
+      that makes the whole map worth drawing, since it is what NNMF experiments
+      actually measured.
+    evidence:
+      - ref: Agliassa2018a
+        claim: >
+          Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis
+          flowering and downregulated flowering-related genes.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        field_uT: 0.1
+        direction: decrease
+        developmental_stage: reproductive
+      - ref: Xu2015
+        claim: >
+          Suppression of Arabidopsis flowering by a near-null magnetic field depends
+          on the light conditions.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
+      - ref: Xu2013
+        claim: >
+          Removal of the local geomagnetic field affected reproductive growth,
+          including silique number and seed yield.
+        species: Arabidopsis thaliana
+        field_regime: NNMF
+        direction: decrease
+        developmental_stage: reproductive
