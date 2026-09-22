@@ -425,3 +425,143 @@ def compile_all(onto: Ontology, src_dir: pathlib.Path = MAP_SRC_DIR, out_dir: pa
     if not records:
         raise MapError(f"no map sources found in {src_dir} — nothing was built")
     return records
+
+
+def render_projection(
+    spec: MapSpec,
+    onto: Ontology,
+    projection,
+    out_dir: pathlib.Path = MAP_OUT_DIR,
+    vmax: float | None = None,
+) -> dict:
+    """Render a map with measured data overlaid, and write it beside the base map.
+
+    The base map is laid out exactly as before — the overlay is a CSS layer keyed on
+    each node's reserved slot, so geometry never changes for a data run and the same
+    base map can carry any number of studies.
+
+    The provenance paragraph is appended to the caption, not attached separately.
+    A figure that leaves the building must say what data is on it.
+    """
+    nodes, comps, canvas = layout_map(spec, onto)
+    values = projection.values
+    if not values:
+        raise MapError(f"{spec.id}: projection carries no values — nothing to overlay")
+
+    limit = vmax if vmax is not None else max(abs(v.value) for v in values.values())
+    if limit <= 0:
+        raise MapError(
+            f"{spec.id}: every projected value is 0.0, so the colour scale would be "
+            f"degenerate. Check the contrast — this is almost certainly a join failure."
+        )
+
+    svg, stats = render_svg(spec, nodes, comps, canvas)
+
+    # Mark measured nodes in the drawing itself: a ring for significance, and the
+    # value printed, because colour alone should never be the only channel.
+    extra = [render.overlay_svg(values, limit)]
+    marks = []
+    by_id = {n.id: n for n in nodes}
+    for nid, nv in values.items():
+        n = by_id.get(nid)
+        if n is None:
+            continue
+        txt = f"{nv.value:+.2f}" + ("*" if nv.significant else "")
+        w = render.measure(txt, render.UNIT_SIZE)[0] + 2 * render.UNIT_PAD_X
+        x = n.box.x2 - w / 2.0
+        y = n.box.y2 - render.UNIT_H / 2.0
+        marks.append(
+            f'<g class="qbm-value" data-value-for="{render.esc(nid)}">'
+            f'<rect x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" height="{render.UNIT_H}" '
+            f'rx="7" class="qbm-unit"/>'
+            f'<text class="qbm-unit-label" x="{x + w/2:.2f}" y="{y + render.UNIT_H - 4:.2f}" '
+            f'text-anchor="middle">{render.esc(txt)}</text></g>'
+        )
+
+    caption_add = (
+        " " + projection.provenance()
+        + " An asterisk marks a node with at least one locus significant at the stated "
+        "threshold. Colour intensity encodes magnitude; a node with no measurement is "
+        "left unfilled and is not the same as a measured zero."
+    )
+    svg = svg.replace("</svg>", "".join(extra + marks) + "</svg>")
+    svg = _append_caption(svg, caption_add, vmax=limit)
+
+    (out_dir / "svg").mkdir(parents=True, exist_ok=True)
+    stem = f"{spec.id}__{_slug(projection.study)}"
+    path = out_dir / "svg" / f"{stem}.svg"
+    path.write_text(svg, encoding="utf-8")
+
+    return {
+        "id": spec.id,
+        "study": projection.study,
+        "contrast": projection.contrast,
+        "organism": projection.organism,
+        "svg": str(path.relative_to(ROOT)),
+        "nodes_with_data": projection.nodes_with_data,
+        "fraction_covered": round(projection.fraction_covered, 4),
+        "vmax": round(limit, 4),
+        "provenance": projection.provenance(),
+        "dropped_edge_labels": stats["dropped_edge_labels"],
+    }
+
+
+def _slug(text: str) -> str:
+    import re
+
+    return re.sub(r"[^A-Za-z0-9]+", "-", text).strip("-")[:60]
+
+
+def _append_caption(svg: str, extra: str, vmax: float | None = None) -> str:
+    """Re-render the caption with the provenance appended, then the colour bar.
+
+    The caption is re-wrapped rather than having a line tacked on, so the added text
+    obeys the same width and the figure does not grow a line that runs off the edge.
+    The colour bar goes in reserved space BELOW the finished caption and the page
+    grows to fit it — trying to tuck it into whatever looked empty put it over a
+    compartment label, then over the title.
+    """
+    import re
+
+    m = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+    if not m:
+        return svg
+    width, height = float(m.group(1)), float(m.group(2))
+
+    import html
+
+    caption_tags = re.findall(r'<text class="qbm-caption"[^>]*>(.*?)</text>', svg)
+    # Unescape before re-wrapping: this text came back out of the SVG already
+    # escaped, and escaping it again yields "Porterfield &amp;amp; Barker".
+    existing = html.unescape(" ".join(caption_tags))
+    lines, _, _ = render._caption_block(existing + extra, width - 32)
+
+    first = re.search(r'<text class="qbm-caption" x="16" y="([\d.]+)"', svg)
+    if not first:
+        return svg
+    start_y = float(first.group(1))
+
+    svg = re.sub(r'<text class="qbm-caption"[^>]*>.*?</text>\s*', "", svg)
+    block = []
+    y = start_y
+    for line in lines:
+        block.append(f'<text class="qbm-caption" x="16" y="{y:.2f}">{render.esc(line)}</text>')
+        y += render.CAPTION_SIZE * render.LINE_SPACING
+    legend_svg = ""
+    if vmax is not None:
+        legend_svg, legend_h = render.overlay_legend_svg(
+            x=16.0, y=y + 10.0, vmax=vmax, label="log2 fold change (measured)"
+        )
+        y += 10.0 + legend_h
+    new_height = max(height, y + 12.0)
+    svg = svg.replace(
+        f'viewBox="0 0 {m.group(1)} {m.group(2)}"', f'viewBox="0 0 {m.group(1)} {new_height:.2f}"'
+    ).replace(f'height="{m.group(2)}"', f'height="{new_height:.2f}"', 1)
+    # Grow the background rect too, or the new caption lines sit off the canvas.
+    svg = re.sub(
+        r'(<rect class="qbm-canvas" x="0" y="0" width="[\d.]+" height=")[\d.]+(")',
+        rf"\g<1>{new_height:.2f}\g<2>",
+        svg,
+        count=1,
+    )
+    return svg.replace("</svg>", "".join(block) + legend_svg + "</svg>")

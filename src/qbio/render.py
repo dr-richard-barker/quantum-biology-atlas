@@ -156,8 +156,10 @@ def _stylesheet() -> str:
         .qbm-edge-label-bg {{ fill: var(--qbm-bg); stroke: none; }}
         .qbm-edge-label {{ font-size: {EDGE_LABEL_SIZE}px; fill: var(--qbm-ink-soft); }}
 
-        /* Data overlay: filled by qbio.project, absent in the base map. */
-        .qbm-overlay {{ stroke: none; }}
+        /* Data overlay: transparent until qbio.project fills it. Declared as a class
+           rule rather than an inline style="fill:none" — an inline style outranks every
+           selector, so the per-node overlay rules would silently never apply. */
+        .qbm-overlay {{ stroke: none; fill: none; }}
         """
     ).strip()
 
@@ -266,7 +268,7 @@ def node_svg(n: LaidOutNode) -> str:
     parts.append(
         f'<rect class="qbm-overlay" data-overlay-for="{esc(n.id)}" '
         f'x="{n.box.x:.2f}" y="{n.box.y:.2f}" width="{n.box.w:.2f}" height="{n.box.h:.2f}" '
-        f'rx="{rx}" ry="{rx}" style="fill:none"/>'
+        f'rx="{rx}" ry="{rx}"/>'
     )
 
     total_h = len(n.lines) * n.font_size * LINE_SPACING + (
@@ -470,3 +472,73 @@ def _caption_block(caption: str, width: float) -> tuple[list[str], float, float]
     if not caption:
         return [], 0.0, 0.0
     return text_block(caption, CAPTION_SIZE, max(240.0, width))
+
+
+# ---------------------------------------------------------------------------
+# data overlay
+# ---------------------------------------------------------------------------
+#: Divergent scale for log2 fold change. Blue (down) ↔ orange (up), both Okabe-Ito,
+#: distinguishable under every common form of colour vision. The review's own figures
+#: used pure red/green, which is the one pairing to avoid.
+OVERLAY_DOWN = OKABE_ITO["blue"]
+OVERLAY_UP = OKABE_ITO["vermillion"]
+
+
+def _hex_to_rgb(h: str) -> tuple[int, int, int]:
+    h = h.lstrip("#")
+    return tuple(int(h[i : i + 2], 16) for i in (0, 2, 4))  # type: ignore[return-value]
+
+
+def diverging_fill(value: float, vmax: float) -> str:
+    """Map a signed value to an rgba fill. Zero is transparent, not a colour.
+
+    Returning transparency at zero matters: a node with a measured value of zero and
+    a node with no measurement at all must not look the same as a node that is
+    mid-scale on some arbitrary palette.
+    """
+    if vmax <= 0:
+        return "rgba(0,0,0,0)"
+    t = max(-1.0, min(1.0, value / vmax))
+    r, g, b = _hex_to_rgb(OVERLAY_UP if t >= 0 else OVERLAY_DOWN)
+    return f"rgba({r},{g},{b},{abs(t) * 0.78:.3f})"
+
+
+def overlay_svg(node_values: dict, vmax: float) -> str:
+    """CSS + markup patch that fills each node's reserved overlay slot.
+
+    Written as a `<style>` block keyed on `data-overlay-for`, so the overlay is a
+    separate layer over an unmodified base map — the geometry is never recomputed
+    for a data run, and the same base map can carry different studies.
+    """
+    rules = []
+    chips = []
+    for nid, nv in node_values.items():
+        rules.append(
+            f'[data-overlay-for="{esc(nid)}"] {{ fill: {diverging_fill(nv.value, vmax)}; }}'
+        )
+        # A significant node gets a visible marker, not just a deeper colour —
+        # colour alone cannot carry a boolean legibly.
+        if nv.significant:
+            chips.append(nid)
+    css = "<style>" + "\n".join(rules) + "</style>"
+    return css
+
+
+def overlay_legend_svg(x: float, y: float, vmax: float, label: str) -> tuple[str, float]:
+    """Colour bar for the overlay, with the scale stated in real units."""
+    w, h = 150.0, 11.0
+    stops = 24
+    out = [f'<g class="qbm-overlay-legend" transform="translate({x:.2f},{y:.2f})">']
+    out.append(f'<text class="qbm-legend" x="0" y="0" style="font-weight:700">{esc(label)}</text>')
+    for i in range(stops):
+        t = -1.0 + 2.0 * i / (stops - 1)
+        out.append(
+            f'<rect x="{i * w / stops:.2f}" y="8" width="{w / stops + 0.6:.2f}" height="{h}" '
+            f'style="fill:{diverging_fill(t * vmax, vmax)};stroke:none"/>'
+        )
+    out.append(f'<rect x="0" y="8" width="{w:.2f}" height="{h}" class="qbm-unit" style="fill:none"/>')
+    out.append(f'<text class="qbm-legend" x="0" y="{8 + h + 11:.2f}">−{vmax:.2f}</text>')
+    out.append(f'<text class="qbm-legend" x="{w:.2f}" y="{8 + h + 11:.2f}" text-anchor="end">+{vmax:.2f}</text>')
+    out.append(f'<text class="qbm-legend" x="{w/2:.2f}" y="{8 + h + 11:.2f}" text-anchor="middle">0</text>')
+    out.append("</g>")
+    return "".join(out), 8 + h + 18

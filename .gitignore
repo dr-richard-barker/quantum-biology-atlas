@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 .locus_cache/
 data/manuscript_text.txt
+.ortho_cache/
+.osdr_cache/
+data/external/
