@@ -45,7 +45,14 @@
   p, li { max-width:74ch; }
   a { color:var(--qba-accent); }
   code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
-    background:var(--qba-card); padding:1px 5px; border-radius:4px; }
+    background:var(--qba-card); padding:1px 5px; border-radius:4px;
+    /* Long identifiers — an AGI locus list, a DOI — must break rather than push the
+       page wider than the screen. */
+    overflow-wrap:anywhere; }
+  /* A code block scrolls inside itself. Without this every page overflowed the
+     viewport on a phone: the index scrolled to 736px at a 375px width. */
+  pre { overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+  pre code { overflow-wrap:normal; white-space:pre; }
   .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
   .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
     padding:9px 14px; font-size:.9rem; }
@@ -53,6 +60,15 @@
   .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
     border-radius:0 8px 8px 0; margin:20px 0; }
   table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  /* A wide table scrolls inside its own box rather than making the whole page scroll
+     sideways. The per-node value tables are 11 columns and overflowed the viewport on
+     the deployed page by 70px at desktop width, and far more on a phone. */
+  .tablewrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px 0; }
+  .tablewrap table { margin:0; min-width:760px; }
+  /* Inside a scrolling table an identifier must NOT break: `overflow-wrap:anywhere`
+     on code turned AT4G25100 into "AT4 G251 00". The wrapper scrolls instead. */
+  .tablewrap code { overflow-wrap:normal; white-space:nowrap; }
+  .tablewrap + .tablenote { font-size:.82rem; color:var(--qba-soft); margin:-4px 0 18px; }
   th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
     vertical-align:top; }
   th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;

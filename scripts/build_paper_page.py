@@ -155,8 +155,8 @@ the same encoding as the maps.</p>""")
 
     for f in figs:
         out.append(f"<h3>{e(f['id'])} · {e(f['tissue'].title())}</h3>")
-        out.append("<table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th>"
-                   "<th>Trace</th>" + "".join(f"<th>{e(t)}</th>" for t in tps)
+        out.append('<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th>'
+                   "<th>Loci</th><th>Trace</th>" + "".join(f"<th>{e(t)}</th>" for t in tps)
                    + "<th>Peak</th></tr></thead><tbody>")
         for n in f["per_node"]:
             cells = "".join(
@@ -167,11 +167,17 @@ the same encoding as the maps.</p>""")
                 + (" <em>(reverses)</em>" if n["reverses_direction"] else "")
                 + f"</td><td><span class='swatch {e(n['evidence_tier'])}'></span>"
                 f"{e(n['evidence_tier'])}</td>"
-                f"<td><code>{e(' '.join(n['loci']))}</code></td>"
+                # One element per locus: the cell may break between identifiers,
+                # never inside one.
+                + "<td>"
+                + " ".join(f"<code>{e(l)}</code>" for l in n["loci"])
+                + "</td>"
                 f"<td>{sparkline_inline(n['log2'], f['vmax'])}</td>"
                 f"{cells}<td><b>{n['peak']:+.2f}</b> @ {e(n['peak_timepoint'])}</td></tr>"
             )
-        out.append("</tbody></table>")
+        out.append('</tbody></table></div>'
+                   '<p class="tablenote">Scroll the table sideways to see every '
+                   'timepoint.</p>')
 
     # ---- what this does and does not show ---------------------------------
     out.append(f"""<h2>What this does not show</h2>
