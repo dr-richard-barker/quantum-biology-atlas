@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSD-8 — the cleanest field-only contrast, and a specificity test it fails</title>
+<meta name="description" content="Arabidopsis at 1g inside and outside a 16.5 T magnet, with non-magnetic gravity controls, and a permutation test asking whether the atlas&#x27;s loci respond at all specially.">
+<meta name="author" content="Richard Barker">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Tokens are namespaced --qba-* and mapped onto the CoSE palette loaded from
+     cose-map.css. Each falls back to a literal, so the page is still legible and
+     correctly themed if that stylesheet cannot be fetched.
+
+     Note --qba-soft maps to --muted, NOT to --soft: in the CoSE vocabulary --soft is
+     a surface colour, and using it for text renders near-white on white. */
+  :root {
+    --qba-bg:     var(--bg,       #ffffff);
+    --qba-ink:    var(--ink,      #1a2230);
+    --qba-soft:   var(--muted,    #5a6473);
+    --qba-faint:  var(--ink-faint,#8892a3);
+    --qba-rule:   var(--line,     #e5e9f0);
+    --qba-card:   var(--surface,  #f7f9fc);
+    --qba-card2:  var(--surface-2,#eef2f8);
+    --qba-accent: var(--accent,   #3B6EA5);
+    --qba-accent2:var(--accent2,  #3FB6A8);
+    /* Okabe-Ito vermillion: the CoSE palette has no warning token, and this is the
+       same colour the maps use for a down-regulated node. */
+    --qba-warn:   #D55E00;
+    --qba-t1: var(--ink,       #1a2230);
+    --qba-t2: var(--muted,     #5a6473);
+    --qba-t3: var(--ink-faint, #8892a3);
+    --qba-t4: var(--line,      #c9d1dc);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--qba-bg); color:var(--qba-ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 16px 96px; }
+  header.hero { padding:56px 0 28px; border-bottom:1px solid var(--qba-rule); }
+  h1 { font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.18; margin:0 0 10px; letter-spacing:-.02em; }
+  .lede { font-size:1.12rem; color:var(--qba-soft); max-width:62ch; margin:0 0 18px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:1.05rem; margin:26px 0 6px; }
+  p, li { max-width:74ch; }
+  a { color:var(--qba-accent); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+    background:var(--qba-card); padding:1px 5px; border-radius:4px;
+    /* Long identifiers — an AGI locus list, a DOI — must break rather than push the
+       page wider than the screen. */
+    overflow-wrap:anywhere; }
+  /* A code block scrolls inside itself. Without this every page overflowed the
+     viewport on a phone: the index scrolled to 736px at a 375px width. */
+  pre { overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+  pre code { overflow-wrap:normal; white-space:pre; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+  .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
+    padding:9px 14px; font-size:.9rem; }
+  .stats b { font-size:1.18rem; display:block; font-weight:700; }
+  .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
+    border-radius:0 8px 8px 0; margin:20px 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  /* A wide table scrolls inside its own box rather than making the whole page scroll
+     sideways. The per-node value tables are 11 columns and overflowed the viewport on
+     the deployed page by 70px at desktop width, and far more on a phone. */
+  .tablewrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px 0; }
+  .tablewrap table { margin:0; min-width:760px; }
+  /* Inside a scrolling table an identifier must NOT break: `overflow-wrap:anywhere`
+     on code turned AT4G25100 into "AT4 G251 00". The wrapper scrolls instead. */
+  .tablewrap code { overflow-wrap:normal; white-space:nowrap; }
+  .tablewrap + .tablenote { font-size:.82rem; color:var(--qba-soft); margin:-4px 0 18px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
+    vertical-align:top; }
+  th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .swatch { display:inline-block; width:34px; height:15px; border-radius:4px;
+    background:var(--qba-card); vertical-align:-2px; margin-right:8px; }
+  .swatch.T1 { border:2.6px solid var(--qba-t1); }
+  .swatch.T2 { border:1.7px solid var(--qba-t2); }
+  .swatch.T3 { border:1.5px dashed var(--qba-t3); }
+  .swatch.T4 { border:1px solid var(--qba-t4); }
+  figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-card); }
+  figure.map > a { display:block; background:var(--qba-bg); }
+  figure.map img { width:100%; height:auto; display:block; }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
+    margin-bottom:4px; }
+  .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
+  .dl { margin-top:8px; font-size:.85rem; }
+  footer { border-top:1px solid var(--qba-rule); margin-top:56px; padding-top:22px;
+    font-size:.88rem; color:var(--qba-soft); }
+  @media (max-width:640px) { header.hero { padding-top:34px; } }
+</style>
+<!-- CoSE colour scheme only. cose-chrome.css and theme.js would inject the
+     navigation rail, and are deliberately not loaded. -->
+<link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-map.css">
+</head>
+<body data-site-id="quantum-biology-atlas">
+<div class="wrap">
+
+<header class="hero">
+<h1>The same gravity, inside and outside the magnet</h1>
+<p class="lede">Gravitational and magnetic field variations synergize to cause subtle variations in the global transcriptional state of Arabidopsis in vitro callus cultures — NASA OSDR
+<a href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-8">OSD-8</a>,
+<a href="https://doi.org/10.1186/1471-2164-13-105">doi:10.1186/1471-2164-13-105</a>.
+This study declares magnetic field and altered gravity as <em>separate</em> factors and
+carries gravity controls that use no magnet at all. One group changes the field and
+nothing else — the cleanest such comparison anywhere in this atlas, in the anchor
+species, at full coverage.</p>
+<ul class="stats">
+<li><b>29,327</b>loci on the array</li>
+<li><b>125/125</b>atlas loci reached</li>
+<li><b>7</b>experimental groups</li>
+<li><b>1</b>isolates the field</li>
+</ul>
+</header>
+<div class="note">
+<p><strong>The atlas's loci are not more field-responsive than random loci.</strong>
+In the field-isolating contrast, the 125 QBO loci move by a mean
+|log<sub>2</sub> fold change| of <strong>0.1660</strong>,
+against <strong>0.1767</strong> for the same number of loci drawn
+at random from the other 29,202 on the array
+(<strong>p = 0.717</strong>, 10,000 permutations,
+one-sided). They move slightly <strong>less</strong>, not more.</p>
+<p>And it is not a quirk of one group. The same test in all
+7 groups — including the two that change gravity with no magnet —
+gives p between 0.66 and
+0.92, never once favouring the atlas's
+loci.</p>
+</div>
+<h2>What that does and does not mean</h2>
+<ul>
+<li><strong>It does not invalidate the ontology.</strong> QBO selects entities for the
+quantum chemistry they carry — an unpaired spin, a radical pair, a paramagnetic
+cofactor — which is a claim about what <em>could</em> mechanistically respond, not a
+prediction that it <em>will</em> respond to 16.5&nbsp;T in callus culture.</li>
+<li><strong>It does constrain what a coloured map may be said to show.</strong> On this
+dataset, the colours on the figures below are not evidence that the field acts
+selectively on these nodes. They show what these nodes did, next to a background that
+did as much.</li>
+<li><strong>The same pattern appears in the gravity-only controls</strong>, which have no
+magnet in them at all. So this is not a statement about magnetism specifically; the QBO
+set is simply less variable than the array average in this experiment. A plausible
+reason — untested here — is that it is largely core bioenergetic and antioxidant
+machinery, which tends to be buffered.</li>
+<li><strong>It is a strong-field result.</strong> Like OSD-27, this is tesla-scale, not
+the near-null regime the review is about. A locus unmoved at 16.5&nbsp;T has not been
+shown unmoved at 30&nbsp;nT.</li>
+</ul>
+<div class="tablewrap"><table><thead><tr><th>Group</th><th>What varies</th><th>QBO mean |log2FC|</th><th>Random background</th><th>p</th></tr></thead><tbody>
+<tr><td><code>MAG_1g</code></td><td><strong>field only</strong></td><td>0.1660</td><td>0.1767 ± 0.0181</td><td>0.717</td></tr>
+<tr><td><code>MAG_mg</code></td><td>field and gravity together</td><td>0.1933</td><td>0.2242 ± 0.0228</td><td>0.920</td></tr>
+<tr><td><code>MAG_0.1g</code></td><td>field and gravity together</td><td>0.1946</td><td>0.2180 ± 0.0225</td><td>0.853</td></tr>
+<tr><td><code>MAG_1.9g</code></td><td>field and gravity together</td><td>0.2073</td><td>0.2249 ± 0.0257</td><td>0.742</td></tr>
+<tr><td><code>MAG_2g</code></td><td>field and gravity together</td><td>0.1415</td><td>0.1487 ± 0.0158</td><td>0.659</td></tr>
+<tr><td><code>RPM_mg</code></td><td>gravity only, no magnet</td><td>0.1837</td><td>0.1986 ± 0.0186</td><td>0.783</td></tr>
+<tr><td><code>LDC_2g</code></td><td>gravity only, no magnet</td><td>0.1933</td><td>0.2082 ± 0.0236</td><td>0.725</td></tr>
+</tbody></table></div>
+<h2>Why this design is worth the trouble</h2>
+<p>Diamagnetic levitation normally confounds field with gravity: position inside the bore
+sets effective gravity, so changing one changes the other. This study breaks that
+confound twice over. It runs a <strong>1g * point inside the magnet</strong> — where
+the magnetic force balances to leave effective gravity at 1g — against a 1g control
+outside it, and it reaches µg and 2g <em>without any magnet</em> using a
+random-positioning machine and a centrifuge.</p>
+<div class="tablewrap"><table><thead><tr><th>Group</th><th>Test</th><th>Reference</th>
+<th>Field</th><th>Gravity</th><th>n</th><th>Isolates</th></tr></thead><tbody>
+<tr><td><code>MAG_1g</code></td><td>MAG 1g*</td><td>1g control outside the magnet</td><td>16.5 T vs 0 T</td><td>1g vs 1g</td><td>3</td><td><strong>field</strong></td></tr>
+<tr><td><code>MAG_mg</code></td><td>MAG mg*</td><td>1g control outside the magnet</td><td>10.1 T vs 0 T</td><td>µg vs 1g</td><td>3</td><td>—</td></tr>
+<tr><td><code>MAG_0.1g</code></td><td>MAG 0.1g*</td><td>1g control outside the magnet</td><td>14.7 T vs 0 T</td><td>0.1g vs 1g</td><td>3</td><td>—</td></tr>
+<tr><td><code>MAG_1.9g</code></td><td>MAG 1.9g*</td><td>1g control outside the magnet</td><td>14.7 T vs 0 T</td><td>1.9g vs 1g</td><td>2</td><td>—</td></tr>
+<tr><td><code>MAG_2g</code></td><td>MAG 2g*</td><td>1g control outside the magnet</td><td>10.1 T vs 0 T</td><td>2g vs 1g</td><td>3</td><td>—</td></tr>
+<tr><td><code>RPM_mg</code></td><td>RPM mg*</td><td>RPM 1g control</td><td>0 T vs 0 T</td><td>µg vs 1g</td><td>3</td><td>gravity</td></tr>
+<tr><td><code>LDC_2g</code></td><td>LDC 2g</td><td>LDC 1g control</td><td>0 T vs 0 T</td><td>2g vs 1g</td><td>3</td><td>gravity</td></tr>
+</tbody></table></div>
+<p><code>MAG_1g</code> is the one group where the two
+channels differ in field and in <em>nothing else</em>: 16.5&nbsp;T
+against 0&nbsp;T, both at
+1g. That is computed from the design table rather than asserted, and
+the build fails if more or fewer than one group qualifies.</p>
+<h2>Where the numbers come from, and what they are not</h2>
+<p><strong>There is no GeneLab differential expression for this study.</strong> Unlike
+OSD-38 and OSD-27, it carries 20 two-colour arrays and a normalized archive with no
+contrasts file. The values here are <strong>the depositors' own normalized log
+ratios</strong> (GSE29787), which is a different and weaker provenance:
+<code>depositor_normalised</code>.</p>
+<p><strong>No model was fitted, so no significance is shown.</strong> Two-colour arrays
+are natively ratios; there is no adjusted p-value in the source and none is invented.
+Every other overlay in this atlas marks significant nodes with an asterisk. These do not,
+deliberately.</p>
+<p><strong>The dye swap is already handled — by the depositors.</strong> The arrays
+alternate control-on-Cy3 and control-on-Cy5, and GEO's own value definition reads
+<em>“normalized log2 ratio representing test g /reference 1g”</em>: already oriented test-over-reference regardless of
+dye. This matters more than it sounds. Had the column been raw log(Cy5/Cy3) instead,
+averaging the replicates in each group would have cancelled real signal toward zero and
+produced a clean, entirely false null.</p>
+<p><strong>The probe-to-gene join is one extra inferential hop.</strong> The processed
+tables key on bare Agilent feature numbers (<code>1</code>, <code>2</code>,
+<code>3</code>), so the GPL9020 platform table is required to reach genes at
+all. Its <code>GENE_SYMBOL</code> column carries an AGI locus only sometimes — often a
+trivial name like <code>AtATG18b</code> instead — and reading only that column reaches
+<strong>17 of the atlas's 125 loci</strong>. The authoritative identifier sits in
+<code>ACCESSION_STRING</code> as <code>tair|AT4G30510.1</code>, which reaches
+<strong>all 125</strong>. Of 43,803 non-control probes,
+38,613 get their locus that way,
+646 only from the symbol column, and
+4,546 carry no AGI at all and are dropped.</p>
+<p>Multiple probes for one locus are combined by <strong>median</strong> rather than
+mean, so a single bad spot on a 45,000-feature array cannot drag a gene with it;
+replicate arrays are then combined by mean.</p>
+<h2>The maps</h2>
+<p>The field-isolating contrast on four maps, at
+<strong>100% node coverage</strong> — every identifier-bearing node received a value,
+which no other page in this atlas achieves. Colour scales are fixed across all
+7 groups so the panels are comparable. Read them with the specificity
+result above in mind.</p>
+<figure class="map">
+<a href="maps/svg/QBM-01__OSD-8.svg"><img src="maps/png/QBM-01__OSD-8.png" alt="QBM-01 with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-01 · Magnet 1g* vs outside, 16.5 T · 10 of 10 nodes (100%)</span>
+<p>Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 10 of 10 identifier-bearing nodes received a value (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.</p>
+<p class="dl"><a href="maps/svg/QBM-01__OSD-8.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-03__OSD-8.svg"><img src="maps/png/QBM-03__OSD-8.png" alt="QBM-03 with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-03 · Magnet 1g* vs outside, 16.5 T · 4 of 4 nodes (100%)</span>
+<p>Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 4 of 4 identifier-bearing nodes received a value (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.</p>
+<p class="dl"><a href="maps/svg/QBM-03__OSD-8.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-07__OSD-8.svg"><img src="maps/png/QBM-07__OSD-8.png" alt="QBM-07 with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-07 · Magnet 1g* vs outside, 16.5 T · 8 of 8 nodes (100%)</span>
+<p>Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 8 of 8 identifier-bearing nodes received a value (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.</p>
+<p class="dl"><a href="maps/svg/QBM-07__OSD-8.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-09__OSD-8.svg"><img src="maps/png/QBM-09__OSD-8.png" alt="QBM-09 with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-09 · Magnet 1g* vs outside, 16.5 T · 9 of 9 nodes (100%)</span>
+<p>Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 9 of 9 identifier-bearing nodes received a value (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.</p>
+<p class="dl"><a href="maps/svg/QBM-09__OSD-8.svg">SVG</a></p>
+</figcaption>
+</figure>
+<h2>Every node in every group</h2>
+<p>The field-isolating group is the one that matters; the rest are
+shown beside it so a node that moves under field-plus-gravity but not under field alone
+is visible as such. Values are log<sub>2</sub> fold change, test over reference.</p>
+<h3>QBM-01 — 10 of 10 nodes (100%)</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th><strong>MAG_1g</strong></th><th>MAG_mg</th><th>MAG_0.1g</th><th>MAG_1.9g</th><th>MAG_2g</th><th>RPM_mg</th><th>LDC_2g</th></tr></thead><tbody>
+<tr><td>ACONITASE</td><td><span class='swatch T3'></span>T3</td><td>+0.404</td><td>+0.506</td><td>+0.396</td><td>+0.303</td><td>+0.329</td><td>+0.058</td><td>-0.214</td></tr>
+<tr><td>COMPLEX_I_FMN</td><td><span class='swatch T3'></span>T3</td><td>+0.320</td><td>+0.120</td><td>+0.017</td><td>+0.275</td><td>+0.067</td><td>+0.123</td><td>-0.010</td></tr>
+<tr><td>AOX</td><td><span class='swatch T4'></span>T4</td><td>-0.176</td><td>-0.149</td><td>-0.119</td><td>-0.398</td><td>-0.178</td><td>+0.115</td><td>-0.094</td></tr>
+<tr><td>LIPOYL_SYNTHASE</td><td><span class='swatch T3'></span>T3</td><td>+0.173</td><td>+0.210</td><td>+0.143</td><td>-0.145</td><td>+0.130</td><td>+0.347</td><td>+0.193</td></tr>
+<tr><td>CYTOCHROME_C</td><td><span class='swatch T3'></span>T3</td><td>-0.162</td><td>-0.069</td><td>-0.033</td><td>-0.195</td><td>-0.130</td><td>+0.068</td><td>+0.172</td></tr>
+<tr><td>RIESKE_FES</td><td><span class='swatch T3'></span>T3</td><td>+0.048</td><td>-0.000</td><td>-0.022</td><td>-0.028</td><td>+0.033</td><td>+0.002</td><td>+0.017</td></tr>
+<tr><td>COMPLEX_II</td><td><span class='swatch T3'></span>T3</td><td>-0.037</td><td>+0.023</td><td>+0.020</td><td>+0.111</td><td>-0.033</td><td>-0.053</td><td>-0.105</td></tr>
+<tr><td>MITO_SUPEROXIDE</td><td><span class='swatch T2'></span>T2</td><td>+0.022</td><td>+0.067</td><td>+0.033</td><td>+0.170</td><td>-0.173</td><td>+0.038</td><td>-0.038</td></tr>
+<tr><td>COMPLEX_I</td><td><span class='swatch T3'></span>T3</td><td>-0.014</td><td>-0.067</td><td>-0.076</td><td>+0.041</td><td>-0.104</td><td>-0.016</td><td>-0.043</td></tr>
+<tr><td>ALT_NADH_DH</td><td><span class='swatch T3'></span>T3</td><td>-0.006</td><td>+0.046</td><td>+0.160</td><td>-0.103</td><td>-0.099</td><td>+0.026</td><td>-0.065</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every group.</p>
+<h3>QBM-03 — 4 of 4 nodes (100%)</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th><strong>MAG_1g</strong></th><th>MAG_mg</th><th>MAG_0.1g</th><th>MAG_1.9g</th><th>MAG_2g</th><th>RPM_mg</th><th>LDC_2g</th></tr></thead><tbody>
+<tr><td>CRY1</td><td><span class='swatch T1'></span>T1</td><td>+0.255</td><td>+0.153</td><td>+0.245</td><td>-0.018</td><td>+0.205</td><td>+0.092</td><td>+0.490</td></tr>
+<tr><td>TRP_TRIAD</td><td><span class='swatch T2'></span>T2</td><td>+0.144</td><td>+0.117</td><td>+0.189</td><td>-0.016</td><td>+0.084</td><td>+0.168</td><td>+0.273</td></tr>
+<tr><td>PHYB</td><td><span class='swatch T4'></span>T4</td><td>-0.107</td><td>+0.023</td><td>-0.113</td><td>-0.045</td><td>+0.043</td><td>-0.060</td><td>-0.023</td></tr>
+<tr><td>CRY2</td><td><span class='swatch T2'></span>T2</td><td>+0.033</td><td>+0.082</td><td>+0.133</td><td>-0.015</td><td>-0.037</td><td>+0.243</td><td>+0.055</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every group.</p>
+<h3>QBM-07 — 8 of 8 nodes (100%)</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th><strong>MAG_1g</strong></th><th>MAG_mg</th><th>MAG_0.1g</th><th>MAG_1.9g</th><th>MAG_2g</th><th>RPM_mg</th><th>LDC_2g</th></tr></thead><tbody>
+<tr><td>PLASTID_ROS</td><td><span class='swatch T2'></span>T2</td><td>+0.182</td><td>+0.232</td><td>+0.245</td><td>+0.034</td><td>+0.056</td><td>+0.100</td><td>+0.203</td></tr>
+<tr><td>CATALASE</td><td><span class='swatch T3'></span>T3</td><td>-0.099</td><td>-0.052</td><td>-0.049</td><td>+0.037</td><td>-0.044</td><td>-0.069</td><td>-0.130</td></tr>
+<tr><td>SUPEROXIDE_DISMUTASES</td><td><span class='swatch T4'></span>T4</td><td>+0.097</td><td>+0.142</td><td>+0.158</td><td>+0.082</td><td>-0.035</td><td>+0.068</td><td>+0.070</td></tr>
+<tr><td>PEROXIREDOXIN_TRX</td><td><span class='swatch T4'></span>T4</td><td>-0.072</td><td>+0.090</td><td>-0.018</td><td>+0.068</td><td>+0.012</td><td>+0.008</td><td>-0.020</td></tr>
+<tr><td>ASC_GSH_CYCLE</td><td><span class='swatch T3'></span>T3</td><td>+0.047</td><td>-0.052</td><td>-0.044</td><td>+0.093</td><td>+0.086</td><td>-0.072</td><td>-0.032</td></tr>
+<tr><td>ASCORBATE_PEROXIDASE</td><td><span class='swatch T3'></span>T3</td><td>+0.027</td><td>+0.017</td><td>-0.220</td><td>+0.565</td><td>+0.037</td><td>+0.162</td><td>-0.242</td></tr>
+<tr><td>MITO_SUPEROXIDE</td><td><span class='swatch T2'></span>T2</td><td>+0.022</td><td>+0.067</td><td>+0.033</td><td>+0.170</td><td>-0.173</td><td>+0.038</td><td>-0.038</td></tr>
+<tr><td>COMPLEX_I</td><td><span class='swatch T3'></span>T3</td><td>-0.014</td><td>-0.067</td><td>-0.076</td><td>+0.041</td><td>-0.104</td><td>-0.016</td><td>-0.043</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every group.</p>
+<h3>QBM-09 — 9 of 9 nodes (100%)</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th><strong>MAG_1g</strong></th><th>MAG_mg</th><th>MAG_0.1g</th><th>MAG_1.9g</th><th>MAG_2g</th><th>RPM_mg</th><th>LDC_2g</th></tr></thead><tbody>
+<tr><td>CYSTEINE_SYNTHESIS</td><td><span class='swatch T4'></span>T4</td><td>+0.230</td><td>+0.528</td><td>+0.373</td><td>+0.588</td><td>+0.442</td><td>-0.158</td><td>+0.252</td></tr>
+<tr><td>NFS1</td><td><span class='swatch T4'></span>T4</td><td>+0.223</td><td>+0.145</td><td>+0.215</td><td>-0.092</td><td>+0.125</td><td>+0.253</td><td>+0.273</td></tr>
+<tr><td>ISU1</td><td><span class='swatch T3'></span>T3</td><td>+0.153</td><td>+0.150</td><td>+0.180</td><td>+0.045</td><td>+0.093</td><td>+0.070</td><td>+0.060</td></tr>
+<tr><td>SUF_SYSTEM</td><td><span class='swatch T3'></span>T3</td><td>-0.142</td><td>-0.293</td><td>-0.168</td><td>-0.172</td><td>-0.035</td><td>-0.020</td><td>+0.343</td></tr>
+<tr><td>FE_UPTAKE</td><td><span class='swatch T2'></span>T2</td><td>+0.074</td><td>-0.033</td><td>-0.046</td><td>+0.109</td><td>+0.033</td><td>-0.036</td><td>-0.050</td></tr>
+<tr><td>FES_CLIENTS</td><td><span class='swatch T3'></span>T3</td><td>+0.034</td><td>+0.034</td><td>-0.005</td><td>-0.006</td><td>+0.019</td><td>-0.026</td><td>+0.046</td></tr>
+<tr><td>FERREDOXIN</td><td><span class='swatch T2'></span>T2</td><td>-0.027</td><td>-0.030</td><td>-0.082</td><td>+0.013</td><td>-0.013</td><td>-0.010</td><td>-0.017</td></tr>
+<tr><td>S_ASSIMILATION</td><td><span class='swatch T2'></span>T2</td><td>+0.017</td><td>+0.093</td><td>+0.088</td><td>+0.252</td><td>+0.089</td><td>-0.177</td><td>-0.387</td></tr>
+<tr><td>FE_STORAGE</td><td><span class='swatch T4'></span>T4</td><td>+0.005</td><td>+0.080</td><td>+0.109</td><td>-0.054</td><td>-0.041</td><td>+0.129</td><td>+0.268</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every group.</p>
+<h2>Reproducing it</h2>
+<pre><code>PYTHONPATH=src python3 scripts/build_osd8_showcase.py
+PYTHONPATH=src python3 scripts/build_osd8_page.py</code></pre>
+<p>The permutation test is seeded (<code>20260924</code>) and runs
+10,000 draws, so the p-values above reproduce exactly. The design table,
+the platform join report, per-group specificity and every per-node value are written to
+<a href="results/osd8/record.json"><code>results/osd8/record.json</code></a>, and this
+page is generated from that record.</p>
+
+<footer>
+<p><strong>Data.</strong> NASA OSDR <a href="https://osdr.nasa.gov/bio/repo/data/studies/OSD-8">OSD-8</a>
+/ GEO <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE29787">GSE29787</a>,
+platform <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL9020">GPL9020</a>.
+Provenance class <code>depositor_normalised</code> — the depositors' normalized
+ratios, not a NASA pipeline output, and no model fitted.</p>
+<p><strong>Publication.</strong> <a href="https://doi.org/10.1186/1471-2164-13-105">doi:10.1186/1471-2164-13-105</a>.</p>
+<p><a href="index.html">← Quantum Biology Atlas</a></p>
+</footer>
+</div>
+</body>
+</html>

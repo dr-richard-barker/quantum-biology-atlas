@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 700.51 980.00" width="700.51" height="980.00" role="img" aria-label="QBM-03 · Cryptochrome radical-pair photochemistry">
+<style>:root {
+  --qbm-bg: #ffffff;
+  --qbm-ink: #16181d;
+  --qbm-ink-soft: #55606e;
+  --qbm-node-fill: #f7f8fa;
+  --qbm-node-stroke: #16181d;
+  --qbm-hairline: #9aa3b0;
+  --qbm-edge: #55606e;
+  --qbm-compartment-fill: rgba(0,0,0,0.035);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --qbm-bg: #0f1115;
+    --qbm-ink: #e8eaee;
+    --qbm-ink-soft: #a3adbb;
+    --qbm-node-fill: #191d24;
+    --qbm-node-stroke: #e8eaee;
+    --qbm-hairline: #5b6572;
+    --qbm-edge: #a3adbb;
+    --qbm-compartment-fill: rgba(255,255,255,0.045);
+  }
+}
+:root[data-theme="dark"] {
+  --qbm-bg: #0f1115;
+  --qbm-ink: #e8eaee;
+  --qbm-ink-soft: #a3adbb;
+  --qbm-node-fill: #191d24;
+  --qbm-node-stroke: #e8eaee;
+  --qbm-hairline: #5b6572;
+  --qbm-edge: #a3adbb;
+  --qbm-compartment-fill: rgba(255,255,255,0.045);
+}
+
+.qbm-canvas { fill: var(--qbm-bg); }
+text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
+.qbm-title  { font-size: 20.0px; font-weight: 700; }
+.qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
+.qbm-caption { font-size: 11.5px; }
+.qbm-label  { font-size: 13.0px; font-weight: 600; }
+.qbm-sub    { font-size: 10.0px; fill: var(--qbm-ink-soft); font-weight: 400; }
+.qbm-legend { font-size: 11.0px; fill: var(--qbm-ink-soft); }
+
+.qbm-node { fill: var(--qbm-node-fill); stroke: var(--qbm-node-stroke); }
+.qbm-unit { fill: var(--qbm-bg); stroke: var(--qbm-hairline); stroke-width: 0.9; }
+.qbm-unit-label { font-size: 9.0px; fill: var(--qbm-ink-soft);
+                   font-weight: 600; letter-spacing: 0.01em; }
+/* Evidence tier is a border channel — a hypothesis looks provisional. */
+.tier-T1 { stroke-width: 2.6; }
+.tier-T2 { stroke-width: 1.7; }
+.tier-T3 { stroke-width: 1.5; stroke-dasharray: 7 5; }
+.tier-T4 { stroke-width: 0.9; stroke: var(--qbm-hairline); }
+
+.qbm-compartment { fill: var(--qbm-compartment-fill); stroke-width: 1.2;
+                    stroke-dasharray: 3 4; }
+.qbm-compartment-label { font-size: 11px; font-weight: 700;
+                          letter-spacing: 0.08em; text-transform: uppercase; }
+.qbm-edge { fill: none; stroke: var(--qbm-edge); stroke-width: 1.6; }
+.qbm-edge-inhibition { stroke: #D55E00; }
+.qbm-edge-electron_transfer { stroke: #0072B2; stroke-width: 2.0; }
+.qbm-edge-cofactor_insertion { stroke: #CC79A7; stroke-dasharray: 5 4; }
+.qbm-edge-redox_feedback { stroke: #E69F00; stroke-dasharray: 2 4; }
+.qbm-edge-energy_feedback { stroke: #009E73; stroke-dasharray: 2 4; }
+.qbm-edge-circadian_feedback { stroke: #CC79A7; stroke-dasharray: 2 4; }
+.qbm-edge-hormonal_feedback { stroke: #56B4E9; stroke-dasharray: 2 4; }
+.qbm-edge-indirect_influence { stroke-dasharray: 6 4; }
+.qbm-edge-label-bg { fill: var(--qbm-bg); stroke: none; }
+.qbm-edge-label { font-size: 9.5px; fill: var(--qbm-ink-soft); }
+
+/* Data overlay: transparent until qbio.project fills it. Declared as a class
+   rule rather than an inline style="fill:none" — an inline style outranks every
+   selector, so the per-node overlay rules would silently never apply. */
+.qbm-overlay { stroke: none; fill: none; }
+
+/* Time-course sparklines. The zero line is a real reference, not decoration:
+   without it an all-up series and an all-down one look identical. */
+.qbm-spark-zero { stroke: var(--qbm-hairline); stroke-width: 0.8; }
+.qbm-spark-line { stroke-width: 1.4; stroke-linecap: round; fill: none; }
+.qbm-spark-dot  { stroke: none; }</style>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
+<rect class="qbm-canvas" x="0" y="0" width="700.51" height="980.00"/>
+<text class="qbm-title" x="16" y="31.20">QBM-03 · Cryptochrome radical-pair photochemistry</text>
+<text class="qbm-subtitle" x="16" y="58.80">The reference mechanism — and the failed replication that has to travel with it</text>
+<g class="qbm-body" transform="translate(52.00,226.60)"><g class="qbm-compartment-group" data-compartment="nucleus"><rect class="qbm-compartment" data-compartment-rect="nucleus" x="-26.00" y="-46.00" width="648.51" height="321.52" rx="12" ry="12" style="stroke:#4a2a55"/><text class="qbm-compartment-label" x="-12.00" y="-31.00" style="fill:#4a2a55">Nucleus</text></g><g class="qbm-compartment-group" data-compartment="organism"><rect class="qbm-compartment" data-compartment-rect="organism" x="179.17" y="293.52" width="238.17" height="106.64" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="193.17" y="308.52" style="fill:#3d3d3d">Organism</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;CRY_FAD" data-edge-class="cofactor_insertion"><path class="qbm-edge qbm-edge-cofactor_insertion" d="M132.21,47.44 L109.09,113.84" marker-end="url(#arrow-cofactor)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;CRY_FAD" data-edge-class="cofactor_insertion"><path class="qbm-edge qbm-edge-cofactor_insertion" d="M257.58,47.44 L135.03,113.84" marker-end="url(#arrow-cofactor)"/></g><g class="qbm-edge-group" data-edge="CRY_FAD-&gt;TRP_TRIAD" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M206.12,131.16 L240.12,131.16" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY_FAD-&gt;TRP_TRIAD" x="211.23" y="124.66" width="23.80" height="13.00" rx="3"/><text class="qbm-edge-label" x="223.12" y="134.46" text-anchor="middle">1e−</text></g><g class="qbm-edge-group" data-edge="TRP_TRIAD-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M389.11,131.16 L423.11,131.16" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="TRP_TRIAD-&gt;SINGLET_TRIPLET" x="382.44" y="158.66" width="47.35" height="13.00" rx="3"/><text class="qbm-edge-label" x="406.11" y="168.46" text-anchor="middle">pair born</text></g><g class="qbm-edge-group" data-edge="CRY_FAD-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M206.12,131.16 L423.11,131.16" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY_FAD-&gt;SINGLET_TRIPLET" x="289.67" y="158.66" width="49.91" height="13.00" rx="3"/><text class="qbm-edge-label" x="314.62" y="168.46" text-anchor="middle">hyperfine</text></g><g class="qbm-edge-group" data-edge="SINGLET_TRIPLET-&gt;COP1_SPA" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M473.55,148.48 L334.52,214.88" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="SINGLET_TRIPLET-&gt;COP1_SPA" x="366.11" y="175.18" width="75.85" height="13.00" rx="3"/><text class="qbm-edge-label" x="404.03" y="184.98" text-anchor="middle">signalling yield</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M158.42,47.44 L285.15,214.88" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M301.01,47.44 L298.51,214.88" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="COP1_SPA-&gt;FLOWERING_OUTPUT" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M298.26,249.52 L298.26,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="COP1_SPA-&gt;FLOWERING_OUTPUT" x="264.99" y="277.22" width="66.53" height="13.00" rx="3"/><text class="qbm-edge-label" x="298.26" y="287.02" text-anchor="middle">degrades CO</text></g><g class="qbm-edge-group" data-edge="CRY2-&gt;FLOWERING_OUTPUT" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M301.14,47.44 L298.42,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY2-&gt;FLOWERING_OUTPUT" x="268.81" y="186.98" width="61.94" height="13.00" rx="3"/><text class="qbm-edge-label" x="299.78" y="196.78" text-anchor="middle">photoperiod</text></g><g class="qbm-edge-group" data-edge="PHYB-&gt;FLOWERING_OUTPUT" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M447.69,47.44 L306.62,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PHYB-&gt;FLOWERING_OUTPUT" x="349.91" y="186.98" width="54.50" height="13.00" rx="3"/><text class="qbm-edge-label" x="377.16" y="196.78" text-anchor="middle">red/far-red</text></g><g class="qbm-edge-group" data-edge="PHYB-&gt;COP1_SPA" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M440.84,47.44 L311.62,214.88" marker-end="url(#arrow)"/></g><g class="qbm-node-group" data-node-id="CRY1" data-tier="T1" data-qbo="QBO:CRY1"><title>Cryptochrome 1 (CRY1)
+tier T1 (verified)
+quantum class: radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive
+nuclei: 1H, 14N
+AGI: AT4G08920
+Ahmad2007: Magnetic intensity affects cryptochrome-dependent responses in Arabidopsis thaliana.
+ [10.1007/s00425-006-0383-0]
+Solovyov2007: Theoretical analysis of Arabidopsis cryptochrome-1 shows magnetic fields could alter activation yields through radical-pair spin dynamics.
+ [10.1529/biophysj.106.097139]
+Harris2009: Under blinded conditions, cryptochrome-dependent magnetic-field effects in Arabidopsis were NOT reproduced.
+ [10.1098/rsif.2008.0519]
+Pooam2019: Magnetic sensitivity mediated by Arabidopsis cryptochrome occurs during flavin reoxidation in the dark, not during photoreduction.
+ [10.1007/s00425-018-3002-y]
+Xu2014: Blue-light-dependent phosphorylation of cryptochromes is affected by magnetic fields in Arabidopsis.
+ [10.1016/j.asr.2014.01.033]
+rationale: The reference case for the radical-pair mechanism in biology, and the entity from which the review&#x27;s whole argument is generalised outward.
+
+caveat: Direction of effect is not consistent across the literature, and one blinded replication attempt failed (see Harris2009 below). Treat the magnitude as unsettled even though the mechanism is well characterised.
+</title><rect class="qbm-node tier-T1" data-node-rect="CRY1" x="76.99" y="0.00" width="126.95" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CRY1" x="76.99" y="0.00" width="126.95" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CRY1" x="140.47" y="20.18" text-anchor="middle">Cryptochrome 1</text><text class="qbm-sub" data-text-for="CRY1" x="140.47" y="36.82" text-anchor="middle">AT4G08920</text></g><g class="qbm-units" data-units-for="CRY1"><rect class="qbm-unit" data-unit-for="CRY1" x="102.15" y="-17.00" width="26.03" height="14.0" rx="3"/><text class="qbm-unit-label" x="115.16" y="-7.00" text-anchor="middle">FAD</text><rect class="qbm-unit" data-unit-for="CRY1" x="132.18" y="-17.00" width="46.61" height="14.0" rx="3"/><text class="qbm-unit-label" x="155.48" y="-7.00" text-anchor="middle">Trp triad</text></g><g class="qbm-node-group" data-node-id="CRY2" data-tier="T2" data-qbo="QBO:CRY2"><title>Cryptochrome 2 (CRY2)
+tier T2 (reported)
+quantum class: radical_pair_acceptor, flavin_semiquinone, triplet_yield_sensitive
+nuclei: 1H, 14N
+AGI: AT1G04400
+Xu2012: A near-null magnetic field affects cryptochrome-related hypocotyl growth and flowering in Arabidopsis.
+ [10.1016/j.asr.2011.12.004]
+Agliassa2018b: Geomagnetic field variation impacts cryptochrome and phytochrome signalling.
+ [10.1016/j.jphotobiol.2018.05.027]
+rationale: Same FAD/tryptophan-triad chemistry as CRY1. CRY2&#x27;s route to flowering time is the mechanistic link between the photoreceptor evidence and the most reproducible NNMF phenotype in the literature — delayed flowering.
+</title><rect class="qbm-node tier-T2" data-node-rect="CRY2" x="237.94" y="0.00" width="126.84" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="CRY2" x="237.94" y="0.00" width="126.84" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="CRY2" x="301.36" y="20.18" text-anchor="middle">Cryptochrome 2</text><text class="qbm-sub" data-text-for="CRY2" x="301.36" y="36.82" text-anchor="middle">AT1G04400</text></g><g class="qbm-units" data-units-for="CRY2"><rect class="qbm-unit" data-unit-for="CRY2" x="261.01" y="-17.00" width="26.03" height="14.0" rx="3"/><text class="qbm-unit-label" x="274.03" y="-7.00" text-anchor="middle">FAD</text><rect class="qbm-unit" data-unit-for="CRY2" x="291.04" y="-17.00" width="50.67" height="14.0" rx="3"/><text class="qbm-unit-label" x="316.38" y="-7.00" text-anchor="middle">flowering</text></g><g class="qbm-node-group" data-node-id="PHYB" data-tier="T4" data-qbo="QBO:PHYB"><title>Phytochrome B
+tier T4 (reported)
+quantum class: structural_context
+AGI: AT2G18790</title><rect class="qbm-node tier-T4" data-node-rect="PHYB" x="398.78" y="0.00" width="120.73" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="PHYB" x="398.78" y="0.00" width="120.73" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="PHYB" x="459.15" y="20.18" text-anchor="middle">Phytochrome B</text><text class="qbm-sub" data-text-for="PHYB" x="459.15" y="36.82" text-anchor="middle">AT2G18790</text></g><g class="qbm-units" data-units-for="PHYB"><rect class="qbm-unit" data-unit-for="PHYB" x="425.14" y="-17.00" width="68.02" height="14.0" rx="3"/><text class="qbm-unit-label" x="459.15" y="-7.00" text-anchor="middle">no spin route</text></g><g class="qbm-node-group" data-node-id="CRY_FAD" data-tier="T1" data-qbo="QBO:CRY_FAD"><title>Cryptochrome FAD cofactor
+tier T1 (verified)
+quantum class: flavin_semiquinone, radical_pair_acceptor, triplet_yield_sensitive
+nuclei: 1H, 14N
+Pooam2019: The magnetically sensitive step is flavin reoxidation in the dark rather than photoreduction, implying a longer-lived radical pair than first assumed.
+ [10.1007/s00425-018-3002-y]
+rationale: The hyperfine partners that make this radical pair field-sensitive are the isoalloxazine ring&#x27;s own nitrogens and protons — 14N at 99.6% abundance and 1H at essentially 100%. Unlike the 57Fe route argued for Fe/S clusters, this one is not abundance-limited, which is a large part of why cryptochrome is the strongest case in the atlas.
+</title><rect class="qbm-node tier-T1" data-node-rect="CRY_FAD" x="0.00" y="113.84" width="206.12" height="34.64" rx="16.0" ry="16.0"/><rect class="qbm-overlay" data-overlay-for="CRY_FAD" x="0.00" y="113.84" width="206.12" height="34.64" rx="16.0" ry="16.0"/><text class="qbm-label" data-text-for="CRY_FAD" x="103.06" y="134.02" text-anchor="middle">FAD (FADox / FAD·− / FADH·)</text></g><g class="qbm-units" data-units-for="CRY_FAD"><rect class="qbm-unit" data-unit-for="CRY_FAD" x="43.42" y="96.84" width="58.15" height="14.0" rx="3"/><text class="qbm-unit-label" x="72.49" y="106.84" text-anchor="middle">14N 99.6%</text><rect class="qbm-unit" data-unit-for="CRY_FAD" x="105.57" y="96.84" width="57.14" height="14.0" rx="3"/><text class="qbm-unit-label" x="134.14" y="106.84" text-anchor="middle">1H ~100%</text></g><g class="qbm-node-group" data-node-id="TRP_TRIAD" data-tier="T2" data-qbo="QBO:TRP_TRIAD"><title>Tryptophan triad (Trp·+)
+tier T2 (reported)
+quantum class: radical_pair_donor, hyperfine_coupled
+nuclei: 1H, 14N
+AGI: AT4G08920, AT1G04400
+Solovyov2007: Spin dynamics of the FAD-tryptophan radical pair in Arabidopsis cryptochrome-1 can be modulated by an applied magnetic field.
+ [10.1529/biophysj.106.097139]
+rationale: The donor half of the canonical pair. Its indole nitrogen and ring protons supply the hyperfine coupling on the donor side.
+</title><rect class="qbm-node tier-T2" data-node-rect="TRP_TRIAD" x="240.12" y="107.44" width="148.99" height="47.44" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="TRP_TRIAD" x="240.12" y="107.44" width="148.99" height="47.44" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="TRP_TRIAD" x="314.62" y="127.62" text-anchor="middle">Tryptophan triad</text><text class="qbm-sub" data-text-for="TRP_TRIAD" x="314.62" y="144.26" text-anchor="middle">AT4G08920 · AT1G04400</text></g><g class="qbm-units" data-units-for="TRP_TRIAD"><rect class="qbm-unit" data-unit-for="TRP_TRIAD" x="283.12" y="90.44" width="63.00" height="14.0" rx="3"/><text class="qbm-unit-label" x="314.62" y="100.44" text-anchor="middle">Trp·+ donor</text></g><g class="qbm-node-group" data-node-id="SINGLET_TRIPLET" data-tier="T2" data-qbo="QBO:SINGLET_TRIPLET"><title>Singlet ⇄ triplet interconversion
+tier T2 (reported)
+quantum class: triplet_yield_sensitive, spin_correlated_pair, hyperfine_coupled
+nuclei: 1H, 14N
+Ritz2000: A photoreceptor-based radical-pair model can in principle transduce a geomagnetic-strength field into a change in signalling yield.
+ [10.1016/S0006-3495(00)76629-X]
+ZadehHaghighi2022: Review of magnetic field effects in biology from the radical-pair perspective, covering the lifetime and hyperfine conditions required.
+ [10.1098/rsif.2022.0325]
+rationale: This is the mechanism itself rather than a molecule. It is on the map because the review&#x27;s argument is that this step, not the protein, is what generalises to other flavoproteins and Fe/S centres.
+
+caveat: For a field of geomagnetic magnitude to compete, the radical pair must live long enough for mixing to accumulate — roughly the microsecond scale. That lifetime requirement is what most candidate sites elsewhere in this atlas have not been shown to meet.
+</title><rect class="qbm-node tier-T2" data-node-rect="SINGLET_TRIPLET" x="423.11" y="113.84" width="173.40" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="SINGLET_TRIPLET" x="423.11" y="113.84" width="173.40" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="SINGLET_TRIPLET" x="509.81" y="134.02" text-anchor="middle">Singlet ⇄ triplet mixing</text></g><g class="qbm-units" data-units-for="SINGLET_TRIPLET"><rect class="qbm-unit" data-unit-for="SINGLET_TRIPLET" x="463.02" y="96.84" width="93.58" height="14.0" rx="3"/><text class="qbm-unit-label" x="509.81" y="106.84" text-anchor="middle">needs ~us lifetime</text></g><g class="qbm-node-group" data-node-id="COP1_SPA" data-tier="T4" data-qbo="QBO:COP1_SPA"><title>COP1 / SPA complex
+tier T4 (inferred)
+quantum class: structural_context</title><rect class="qbm-node tier-T4" data-node-rect="COP1_SPA" x="221.11" y="214.88" width="154.29" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="COP1_SPA" x="221.11" y="214.88" width="154.29" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="COP1_SPA" x="298.26" y="235.06" text-anchor="middle">COP1 / SPA complex</text></g><g class="qbm-node-group" data-node-id="FLOWERING_OUTPUT" data-tier="T4" data-qbo="QBO:FLOWERING_OUTPUT"><title>Flowering time (CO → FT)
+tier T4 (reported)
+quantum class: structural_context
+Agliassa2018a: Reduction of the geomagnetic field to below 100 nT delayed Arabidopsis flowering and downregulated flowering-related genes.
+ [10.1002/bem.22123]
+Xu2015: Suppression of Arabidopsis flowering by a near-null magnetic field depends on the light conditions.
+ [10.1002/bem.21927]
+Xu2013: Removal of the local geomagnetic field affected reproductive growth, including silique number and seed yield.
+ [10.1002/bem.21788]</title><rect class="qbm-node tier-T4" data-node-rect="FLOWERING_OUTPUT" x="205.17" y="339.52" width="186.17" height="34.64" rx="7.0" ry="7.0"/><rect class="qbm-overlay" data-overlay-for="FLOWERING_OUTPUT" x="205.17" y="339.52" width="186.17" height="34.64" rx="7.0" ry="7.0"/><text class="qbm-label" data-text-for="FLOWERING_OUTPUT" x="298.26" y="359.70" text-anchor="middle">Flowering time (CO → FT)</text></g><g class="qbm-units" data-units-for="FLOWERING_OUTPUT"><rect class="qbm-unit" data-unit-for="FLOWERING_OUTPUT" x="255.00" y="322.52" width="86.51" height="14.0" rx="3"/><text class="qbm-unit-label" x="298.26" y="332.52" text-anchor="middle">NNMF delays this</text></g></g>
+<g transform="translate(0,81.60)"><g class="qbm-legend-group" transform="translate(16.00,0.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">Evidence tier</text><rect class="qbm-node tier-T1" x="0" y="14.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="25.00">T1 — Demonstrated</text><rect class="qbm-node tier-T2" x="0" y="35.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="46.00">T2 — Inferred</text><rect class="qbm-node tier-T4" x="0" y="56.00" width="26" height="14" rx="4"/><text class="qbm-legend" x="34" y="67.00">T4 — Context</text></g></g>
+<style>[data-overlay-for="CRY1"] { fill: rgba(213,94,0,0.406); }
+[data-overlay-for="CRY2"] { fill: rgba(213,94,0,0.053); }
+[data-overlay-for="PHYB"] { fill: rgba(0,114,178,0.170); }
+[data-overlay-for="TRP_TRIAD"] { fill: rgba(213,94,0,0.229); }</style><g transform="translate(52.00,226.60)"><g class="qbm-value" data-value-for="CRY1"><rect x="185.91" y="40.44" width="36.06" height="14.0" rx="7" class="qbm-unit"/><text class="qbm-unit-label" x="203.94" y="50.44" text-anchor="middle">+0.26</text></g><g class="qbm-value" data-value-for="CRY2"><rect x="346.83" y="40.44" width="35.91" height="14.0" rx="7" class="qbm-unit"/><text class="qbm-unit-label" x="364.78" y="50.44" text-anchor="middle">+0.03</text></g><g class="qbm-value" data-value-for="PHYB"><rect x="503.51" y="40.44" width="32.02" height="14.0" rx="7" class="qbm-unit"/><text class="qbm-unit-label" x="519.52" y="50.44" text-anchor="middle">-0.11</text></g><g class="qbm-value" data-value-for="TRP_TRIAD"><rect x="371.05" y="147.88" width="36.12" height="14.0" rx="7" class="qbm-unit"/><text class="qbm-unit-label" x="389.11" y="157.88" text-anchor="middle">+0.14</text></g></g><text class="qbm-caption" x="16" y="670.76">Cryptochrome is the only plant entity in the review&#x27;s bibliography where a magnetic field was applied and an effect</text><text class="qbm-caption" x="16" y="685.48">measured on the protein&#x27;s own chemistry rather than on a downstream phenotype, so it carries the atlas&#x27;s only T1</text><text class="qbm-caption" x="16" y="700.20">annotations. The hyperfine partners that make this pair field-sensitive are the flavin&#x27;s own nitrogens and protons —</text><text class="qbm-caption" x="16" y="714.92">14N at 99.6% natural abundance and 1H at essentially 100% — so unlike the 57Fe route argued for iron-sulfur</text><text class="qbm-caption" x="16" y="729.64">clusters, this one is not abundance-limited. That asymmetry is much of why cryptochrome is the strongest case</text><text class="qbm-caption" x="16" y="744.36">here and the Fe/S nodes elsewhere are not. Phytochrome B is drawn deliberately as context with no quantum claim:</text><text class="qbm-caption" x="16" y="759.08">its photochemistry is a Z/E isomerisation offering no spin-based route, so reported field effects on phytochrome</text><text class="qbm-caption" x="16" y="773.80">signalling are most simply a downstream consequence of cryptochrome. Note also that one blinded replication</text><text class="qbm-caption" x="16" y="788.52">(Harris et al. 2009) did NOT reproduce cryptochrome-dependent field effects; that result is recorded in the ontology</text><text class="qbm-caption" x="16" y="803.24">on the same footing as the positive reports. Derived from: Figure 3 panel A of Porterfield &amp; Barker, &quot;Plant</text><text class="qbm-caption" x="16" y="817.96">Responses to Near-Null Magnetic Fields&quot; — expanded to the photocycle and bound to Arabidopsis loci. Node counts</text><text class="qbm-caption" x="16" y="832.68">by evidence tier: T1=2, T2=3, T4=3. Schematic topology only — no quantitative value is encoded in this base map;</text><text class="qbm-caption" x="16" y="847.40">numbers appear only when measured data is projected onto it. Data: OSD-8, contrast MAG_1g. organism</text><text class="qbm-caption" x="16" y="862.12">Arabidopsis thaliana. 4 of 4 identifier-bearing nodes received a value (100%); 4 nodes carry no gene identifier and</text><text class="qbm-caption" x="16" y="876.84">cannot. multi-locus nodes aggregated by mean. An asterisk marks a node with at least one locus significant at the</text><text class="qbm-caption" x="16" y="891.56">stated threshold. Colour intensity encodes magnitude; a node with no measurement is left unfilled and is not the</text><text class="qbm-caption" x="16" y="906.28">same as a measured zero.</text><g class="qbm-overlay-legend" transform="translate(16.00,931.00)"><text class="qbm-legend" x="0" y="0" style="font-weight:700">log2 fold change (measured)</text><rect x="0.00" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.780);stroke:none"/><rect x="6.25" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.712);stroke:none"/><rect x="12.50" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.644);stroke:none"/><rect x="18.75" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.577);stroke:none"/><rect x="25.00" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.509);stroke:none"/><rect x="31.25" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.441);stroke:none"/><rect x="37.50" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.373);stroke:none"/><rect x="43.75" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.305);stroke:none"/><rect x="50.00" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.237);stroke:none"/><rect x="56.25" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.170);stroke:none"/><rect x="62.50" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.102);stroke:none"/><rect x="68.75" y="8" width="6.85" height="11.0" style="fill:rgba(0,114,178,0.034);stroke:none"/><rect x="75.00" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.034);stroke:none"/><rect x="81.25" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.102);stroke:none"/><rect x="87.50" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.170);stroke:none"/><rect x="93.75" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.237);stroke:none"/><rect x="100.00" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.305);stroke:none"/><rect x="106.25" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.373);stroke:none"/><rect x="112.50" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.441);stroke:none"/><rect x="118.75" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.509);stroke:none"/><rect x="125.00" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.577);stroke:none"/><rect x="131.25" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.644);stroke:none"/><rect x="137.50" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.712);stroke:none"/><rect x="143.75" y="8" width="6.85" height="11.0" style="fill:rgba(213,94,0,0.780);stroke:none"/><rect x="0" y="8" width="150.00" height="11.0" class="qbm-unit" style="fill:none"/><text class="qbm-legend" x="0" y="30.00">−0.49</text><text class="qbm-legend" x="150.00" y="30.00" text-anchor="end">+0.49</text><text class="qbm-legend" x="75.00" y="30.00" text-anchor="middle">0</text></g></svg>

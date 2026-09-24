@@ -338,6 +338,26 @@ was deposited; the Data Availability Statement reads
 <p class="dl"><a href="paper-{e(rec['key'])}.html">Open the demonstration →</a></p>
 </figcaption></figure>""")
 
+    osd8p = ROOT / "results" / "osd8" / "record.json"
+    if osd8p.exists():
+        import json as _json
+
+        r8 = _json.loads(osd8p.read_text())
+        s8 = r8["specificity"][r8["primary_group"]]
+        out.append(f"""<figure class="map"><figcaption>
+<span class="t"><a href="osd8.html">OSD-8 — the same gravity, inside and outside a 16.5 T magnet</a></span>
+<p>The cleanest field-only contrast in the atlas: 1g inside the magnet against 1g
+outside it, in <em>Arabidopsis</em>, at <strong>100% node coverage</strong> on every
+map. The study also carries gravity controls that use no magnet at all.</p>
+<p><strong>And the result that constrains every other page:</strong> the atlas's
+{s8['n_qbo_loci_measured']} loci move no more than {s8['n_background_loci']:,} random
+loci from the same array (p&nbsp;=&nbsp;{s8['p_value']:.2f}). Selecting for quantum
+chemistry did not select for field responsiveness here, and the page says so.</p>
+<p><strong>Provenance:</strong> <code>{e(r8['provenance_class'])}</code> — the
+depositors' normalised ratios, no model fitted, so no significance is shown.</p>
+<p class="dl"><a href="osd8.html">Open the demonstration →</a></p>
+</figcaption></figure>""")
+
     if osd27.exists():
         import json as _json
 

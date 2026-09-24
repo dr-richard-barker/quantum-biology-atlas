@@ -1,0 +1,919 @@
+{
+  "accession": "OSD-8",
+  "title": "Gravitational and magnetic field variations synergize to cause subtle variations in the global transcriptional state of Arabidopsis in vitro callus cultures",
+  "publication_doi": "10.1186/1471-2164-13-105",
+  "geo_series": "GSE29787",
+  "platform": "GPL9020",
+  "provenance_class": "depositor_normalised",
+  "organism": "Arabidopsis thaliana",
+  "value_definition": "normalized log2 ratio representing test g /reference 1g",
+  "field_regime": "strong static field",
+  "primary_group": "MAG_1g",
+  "groups": [
+    {
+      "key": "MAG_1g",
+      "label": "Magnet 1g* vs outside, 16.5 T",
+      "test": "MAG 1g*",
+      "reference": "1g control outside the magnet",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738246",
+        "GSM738247",
+        "GSM738248"
+      ],
+      "field_tesla": 16.5,
+      "reference_field_tesla": 0.0,
+      "gravity": "1g",
+      "reference_gravity": "1g",
+      "isolates_field": true,
+      "isolates_gravity": false,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "MAG_mg",
+      "label": "Magnet simulated \u00b5g vs 1g outside",
+      "test": "MAG mg*",
+      "reference": "1g control outside the magnet",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738240",
+        "GSM738241",
+        "GSM738242"
+      ],
+      "field_tesla": 10.1,
+      "reference_field_tesla": 0.0,
+      "gravity": "\u00b5g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": false,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "MAG_0.1g",
+      "label": "Magnet 0.1g* vs 1g outside",
+      "test": "MAG 0.1g*",
+      "reference": "1g control outside the magnet",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738243",
+        "GSM738244",
+        "GSM738245"
+      ],
+      "field_tesla": 14.7,
+      "reference_field_tesla": 0.0,
+      "gravity": "0.1g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": false,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "MAG_1.9g",
+      "label": "Magnet 1.9g* vs 1g outside",
+      "test": "MAG 1.9g*",
+      "reference": "1g control outside the magnet",
+      "n_arrays": 2,
+      "arrays": [
+        "GSM738249",
+        "GSM738250"
+      ],
+      "field_tesla": 14.7,
+      "reference_field_tesla": 0.0,
+      "gravity": "1.9g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": false,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "MAG_2g",
+      "label": "Magnet 2g* vs 1g outside",
+      "test": "MAG 2g*",
+      "reference": "1g control outside the magnet",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738251",
+        "GSM738252",
+        "GSM738253"
+      ],
+      "field_tesla": 10.1,
+      "reference_field_tesla": 0.0,
+      "gravity": "2g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": false,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "RPM_mg",
+      "label": "Random-positioning \u00b5g vs its 1g control (no magnet)",
+      "test": "RPM mg*",
+      "reference": "RPM 1g control",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738254",
+        "GSM738255",
+        "GSM738256"
+      ],
+      "field_tesla": 0.0,
+      "reference_field_tesla": 0.0,
+      "gravity": "\u00b5g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": true,
+      "loci_with_values": 29327
+    },
+    {
+      "key": "LDC_2g",
+      "label": "Centrifuge 2g vs its 1g control (no magnet)",
+      "test": "LDC 2g",
+      "reference": "LDC 1g control",
+      "n_arrays": 3,
+      "arrays": [
+        "GSM738237",
+        "GSM738238",
+        "GSM738239"
+      ],
+      "field_tesla": 0.0,
+      "reference_field_tesla": 0.0,
+      "gravity": "2g",
+      "reference_gravity": "1g",
+      "isolates_field": false,
+      "isolates_gravity": true,
+      "loci_with_values": 29327
+    }
+  ],
+  "platform_join": {
+    "platform": "GPL9020",
+    "rows": 45220,
+    "probes": 43803,
+    "control_spots": 1417,
+    "probes_without_agi": 4546,
+    "probes_with_agi_from_accession_string": 38613,
+    "probes_with_agi_only_from_gene_symbol": 646,
+    "distinct_loci": 29327
+  },
+  "specificity": {
+    "MAG_1g": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.16604,
+      "background_mean": 0.17675,
+      "background_sd": 0.01809,
+      "p_value": 0.71663,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "MAG_mg": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.19329,
+      "background_mean": 0.22423,
+      "background_sd": 0.02284,
+      "p_value": 0.92021,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "MAG_0.1g": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.19457,
+      "background_mean": 0.21801,
+      "background_sd": 0.02251,
+      "p_value": 0.85291,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "MAG_1.9g": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.20732,
+      "background_mean": 0.22487,
+      "background_sd": 0.02575,
+      "p_value": 0.74243,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "MAG_2g": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.14153,
+      "background_mean": 0.14871,
+      "background_sd": 0.01585,
+      "p_value": 0.65863,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "RPM_mg": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.18367,
+      "background_mean": 0.19855,
+      "background_sd": 0.01865,
+      "p_value": 0.78282,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    },
+    "LDC_2g": {
+      "n_qbo_loci_measured": 125,
+      "n_background_loci": 29202,
+      "observed_mean_abs_log2fc": 0.19332,
+      "background_mean": 0.20825,
+      "background_sd": 0.02358,
+      "p_value": 0.72533,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "QBO loci respond MORE than random loci",
+      "significant_at_0.05": false
+    }
+  },
+  "maps": {
+    "QBM-01": {
+      "nodes_with_data": 10,
+      "addressable": 10,
+      "fraction": 1.0,
+      "vmax": 0.5061,
+      "nodes": [
+        {
+          "node_id": "ACONITASE",
+          "qbo": "QBO:ACONITASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT4G35830",
+            "AT4G26970",
+            "AT2G05710"
+          ],
+          "by_group": {
+            "MAG_1g": 0.4044,
+            "MAG_mg": 0.5061,
+            "MAG_0.1g": 0.3961,
+            "MAG_1.9g": 0.3033,
+            "MAG_2g": 0.3289,
+            "RPM_mg": 0.0578,
+            "LDC_2g": -0.2139
+          }
+        },
+        {
+          "node_id": "COMPLEX_I_FMN",
+          "qbo": "QBO:COMPLEX_I_FMN",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G08530"
+          ],
+          "by_group": {
+            "MAG_1g": 0.32,
+            "MAG_mg": 0.12,
+            "MAG_0.1g": 0.0167,
+            "MAG_1.9g": 0.275,
+            "MAG_2g": 0.0667,
+            "RPM_mg": 0.1233,
+            "LDC_2g": -0.01
+          }
+        },
+        {
+          "node_id": "AOX",
+          "qbo": "QBO:AOX",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT3G22370",
+            "AT3G22360",
+            "AT3G27620",
+            "AT1G32350",
+            "AT5G64210"
+          ],
+          "by_group": {
+            "MAG_1g": -0.1757,
+            "MAG_mg": -0.1487,
+            "MAG_0.1g": -0.1193,
+            "MAG_1.9g": -0.3975,
+            "MAG_2g": -0.1783,
+            "RPM_mg": 0.115,
+            "LDC_2g": -0.0937
+          }
+        },
+        {
+          "node_id": "LIPOYL_SYNTHASE",
+          "qbo": "QBO:LIPOYL_SYNTHASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT2G20860"
+          ],
+          "by_group": {
+            "MAG_1g": 0.1733,
+            "MAG_mg": 0.21,
+            "MAG_0.1g": 0.1433,
+            "MAG_1.9g": -0.145,
+            "MAG_2g": 0.13,
+            "RPM_mg": 0.3467,
+            "LDC_2g": 0.1933
+          }
+        },
+        {
+          "node_id": "CYTOCHROME_C",
+          "qbo": "QBO:CYTOCHROME_C",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G22840",
+            "AT4G10040"
+          ],
+          "by_group": {
+            "MAG_1g": -0.1617,
+            "MAG_mg": -0.0692,
+            "MAG_0.1g": -0.0325,
+            "MAG_1.9g": -0.195,
+            "MAG_2g": -0.13,
+            "RPM_mg": 0.0683,
+            "LDC_2g": 0.1725
+          }
+        },
+        {
+          "node_id": "RIESKE_FES",
+          "qbo": "QBO:RIESKE_FES",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G13430",
+            "AT5G13440"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0483,
+            "MAG_mg": -0.0,
+            "MAG_0.1g": -0.0225,
+            "MAG_1.9g": -0.0275,
+            "MAG_2g": 0.0333,
+            "RPM_mg": 0.0017,
+            "LDC_2g": 0.0167
+          }
+        },
+        {
+          "node_id": "COMPLEX_II",
+          "qbo": "QBO:COMPLEX_II",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G66760",
+            "AT3G27380",
+            "AT5G40650",
+            "AT5G09600",
+            "AT2G46505"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0367,
+            "MAG_mg": 0.0233,
+            "MAG_0.1g": 0.0203,
+            "MAG_1.9g": 0.111,
+            "MAG_2g": -0.0327,
+            "RPM_mg": -0.053,
+            "LDC_2g": -0.1047
+          }
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT3G10920"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0217,
+            "MAG_mg": 0.0667,
+            "MAG_0.1g": 0.0333,
+            "MAG_1.9g": 0.17,
+            "MAG_2g": -0.1733,
+            "RPM_mg": 0.0383,
+            "LDC_2g": -0.0383
+          }
+        },
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0137,
+            "MAG_mg": -0.0667,
+            "MAG_0.1g": -0.0758,
+            "MAG_1.9g": 0.0406,
+            "MAG_2g": -0.1042,
+            "RPM_mg": -0.0158,
+            "LDC_2g": -0.0429
+          }
+        },
+        {
+          "node_id": "ALT_NADH_DH",
+          "qbo": "QBO:ALT_NADH_DH",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G07180",
+            "AT2G29990",
+            "AT4G28220",
+            "AT4G05020",
+            "AT2G20800"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0057,
+            "MAG_mg": 0.0463,
+            "MAG_0.1g": 0.16,
+            "MAG_1.9g": -0.103,
+            "MAG_2g": -0.0987,
+            "RPM_mg": 0.0257,
+            "LDC_2g": -0.065
+          }
+        }
+      ]
+    },
+    "QBM-03": {
+      "nodes_with_data": 4,
+      "addressable": 4,
+      "fraction": 1.0,
+      "vmax": 0.49,
+      "nodes": [
+        {
+          "node_id": "CRY1",
+          "qbo": "QBO:CRY1",
+          "evidence_tier": "T1",
+          "loci": [
+            "AT4G08920"
+          ],
+          "by_group": {
+            "MAG_1g": 0.255,
+            "MAG_mg": 0.1533,
+            "MAG_0.1g": 0.245,
+            "MAG_1.9g": -0.0175,
+            "MAG_2g": 0.205,
+            "RPM_mg": 0.0917,
+            "LDC_2g": 0.49
+          }
+        },
+        {
+          "node_id": "TRP_TRIAD",
+          "qbo": "QBO:TRP_TRIAD",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT4G08920",
+            "AT1G04400"
+          ],
+          "by_group": {
+            "MAG_1g": 0.1442,
+            "MAG_mg": 0.1175,
+            "MAG_0.1g": 0.1892,
+            "MAG_1.9g": -0.0163,
+            "MAG_2g": 0.0842,
+            "RPM_mg": 0.1675,
+            "LDC_2g": 0.2725
+          }
+        },
+        {
+          "node_id": "PHYB",
+          "qbo": "QBO:PHYB",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT2G18790"
+          ],
+          "by_group": {
+            "MAG_1g": -0.1067,
+            "MAG_mg": 0.0233,
+            "MAG_0.1g": -0.1133,
+            "MAG_1.9g": -0.045,
+            "MAG_2g": 0.0433,
+            "RPM_mg": -0.06,
+            "LDC_2g": -0.0233
+          }
+        },
+        {
+          "node_id": "CRY2",
+          "qbo": "QBO:CRY2",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT1G04400"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0333,
+            "MAG_mg": 0.0817,
+            "MAG_0.1g": 0.1333,
+            "MAG_1.9g": -0.015,
+            "MAG_2g": -0.0367,
+            "RPM_mg": 0.2433,
+            "LDC_2g": 0.055
+          }
+        }
+      ]
+    },
+    "QBM-07": {
+      "nodes_with_data": 8,
+      "addressable": 8,
+      "fraction": 1.0,
+      "vmax": 0.565,
+      "nodes": [
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT4G25100",
+            "AT2G28190"
+          ],
+          "by_group": {
+            "MAG_1g": 0.1817,
+            "MAG_mg": 0.2317,
+            "MAG_0.1g": 0.245,
+            "MAG_1.9g": 0.0338,
+            "MAG_2g": 0.0558,
+            "RPM_mg": 0.1,
+            "LDC_2g": 0.2033
+          }
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G20630",
+            "AT4G35090",
+            "AT1G20620"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0989,
+            "MAG_mg": -0.0522,
+            "MAG_0.1g": -0.0489,
+            "MAG_1.9g": 0.0367,
+            "MAG_2g": -0.0444,
+            "RPM_mg": -0.0689,
+            "LDC_2g": -0.13
+          }
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190",
+            "AT3G10920",
+            "AT4G25100"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0967,
+            "MAG_mg": 0.1425,
+            "MAG_0.1g": 0.1579,
+            "MAG_1.9g": 0.0819,
+            "MAG_2g": -0.035,
+            "RPM_mg": 0.0675,
+            "LDC_2g": 0.07
+          }
+        },
+        {
+          "node_id": "PEROXIREDOXIN_TRX",
+          "qbo": "QBO:PEROXIREDOXIN_TRX",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT3G06050"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0717,
+            "MAG_mg": 0.09,
+            "MAG_0.1g": -0.0183,
+            "MAG_1.9g": 0.0675,
+            "MAG_2g": 0.0117,
+            "RPM_mg": 0.0083,
+            "LDC_2g": -0.02
+          }
+        },
+        {
+          "node_id": "ASC_GSH_CYCLE",
+          "qbo": "QBO:ASC_GSH_CYCLE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT3G24170",
+            "AT1G19570",
+            "AT3G52880"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0467,
+            "MAG_mg": -0.0522,
+            "MAG_0.1g": -0.0444,
+            "MAG_1.9g": 0.0933,
+            "MAG_2g": 0.0856,
+            "RPM_mg": -0.0722,
+            "LDC_2g": -0.0317
+          }
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G07890",
+            "AT3G09640"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0267,
+            "MAG_mg": 0.0167,
+            "MAG_0.1g": -0.22,
+            "MAG_1.9g": 0.565,
+            "MAG_2g": 0.0367,
+            "RPM_mg": 0.1617,
+            "LDC_2g": -0.2417
+          }
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT3G10920"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0217,
+            "MAG_mg": 0.0667,
+            "MAG_0.1g": 0.0333,
+            "MAG_1.9g": 0.17,
+            "MAG_2g": -0.1733,
+            "RPM_mg": 0.0383,
+            "LDC_2g": -0.0383
+          }
+        },
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0137,
+            "MAG_mg": -0.0667,
+            "MAG_0.1g": -0.0758,
+            "MAG_1.9g": 0.0406,
+            "MAG_2g": -0.1042,
+            "RPM_mg": -0.0158,
+            "LDC_2g": -0.0429
+          }
+        }
+      ]
+    },
+    "QBM-09": {
+      "nodes_with_data": 9,
+      "addressable": 9,
+      "fraction": 1.0,
+      "vmax": 0.5875,
+      "nodes": [
+        {
+          "node_id": "CYSTEINE_SYNTHESIS",
+          "qbo": "QBO:CYSTEINE_SYNTHESIS",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT1G55920",
+            "AT4G14880"
+          ],
+          "by_group": {
+            "MAG_1g": 0.23,
+            "MAG_mg": 0.5283,
+            "MAG_0.1g": 0.3733,
+            "MAG_1.9g": 0.5875,
+            "MAG_2g": 0.4417,
+            "RPM_mg": -0.1583,
+            "LDC_2g": 0.2517
+          }
+        },
+        {
+          "node_id": "NFS1",
+          "qbo": "QBO:NFS1",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT5G65720"
+          ],
+          "by_group": {
+            "MAG_1g": 0.2233,
+            "MAG_mg": 0.145,
+            "MAG_0.1g": 0.215,
+            "MAG_1.9g": -0.0925,
+            "MAG_2g": 0.125,
+            "RPM_mg": 0.2533,
+            "LDC_2g": 0.2733
+          }
+        },
+        {
+          "node_id": "ISU1",
+          "qbo": "QBO:ISU1",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT4G22220"
+          ],
+          "by_group": {
+            "MAG_1g": 0.1533,
+            "MAG_mg": 0.15,
+            "MAG_0.1g": 0.18,
+            "MAG_1.9g": 0.045,
+            "MAG_2g": 0.0933,
+            "RPM_mg": 0.07,
+            "LDC_2g": 0.06
+          }
+        },
+        {
+          "node_id": "SUF_SYSTEM",
+          "qbo": "QBO:SUF_SYSTEM",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G08490",
+            "AT4G26500"
+          ],
+          "by_group": {
+            "MAG_1g": -0.1417,
+            "MAG_mg": -0.2933,
+            "MAG_0.1g": -0.1683,
+            "MAG_1.9g": -0.1725,
+            "MAG_2g": -0.035,
+            "RPM_mg": -0.02,
+            "LDC_2g": 0.3433
+          }
+        },
+        {
+          "node_id": "FE_UPTAKE",
+          "qbo": "QBO:FE_UPTAKE",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT1G01580",
+            "AT4G19690",
+            "AT2G28160",
+            "AT3G56970",
+            "AT3G56980",
+            "AT1G23020"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0739,
+            "MAG_mg": -0.0328,
+            "MAG_0.1g": -0.0461,
+            "MAG_1.9g": 0.1092,
+            "MAG_2g": 0.0333,
+            "RPM_mg": -0.0364,
+            "LDC_2g": -0.0503
+          }
+        },
+        {
+          "node_id": "FES_CLIENTS",
+          "qbo": "QBO:FES_CLIENTS",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT4G35830",
+            "AT5G66760",
+            "AT5G13430",
+            "AT4G03280",
+            "AT1G10960",
+            "AT2G20860",
+            "AT2G21790"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0338,
+            "MAG_mg": 0.034,
+            "MAG_0.1g": -0.0048,
+            "MAG_1.9g": -0.0064,
+            "MAG_2g": 0.0195,
+            "RPM_mg": -0.0262,
+            "LDC_2g": 0.0462
+          }
+        },
+        {
+          "node_id": "FERREDOXIN",
+          "qbo": "QBO:FERREDOXIN",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT1G10960",
+            "AT1G60950"
+          ],
+          "by_group": {
+            "MAG_1g": -0.0267,
+            "MAG_mg": -0.03,
+            "MAG_0.1g": -0.0817,
+            "MAG_1.9g": 0.0125,
+            "MAG_2g": -0.0133,
+            "RPM_mg": -0.01,
+            "LDC_2g": -0.0167
+          }
+        },
+        {
+          "node_id": "S_ASSIMILATION",
+          "qbo": "QBO:S_ASSIMILATION",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT4G08620",
+            "AT1G78000",
+            "AT5G10180",
+            "AT3G22890",
+            "AT4G04610",
+            "AT1G62180",
+            "AT4G21990",
+            "AT5G04590"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0169,
+            "MAG_mg": 0.0933,
+            "MAG_0.1g": 0.0881,
+            "MAG_1.9g": 0.2519,
+            "MAG_2g": 0.089,
+            "RPM_mg": -0.1773,
+            "LDC_2g": -0.3871
+          }
+        },
+        {
+          "node_id": "FE_STORAGE",
+          "qbo": "QBO:FE_STORAGE",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT5G01600",
+            "AT2G40300",
+            "AT1G56430",
+            "AT2G23150",
+            "AT5G67330",
+            "AT3G12750"
+          ],
+          "by_group": {
+            "MAG_1g": 0.0047,
+            "MAG_mg": 0.0797,
+            "MAG_0.1g": 0.1086,
+            "MAG_1.9g": -0.0537,
+            "MAG_2g": -0.0411,
+            "RPM_mg": 0.1289,
+            "LDC_2g": 0.2683
+          }
+        }
+      ]
+    }
+  },
+  "figures": [
+    {
+      "id": "QBM-01",
+      "study": "OSD-8",
+      "contrast": "MAG_1g",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-01__OSD-8.svg",
+      "nodes_with_data": 10,
+      "fraction_covered": 1.0,
+      "vmax": 0.5061,
+      "provenance": "Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 10 of 10 identifier-bearing nodes received a value (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.",
+      "dropped_edge_labels": [],
+      "group": "MAG_1g",
+      "group_label": "Magnet 1g* vs outside, 16.5 T"
+    },
+    {
+      "id": "QBM-03",
+      "study": "OSD-8",
+      "contrast": "MAG_1g",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-03__OSD-8.svg",
+      "nodes_with_data": 4,
+      "fraction_covered": 1.0,
+      "vmax": 0.49,
+      "provenance": "Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 4 of 4 identifier-bearing nodes received a value (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.",
+      "dropped_edge_labels": [],
+      "group": "MAG_1g",
+      "group_label": "Magnet 1g* vs outside, 16.5 T"
+    },
+    {
+      "id": "QBM-07",
+      "study": "OSD-8",
+      "contrast": "MAG_1g",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-07__OSD-8.svg",
+      "nodes_with_data": 8,
+      "fraction_covered": 1.0,
+      "vmax": 0.565,
+      "provenance": "Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 8 of 8 identifier-bearing nodes received a value (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.",
+      "dropped_edge_labels": [],
+      "group": "MAG_1g",
+      "group_label": "Magnet 1g* vs outside, 16.5 T"
+    },
+    {
+      "id": "QBM-09",
+      "study": "OSD-8",
+      "contrast": "MAG_1g",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-09__OSD-8.svg",
+      "nodes_with_data": 9,
+      "fraction_covered": 1.0,
+      "vmax": 0.5875,
+      "provenance": "Data: OSD-8, contrast MAG_1g. organism Arabidopsis thaliana. 9 of 9 identifier-bearing nodes received a value (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean.",
+      "dropped_edge_labels": [],
+      "group": "MAG_1g",
+      "group_label": "Magnet 1g* vs outside, 16.5 T"
+    }
+  ]
+}
