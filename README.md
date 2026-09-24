@@ -137,17 +137,21 @@ arithmetic. All ten maps pass across 1,447 elements.
 
 ## Two findings from building it
 
-**1. The companion repo's study database has unusable DOIs.** Every DOI in
-`magnetobiology-nnmf-review/data/nnmf_study_database.csv` was resolved against
-CrossRef: **only 7 of 49 title-match.** Its `Belyavskaya2004` row cites
-`10.1016/j.asr.2003.09.043`, which is a paper on calcium gradients in the fish inner
-ear. Seven further rows cite work absent from the manuscript's bibliography with
-unresolvable DOIs.
+**1. The companion repo's study database had unusable DOIs — since repaired.** Every
+DOI in `magnetobiology-nnmf-review/data/nnmf_study_database.csv` was resolved against
+CrossRef, and **only 7 of 49 title-matched**. Its `Belyavskaya2004` row cited
+`10.1016/j.asr.2003.09.043`, a paper on calcium gradients in the fish inner ear.
 
-The manuscript's **own** bibliography is clean — **42/42 resolve and title-match** — so
-this repository's evidence base is built from the bibliography and not from that CSV.
-`scripts/build_evidence_base.py` re-verifies all 42 on every run and refuses to write
-its output if any fails.
+That file has since been repaired in its own repository (**42 of 49 now verified**, none
+resolving to a wrong paper). The remaining 7 are marked `DOI_UNVERIFIED` rather than
+filled with a plausible guess: they are sequential placeholders for work that has no
+issued DOI. `scripts/verify_dois.py` there re-checks the file and fails on any
+regression.
+
+The manuscript's **own** bibliography was clean throughout — **42/42 resolve and
+title-match** — so this repository's evidence base is built from the bibliography and
+never from that CSV. `scripts/build_evidence_base.py` re-verifies all 42 on every run
+and refuses to write its output if any fails.
 
 **2. Gene symbols are not safe to type from memory.** Resolving every symbol during
 authoring caught five collisions that would each have put the wrong gene on a map:
