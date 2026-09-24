@@ -196,8 +196,16 @@ def _tooltip(ent, onto: Ontology) -> str:
     return "\n".join(bits)
 
 
-def layout_map(spec: MapSpec, onto: Ontology) -> tuple[list[LaidOutNode], list[tuple], Box]:
-    """Measure, size and place every node. Returns (nodes, compartment boxes, canvas)."""
+def layout_map(
+    spec: MapSpec, onto: Ontology, *, reserve_bottom: float = 0.0
+) -> tuple[list[LaidOutNode], list[tuple], Box]:
+    """Measure, size and place every node. Returns (nodes, compartment boxes, canvas).
+
+    `reserve_bottom` grows every node box by that much and keeps the text centred in
+    the remaining height, so a time-course sparkline has somewhere to live that is not
+    on top of the node's own identifiers. Geometry still follows content — the content
+    simply now includes the data strip.
+    """
     seen: set[str] = set()
     rows: list[list[LaidOutNode]] = []
     all_nodes: list[LaidOutNode] = []
@@ -219,9 +227,11 @@ def layout_map(spec: MapSpec, onto: Ontology) -> tuple[list[LaidOutNode], list[t
                 sub_font_size=render.SUB_SIZE,
                 preferred_width=float(lane.get("node_width", 186)),
             )
+            box.h += reserve_bottom
             node = LaidOutNode(
                 id=nid,
                 box=box,
+                reserve_bottom=reserve_bottom,
                 lines=lines,
                 font_size=render.NODE_SIZE,
                 font_weight="600",
@@ -507,7 +517,15 @@ def render_projection(
         "threshold. Colour intensity encodes magnitude; a node with no measurement is "
         "left unfilled and is not the same as a measured zero."
     )
-    svg = svg.replace("</svg>", "".join(extra + marks) + "</svg>")
+    # The marks are positioned from node boxes, which are in LAYOUT coordinates, while
+    # anything appended before `</svg>` is in document coordinates. They differ by the
+    # header height, so a mark appended directly lands well away from its node. Emitting
+    # them as a sibling group with the body's own transform puts them back on the map.
+    tf = render.body_transform(svg)
+    overlay_css = "".join(extra)
+    svg = svg.replace(
+        "</svg>", f'{overlay_css}<g transform="{tf}">{"".join(marks)}</g></svg>'
+    )
     svg = _append_caption(svg, caption_add, vmax=limit)
 
     (out_dir / "svg").mkdir(parents=True, exist_ok=True)
@@ -588,3 +606,105 @@ def _append_caption(svg: str, extra: str, vmax: float | None = None) -> str:
         count=1,
     )
     return svg.replace("</svg>", "".join(block) + legend_svg + "</svg>")
+
+
+def render_series_projection(
+    spec: MapSpec,
+    onto: Ontology,
+    projection,
+    out_dir: pathlib.Path = MAP_OUT_DIR,
+    vmax: float | None = None,
+) -> dict:
+    """Render a map carrying a whole time course: tint by extreme, draw the trajectory.
+
+    This is the one thing a static pathway diagram cannot do. Each node gets the colour
+    of its most extreme timepoint and a sparkline of the full series, so a reader can
+    see not only how far a node moved but when, and whether it reversed.
+
+    Raises if any sparkline overlaps a node box. That check exists because the
+    compartment-band overlap shipped once: the renderer had no assertion about overlap,
+    so nothing failed and the defect reached the page.
+    """
+    # Lay the map out with room for the traces. The base map and the OSDR overlays are
+    # unaffected — they call layout_map with no reservation and are byte-identical.
+    nodes, comps, canvas = layout_map(spec, onto, reserve_bottom=render.SPARK_RESERVE)
+    values = projection.values
+    if not values:
+        raise MapError(f"{spec.id}: series projection carries no values")
+
+    limit = vmax if vmax is not None else projection.vmax()
+    if limit <= 0:
+        raise MapError(
+            f"{spec.id}: every projected value is 0.0 across every timepoint, so the "
+            f"colour scale would be degenerate. This is almost certainly a join failure."
+        )
+
+    svg, stats = render_svg(spec, nodes, comps, canvas)
+
+    # Tint by the extreme timepoint, reusing the single-contrast overlay machinery so a
+    # time-course map and an OSDR map are coloured by exactly the same code.
+    peak_values = {nid: _peak_nodevalue(ns) for nid, ns in values.items()}
+    boxes = {n.id: n.box for n in nodes}
+
+    spark_svg, collisions = render.sparkline_svg(
+        {nid: boxes[nid] for nid in values if nid in boxes}, values, limit
+    )
+    if collisions:
+        raise MapError(
+            f"{spec.id}: {len(collisions)} sparkline(s) overlap a node box — the figure "
+            f"would be legible-looking and wrong. Widen the lane gutters for this map.\n  "
+            + "\n  ".join(collisions[:8])
+        )
+
+    caption_add = (
+        " " + projection.provenance()
+        + " Each node is tinted by its most extreme timepoint and carries a sparkline of "
+        "the full trajectory: the colour says how far it moved, the line says when. A "
+        "node with no measurement is left unfilled, which is not the same as a measured "
+        "zero."
+    )
+    tf = render.body_transform(svg)
+    svg = svg.replace(
+        "</svg>",
+        render.overlay_svg(peak_values, limit)
+        + f'<g transform="{tf}">{spark_svg}</g></svg>',
+    )
+    svg = _append_caption(svg, caption_add, vmax=limit)
+
+    (out_dir / "svg").mkdir(parents=True, exist_ok=True)
+    stem = f"{spec.id}__{_slug(projection.study)}__{_slug(projection.tissue)}"
+    path = out_dir / "svg" / f"{stem}.svg"
+    path.write_text(svg, encoding="utf-8")
+
+    reversing = sorted(nid for nid, ns in values.items() if ns.crosses_zero())
+    return {
+        "id": spec.id,
+        "study": projection.study,
+        "tissue": projection.tissue,
+        "organism": projection.organism,
+        "svg": str(path.relative_to(ROOT)),
+        "timepoints": list(projection.timepoints),
+        "nodes_with_data": projection.nodes_with_data,
+        "fraction_covered": round(projection.fraction_covered, 4),
+        "vmax": round(limit, 4),
+        "nodes_reversing_direction": reversing,
+        "provenance": projection.provenance(),
+        "dropped_edge_labels": stats["dropped_edge_labels"],
+    }
+
+
+def _peak_nodevalue(ns):
+    """A `NodeValue` standing for the series' most extreme timepoint, for the tint."""
+    from .project import NodeValue
+
+    return NodeValue(
+        node_id=ns.node_id,
+        qbo_id=ns.qbo_id,
+        value=ns.extreme(),
+        n_loci=ns.n_loci,
+        loci_used=ns.loci_used,
+        loci_missing=ns.loci_missing,
+        aggregator=ns.aggregator,
+        evidence_tier=ns.evidence_tier,
+        significant=None,
+    )

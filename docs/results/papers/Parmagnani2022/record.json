@@ -1,0 +1,619 @@
+{
+  "key": "Parmagnani2022",
+  "citation": "Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824",
+  "doi": "10.3390/biom12121824",
+  "pmcid": "PMC9775259",
+  "provenance_class": "published_results",
+  "data_availability_verbatim": "Data are available as supplementary tables and further data can be provided upon request",
+  "organism": "Arabidopsis thaliana",
+  "field_regime": "near-null magnetic field (~30 nT) against the local geomagnetic field (20\u201360 \u00b5T), generated in a triaxial Helmholtz coil system and monitored with a three-axis magnetometer",
+  "source_table": "Table S2.xlsx",
+  "loci_in_table": 194,
+  "qbo_loci_covered": [
+    "AT1G07890",
+    "AT1G08830",
+    "AT1G15550",
+    "AT1G20630",
+    "AT1G32350",
+    "AT2G28190",
+    "AT3G09640",
+    "AT3G22360",
+    "AT3G22370",
+    "AT4G25100",
+    "AT4G28220",
+    "AT5G64210"
+  ],
+  "cells_parsed": 2716,
+  "cells_blank": 0,
+  "rows_without_locus": 0,
+  "tissues": [
+    "ROOTS",
+    "SHOOTS"
+  ],
+  "figures": [
+    {
+      "id": "QBM-07",
+      "study": "Parmagnani, Mannino & Maffei",
+      "tissue": "ROOTS",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-07__Parmagnani-Mannino-Maffei__ROOTS.svg",
+      "timepoints": [
+        "10 min",
+        "1 h",
+        "2 h",
+        "4 h",
+        "24 h",
+        "48 h",
+        "96 h"
+      ],
+      "nodes_with_data": 4,
+      "fraction_covered": 0.5,
+      "vmax": 1.0893,
+      "nodes_reversing_direction": [
+        "CATALASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 3 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, CATALASE), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": false,
+      "per_node": [
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "loci": [
+            "AT4G25100",
+            "AT2G28190"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.2688,
+            0.0286,
+            0.111,
+            0.0426,
+            0.2141,
+            0.1243,
+            0.2016
+          ],
+          "sd": [
+            0.2086,
+            0.2741,
+            0.2939,
+            0.7984,
+            0.8084,
+            0.1456,
+            0.278
+          ],
+          "peak": -0.2688,
+          "peak_timepoint": "10 min",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190",
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.2688,
+            0.1506,
+            0.1243,
+            0.0566,
+            0.2141,
+            0.1243,
+            0.2016
+          ],
+          "sd": [
+            0.2086,
+            0.2741,
+            0.2939,
+            0.7984,
+            0.8084,
+            0.1456,
+            0.278
+          ],
+          "peak": -0.2688,
+          "peak_timepoint": "10 min",
+          "reverses_direction": true,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "loci": [
+            "AT1G07890",
+            "AT3G09640"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.7612,
+            -0.2863,
+            -0.7612,
+            -0.3771,
+            -1.0893,
+            -0.1203,
+            -0.2176
+          ],
+          "sd": [
+            0.4157,
+            0.2639,
+            0.3179,
+            0.2998,
+            0.5218,
+            0.2082,
+            0.3523
+          ],
+          "peak": -1.0893,
+          "peak_timepoint": "24 h",
+          "reverses_direction": false,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "loci": [
+            "AT1G20630"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            0.0426,
+            -0.2176,
+            0.5753,
+            -0.3959,
+            -0.6215,
+            -0.2345,
+            0.3448
+          ],
+          "sd": [
+            0.1681,
+            0.7046,
+            0.3679,
+            0.6644,
+            0.4217,
+            0.5771,
+            0.727
+          ],
+          "peak": -0.6215,
+          "peak_timepoint": "24 h",
+          "reverses_direction": true,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-07",
+      "study": "Parmagnani, Mannino & Maffei",
+      "tissue": "SHOOTS",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-07__Parmagnani-Mannino-Maffei__SHOOTS.svg",
+      "timepoints": [
+        "10 min",
+        "1 h",
+        "2 h",
+        "4 h",
+        "24 h",
+        "48 h",
+        "96 h"
+      ],
+      "nodes_with_data": 4,
+      "fraction_covered": 0.5,
+      "vmax": 0.9411,
+      "nodes_reversing_direction": [
+        "ASCORBATE_PEROXIDASE",
+        "CATALASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 4 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE, CATALASE), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": false,
+      "per_node": [
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "loci": [
+            "AT4G25100",
+            "AT2G28190"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            0.189,
+            0.0286,
+            -0.1361,
+            0.251,
+            0.4957,
+            -0.0893,
+            -0.2863
+          ],
+          "sd": [
+            0.1842,
+            0.2404,
+            0.307,
+            0.8468,
+            0.3899,
+            0.1228,
+            0.8621
+          ],
+          "peak": 0.4957,
+          "peak_timepoint": "24 h",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190",
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            0.189,
+            0.111,
+            -0.1361,
+            0.251,
+            0.4957,
+            -0.1203,
+            -0.2863
+          ],
+          "sd": [
+            0.1842,
+            0.2538,
+            0.307,
+            0.8468,
+            0.3899,
+            0.1228,
+            0.8621
+          ],
+          "peak": 0.4957,
+          "peak_timepoint": "24 h",
+          "reverses_direction": true,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "loci": [
+            "AT1G07890",
+            "AT3G09640"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.454,
+            0.0286,
+            -0.3959,
+            0.7991,
+            -0.5564,
+            0.2265,
+            -0.6666
+          ],
+          "sd": [
+            0.3162,
+            0.6412,
+            0.3091,
+            0.4312,
+            0.3607,
+            1.1468,
+            0.5038
+          ],
+          "peak": 0.7991,
+          "peak_timepoint": "4 h",
+          "reverses_direction": true,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "loci": [
+            "AT1G20630"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            0.0144,
+            -0.2515,
+            0.4647,
+            0.9411,
+            -0.2515,
+            -0.5995,
+            -0.3959
+          ],
+          "sd": [
+            0.2285,
+            0.4809,
+            0.5854,
+            0.3081,
+            0.3435,
+            0.306,
+            0.3417
+          ],
+          "peak": 0.9411,
+          "peak_timepoint": "4 h",
+          "reverses_direction": true,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-01",
+      "study": "Parmagnani, Mannino & Maffei",
+      "tissue": "ROOTS",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-01__Parmagnani-Mannino-Maffei__ROOTS.svg",
+      "timepoints": [
+        "10 min",
+        "1 h",
+        "2 h",
+        "4 h",
+        "24 h",
+        "48 h",
+        "96 h"
+      ],
+      "nodes_with_data": 2,
+      "fraction_covered": 0.2,
+      "vmax": 1.2176,
+      "nodes_reversing_direction": [
+        "ALT_NADH_DH",
+        "AOX"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 2 node(s) reverse direction during the course (ALT_NADH_DH, AOX), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": true,
+      "per_node": [
+        {
+          "node_id": "ALT_NADH_DH",
+          "qbo": "QBO:ALT_NADH_DH",
+          "loci": [
+            "AT4G28220"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.0893,
+            -0.152,
+            -0.0893,
+            -0.2863,
+            0.0144,
+            -0.1047,
+            -0.1361
+          ],
+          "sd": [
+            0.1688,
+            0.1122,
+            0.1381,
+            0.2111,
+            0.2285,
+            0.1551,
+            0.1427
+          ],
+          "peak": -0.2863,
+          "peak_timepoint": "4 h",
+          "reverses_direction": true,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "AOX",
+          "qbo": "QBO:AOX",
+          "loci": [
+            "AT3G22370",
+            "AT3G22360",
+            "AT1G32350",
+            "AT5G64210"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -1.2176,
+            -1.1844,
+            0.3103,
+            0.9635,
+            -0.4344,
+            -0.1047,
+            0.2869
+          ],
+          "sd": [
+            0.3191,
+            0.5574,
+            0.5119,
+            0.6886,
+            0.5264,
+            1.1906,
+            1.1589
+          ],
+          "peak": -1.2176,
+          "peak_timepoint": "10 min",
+          "reverses_direction": true,
+          "evidence_tier": "T4"
+        }
+      ]
+    },
+    {
+      "id": "QBM-01",
+      "study": "Parmagnani, Mannino & Maffei",
+      "tissue": "SHOOTS",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-01__Parmagnani-Mannino-Maffei__SHOOTS.svg",
+      "timepoints": [
+        "10 min",
+        "1 h",
+        "2 h",
+        "4 h",
+        "24 h",
+        "48 h",
+        "96 h"
+      ],
+      "nodes_with_data": 2,
+      "fraction_covered": 0.2,
+      "vmax": 1.406,
+      "nodes_reversing_direction": [
+        "AOX"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 1 node(s) reverse direction during the course (AOX), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": true,
+      "per_node": [
+        {
+          "node_id": "ALT_NADH_DH",
+          "qbo": "QBO:ALT_NADH_DH",
+          "loci": [
+            "AT4G28220"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.0893,
+            -0.1203,
+            -0.1047,
+            -0.074,
+            0.0,
+            -0.0589,
+            -0.0291
+          ],
+          "sd": [
+            0.1535,
+            0.047,
+            0.0621,
+            0.0304,
+            0.0289,
+            0.0301,
+            0.1178
+          ],
+          "peak": -0.1203,
+          "peak_timepoint": "1 h",
+          "reverses_direction": false,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "AOX",
+          "qbo": "QBO:AOX",
+          "loci": [
+            "AT3G22370",
+            "AT3G22360",
+            "AT1G32350",
+            "AT5G64210"
+          ],
+          "timepoints": [
+            "10 min",
+            "1 h",
+            "2 h",
+            "4 h",
+            "24 h",
+            "48 h",
+            "96 h"
+          ],
+          "log2": [
+            -0.2176,
+            0.9411,
+            0.8237,
+            0.7398,
+            1.1309,
+            1.406,
+            1.2928
+          ],
+          "sd": [
+            0.3523,
+            0.3655,
+            0.7003,
+            0.4665,
+            0.5402,
+            0.687,
+            0.6487
+          ],
+          "peak": 1.406,
+          "peak_timepoint": "48 h",
+          "reverses_direction": true,
+          "evidence_tier": "T4"
+        }
+      ]
+    }
+  ]
+}

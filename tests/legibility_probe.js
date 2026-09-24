@@ -239,9 +239,46 @@
     failures.push('CAPTION does not say what the map was derived from');
   }
 
+  // ---- 11. time-course sparklines sit on their node, not on its text ------
+  // Only present on a series overlay. Two things have to hold: the trace must be
+  // INSIDE the node it belongs to (an overlay appended without the body group's
+  // transform lands next to the wrong node entirely, which is how the first
+  // published OSD-38 overlay shipped), and its value label must not cover the
+  // node's own identifiers.
+  const sparks = Array.from(svg.querySelectorAll('.qbm-spark'));
+  let sparkChecks = 0;
+  sparks.forEach((g) => {
+    const id = g.getAttribute('data-spark-for');
+    const gb = rel(g);
+    const nb = rects[id];
+    if (!nb) {
+      failures.push(`SPARKLINE for unknown node "${id}"`);
+      return;
+    }
+    sparkChecks++;
+    // Use the probe's own `inside` helper and its {x,y,x2,y2} box shape. Writing a
+    // fresh comparison against .left/.right here read fine and compared against
+    // undefined on every axis, so it failed for all four sparklines on a figure that
+    // was correct — the mirror image of a vacuous check.
+    if (!inside(gb, nb, CONTAIN_TOL)) {
+      failures.push(`SPARKLINE for "${id}" is not inside its node box ${fmt(gb)} / ${fmt(nb)}`);
+    }
+    svg.querySelectorAll(`[data-text-for="${id}"]`).forEach((t) => {
+      if (overlaps(gb, rel(t), PENETRATE_TOL)) {
+        failures.push(`SPARKLINE for "${id}" covers that node's own label`);
+      }
+    });
+  });
+  if (sparks.length) {
+    const traces = svg.querySelectorAll('.qbm-spark-line').length;
+    if (!traces) failures.push('SPARKLINE groups present but no trace was drawn');
+  }
+
   return {
     failures,
     stats: {
+      sparklines: sparks.length,
+      sparkChecks,
       nodes: ids.length,
       textRuns,
       elementsChecked: checked,

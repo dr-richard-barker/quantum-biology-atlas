@@ -211,12 +211,30 @@ def ensembl_orthologs(
 
 
 def available_divisions(timeout: int = 30) -> list[str]:
-    """Ask Ensembl which Compara divisions exist. Used by the test, not assumed."""
-    req = urllib.request.Request(
-        ENSEMBL + "/info/comparas?", headers={"Accept": "application/json", "User-Agent": UA}
+    """Ask Ensembl which Compara divisions exist. Used by the test, not assumed.
+
+    Retries, because this endpoint is intermittently unavailable: it has been observed
+    returning 500 and 503 for several minutes across every user agent and both URL
+    spellings, then 200 again, while `/homology/...` kept working. A single attempt
+    therefore reports "Ensembl has no pan_homology division", which is a claim about
+    the data rather than about the network, and is the wrong thing to conclude.
+    """
+    last: Exception | None = None
+    for attempt in range(4):
+        req = urllib.request.Request(
+            ENSEMBL + "/info/comparas",
+            headers={"Accept": "application/json", "User-Agent": UA},
+        )
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return sorted(c["name"] for c in json.load(r).get("comparas", []))
+        except (urllib.error.HTTPError, *RETRIABLE) as e:
+            last = e
+            time.sleep(2 + attempt * 3)
+    raise OrthologyError(
+        f"Ensembl /info/comparas did not answer after 4 attempts ({last}). "
+        f"This is an availability failure, not evidence about which divisions exist."
     )
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return sorted(c["name"] for c in json.load(r).get("comparas", []))
 
 
 # ---------------------------------------------------------------------------
@@ -274,11 +292,20 @@ def orthodb_orthologs(
         # so a file carrying both does not pick the wrong one.
         src_col = _pick_column(cols, ("arabidopsis", "athaliana", "at_gene", "tair", "gene_id"))
         tgt_col = _pick_column(cols, _species_column_hints(target_species))
-        if not src_col or not tgt_col:
+        if not src_col:
+            # No source column is a defect in the file itself, and every projection
+            # through it is affected. That is worth stopping for.
             raise OrthologyError(
-                f"{path.name}: could not find source/target columns for "
-                f"{source_species} → {target_species}. Columns present: {cols[:12]}"
+                f"{path.name}: could not find a {source_species} source column. "
+                f"Columns present: {cols[:12]}"
             )
+        if not tgt_col:
+            # A missing TARGET column is different in kind: the committed matrix is
+            # human-anchored, so it simply cannot reach fly, worm or yeast. That is a
+            # known property of the file, not an error — raising here made
+            # `build_ortholog_map.py` abandon four of its five species. Return nothing
+            # and let the caller record that only one method could run.
+            return []
         for row in reader:
             src = (row.get(src_col) or "").strip().upper()
             tgt = (row.get(tgt_col) or "").strip()
@@ -365,7 +392,13 @@ def project(
         methods.append(f"ensembl_{division}")
     if use_orthodb:
         odb = orthodb_orthologs(loci, target_species, source_species=source_species)
-        if odb or find_orthodb_matrix() is not None:
+        # Only claim OrthoDB as a method when it actually returned calls. The matrix
+        # existing on disk is not the same as it being able to reach this species:
+        # it is human-anchored, so for fly, worm and yeast it contributes nothing.
+        # Listing it anyway put "via ensembl_pan_homology, orthodb_v12" into coverage
+        # reports and figure captions for projections only one method could make,
+        # which reads as corroboration that never happened.
+        if odb:
             methods.append("orthodb_v12")
 
     by_locus: dict[str, list[Ortholog]] = {l: [] for l in loci}

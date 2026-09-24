@@ -261,11 +261,24 @@ crosses kingdoms. The <code>plants</code> division does not reach animals at all
 <li><strong>OrthoDB v12</strong> — the committed human-anchored matrix from
 <a href="https://github.com/dr-richard-barker/OSDR_X-species_V2">OSDR_X-species_V2</a>.</li>
 </ul>
-<p>Projecting the atlas loci to human maps 15 of 28, with the two methods agreeing on 6
-and disagreeing on none. The <em>unmapped</em> set is the validation: every alternative
-oxidase and type II NAD(P)H dehydrogenase locus fails to map, which is correct —
-humans have neither. A projection that matches nothing <strong>raises</strong> rather
-than returning an empty frame that would render as a blank map.</p>
+<p>Projecting the atlas's 125 loci to human maps <strong>68</strong>, with both backbones agreeing on 22 and disagreeing on 0. The other species run on Ensembl alone (fly 63/125, mouse 64/125, worm 61/125, yeast 68/125) because the committed OrthoDB matrix is human-anchored — stated rather than left to look like two-method corroboration. The <em>unmapped</em> set is the validation: the alternative oxidase and type II NAD(P)H dehydrogenase loci fail to map, which is correct, because humans have neither. A projection that matches nothing <strong>raises</strong> rather than returning an empty frame that would render as a blank map.</p>
+<h2>Demonstrations</h2>
+<p>Each page projects real measurements onto the maps and states its provenance class,
+because the three available kinds of data do not carry equal weight:
+<code>genelab_processed</code> (NASA's own pipeline), <code>depositor_normalised</code>
+(the depositors' ratios, no model fitted) and <code>published_results</code> (numbers
+read out of a paper's supplementary tables, because nothing was deposited).</p>
+<figure class="map"><figcaption>
+<span class="t"><a href="paper-Parmagnani2022.html">Parmagnani, Mannino &amp; Maffei (2022), Biomolecules 12(12):1824</a></span>
+<p>194 loci, 7 timepoints across
+2 tissues, 2,716 values —
+12 of them on atlas nodes. The first overlay in this atlas
+to carry <strong>time</strong> rather than a single snapshot.</p>
+<p><strong>Provenance:</strong> <code>published_results</code>. No raw data
+was deposited; the Data Availability Statement reads
+<em>“Data are available as supplementary tables and further data can be provided upon request”</em>.</p>
+<p class="dl"><a href="paper-Parmagnani2022.html">Open the demonstration →</a></p>
+</figcaption></figure>
 <h2>A pre-registered test, and why it could not settle anything</h2>
 <p>The hypothesis, null, data sources and <em>confounds</em> were committed before the
 script was run. The question: are human orthologs carrying spin-bearing cofactors

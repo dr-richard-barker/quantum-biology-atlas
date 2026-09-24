@@ -155,6 +155,10 @@ class LaidOutNode:
     row: int = 0
     col: int = 0
     payload: dict = dataclasses.field(default_factory=dict)
+    #: Height at the bottom of the box reserved for something other than text — the
+    #: time-course sparkline. Text is centred in the REMAINING height, so reserving
+    #: space actually moves the label up rather than just making the box taller.
+    reserve_bottom: float = 0.0
 
     def text_box(self) -> Box:
         """Bounding box of the laid-out text, used by the legibility assertions."""

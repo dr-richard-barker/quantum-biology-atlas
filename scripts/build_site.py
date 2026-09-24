@@ -157,6 +157,36 @@ def tail() -> str:
 """
 
 
+
+def _orthology_paragraph() -> str:
+    """One sentence per real number, read from the generated ortholog map."""
+    import json as _json
+
+    path = ROOT / "catalog" / "orthologs.json"
+    if not path.exists():
+        return ("Cross-species projection runs on demand; no precomputed ortholog map "
+                "is committed, so no coverage is claimed here.")
+    doc = _json.loads(path.read_text())
+    sp = doc["species"]
+    h = sp["homo_sapiens"]
+    corroborated = sum(1 for v in h["orthologs"].values() if v["corroborated"])
+    others = ", ".join(
+        f"{v['common_name']} {v['mapped']}/{v['requested']}"
+        for k, v in sp.items() if k != "homo_sapiens"
+    )
+    return (
+        f"Projecting the atlas's {doc['loci']} loci to human maps "
+        f"<strong>{h['mapped']}</strong>, with both backbones agreeing on "
+        f"{corroborated} and disagreeing on {len(h['method_disagreements'])}. "
+        f"The other species run on Ensembl alone ({others}) because the committed "
+        f"OrthoDB matrix is human-anchored — stated rather than left to look like "
+        f"two-method corroboration. The <em>unmapped</em> set is the validation: the "
+        f"alternative oxidase and type II NAD(P)H dehydrogenase loci fail to map, which "
+        f"is correct, because humans have neither. A projection that matches nothing "
+        f"<strong>raises</strong> rather than returning an empty frame that would render "
+        f"as a blank map."
+    )
+
 def build(manifest: dict, onto, test_result: dict | None) -> str:
     t = manifest["totals"]
     out = [head(
@@ -243,7 +273,12 @@ Description) so it opens in Newt, VANTED, CySBGN and the
 </figure>""")
 
     # ---- cross-species ---------------------------------------------------
-    out.append("""<h2>Cross-species projection</h2>
+    # Derived from catalog/orthologs.json rather than typed. The previous wording
+    # here claimed "15 of 28", which was true of an earlier, smaller ontology and had
+    # silently become wrong — a hard-coded count is exactly what this project treats as
+    # a defect everywhere else.
+    ortho_para = _orthology_paragraph()
+    out.append(f"""<h2>Cross-species projection</h2>
 <p>The ontology is anchored on <em>Arabidopsis</em>, because that is where the
 near-null-field literature is. Projecting onto another organism runs
 <strong>two independent orthology backbones</strong> and reports where they disagree,
@@ -254,11 +289,37 @@ crosses kingdoms. The <code>plants</code> division does not reach animals at all
 <li><strong>OrthoDB v12</strong> — the committed human-anchored matrix from
 <a href="https://github.com/dr-richard-barker/OSDR_X-species_V2">OSDR_X-species_V2</a>.</li>
 </ul>
-<p>Projecting the atlas loci to human maps 15 of 28, with the two methods agreeing on 6
-and disagreeing on none. The <em>unmapped</em> set is the validation: every alternative
-oxidase and type II NAD(P)H dehydrogenase locus fails to map, which is correct —
-humans have neither. A projection that matches nothing <strong>raises</strong> rather
-than returning an empty frame that would render as a blank map.</p>""")
+<p>{ortho_para}</p>""")
+
+    # ---- demonstration pages ---------------------------------------------
+    # Built from results/papers/*/record.json, so a new showcase appears here without
+    # this file being edited — and a page whose record is missing simply does not.
+    papers_dir = ROOT / "results" / "papers"
+    records = []
+    for rec_path in sorted(papers_dir.glob("*/record.json")):
+        import json as _json
+
+        records.append(_json.loads(rec_path.read_text()))
+    if records:
+        out.append("""<h2>Demonstrations</h2>
+<p>Each page projects real measurements onto the maps and states its provenance class,
+because the three available kinds of data do not carry equal weight:
+<code>genelab_processed</code> (NASA's own pipeline), <code>depositor_normalised</code>
+(the depositors' ratios, no model fitted) and <code>published_results</code> (numbers
+read out of a paper's supplementary tables, because nothing was deposited).</p>""")
+        for rec in records:
+            tps = rec["figures"][0]["timepoints"] if rec["figures"] else []
+            out.append(f"""<figure class="map"><figcaption>
+<span class="t"><a href="paper-{e(rec['key'])}.html">{e(rec['citation'])}</a></span>
+<p>{rec['loci_in_table']} loci, {len(tps)} timepoints across
+{len(rec['tissues'])} tissues, {rec['cells_parsed']:,} values —
+{len(rec['qbo_loci_covered'])} of them on atlas nodes. The first overlay in this atlas
+to carry <strong>time</strong> rather than a single snapshot.</p>
+<p><strong>Provenance:</strong> <code>{e(rec['provenance_class'])}</code>. No raw data
+was deposited; the Data Availability Statement reads
+<em>“{e(rec['data_availability_verbatim'])}”</em>.</p>
+<p class="dl"><a href="paper-{e(rec['key'])}.html">Open the demonstration →</a></p>
+</figcaption></figure>""")
 
     # ---- the test --------------------------------------------------------
     if test_result:
@@ -400,6 +461,14 @@ def main() -> int:
         if f.exists():
             shutil.copy2(f, args.out.parent / "results" / name)
             copied += 1
+    # Per-paper records back the demonstration pages built from published supplementary
+    # tables. They have to live UNDER docs/: Pages serves only that directory, so a link
+    # to ../results/ resolves on a local checkout and 404s on the deployed site.
+    for rec in sorted((ROOT / "results" / "papers").glob("*/record.json")):
+        dst = args.out.parent / "results" / "papers" / rec.parent.name / "record.json"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(rec, dst)
+        copied += 1
     print(f"  copied {copied} artefact files into docs/ (site is self-contained)")
     print(f"wrote {args.out.relative_to(ROOT)} ({args.out.stat().st_size/1024:.0f} KB)")
     print(f"  {manifest['totals']['maps']} maps, theme from {COSE}")

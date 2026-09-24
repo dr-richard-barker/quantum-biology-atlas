@@ -19,6 +19,7 @@ CSS rule `.qbm-node { fill: var(--x) }` works everywhere.
 from __future__ import annotations
 
 import html
+import re
 import textwrap
 from typing import Iterable, Sequence
 
@@ -161,6 +162,12 @@ def _stylesheet() -> str:
            rule rather than an inline style="fill:none" — an inline style outranks every
            selector, so the per-node overlay rules would silently never apply. */
         .qbm-overlay {{ stroke: none; fill: none; }}
+
+        /* Time-course sparklines. The zero line is a real reference, not decoration:
+           without it an all-up series and an all-down one look identical. */
+        .qbm-spark-zero {{ stroke: var(--qbm-hairline); stroke-width: 0.8; }}
+        .qbm-spark-line {{ stroke-width: 1.4; stroke-linecap: round; fill: none; }}
+        .qbm-spark-dot  {{ stroke: none; }}
         """
     ).strip()
 
@@ -275,7 +282,10 @@ def node_svg(n: LaidOutNode) -> str:
     total_h = len(n.lines) * n.font_size * LINE_SPACING + (
         len(n.sublines) * n.sub_font_size * LINE_SPACING if n.sublines else 0.0
     )
-    y = n.box.cy - total_h / 2.0 + n.font_size * 0.86
+    # Centre the text in the height NOT reserved for a sparkline, so reserving
+    # space moves the label up instead of leaving it under the trace.
+    text_cy = n.box.y + (n.box.h - n.reserve_bottom) / 2.0
+    y = text_cy - total_h / 2.0 + n.font_size * 0.86
     for line in n.lines:
         parts.append(
             f'<text class="qbm-label" data-text-for="{esc(n.id)}" x="{n.box.cx:.2f}" '
@@ -483,7 +493,7 @@ def document(
         f"<style>{_stylesheet()}</style>",
         _defs(),
         f'<rect class="qbm-canvas" x="0" y="0" width="{total_w:.2f}" height="{total_h:.2f}"/>',
-        f'<g transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
+        f'<g class="qbm-body" transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
     ]
 
     hy = 14.0 + TITLE_SIZE * 0.86
@@ -584,3 +594,177 @@ def overlay_legend_svg(x: float, y: float, vmax: float, label: str) -> tuple[str
     out.append(f'<text class="qbm-legend" x="{w/2:.2f}" y="{8 + h + 11:.2f}" text-anchor="middle">0</text>')
     out.append("</g>")
     return "".join(out), 8 + h + 18
+
+
+# ---------------------------------------------------------------------------
+# time series: sparklines
+# ---------------------------------------------------------------------------
+
+SPARK_W = 58.0
+SPARK_H = 17.0
+SPARK_PAD_X = 4.0
+#: Gap between the sparkline and the node's lower border.
+SPARK_INSET = 3.0
+#: What `layout_map(reserve_bottom=...)` must be given for the strip to fit.
+SPARK_RESERVE = 17.0 + 3.0 + 2.0
+#: Sparkline dot radius. Small enough that seven points on 58px stay distinguishable.
+SPARK_DOT = 1.5
+
+
+def sparkline_svg(
+    node_boxes: dict,
+    node_series: dict,
+    vmax: float,
+) -> tuple[str, list[str]]:
+    """Draw one sparkline per node, straddling the node's bottom edge.
+
+    A single-contrast overlay colours a node by one number. A time course has no single
+    number that is honest: a gene that rises early and falls late averages to nothing,
+    and colouring by the mean would report "no response" for a gene that responded
+    twice. So the node is tinted by its most extreme timepoint and the whole trajectory
+    is drawn beside it — the colour says how far it moved, the line says when.
+
+    The sparkline sits in the same band the value chip already uses (centred on the
+    node's lower border) rather than inside the box, because node boxes are sized to
+    their text and a strip inside would land on the label.
+
+    Returns (svg, collisions) where `collisions` names any sparkline that overlaps
+    another node's box. It is returned rather than logged so the caller can assert it
+    is empty — an overlapping sparkline is legible-looking and wrong, and the
+    compartment-band bug got shipped precisely because nothing asserted on overlap.
+    """
+    if vmax <= 0:
+        raise ValueError(
+            "sparkline vmax must be positive; a degenerate scale means the join failed"
+        )
+
+    out: list[str] = []
+    placed: list[tuple[str, float, float, float, float]] = []
+
+    for nid, ns in node_series.items():
+        box = node_boxes.get(nid)
+        if box is None:
+            continue
+        peak = f"{ns.extreme():+.2f}"
+        label_w = measure(peak, UNIT_SIZE)[0]
+        total_w = SPARK_W + SPARK_PAD_X * 3 + label_w
+        x = box.cx - total_w / 2.0
+        # Sit INSIDE the strip the layout reserved at the bottom of the box. Straddling
+        # the border — which is fine for the narrow value chip — put a 58px-wide trace
+        # across the node's own AGI sublabel and over the compartment tag below it.
+        y = box.y2 - SPARK_H - SPARK_INSET
+        placed.append((nid, x, y, total_w, SPARK_H))
+
+        g = [f'<g class="qbm-spark" data-spark-for="{esc(nid)}">']
+        g.append(
+            f'<rect class="qbm-unit" x="{x:.2f}" y="{y:.2f}" width="{total_w:.2f}" '
+            f'height="{SPARK_H:.2f}" rx="{SPARK_H / 2:.2f}"/>'
+        )
+
+        # Plot area, with the zero line drawn: without it a reader cannot tell an
+        # all-up series from an all-down one, since the trace is scaled either way.
+        px = x + SPARK_PAD_X
+        py = y + 2.5
+        ph = SPARK_H - 5.0
+        zero_y = py + ph / 2.0
+        g.append(
+            f'<line class="qbm-spark-zero" x1="{px:.2f}" y1="{zero_y:.2f}" '
+            f'x2="{px + SPARK_W:.2f}" y2="{zero_y:.2f}"/>'
+        )
+
+        n = len(ns.points)
+        step = SPARK_W / max(1, n - 1)
+        pts: list[tuple[float, float, float]] = []
+        for i, v in enumerate(ns.points):
+            if v is None:
+                continue
+            t = max(-1.0, min(1.0, v / vmax))
+            pts.append((px + i * step, zero_y - t * (ph / 2.0), v))
+
+        # Segments are drawn individually and coloured by sign, so a crossing of the
+        # zero line is visible as a colour change rather than only as a slope.
+        for (x1, y1, v1), (x2, y2, _) in zip(pts, pts[1:]):
+            colour = OKABE_ITO["vermillion"] if v1 >= 0 else OKABE_ITO["blue"]
+            g.append(
+                f'<line class="qbm-spark-line" x1="{x1:.2f}" y1="{y1:.2f}" '
+                f'x2="{x2:.2f}" y2="{y2:.2f}" style="stroke:{colour}"/>'
+            )
+        for xi, yi, v in pts:
+            colour = OKABE_ITO["vermillion"] if v >= 0 else OKABE_ITO["blue"]
+            g.append(
+                f'<circle class="qbm-spark-dot" cx="{xi:.2f}" cy="{yi:.2f}" '
+                f'r="{SPARK_DOT}" style="fill:{colour}"/>'
+            )
+
+        g.append(
+            f'<text class="qbm-unit-label" x="{x + total_w - SPARK_PAD_X:.2f}" '
+            f'y="{y + SPARK_H - 5:.2f}" text-anchor="end">{esc(peak)}</text>'
+        )
+        g.append("</g>")
+        out.append("".join(g))
+
+    collisions = []
+    for nid, x, y, w, h in placed:
+        for other, ob in node_boxes.items():
+            if other == nid:
+                continue
+            if x < ob.x2 and x + w > ob.x and y < ob.y2 and y + h > ob.y:
+                collisions.append(f"{nid} sparkline overlaps node {other}")
+    return "".join(out), collisions
+
+
+def sparkline_legend_svg(x: float, y: float, timepoints, vmax: float) -> tuple[str, float]:
+    """Explain the sparkline: what the axis is, and what the colour change means."""
+    out = [f'<g class="qbm-spark-legend" transform="translate({x:.2f},{y:.2f})">']
+    out.append(
+        f'<text class="qbm-legend" x="0" y="0" style="font-weight:700">'
+        f'Time course ({len(timepoints)} points: {esc(", ".join(timepoints))})</text>'
+    )
+    demo = [0.35, 0.75, 0.2, -0.4, -0.75, -0.3, 0.15]
+    px, py, ph = 0.0, 10.0, 14.0
+    zero_y = py + ph / 2.0
+    out.append(
+        f'<rect class="qbm-unit" x="-4" y="{py - 2:.2f}" width="{SPARK_W + 8:.2f}" '
+        f'height="{ph + 4:.2f}" rx="{(ph + 4) / 2:.2f}"/>'
+    )
+    out.append(
+        f'<line class="qbm-spark-zero" x1="{px:.2f}" y1="{zero_y:.2f}" '
+        f'x2="{px + SPARK_W:.2f}" y2="{zero_y:.2f}"/>'
+    )
+    step = SPARK_W / (len(demo) - 1)
+    dp = [(px + i * step, zero_y - v * ph / 2.0, v) for i, v in enumerate(demo)]
+    for (x1, y1, v1), (x2, y2, _) in zip(dp, dp[1:]):
+        c = OKABE_ITO["vermillion"] if v1 >= 0 else OKABE_ITO["blue"]
+        out.append(
+            f'<line class="qbm-spark-line" x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" '
+            f'y2="{y2:.2f}" style="stroke:{c}"/>'
+        )
+    out.append(
+        f'<text class="qbm-legend" x="{SPARK_W + 12:.2f}" y="{zero_y + 3:.2f}">'
+        f'earliest → latest; the flat line is no change (log2 0); '
+        f'vermillion above it, blue below; scale ±{vmax:.2f}</text>'
+    )
+    out.append("</g>")
+    return "".join(out), ph + 16.0
+
+#: The drawing is translated below the header, so anything appended to the finished
+#: document in raw layout coordinates lands offset by exactly that amount. Overlay
+#: marks are therefore emitted as a sibling group carrying the SAME transform.
+_BODY_TF_RX = re.compile(r'<g class="qbm-body" transform="(translate\([^"]+\))"')
+
+
+def body_transform(svg: str) -> str:
+    """The body group's transform, for placing appended overlay marks in map space.
+
+    Appending a mark directly before `</svg>` puts it in document coordinates while
+    every node box is in layout coordinates — the two differ by the header height and
+    the canvas origin. That silently detached every measured value from its node in the
+    first published OSD-38 overlay: the numbers were correct and sat next to the wrong
+    boxes, which is worse than no numbers at all.
+    """
+    m = _BODY_TF_RX.search(svg)
+    if not m:
+        raise ValueError(
+            "no qbm-body group found — cannot place overlay marks in map coordinates"
+        )
+    return m.group(1)
