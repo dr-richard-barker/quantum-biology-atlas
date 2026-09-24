@@ -316,7 +316,8 @@ crosses kingdoms. The <code>plants</code> division does not reach animals at all
         import json as _json
 
         records.append(_json.loads(rec_path.read_text()))
-    if records:
+    osd27 = ROOT / "results" / "osd27" / "record.json"
+    if records or osd27.exists():
         out.append("""<h2>Demonstrations</h2>
 <p>Each page projects real measurements onto the maps and states its provenance class,
 because the three available kinds of data do not carry equal weight:
@@ -335,6 +336,27 @@ to carry <strong>time</strong> rather than a single snapshot.</p>
 was deposited; the Data Availability Statement reads
 <em>“{e(rec['data_availability_verbatim'])}”</em>.</p>
 <p class="dl"><a href="paper-{e(rec['key'])}.html">Open the demonstration →</a></p>
+</figcaption></figure>""")
+
+    if osd27.exists():
+        import json as _json
+
+        r27 = _json.loads(osd27.read_text())
+        o27 = r27["orthology"]
+        nodes27 = sum(len(m["consistency"]) for m in r27["maps"].values() if "consistency" in m)
+        out.append(f"""<figure class="map"><figcaption>
+<span class="t"><a href="osd27.html">OSD-27 — <em>Drosophila</em> in a 16.5 T levitation magnet</a></span>
+<p>The cross-species bridge doing real work: {o27['mapped']} of {o27['requested']} atlas
+loci reach the fly, and Arabidopsis CRY1 lands on <em>Drosophila</em> <code>cry</code>,
+the canonical animal magnetoreceptor. Of 420 contrasts, {len(r27['contrasts'])} isolate
+the field from the gravity the levitation also changes.</p>
+<p><strong>The result is null and reported as one:</strong> none of the {nodes27} nodes
+with data moves the same way in all {len(r27['contrasts'])} contrasts. The page also
+states what the projection destroys — on the cryptochrome map three distinct nodes
+collapse onto one fly gene.</p>
+<p><strong>Provenance:</strong> <code>{e(r27['provenance_class'])}</code>, and a
+<strong>strong-field</strong> study — the opposite end of the axis from the review.</p>
+<p class="dl"><a href="osd27.html">Open the demonstration →</a></p>
 </figcaption></figure>""")
 
     # ---- the test --------------------------------------------------------
@@ -482,6 +504,11 @@ def main() -> int:
     # to ../results/ resolves on a local checkout and 404s on the deployed site.
     for rec in sorted((ROOT / "results" / "papers").glob("*/record.json")):
         dst = args.out.parent / "results" / "papers" / rec.parent.name / "record.json"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(rec, dst)
+        copied += 1
+    for rec in sorted(ROOT.glob("results/osd*/record.json")):
+        dst = args.out.parent / "results" / rec.parent.name / "record.json"
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(rec, dst)
         copied += 1

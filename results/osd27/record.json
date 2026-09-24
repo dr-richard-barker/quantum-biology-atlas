@@ -1,0 +1,1083 @@
+{
+  "accession": "OSD-27",
+  "title": "Transcription profiling of Drosophila exposed to a levitation magnet for different lengths of time",
+  "publication_doi": "10.1186/1471-2164-13-52",
+  "provenance_class": "genelab_processed",
+  "organism": "Drosophila melanogaster",
+  "field_tesla_nominal": 16.5,
+  "field_regime": "strong static field",
+  "source_species": "arabidopsis_thaliana",
+  "target_species": "drosophila_melanogaster",
+  "contrasts": [
+    {
+      "label": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "duration": "22 day",
+      "temperature": "19 \u00b0C",
+      "sex": "Male"
+    },
+    {
+      "label": "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)",
+      "duration": "26 hour",
+      "temperature": "14 \u00b0C",
+      "sex": "Female"
+    },
+    {
+      "label": "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)",
+      "duration": "26 hour",
+      "temperature": "14 \u00b0C",
+      "sex": "Male"
+    },
+    {
+      "label": "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)",
+      "duration": "5 day",
+      "temperature": "24 \u00b0C",
+      "sex": "Female"
+    },
+    {
+      "label": "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)",
+      "duration": "5 day",
+      "temperature": "24 \u00b0C",
+      "sex": "Male"
+    }
+  ],
+  "orthology": {
+    "mapped": 63,
+    "requested": 125,
+    "fraction": 0.504,
+    "methods_used": [
+      "ensembl_pan_homology"
+    ],
+    "disagreements": 0,
+    "unmapped": [
+      "AT1G01060",
+      "AT1G06680",
+      "AT1G07180",
+      "AT1G07890",
+      "AT1G08490",
+      "AT1G14920",
+      "AT1G15550",
+      "AT1G20340",
+      "AT1G22770",
+      "AT1G32350",
+      "AT1G53240",
+      "AT1G55920",
+      "AT1G56430",
+      "AT1G62180",
+      "AT1G70940",
+      "AT1G73590",
+      "AT1G76100",
+      "AT2G01570",
+      "AT2G05620",
+      "AT2G18790",
+      "AT2G20800",
+      "AT2G28160",
+      "AT2G29990",
+      "AT2G40080",
+      "AT2G45660",
+      "AT2G46505",
+      "AT2G46790",
+      "AT2G46830",
+      "AT3G03450",
+      "AT3G09640",
+      "AT3G15660",
+      "AT3G21720",
+      "AT3G22360",
+      "AT3G22370",
+      "AT3G22890",
+      "AT3G24430",
+      "AT3G27620",
+      "AT4G03280",
+      "AT4G04610",
+      "AT4G04640",
+      "AT4G05020",
+      "AT4G14880",
+      "AT4G21990",
+      "AT4G22890",
+      "AT4G25100",
+      "AT4G25420",
+      "AT4G28220",
+      "AT5G02810",
+      "AT5G03860",
+      "AT5G04590",
+      "AT5G09600",
+      "AT5G10140",
+      "AT5G20730",
+      "AT5G24470",
+      "AT5G57090",
+      "AT5G61380",
+      "AT5G64210",
+      "AT5G66760",
+      "ATCG00020",
+      "ATCG00540",
+      "ATCG00720",
+      "ATCG01060"
+    ],
+    "one_to_one": 12
+  },
+  "cry1": {
+    "arabidopsis": "AT4G08920",
+    "drosophila": [
+      "FBgn0025680"
+    ]
+  },
+  "alpha": 0.05,
+  "maps": {
+    "QBM-01": {
+      "nodes_with_data": 7,
+      "addressable": 10,
+      "fraction": 0.7,
+      "unmatched": [
+        "ALT_NADH_DH",
+        "AOX",
+        "MITO_SUPEROXIDE"
+      ],
+      "without_loci": [
+        "NADH_POOL",
+        "SUCCINATE",
+        "O2",
+        "UBIQUINONE_POOL",
+        "UBISEMIQUINONE",
+        "COMPLEX_IV",
+        "ATP_SYNTHASE"
+      ],
+      "consistency": [
+        {
+          "node_id": "CYTOCHROME_C",
+          "qbo": "QBO:CYTOCHROME_C",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G22840",
+            "AT4G10040"
+          ],
+          "via": [
+            "AT1G22840\u2192FBgn0086907",
+            "AT4G10040\u2192FBgn0284248"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.1012,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": -0.018,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.1132,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.0294,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.2173,
+              "significant": false
+            }
+          },
+          "n_up": 1,
+          "n_down": 4,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0841,
+          "n_target_genes": 2,
+          "target_genes": [
+            "FBgn0086907",
+            "FBgn0284248"
+          ]
+        },
+        {
+          "node_id": "COMPLEX_II",
+          "qbo": "QBO:COMPLEX_II",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT3G27380",
+            "AT5G40650"
+          ],
+          "via": [
+            "AT3G27380\u2192FBgn0014028",
+            "AT3G27380\u2192FBgn0030975",
+            "AT5G40650\u2192FBgn0014028",
+            "AT5G40650\u2192FBgn0030975"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.2726,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0069,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": 0.0426,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.0779,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.1492,
+              "significant": false
+            }
+          },
+          "n_up": 3,
+          "n_down": 2,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0589,
+          "n_target_genes": 2,
+          "target_genes": [
+            "FBgn0014028",
+            "FBgn0030975"
+          ]
+        },
+        {
+          "node_id": "ACONITASE",
+          "qbo": "QBO:ACONITASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT4G35830",
+            "AT4G26970",
+            "AT2G05710"
+          ],
+          "via": [
+            "AT4G35830\u2192FBgn0024957",
+            "AT4G26970\u2192FBgn0024957",
+            "AT2G05710\u2192FBgn0024957"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.3307,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.2159,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": 0.1208,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.095,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": 0.1775,
+              "significant": false
+            }
+          },
+          "n_up": 4,
+          "n_down": 1,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": 0.0557,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0024957"
+          ]
+        },
+        {
+          "node_id": "RIESKE_FES",
+          "qbo": "QBO:RIESKE_FES",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G13430",
+            "AT5G13440"
+          ],
+          "via": [
+            "AT5G13430\u2192FBgn0021906",
+            "AT5G13440\u2192FBgn0021906"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.0318,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0522,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.0815,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.2314,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": 0.098,
+              "significant": false
+            }
+          },
+          "n_up": 3,
+          "n_down": 2,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": 0.0537,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0021906"
+          ]
+        },
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "via": [
+            "AT5G37510\u2192FBgn0017566",
+            "AT5G08530\u2192FBgn0031771",
+            "AT5G08530\u2192FBgn0034251",
+            "AT5G08530\u2192FBgn0034007",
+            "AT4G02580\u2192FBgn0036706",
+            "AT4G02580\u2192FBgn0030853",
+            "AT5G11770\u2192FBgn0039669"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.1386,
+              "significant": true
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0536,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.1039,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1036,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.0905,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 1,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0352,
+          "n_target_genes": 7,
+          "target_genes": [
+            "FBgn0017566",
+            "FBgn0030853",
+            "FBgn0031771",
+            "FBgn0034007",
+            "FBgn0034251",
+            "FBgn0036706",
+            "FBgn0039669"
+          ]
+        },
+        {
+          "node_id": "COMPLEX_I_FMN",
+          "qbo": "QBO:COMPLEX_I_FMN",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G08530"
+          ],
+          "via": [
+            "AT5G08530\u2192FBgn0031771",
+            "AT5G08530\u2192FBgn0034251",
+            "AT5G08530\u2192FBgn0034007"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.2268,
+              "significant": true
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0529,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": 0.0485,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.0063,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.0007,
+              "significant": false
+            }
+          },
+          "n_up": 3,
+          "n_down": 2,
+          "n_significant": 1,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.024,
+          "n_target_genes": 3,
+          "target_genes": [
+            "FBgn0031771",
+            "FBgn0034007",
+            "FBgn0034251"
+          ]
+        },
+        {
+          "node_id": "LIPOYL_SYNTHASE",
+          "qbo": "QBO:LIPOYL_SYNTHASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT2G20860"
+          ],
+          "via": [
+            "AT2G20860\u2192FBgn0029158"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": 0.0371,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0478,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": 0.1156,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": -0.0638,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.111,
+              "significant": false
+            }
+          },
+          "n_up": 3,
+          "n_down": 2,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": 0.0051,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0029158"
+          ]
+        }
+      ]
+    },
+    "QBM-03": {
+      "nodes_with_data": 3,
+      "addressable": 4,
+      "fraction": 0.75,
+      "unmatched": [
+        "PHYB"
+      ],
+      "without_loci": [
+        "CRY_FAD",
+        "SINGLET_TRIPLET",
+        "COP1_SPA",
+        "FLOWERING_OUTPUT"
+      ],
+      "consistency": [
+        {
+          "node_id": "CRY1",
+          "qbo": "QBO:CRY1",
+          "evidence_tier": "T1",
+          "loci": [
+            "AT4G08920"
+          ],
+          "via": [
+            "AT4G08920\u2192FBgn0025680"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.111,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.218,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.2418,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1812,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.1693,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0246,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0025680"
+          ]
+        },
+        {
+          "node_id": "CRY2",
+          "qbo": "QBO:CRY2",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT1G04400"
+          ],
+          "via": [
+            "AT1G04400\u2192FBgn0025680"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.111,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.218,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.2418,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1812,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.1693,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0246,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0025680"
+          ]
+        },
+        {
+          "node_id": "TRP_TRIAD",
+          "qbo": "QBO:TRP_TRIAD",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT4G08920",
+            "AT1G04400"
+          ],
+          "via": [
+            "AT4G08920\u2192FBgn0025680",
+            "AT1G04400\u2192FBgn0025680"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.111,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.218,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.2418,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1812,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.1693,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0246,
+          "n_target_genes": 1,
+          "target_genes": [
+            "FBgn0025680"
+          ]
+        }
+      ]
+    },
+    "QBM-07": {
+      "nodes_with_data": 5,
+      "addressable": 8,
+      "fraction": 0.625,
+      "unmatched": [
+        "MITO_SUPEROXIDE",
+        "ASCORBATE_PEROXIDASE",
+        "PEROXIREDOXIN_TRX"
+      ],
+      "without_loci": [
+        "BETA_OXIDATION",
+        "REDOX_POOLS",
+        "NADPH_POOL",
+        "ROS_TRANSCRIPTIONAL_RESPONSE"
+      ],
+      "consistency": [
+        {
+          "node_id": "ASC_GSH_CYCLE",
+          "qbo": "QBO:ASC_GSH_CYCLE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT3G24170",
+            "AT1G19570",
+            "AT3G52880"
+          ],
+          "via": [
+            "AT3G24170\u2192FBgn0020653",
+            "AT3G24170\u2192FBgn0037170",
+            "AT3G24170\u2192FBgn0031392",
+            "AT3G24170\u2192FBgn0025628",
+            "AT3G24170\u2192FBgn0032754",
+            "AT3G24170\u2192FBgn0032846",
+            "AT1G19570\u2192FBgn0030484",
+            "AT1G19570\u2192FBgn0033817",
+            "AT1G19570\u2192FBgn0029176",
+            "AT1G19570\u2192FBgn0038029",
+            "AT1G19570\u2192FBgn0030529",
+            "AT1G19570\u2192FBgn0063499",
+            "AT1G19570\u2192FBgn0063491",
+            "AT1G19570\u2192FBgn0034335",
+            "AT1G19570\u2192FBgn0063498",
+            "AT1G19570\u2192FBgn0063493",
+            "AT1G19570\u2192FBgn0063492",
+            "AT1G19570\u2192FBgn0063495",
+            "AT1G19570\u2192FBgn0063494",
+            "AT1G19570\u2192FBgn0063496",
+            "AT1G19570\u2192FBgn0063497",
+            "AT1G19570\u2192FBgn0027590",
+            "AT1G19570\u2192FBgn0034354",
+            "AT1G19570\u2192FBgn0033381",
+            "AT1G19570\u2192FBgn0250732",
+            "AT1G19570\u2192FBgn0035904",
+            "AT1G19570\u2192FBgn0086348",
+            "AT1G19570\u2192FBgn0035907",
+            "AT1G19570\u2192FBgn0035906",
+            "AT1G19570\u2192FBgn0010038",
+            "AT1G19570\u2192FBgn0010041",
+            "AT1G19570\u2192FBgn0010040",
+            "AT1G19570\u2192FBgn0010043",
+            "AT1G19570\u2192FBgn0010042",
+            "AT1G19570\u2192FBgn0042206",
+            "AT1G19570\u2192FBgn0010039",
+            "AT1G19570\u2192FBgn0001149",
+            "AT1G19570\u2192FBgn0038020",
+            "AT1G19570\u2192FBgn0010044",
+            "AT3G52880\u2192FBgn0025628",
+            "AT3G52880\u2192FBgn0032754"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.2818,
+              "significant": true
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0344,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.0001,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": -0.0525,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.1941,
+              "significant": false
+            }
+          },
+          "n_up": 1,
+          "n_down": 4,
+          "n_significant": 1,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0988,
+          "n_target_genes": 39,
+          "target_genes": [
+            "FBgn0001149",
+            "FBgn0010038",
+            "FBgn0010039",
+            "FBgn0010040",
+            "FBgn0010041",
+            "FBgn0010042",
+            "FBgn0010043",
+            "FBgn0010044",
+            "FBgn0020653",
+            "FBgn0025628",
+            "FBgn0027590",
+            "FBgn0029176",
+            "FBgn0030484",
+            "FBgn0030529",
+            "FBgn0031392",
+            "FBgn0032754",
+            "FBgn0032846",
+            "FBgn0033381",
+            "FBgn0033817",
+            "FBgn0034335",
+            "FBgn0034354",
+            "FBgn0035904",
+            "FBgn0035906",
+            "FBgn0035907",
+            "FBgn0037170",
+            "FBgn0038020",
+            "FBgn0038029",
+            "FBgn0042206",
+            "FBgn0063491",
+            "FBgn0063492",
+            "FBgn0063493",
+            "FBgn0063494",
+            "FBgn0063495",
+            "FBgn0063496",
+            "FBgn0063497",
+            "FBgn0063498",
+            "FBgn0063499",
+            "FBgn0086348",
+            "FBgn0250732"
+          ]
+        },
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "via": [
+            "AT5G37510\u2192FBgn0017566",
+            "AT5G08530\u2192FBgn0031771",
+            "AT5G08530\u2192FBgn0034251",
+            "AT5G08530\u2192FBgn0034007",
+            "AT4G02580\u2192FBgn0036706",
+            "AT4G02580\u2192FBgn0030853",
+            "AT5G11770\u2192FBgn0039669"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.1386,
+              "significant": true
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0536,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.1039,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1036,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.0905,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 1,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0352,
+          "n_target_genes": 7,
+          "target_genes": [
+            "FBgn0017566",
+            "FBgn0030853",
+            "FBgn0031771",
+            "FBgn0034007",
+            "FBgn0034251",
+            "FBgn0036706",
+            "FBgn0039669"
+          ]
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "evidence_tier": "T3",
+          "loci": [
+            "AT1G20630",
+            "AT4G35090",
+            "AT1G20620"
+          ],
+          "via": [
+            "AT1G20630\u2192FBgn0032061",
+            "AT1G20630\u2192FBgn0000261",
+            "AT4G35090\u2192FBgn0032061",
+            "AT4G35090\u2192FBgn0000261",
+            "AT1G20620\u2192FBgn0032061",
+            "AT1G20620\u2192FBgn0000261"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": -0.1808,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": 0.0663,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": 0.0648,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": -0.1177,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": -0.0044,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": -0.0344,
+          "n_target_genes": 2,
+          "target_genes": [
+            "FBgn0000261",
+            "FBgn0032061"
+          ]
+        },
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "evidence_tier": "T2",
+          "loci": [
+            "AT2G28190"
+          ],
+          "via": [
+            "AT2G28190\u2192FBgn0039386",
+            "AT2G28190\u2192FBgn0003462"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": 0.0937,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": -0.0461,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.1696,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": 0.1121,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": 0.0454,
+              "significant": false
+            }
+          },
+          "n_up": 3,
+          "n_down": 2,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": 0.0071,
+          "n_target_genes": 2,
+          "target_genes": [
+            "FBgn0003462",
+            "FBgn0039386"
+          ]
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "evidence_tier": "T4",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190"
+          ],
+          "via": [
+            "AT1G08830\u2192FBgn0033631",
+            "AT2G28190\u2192FBgn0039386",
+            "AT2G28190\u2192FBgn0003462"
+          ],
+          "by_contrast": {
+            "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)": {
+              "log2fc": 0.2377,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Female)v(26 hour & 1G on Earth & 14 degree Celsius & Female)": {
+              "log2fc": -0.0483,
+              "significant": false
+            },
+            "(26 hour & 1G by magnetic levitator & 14 degree Celsius & Male)v(26 hour & 1G on Earth & 14 degree Celsius & Male)": {
+              "log2fc": -0.1146,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Female)v(5 day & 1G on Earth & 24 degree Celsius & Female)": {
+              "log2fc": -0.1399,
+              "significant": false
+            },
+            "(5 day & 1G by magnetic levitator & 24 degree Celsius & Male)v(5 day & 1G on Earth & 24 degree Celsius & Male)": {
+              "log2fc": 0.0654,
+              "significant": false
+            }
+          },
+          "n_up": 2,
+          "n_down": 3,
+          "n_significant": 0,
+          "n_contrasts": 5,
+          "consistent_direction": "mixed",
+          "mean_log2fc": 0.0001,
+          "n_target_genes": 3,
+          "target_genes": [
+            "FBgn0003462",
+            "FBgn0033631",
+            "FBgn0039386"
+          ]
+        }
+      ]
+    }
+  },
+  "projection_collapses": {
+    "nodes_sharing_a_target_gene": [
+      {
+        "map": "QBM-03",
+        "nodes": [
+          "CRY1",
+          "CRY2",
+          "TRP_TRIAD"
+        ],
+        "target_genes": [
+          "FBgn0025680"
+        ],
+        "n_target_genes": 1
+      },
+      {
+        "map": "QBM-01",
+        "nodes": [
+          "COMPLEX_I",
+          "COMPLEX_I_FMN"
+        ],
+        "target_genes": [
+          "FBgn0031771",
+          "FBgn0034007",
+          "FBgn0034251"
+        ],
+        "n_target_genes": 3
+      },
+      {
+        "map": "QBM-07",
+        "nodes": [
+          "PLASTID_ROS",
+          "SUPEROXIDE_DISMUTASES"
+        ],
+        "target_genes": [
+          "FBgn0003462",
+          "FBgn0039386"
+        ],
+        "n_target_genes": 2
+      }
+    ],
+    "nodes_averaging_many_genes": [
+      {
+        "map": "QBM-07",
+        "node_id": "ASC_GSH_CYCLE",
+        "n_target_genes": 39,
+        "loci": [
+          "AT3G24170",
+          "AT1G19570",
+          "AT3G52880"
+        ]
+      }
+    ]
+  },
+  "figures": [
+    {
+      "id": "QBM-01",
+      "study": "OSD-27",
+      "contrast": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "organism": "Drosophila melanogaster",
+      "svg": "maps/svg/QBM-01__OSD-27.svg",
+      "nodes_with_data": 7,
+      "fraction_covered": 0.7,
+      "vmax": 0.3307,
+      "provenance": "Data: OSD-27, contrast (22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male). organism Drosophila melanogaster. 7 of 10 identifier-bearing nodes received a value (70%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean. significance at adjusted p \u2264 0.05. orthology arabidopsis_thaliana \u2192 drosophila_melanogaster via ensembl_pan_homology (15/28 loci, 0 method disagreements). no measurement found for: ALT_NADH_DH, AOX, MITO_SUPEROXIDE.",
+      "dropped_edge_labels": [],
+      "factors": {
+        "duration": "22 day",
+        "temperature": "19 \u00b0C",
+        "sex": "Male"
+      },
+      "contrast_label": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "low_coverage_published": false
+    },
+    {
+      "id": "QBM-03",
+      "study": "OSD-27",
+      "contrast": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "organism": "Drosophila melanogaster",
+      "svg": "maps/svg/QBM-03__OSD-27.svg",
+      "nodes_with_data": 3,
+      "fraction_covered": 0.75,
+      "vmax": 0.2418,
+      "provenance": "Data: OSD-27, contrast (22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male). organism Drosophila melanogaster. 3 of 4 identifier-bearing nodes received a value (75%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean. significance at adjusted p \u2264 0.05. orthology arabidopsis_thaliana \u2192 drosophila_melanogaster via ensembl_pan_homology (2/3 loci, 0 method disagreements). no measurement found for: PHYB.",
+      "dropped_edge_labels": [],
+      "factors": {
+        "duration": "22 day",
+        "temperature": "19 \u00b0C",
+        "sex": "Male"
+      },
+      "contrast_label": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "low_coverage_published": false
+    },
+    {
+      "id": "QBM-07",
+      "study": "OSD-27",
+      "contrast": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "organism": "Drosophila melanogaster",
+      "svg": "maps/svg/QBM-07__OSD-27.svg",
+      "nodes_with_data": 5,
+      "fraction_covered": 0.625,
+      "vmax": 0.2818,
+      "provenance": "Data: OSD-27, contrast (22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male). organism Drosophila melanogaster. 5 of 8 identifier-bearing nodes received a value (62%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by mean. significance at adjusted p \u2264 0.05. orthology arabidopsis_thaliana \u2192 drosophila_melanogaster via ensembl_pan_homology (14/17 loci, 0 method disagreements). no measurement found for: MITO_SUPEROXIDE, ASCORBATE_PEROXIDASE, PEROXIREDOXIN_TRX.",
+      "dropped_edge_labels": [],
+      "factors": {
+        "duration": "22 day",
+        "temperature": "19 \u00b0C",
+        "sex": "Male"
+      },
+      "contrast_label": "(22 day & 1G by magnetic levitator & 19 degree Celsius & Male)v(22 day & 1G on Earth & 19 degree Celsius & Male)",
+      "low_coverage_published": false
+    }
+  ]
+}
