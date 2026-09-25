@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Explore — project your own data onto a quantum pathway map</title>
+<meta name="description" content="Drop a differential-expression table and see it on the atlas&#x27;s maps. Runs entirely in your browser; nothing is uploaded.">
+<meta name="author" content="Richard Barker">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Tokens are namespaced --qba-* and mapped onto the CoSE palette loaded from
+     cose-map.css. Each falls back to a literal, so the page is still legible and
+     correctly themed if that stylesheet cannot be fetched.
+
+     Note --qba-soft maps to --muted, NOT to --soft: in the CoSE vocabulary --soft is
+     a surface colour, and using it for text renders near-white on white. */
+  :root {
+    --qba-bg:     var(--bg,       #ffffff);
+    --qba-ink:    var(--ink,      #1a2230);
+    --qba-soft:   var(--muted,    #5a6473);
+    --qba-faint:  var(--ink-faint,#8892a3);
+    --qba-rule:   var(--line,     #e5e9f0);
+    --qba-card:   var(--surface,  #f7f9fc);
+    --qba-card2:  var(--surface-2,#eef2f8);
+    --qba-accent: var(--accent,   #3B6EA5);
+    --qba-accent2:var(--accent2,  #3FB6A8);
+    /* Okabe-Ito vermillion: the CoSE palette has no warning token, and this is the
+       same colour the maps use for a down-regulated node. */
+    --qba-warn:   #D55E00;
+    --qba-t1: var(--ink,       #1a2230);
+    --qba-t2: var(--muted,     #5a6473);
+    --qba-t3: var(--ink-faint, #8892a3);
+    --qba-t4: var(--line,      #c9d1dc);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--qba-bg); color:var(--qba-ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 16px 96px; }
+  header.hero { padding:56px 0 28px; border-bottom:1px solid var(--qba-rule); }
+  h1 { font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.18; margin:0 0 10px; letter-spacing:-.02em; }
+  .lede { font-size:1.12rem; color:var(--qba-soft); max-width:62ch; margin:0 0 18px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:1.05rem; margin:26px 0 6px; }
+  p, li { max-width:74ch; }
+  a { color:var(--qba-accent); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+    background:var(--qba-card); padding:1px 5px; border-radius:4px;
+    /* Long identifiers — an AGI locus list, a DOI — must break rather than push the
+       page wider than the screen. */
+    overflow-wrap:anywhere; }
+  /* A code block scrolls inside itself. Without this every page overflowed the
+     viewport on a phone: the index scrolled to 736px at a 375px width. */
+  pre { overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+  pre code { overflow-wrap:normal; white-space:pre; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+  .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
+    padding:9px 14px; font-size:.9rem; }
+  .stats b { font-size:1.18rem; display:block; font-weight:700; }
+  .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
+    border-radius:0 8px 8px 0; margin:20px 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  /* A wide table scrolls inside its own box rather than making the whole page scroll
+     sideways. The per-node value tables are 11 columns and overflowed the viewport on
+     the deployed page by 70px at desktop width, and far more on a phone. */
+  .tablewrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px 0; }
+  .tablewrap table { margin:0; min-width:760px; }
+  /* Inside a scrolling table an identifier must NOT break: `overflow-wrap:anywhere`
+     on code turned AT4G25100 into "AT4 G251 00". The wrapper scrolls instead. */
+  .tablewrap code { overflow-wrap:normal; white-space:nowrap; }
+  .tablewrap + .tablenote { font-size:.82rem; color:var(--qba-soft); margin:-4px 0 18px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
+    vertical-align:top; }
+  th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .swatch { display:inline-block; width:34px; height:15px; border-radius:4px;
+    background:var(--qba-card); vertical-align:-2px; margin-right:8px; }
+  .swatch.T1 { border:2.6px solid var(--qba-t1); }
+  .swatch.T2 { border:1.7px solid var(--qba-t2); }
+  .swatch.T3 { border:1.5px dashed var(--qba-t3); }
+  .swatch.T4 { border:1px solid var(--qba-t4); }
+  figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-card); }
+  figure.map > a { display:block; background:var(--qba-bg); }
+  figure.map img { width:100%; height:auto; display:block; }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
+    margin-bottom:4px; }
+  .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
+  .dl { margin-top:8px; font-size:.85rem; }
+  footer { border-top:1px solid var(--qba-rule); margin-top:56px; padding-top:22px;
+    font-size:.88rem; color:var(--qba-soft); }
+  @media (max-width:640px) { header.hero { padding-top:34px; } }
+</style>
+<!-- CoSE colour scheme only. cose-chrome.css and theme.js would inject the
+     navigation rail, and are deliberately not loaded. -->
+<link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-map.css">
+</head>
+<body data-site-id="quantum-biology-atlas">
+<div class="wrap">
+
+<style>
+  .drop { border:2px dashed var(--qba-rule); border-radius:14px; padding:34px 20px;
+    text-align:center; background:var(--qba-card); transition:border-color .15s,background .15s; }
+  .drop.over { border-color:var(--qba-accent); background:var(--qba-card2); }
+  .drop input[type=file] { display:none; }
+  .btn { display:inline-block; border:1px solid var(--qba-rule); background:var(--qba-bg);
+    color:var(--qba-ink); border-radius:9px; padding:9px 16px; font:inherit; font-size:.92rem;
+    cursor:pointer; }
+  .btn:hover { border-color:var(--qba-accent); color:var(--qba-accent); }
+  .btn.primary { background:var(--qba-accent); color:#fff; border-color:var(--qba-accent); }
+  .controls { display:flex; flex-wrap:wrap; gap:14px; margin:20px 0; align-items:flex-end; }
+  .controls label { display:block; font-size:.8rem; color:var(--qba-soft);
+    text-transform:uppercase; letter-spacing:.05em; margin-bottom:5px; font-weight:650; }
+  .controls select, .controls input { font:inherit; font-size:.92rem; padding:7px 9px;
+    border:1px solid var(--qba-rule); border-radius:8px; background:var(--qba-bg);
+    color:var(--qba-ink); max-width:100%; }
+  .msg { border-radius:0 8px 8px 0; padding:12px 16px; margin:18px 0;
+    border-left:3px solid var(--qba-rule); background:var(--qba-card); }
+  .msg.err  { border-left-color:#D55E00; }
+  .msg.warn { border-left-color:#E69F00; }
+  .msg.ok   { border-left-color:#009E73; }
+  .msg h4 { margin:0 0 6px; font-size:1rem; }
+  .msg p, .msg ul { margin:6px 0; font-size:.92rem; }
+  .cov { display:flex; flex-wrap:wrap; gap:10px; margin:14px 0 0; padding:0; list-style:none; }
+  .cov li { background:var(--qba-bg); border:1px solid var(--qba-rule); border-radius:9px;
+    padding:7px 12px; font-size:.85rem; }
+  .cov b { display:block; font-size:1.1rem; }
+  #stage { margin-top:22px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-bg); }
+  #stage svg { width:100%; height:auto; display:block; }
+  #stage:empty { display:none; }
+  .hint { font-size:.85rem; color:var(--qba-soft); }
+  details.diag { margin-top:10px; font-size:.88rem; }
+  details.diag summary { cursor:pointer; color:var(--qba-accent); }
+  details.diag code { font-size:.85em; }
+</style>
+<header class="hero">
+<h1>Put your own data on the maps</h1>
+<p class="lede">Drop a differential-expression table — CSV or TSV, an identifier column
+and a log<sub>2</sub> fold change — and see it projected onto any of the atlas's
+10 maps. If it is not <em>Arabidopsis</em>, the orthology runs too.</p>
+<p class="lede"><strong>Nothing is uploaded.</strong> The file is read in your browser,
+joined against the catalogue that ships with this site, and drawn. That is a deliberate
+property, not an accident of hosting: unpublished data should not have to leave your
+machine to be looked at.</p>
+</header>
+
+<div class="drop" id="drop">
+  <p><strong>Drop a CSV or TSV here</strong>, or
+    <label class="btn" for="file">choose a file</label>
+    <input type="file" id="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values">
+  </p>
+  <p class="hint">Never leaves your browser. No file size limit beyond your own memory.</p>
+  <p><button class="btn" id="demo" type="button">Load a real example instead</button></p>
+  <p class="hint">The example is the OSD-8 field-isolating contrast — 1g inside a
+    16.5&nbsp;T magnet against 1g outside it, 2,125 <em>Arabidopsis</em> loci.
+    <a href="osd8.html">What that study is</a>.</p>
+</div>
+
+<div class="controls">
+  <div><label for="map">Map</label>
+    <select id="map"><option value="QBM-01">QBM-01 — Mitochondrial electron transport and oxidative phosphorylation</option>
+<option value="QBM-02">QBM-02 — Photosynthetic electron transport and plastid redox</option>
+<option value="QBM-03">QBM-03 — Cryptochrome radical-pair photochemistry</option>
+<option value="QBM-04">QBM-04 — Iron-sulfur cluster biogenesis — ISC, SUF and CIA</option>
+<option value="QBM-05">QBM-05 — TCA cycle and the Fe/S-dependent steps</option>
+<option value="QBM-06">QBM-06 — Seed germination before photosynthesis</option>
+<option value="QBM-07">QBM-07 — ROS production, scavenging and redox buffering</option>
+<option value="QBM-08">QBM-08 — From magnetic environment to plant phenotype</option>
+<option value="QBM-09">QBM-09 — Iron uptake and sulfate assimilation</option>
+<option value="QBM-10">QBM-10 — Hormone and circadian integration of the flowering response</option></select></div>
+  <div><label for="species">Your data's species</label>
+    <select id="species">
+      <option value="arabidopsis_thaliana" selected>Arabidopsis thaliana (no projection needed)</option>
+      <option value="homo_sapiens">Human (68/125 loci mapped)</option>
+<option value="saccharomyces_cerevisiae">Yeast (68/125 loci mapped)</option>
+<option value="mus_musculus">Mouse (64/125 loci mapped)</option>
+<option value="drosophila_melanogaster">Fly (63/125 loci mapped)</option>
+<option value="caenorhabditis_elegans">Worm (61/125 loci mapped)</option>
+    </select></div>
+  <div><label for="agg">Multi-locus nodes</label>
+    <select id="agg">
+      <option value="extreme">Largest change</option>
+      <option value="mean" selected>Mean</option>
+      <option value="median">Median</option>
+    </select></div>
+  <div><label for="alpha">Significance α</label>
+    <input type="number" id="alpha" value="0.05" min="0" max="1" step="0.01" style="width:7em"></div>
+  <div><button class="btn primary" id="go" type="button">Project</button></div>
+</div>
+
+<div id="report"></div>
+<div id="stage"></div>
+<h2>What it does with your file</h2>
+<p><strong>It detects the identifier namespace rather than asking.</strong> The commonest
+silent failure in a tool like this is a user uploading Ensembl ids against an AGI-keyed
+map: everything misses, a blank map renders, and it looks like a finding. Here the column
+that looks most like identifiers is chosen by content, the namespace is named back to
+you, and a namespace that cannot reach the species you picked is an error rather than an
+empty result.</p>
+<p><strong>It refuses rather than drawing something meaningless.</strong> A join that
+matches nothing stops with an explanation. Below 25% coverage it warns
+loudly and states the number. Both rules are ported from
+<code>qbio.project.project_expression</code>, which the generated figures on this site go
+through, so an overlay you make here obeys the same discipline as one in the repository.</p>
+<p><strong>It shows what it could not do.</strong> Nodes with no gene identifier at all,
+nodes whose loci are absent from your table, and — for a cross-species run — loci with no
+ortholog in your species are counted separately, because they are different problems.</p>
+<p><strong>Colour means the same thing as everywhere else in the atlas.</strong>
+Okabe-Ito vermillion above zero, blue below, transparent at no change, and the evidence
+tier still shows as the border style. A dashed node is a hypothesis whatever your data
+says about it.</p>
+
+<h2>What it cannot tell you</h2>
+<ul>
+<li><strong>That a coloured node is field-sensitive.</strong> The atlas's own
+<a href="osd8.html">specificity test</a> found its loci respond no more than random loci
+on the same array. Colour shows what your data did at these nodes, not that these nodes
+are special.</li>
+<li><strong>Anything about statistical power.</strong> No test is run here. If your table
+has an adjusted p-value column it is used to mark nodes at your chosen α and nothing
+more.</li>
+<li><strong>That an ortholog call is an identity.</strong> Cross-species projection
+collapses distinctions — on the cryptochrome map, three nodes land on a single fly gene.
+The coverage report names the method; the <a href="osd27.html">fly page</a> shows what
+that costs.</li>
+</ul>
+
+<h2>Expected format</h2>
+<pre><code>locus,log2FoldChange,padj
+AT1G07890,-1.09,0.004
+AT1G20630,0.94,0.21</code></pre>
+<p class="hint">Tab-separated works too, and the delimiter is sniffed. The identifier and
+value columns are detected, so column order and extra columns do not matter. A column
+named like <code>log2FoldChange</code> is preferred over an unnamed numeric one; an
+adjusted-p column is optional. Recognised namespaces: Arabidopsis AGI, FlyBase, Ensembl,
+WormBase and SGD systematic names.</p>
+
+<footer>
+<p><a href="index.html">← Quantum Biology Atlas</a></p>
+</footer>
+
+<script type="module" src="assets/qbm-explore-ui.js"></script>
+</div>
+</body>
+</html>

@@ -338,6 +338,22 @@ was deposited; the Data Availability Statement reads
 <p class="dl"><a href="paper-{e(rec['key'])}.html">Open the demonstration →</a></p>
 </figcaption></figure>""")
 
+    # The upload GUI. Listed first because it is the thing a visitor can use on their
+    # own data, rather than read about.
+    if (args_out_docs := ROOT / "docs" / "explore.html").exists():
+        out.append("""<figure class="map"><figcaption>
+<span class="t"><a href="explore.html">Explore — put your own data on the maps</a></span>
+<p>Drop a differential-expression table and see it projected onto any map, with the
+orthology run for you if it is not <em>Arabidopsis</em>. <strong>Nothing is uploaded</strong>
+— the file is read in your browser and joined against the catalogue that ships with this
+site.</p>
+<p>It carries the same refusals as the generated figures: an empty join stops with an
+explanation rather than drawing a blank map, coverage below 25% warns and states the
+number, and a namespace that cannot reach your chosen species is caught before the join
+rather than after. It also names the nodes that collapse onto a shared gene.</p>
+<p class="dl"><a href="explore.html">Open the tool →</a></p>
+</figcaption></figure>""")
+
     osd8p = ROOT / "results" / "osd8" / "record.json"
     if osd8p.exists():
         import json as _json
