@@ -355,3 +355,138 @@ def test_base_maps_are_unaffected_by_the_series_capability(onto):
     b, _, _ = maps.layout_map(spec, onto)
     assert [n.box.h for n in a] == [n.box.h for n in b]
     assert all(n.reserve_bottom == 0.0 for n in a)
+
+
+# ---------------------------------------------------------------------------
+# signed fold change — the third scale
+# ---------------------------------------------------------------------------
+
+
+def test_signed_fold_converts_reciprocally():
+    """-3.09 means 3.09-fold DOWN, not a log and not a ratio."""
+    up = papers.Measurement(3.09, 0.1, papers.SIGNED_FOLD).to_log2()
+    down = papers.Measurement(-3.09, 0.1, papers.SIGNED_FOLD).to_log2()
+    assert up.value == pytest.approx(math.log2(3.09))
+    assert down.value == pytest.approx(-math.log2(3.09))
+    assert up.value == pytest.approx(-down.value)
+
+
+def test_signed_fold_of_one_is_no_change_either_way():
+    for v in (1.0, -1.0):
+        assert papers.Measurement(v, 0, papers.SIGNED_FOLD).to_log2().value == pytest.approx(0.0)
+
+
+def test_a_value_inside_minus_one_to_one_is_refused_on_the_signed_scale():
+    """The tell that the scale was mislabelled. Guessing between 'wrong scale' and
+    'misparsed cell' would silently change a direction."""
+    with pytest.raises(papers.PaperError, match="strictly between"):
+        papers.Measurement(0.5, 0, papers.SIGNED_FOLD).to_log2()
+
+
+def test_reading_signed_fold_as_a_ratio_would_invert_the_papers_claim():
+    """Why the scale is checked rather than assumed: Agliassa's central finding is that
+    near-null fields DOWN-regulate flowering genes."""
+    signed = papers.Measurement(-3.09, 0, papers.SIGNED_FOLD).to_log2().value
+    assert signed < 0
+    # The same number read as a ratio is not even convertible, which is the safe failure.
+    with pytest.raises(papers.PaperError):
+        papers.Measurement(-3.09, 0, papers.RATIO).to_log2()
+
+
+def test_parse_signed_fold_handles_the_unicode_minus():
+    """The XML uses U+2212, which a plain '-' match misses entirely."""
+    assert papers.parse_signed_fold("−3.09 (±0.10)") == (-3.09, 0.10)
+    assert papers.parse_signed_fold("1.14 (±0.02)") == (1.14, 0.02)
+    assert papers.parse_signed_fold("not a value") is None
+
+
+# ---------------------------------------------------------------------------
+# main-text tables
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(scope="module")
+def agliassa():
+    import zipfile
+
+    src = ROOT / "data" / "external" / "papers" / "PMC6032911_suppl.zip"
+    if not src.exists():
+        pytest.skip("Agliassa 2018a supplementary not cached")
+    xml_cache = ROOT / "data" / "external" / "papers" / "PMC6032911_fulltext.xml"
+    if not xml_cache.exists():
+        pytest.skip("Agliassa 2018a full text not cached")
+    zf = zipfile.ZipFile(src)
+    primer = papers.read_primer_map(
+        zf.read(papers.find_member(zf, "SuppTable-S1"))
+    )
+    series, report = papers.read_maintext_timecourse(
+        xml_cache.read_text(encoding="utf-8", errors="replace"),
+        table_captions=("Time-Course Expression of Leaf Genes",
+                        "Time-Course Expression of Floral Meristem Genes"),
+        symbol_to_locus=primer, scale=papers.SIGNED_FOLD,
+    )
+    return series, report, primer
+
+
+def test_every_gene_symbol_resolves_from_the_papers_own_primer_table(agliassa):
+    """Resolving a symbol from memory is how the wrong gene reaches a map."""
+    _, report, primer = agliassa
+    assert not report["symbols_unresolved"], report["symbols_unresolved"]
+    assert len(primer) >= 25
+
+
+def test_a_symbol_with_a_stray_space_still_resolves(agliassa):
+    """The XML renders SOC1 as 'SOC 1'; an exact lookup loses a central flowering gene."""
+    series, _, _ = agliassa
+    assert any(s.gene_code.replace(" ", "") == "SOC1" for s in series)
+
+
+def test_tables_are_selected_by_caption_not_position(agliassa):
+    with pytest.raises(papers.PaperError, match="no main-text table matched"):
+        papers.read_maintext_timecourse(
+            "<table-wrap><caption>Something else</caption></table-wrap>",
+            table_captions=("Time-Course Expression of Leaf Genes",),
+            symbol_to_locus={}, scale=papers.SIGNED_FOLD,
+        )
+
+
+def test_the_two_tissues_have_their_own_timebases(agliassa):
+    """Leaves were sampled days 17-28, meristem days 21-30. Sharing a timebase would
+    misdate every meristem value."""
+    series, _, _ = agliassa
+    bases = {s.tissue: s.timepoints for s in series}
+    assert len(set(bases.values())) == 2
+
+
+def test_the_direction_matches_the_papers_own_abstract(agliassa):
+    """The abstract says NNMF causes 'an early downregulation of clock, photoperiod,
+    gibberellin, and vernalization pathways'. The clock genes must come out negative."""
+    series, _, _ = agliassa
+    clock = [s for s in series if s.locus in
+             {"AT2G46830", "AT1G01060", "AT5G61380", "AT1G22770"}]
+    assert clock, "no circadian clock loci parsed"
+    early = [s.to_log2().points[0].value for s in clock if s.points[0] is not None]
+    assert sum(early) / len(early) < 0, (
+        "the clock genes come out UP at the first timepoint, which contradicts the "
+        "paper's abstract — the scale conversion is probably inverted"
+    )
+
+
+def test_a_pdf_with_no_symbol_pairs_raises():
+    """A VALID pdf carrying no primer table, not a corrupt one — a corrupt file already
+    fails loudly inside pdfplumber, and returning an empty key silently would make every
+    downstream symbol fail to resolve."""
+    import io
+    import zipfile
+
+    src = ROOT / "data" / "external" / "papers" / "PMC9917513_suppl.zip"
+    if not src.exists():
+        pytest.skip("Parmagnani 2023 supplementary not cached")
+    outer = zipfile.ZipFile(src)
+    inner = papers.open_nested_zip(
+        outer, next(n for n in outer.namelist() if n.lower().endswith(".zip"))
+    )
+    # Its Table S2 is an HPLC gradient: a real table, with no gene symbols in it.
+    data = inner.read(papers.find_member(inner, "Table S2"))
+    with pytest.raises(papers.PaperError, match="no gene-symbol"):
+        papers.read_primer_map(data)

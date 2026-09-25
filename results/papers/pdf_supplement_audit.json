@@ -1,0 +1,68 @@
+{
+  "question": "Which of the PDF-supplement papers carry gene-level data the atlas can project?",
+  "method": "pdfplumber 0.11.8 was installed and every supplementary PDF was opened and read, and each paper's main-text tables were fetched from EuropePMC. The verdicts below are from what the files contain, not from their titles.",
+  "papers": {
+    "Vigani2021": {
+      "pmcid": "PMC8469209",
+      "doi": "10.3390/ijms221810166",
+      "supplementary_pdfs": [
+        {
+          "file": "ijms-1386884-supplementary.pdf",
+          "pages": 6,
+          "first_lines": "Table S1. Two-way ANOVA analysis of the different parameters considered in this work. The effect / of single variable (nutrient availability, NA or magnetic field (MF) intensity) and the variable / interaction (NAxMF) was considered. Significant effects (p val"
+        }
+      ],
+      "main_text_tables": [
+        {
+          "caption": "Metal contents (Fe, Zn, Cu, Mn, and Mo expressed as \u03bcg/g dry weight) of shoot and root tissues of Arabidopsis thaliana seedlings exposed to GMF and NN",
+          "agi_ids_present": 0
+        },
+        {
+          "caption": "Metal contents (Fe, Zn, Cu, Mn, and Mo expressed as \u03bcg/g DW) of Arabidopsis thaliana seedlings (whole plant) grown under full nutrient conditions (C),",
+          "agi_ids_present": 0
+        },
+        {
+          "caption": "",
+          "agi_ids_present": 0
+        }
+      ],
+      "verdict": "not_buildable",
+      "reason": "No gene-level values anywhere. The supplementary PDF is a two-way ANOVA summary, a growth-medium nutrient recipe and a primer list; the main-text tables are elemental contents (Fe, Zn, Cu, Mn, Mo). The gene expression appears only in figures. Element concentrations are real data but carry no loci, so they cannot be projected onto a map whose nodes are gene sets."
+    },
+    "Parmagnani2023": {
+      "pmcid": "PMC9917513",
+      "doi": "10.3390/ijms24032896",
+      "supplementary_pdfs": [
+        {
+          "file": "Supplementary Table S1.pdf",
+          "pages": 1,
+          "first_lines": "Supplementary Table S1. Primers used in this study / Gene Locus Sequence 5\u2019 \u2192 3\u2019 Sense / PlIScA1 Pl01G0000340900.1 AGTTGGTTGAGGATAAGGGTGT Forward"
+        },
+        {
+          "file": "Supplementary Table S2.pdf",
+          "pages": 1,
+          "first_lines": "Supplementary Table S2. Chromatographic gradient used / for the separation of Chlorophyll, chlorophyll degradation / products, and carotenoids."
+        }
+      ],
+      "main_text_tables": [
+        {
+          "caption": "Chemical characterization of Lima bean chlorophylls in plants exposed to GMF and NNMF conditions. Values are expressed as \u00b5g g\u22121 F.Wt (standard deviat",
+          "agi_ids_present": 0
+        },
+        {
+          "caption": "Chemical characterization of Lima bean carotenoids in plants exposed to GMF and NNMF conditions. Values are expressed as \u00b5g g\u22121 F.Wt (standard deviati",
+          "agi_ids_present": 0
+        }
+      ],
+      "verdict": "not_buildable",
+      "reason": "Two independent blockers. The supplementary PDFs are a primer list and an HPLC gradient; the main-text tables are chlorophyll and carotenoid chemistry. And the organism is Phaseolus lunatus - its loci are Pl01G0000340900-style ids, not AGI - so even the primer table could not be joined without an orthology route the atlas does not have for lima bean."
+    },
+    "Agliassa2018a": {
+      "pmcid": "PMC6032911",
+      "doi": "10.1002/bem.22123",
+      "verdict": "built",
+      "reason": "Its supplementary PDFs are also not data - a primer list, a phenology table and ANOVA output - but its main text carries the gene expression time course as Tables 1 and 2, and the primer PDF supplies the authoritative symbol-to-locus key for reading them.",
+      "page": "docs/paper-Agliassa2018a.html"
+    }
+  }
+}

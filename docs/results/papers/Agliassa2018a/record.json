@@ -1,0 +1,434 @@
+{
+  "key": "Agliassa2018a",
+  "citation": "Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), Bioelectromagnetics 39(5):361-374",
+  "doi": "10.1002/bem.22123",
+  "pmcid": "PMC6032911",
+  "provenance_class": "published_results",
+  "data_availability_verbatim": "no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables",
+  "organism": "Arabidopsis thaliana",
+  "field_regime": "near-null magnetic field against the local geomagnetic field, in a triaxial Helmholtz coil system",
+  "source_table": null,
+  "loci_in_table": 26,
+  "qbo_loci_covered": [
+    "AT1G01060",
+    "AT1G22770",
+    "AT2G45660",
+    "AT2G46830",
+    "AT4G25420",
+    "AT5G10140",
+    "AT5G61380"
+  ],
+  "cells_parsed": 196,
+  "cells_blank": 0,
+  "rows_without_locus": 0,
+  "tissues": [
+    "leaves",
+    "floral meristem"
+  ],
+  "figures": [
+    {
+      "id": "QBM-10",
+      "study": "Agliassa, Narayana, Bertea, Rodgers & Maffei",
+      "tissue": "leaves",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg",
+      "timepoints": [
+        "17",
+        "19",
+        "21",
+        "22",
+        "23",
+        "28"
+      ],
+      "nodes_with_data": 3,
+      "fraction_covered": 0.4286,
+      "vmax": 2.3923,
+      "nodes_reversing_direction": [
+        "FLOWERING_REGULATORS",
+        "GA_SIGNALLING"
+      ],
+      "nodes_with_heatmap": [
+        "CIRCADIAN_CLOCK"
+      ],
+      "nodes_with_diverging_loci": [
+        "CIRCADIAN_CLOCK"
+      ],
+      "provenance": "Values are the authors' published results from Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited \u2014 the Data Availability Statement reads \u201cno Data Availability Statement is present in the article; the quantitative data appear only as main-text tables\u201d. Reported as log2 fold change; values are signed fold change \u2014 never reported strictly between -1 and +1 \u2014 so a negative number is a reciprocal, not a log. leaves, 6 timepoints (17, 19, 21, 22, 23, 28). 3 of 7 identifier-bearing nodes received a series (43%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (CIRCADIAN_CLOCK), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 2 node(s) reverse direction during the course (GA_SIGNALLING, FLOWERING_REGULATORS), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [
+        "SINGLET_TRIPLET->CIRCADIAN_CLOCK: 'CRY is a clock input'"
+      ],
+      "low_coverage_published": false,
+      "per_node": [
+        {
+          "node_id": "CIRCADIAN_CLOCK",
+          "qbo": "QBO:CIRCADIAN_CLOCK",
+          "loci": [
+            "AT2G46830",
+            "AT1G01060",
+            "AT5G61380",
+            "AT1G22770"
+          ],
+          "timepoints": [
+            "17",
+            "19",
+            "21",
+            "22",
+            "23",
+            "28"
+          ],
+          "log2": [
+            -2.3923,
+            -0.7908,
+            -0.4751,
+            -0.8237,
+            -1.5558,
+            -1.0072
+          ],
+          "sd": [
+            0.1248,
+            0.1483,
+            0.1132,
+            0.5465,
+            0.0694,
+            0.0897
+          ],
+          "peak": -2.3923,
+          "peak_timepoint": "17",
+          "reverses_direction": false,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "GA_SIGNALLING",
+          "qbo": "QBO:GA_SIGNALLING",
+          "loci": [
+            "AT4G25420"
+          ],
+          "timepoints": [
+            "17",
+            "19",
+            "21",
+            "22",
+            "23",
+            "28"
+          ],
+          "log2": [
+            -1.6369,
+            -1.281,
+            -0.3103,
+            -1.1953,
+            0.2869,
+            -0.263
+          ],
+          "sd": [
+            0.1299,
+            0.2137,
+            0.2443,
+            0.0567,
+            0.3193,
+            0.1443
+          ],
+          "peak": -1.6369,
+          "peak_timepoint": "17",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "FLOWERING_REGULATORS",
+          "qbo": "QBO:FLOWERING_REGULATORS",
+          "loci": [
+            "AT5G10140"
+          ],
+          "timepoints": [
+            "17",
+            "19",
+            "21",
+            "22",
+            "23",
+            "28"
+          ],
+          "log2": [
+            0.9855,
+            -0.1635,
+            -0.1375,
+            -0.8074,
+            -1.1506,
+            -1.9298
+          ],
+          "sd": [
+            0.1239,
+            0.0386,
+            0.1443,
+            0.0907,
+            0.182,
+            0.0303
+          ],
+          "peak": -1.9298,
+          "peak_timepoint": "28",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        }
+      ]
+    },
+    {
+      "id": "QBM-10",
+      "study": "Agliassa, Narayana, Bertea, Rodgers & Maffei",
+      "tissue": "floral meristem",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg",
+      "timepoints": [
+        "21",
+        "22",
+        "23",
+        "28",
+        "30"
+      ],
+      "nodes_with_data": 2,
+      "fraction_covered": 0.2857,
+      "vmax": 3.847,
+      "nodes_reversing_direction": [
+        "FLOWERING_REGULATORS",
+        "GA_SIGNALLING"
+      ],
+      "nodes_with_heatmap": [
+        "FLOWERING_REGULATORS"
+      ],
+      "nodes_with_diverging_loci": [
+        "FLOWERING_REGULATORS"
+      ],
+      "provenance": "Values are the authors' published results from Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited \u2014 the Data Availability Statement reads \u201cno Data Availability Statement is present in the article; the quantitative data appear only as main-text tables\u201d. Reported as log2 fold change; values are signed fold change \u2014 never reported strictly between -1 and +1 \u2014 so a negative number is a reciprocal, not a log. floral meristem, 5 timepoints (21, 22, 23, 28, 30). 2 of 7 identifier-bearing nodes received a series (29%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (FLOWERING_REGULATORS), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 2 node(s) reverse direction during the course (GA_SIGNALLING, FLOWERING_REGULATORS), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": false,
+      "per_node": [
+        {
+          "node_id": "GA_SIGNALLING",
+          "qbo": "QBO:GA_SIGNALLING",
+          "loci": [
+            "AT4G25420"
+          ],
+          "timepoints": [
+            "21",
+            "22",
+            "23",
+            "28",
+            "30"
+          ],
+          "log2": [
+            -0.8718,
+            -0.9411,
+            -0.4751,
+            0.0566,
+            0.0426
+          ],
+          "sd": [
+            0.1656,
+            0.1879,
+            0.2387,
+            0.111,
+            0.4622
+          ],
+          "peak": -0.9411,
+          "peak_timepoint": "22",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "FLOWERING_REGULATORS",
+          "qbo": "QBO:FLOWERING_REGULATORS",
+          "loci": [
+            "AT5G10140",
+            "AT2G45660"
+          ],
+          "timepoints": [
+            "21",
+            "22",
+            "23",
+            "28",
+            "30"
+          ],
+          "log2": [
+            -2.3219,
+            -3.847,
+            -2.4699,
+            -1.7137,
+            0.8074
+          ],
+          "sd": [
+            0.1102,
+            0.1707,
+            0.0753,
+            0.0384,
+            0.1484
+          ],
+          "peak": -3.847,
+          "peak_timepoint": "22",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        }
+      ]
+    },
+    {
+      "id": "QBM-08",
+      "study": "Agliassa, Narayana, Bertea, Rodgers & Maffei",
+      "tissue": "leaves",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg",
+      "timepoints": [
+        "17",
+        "19",
+        "21",
+        "22",
+        "23",
+        "28"
+      ],
+      "nodes_with_data": 2,
+      "fraction_covered": 0.2222,
+      "vmax": 2.3923,
+      "nodes_reversing_direction": [
+        "GA_SIGNALLING"
+      ],
+      "nodes_with_heatmap": [
+        "CIRCADIAN_CLOCK"
+      ],
+      "nodes_with_diverging_loci": [
+        "CIRCADIAN_CLOCK"
+      ],
+      "provenance": "Values are the authors' published results from Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited \u2014 the Data Availability Statement reads \u201cno Data Availability Statement is present in the article; the quantitative data appear only as main-text tables\u201d. Reported as log2 fold change; values are signed fold change \u2014 never reported strictly between -1 and +1 \u2014 so a negative number is a reciprocal, not a log. leaves, 6 timepoints (17, 19, 21, 22, 23, 28). 2 of 9 identifier-bearing nodes received a series (22%); 10 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (CIRCADIAN_CLOCK), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 1 node(s) reverse direction during the course (GA_SIGNALLING), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": true,
+      "per_node": [
+        {
+          "node_id": "GA_SIGNALLING",
+          "qbo": "QBO:GA_SIGNALLING",
+          "loci": [
+            "AT4G25420"
+          ],
+          "timepoints": [
+            "17",
+            "19",
+            "21",
+            "22",
+            "23",
+            "28"
+          ],
+          "log2": [
+            -1.6369,
+            -1.281,
+            -0.3103,
+            -1.1953,
+            0.2869,
+            -0.263
+          ],
+          "sd": [
+            0.1299,
+            0.2137,
+            0.2443,
+            0.0567,
+            0.3193,
+            0.1443
+          ],
+          "peak": -1.6369,
+          "peak_timepoint": "17",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "CIRCADIAN_CLOCK",
+          "qbo": "QBO:CIRCADIAN_CLOCK",
+          "loci": [
+            "AT2G46830",
+            "AT1G01060",
+            "AT5G61380",
+            "AT1G22770"
+          ],
+          "timepoints": [
+            "17",
+            "19",
+            "21",
+            "22",
+            "23",
+            "28"
+          ],
+          "log2": [
+            -2.3923,
+            -0.7908,
+            -0.4751,
+            -0.8237,
+            -1.5558,
+            -1.0072
+          ],
+          "sd": [
+            0.1248,
+            0.1483,
+            0.1132,
+            0.5465,
+            0.0694,
+            0.0897
+          ],
+          "peak": -2.3923,
+          "peak_timepoint": "17",
+          "reverses_direction": false,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-08",
+      "study": "Agliassa, Narayana, Bertea, Rodgers & Maffei",
+      "tissue": "floral meristem",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg",
+      "timepoints": [
+        "21",
+        "22",
+        "23",
+        "28",
+        "30"
+      ],
+      "nodes_with_data": 1,
+      "fraction_covered": 0.1111,
+      "vmax": 0.9411,
+      "nodes_reversing_direction": [
+        "GA_SIGNALLING"
+      ],
+      "nodes_with_heatmap": [],
+      "nodes_with_diverging_loci": [],
+      "provenance": "Values are the authors' published results from Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited \u2014 the Data Availability Statement reads \u201cno Data Availability Statement is present in the article; the quantitative data appear only as main-text tables\u201d. Reported as log2 fold change; values are signed fold change \u2014 never reported strictly between -1 and +1 \u2014 so a negative number is a reciprocal, not a log. floral meristem, 5 timepoints (21, 22, 23, 28, 30). 1 of 9 identifier-bearing nodes received a series (11%); 10 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) reverse direction during the course (GA_SIGNALLING), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": true,
+      "per_node": [
+        {
+          "node_id": "GA_SIGNALLING",
+          "qbo": "QBO:GA_SIGNALLING",
+          "loci": [
+            "AT4G25420"
+          ],
+          "timepoints": [
+            "21",
+            "22",
+            "23",
+            "28",
+            "30"
+          ],
+          "log2": [
+            -0.8718,
+            -0.9411,
+            -0.4751,
+            0.0566,
+            0.0426
+          ],
+          "sd": [
+            0.1656,
+            0.1879,
+            0.2387,
+            0.111,
+            0.4622
+          ],
+          "peak": -0.9411,
+          "peak_timepoint": "22",
+          "reverses_direction": true,
+          "evidence_tier": "T2"
+        }
+      ]
+    }
+  ]
+}

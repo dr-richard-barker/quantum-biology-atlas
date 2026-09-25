@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agliassa, Narayana, Bertea, Rodgers &amp; Maffei — near-null field time course</title>
+<meta name="description" content="A 6-point time course from Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374 projected onto the quantum pathway maps as trajectories.">
+<meta name="author" content="Richard Barker">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Tokens are namespaced --qba-* and mapped onto the CoSE palette loaded from
+     cose-map.css. Each falls back to a literal, so the page is still legible and
+     correctly themed if that stylesheet cannot be fetched.
+
+     Note --qba-soft maps to --muted, NOT to --soft: in the CoSE vocabulary --soft is
+     a surface colour, and using it for text renders near-white on white. */
+  :root {
+    --qba-bg:     var(--bg,       #ffffff);
+    --qba-ink:    var(--ink,      #1a2230);
+    --qba-soft:   var(--muted,    #5a6473);
+    --qba-faint:  var(--ink-faint,#8892a3);
+    --qba-rule:   var(--line,     #e5e9f0);
+    --qba-card:   var(--surface,  #f7f9fc);
+    --qba-card2:  var(--surface-2,#eef2f8);
+    --qba-accent: var(--accent,   #3B6EA5);
+    --qba-accent2:var(--accent2,  #3FB6A8);
+    /* Okabe-Ito vermillion: the CoSE palette has no warning token, and this is the
+       same colour the maps use for a down-regulated node. */
+    --qba-warn:   #D55E00;
+    --qba-t1: var(--ink,       #1a2230);
+    --qba-t2: var(--muted,     #5a6473);
+    --qba-t3: var(--ink-faint, #8892a3);
+    --qba-t4: var(--line,      #c9d1dc);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--qba-bg); color:var(--qba-ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 16px 96px; }
+  header.hero { padding:56px 0 28px; border-bottom:1px solid var(--qba-rule); }
+  h1 { font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.18; margin:0 0 10px; letter-spacing:-.02em; }
+  .lede { font-size:1.12rem; color:var(--qba-soft); max-width:62ch; margin:0 0 18px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:1.05rem; margin:26px 0 6px; }
+  p, li { max-width:74ch; }
+  a { color:var(--qba-accent); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+    background:var(--qba-card); padding:1px 5px; border-radius:4px;
+    /* Long identifiers — an AGI locus list, a DOI — must break rather than push the
+       page wider than the screen. */
+    overflow-wrap:anywhere; }
+  /* A code block scrolls inside itself. Without this every page overflowed the
+     viewport on a phone: the index scrolled to 736px at a 375px width. */
+  pre { overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+  pre code { overflow-wrap:normal; white-space:pre; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+  .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
+    padding:9px 14px; font-size:.9rem; }
+  .stats b { font-size:1.18rem; display:block; font-weight:700; }
+  .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
+    border-radius:0 8px 8px 0; margin:20px 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  /* A wide table scrolls inside its own box rather than making the whole page scroll
+     sideways. The per-node value tables are 11 columns and overflowed the viewport on
+     the deployed page by 70px at desktop width, and far more on a phone. */
+  .tablewrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px 0; }
+  .tablewrap table { margin:0; min-width:760px; }
+  /* Inside a scrolling table an identifier must NOT break: `overflow-wrap:anywhere`
+     on code turned AT4G25100 into "AT4 G251 00". The wrapper scrolls instead. */
+  .tablewrap code { overflow-wrap:normal; white-space:nowrap; }
+  .tablewrap + .tablenote { font-size:.82rem; color:var(--qba-soft); margin:-4px 0 18px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
+    vertical-align:top; }
+  th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .swatch { display:inline-block; width:34px; height:15px; border-radius:4px;
+    background:var(--qba-card); vertical-align:-2px; margin-right:8px; }
+  .swatch.T1 { border:2.6px solid var(--qba-t1); }
+  .swatch.T2 { border:1.7px solid var(--qba-t2); }
+  .swatch.T3 { border:1.5px dashed var(--qba-t3); }
+  .swatch.T4 { border:1px solid var(--qba-t4); }
+  figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-card); }
+  figure.map > a { display:block; background:var(--qba-bg); }
+  figure.map img { width:100%; height:auto; display:block; }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
+    margin-bottom:4px; }
+  .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
+  .dl { margin-top:8px; font-size:.85rem; }
+  footer { border-top:1px solid var(--qba-rule); margin-top:56px; padding-top:22px;
+    font-size:.88rem; color:var(--qba-soft); }
+  @media (max-width:640px) { header.hero { padding-top:34px; } }
+</style>
+<!-- CoSE colour scheme only. cose-chrome.css and theme.js would inject the
+     navigation rail, and are deliberately not loaded. -->
+<link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-map.css">
+</head>
+<body data-site-id="quantum-biology-atlas">
+<div class="wrap">
+
+<header class="hero">
+<h1>Time on a map</h1>
+<p class="lede">A 6-point near-null-field time course — 17, 19, 21, 22, 23, 28 — in
+roots and shoots, projected onto the redox and respiratory maps. Every other overlay in
+this atlas is a single snapshot; this one is a trajectory, which is the only way to see a
+node that goes down and then comes back.</p>
+<p class="lede">Source: Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374,
+<a href="https://doi.org/10.1002/bem.22123">doi:10.1002/bem.22123</a>
+(<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6032911/">PMC6032911</a>),
+Arabidopsis thaliana.</p>
+<ul class="stats">
+<li><b>26</b>loci in the source table</li>
+<li><b>7</b>are QBO atlas loci</li>
+<li><b>6</b>timepoints × 2 tissues</li>
+<li><b>196</b>values parsed</li>
+</ul>
+</header>
+<div class="note">
+<p><strong>These are the authors' published results, not a reanalysis.</strong>
+No raw data was deposited in any public repository. The article's Data Availability
+Statement reads, in full: <em>“no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables”</em></p>
+<p>So nothing on this page can be recomputed, re-thresholded or re-tested from source
+data. What is drawn is what the authors chose to report, read out of
+<code></code> and re-projected onto the maps. That is a weaker
+provenance than the NASA OSDR pages in this atlas, which rest on processed data anyone
+can download, and it is labelled differently throughout:
+<code>published_results</code>.</p>
+</div>
+<h2>What was measured</h2>
+<p>near-null magnetic field against the local geomagnetic field, in a triaxial Helmholtz coil system. Values are Agliassa's reported
+fold change for NNMF-grown plants relative to GMF-grown controls, as
+<code>mean ± SD</code>.</p>
+<p><strong>The scale matters more than it looks.</strong> The published values are
+<em>ratios</em> — 1.0 means no change — while every overlay in this atlas expects log2,
+where 0.0 means no change. Feeding the ratios in directly would have coloured every
+unchanged gene as strongly upregulated, and the figure would have looked completely
+normal. The conversion happens in <code>qbio.papers.Series.to_log2</code>, the SD is
+carried through the same transform rather than left in the wrong units, and
+<code>qbio.project.project_series</code> refuses a series that is still on a ratio
+scale.</p>
+<p>The parse is complete: 196 cells read,
+0 blank, 0 rows without a usable locus.
+The identifiers in the source are written <code>At1g01980.1</code> — lowercase
+<code>g</code>, with a transcript suffix — so a naive AGI pattern matches
+<strong>none</strong> of them; normalisation is done in the parser rather than left to
+each caller.</p>
+<h2>The maps</h2>
+<p>Each node is tinted by its most extreme timepoint and carries a
+sparkline of the whole trajectory: the colour says how far it moved, the line says when.
+A node with no measurement is left unfilled, which is not the same as a measured zero.
+Vermillion is above no-change, blue below, and the flat line through each trace is
+log2 0.</p>
+<figure class="map">
+<a href="maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg"><img src="maps/png/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.png" alt="QBM-10 with the leaves time course projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-10 · Leaves · 3 nodes with data (43%)</span>
+<p><strong>2 of 3 nodes reverse direction</strong> during the course (FLOWERING_REGULATORS, GA_SIGNALLING) — behaviour no single-contrast overlay can represent.</p>
+<p>Values are the authors&#x27; published results from Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited — the Data Availability Statement reads “no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables”. Reported as log2 fold change; values are signed fold change — never reported strictly between -1 and +1 — so a negative number is a reciprocal, not a log. leaves, 6 timepoints (17, 19, 21, 22, 23, 28). 3 of 7 identifier-bearing nodes received a series (43%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (CIRCADIAN_CLOCK), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 2 node(s) reverse direction during the course (GA_SIGNALLING, FLOWERING_REGULATORS), which no single-contrast overlay can show.</p>
+<p class="dl"><a href="maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg"><img src="maps/png/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.png" alt="QBM-10 with the floral meristem time course projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-10 · Floral Meristem · 2 nodes with data (29%)</span>
+<p><strong>2 of 2 nodes reverse direction</strong> during the course (FLOWERING_REGULATORS, GA_SIGNALLING) — behaviour no single-contrast overlay can represent.</p>
+<p>Values are the authors&#x27; published results from Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited — the Data Availability Statement reads “no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables”. Reported as log2 fold change; values are signed fold change — never reported strictly between -1 and +1 — so a negative number is a reciprocal, not a log. floral meristem, 5 timepoints (21, 22, 23, 28, 30). 2 of 7 identifier-bearing nodes received a series (29%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (FLOWERING_REGULATORS), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 2 node(s) reverse direction during the course (GA_SIGNALLING, FLOWERING_REGULATORS), which no single-contrast overlay can show.</p>
+<p class="dl"><a href="maps/svg/QBM-10__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg"><img src="maps/png/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.png" alt="QBM-08 with the leaves time course projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-08 · Leaves · 2 nodes with data (22%)</span>
+<p><strong>Coverage is below the atlas's own 25% threshold</strong>
+(22%). It is shown anyway, with the number stated, because the
+map's remaining nodes are respiratory complexes the source table does not cover at all —
+not nodes that were measured and found unchanged.</p><p><strong>1 of 2 nodes reverse direction</strong> during the course (GA_SIGNALLING) — behaviour no single-contrast overlay can represent.</p>
+<p>Values are the authors&#x27; published results from Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited — the Data Availability Statement reads “no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables”. Reported as log2 fold change; values are signed fold change — never reported strictly between -1 and +1 — so a negative number is a reciprocal, not a log. leaves, 6 timepoints (17, 19, 21, 22, 23, 28). 2 of 9 identifier-bearing nodes received a series (22%); 10 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (CIRCADIAN_CLOCK), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 1 node(s) reverse direction during the course (GA_SIGNALLING), which no single-contrast overlay can show.</p>
+<p class="dl"><a href="maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__leaves.svg">SVG</a></p>
+</figcaption>
+</figure>
+<figure class="map">
+<a href="maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg"><img src="maps/png/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.png" alt="QBM-08 with the floral meristem time course projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-08 · Floral Meristem · 1 nodes with data (11%)</span>
+<p><strong>Coverage is below the atlas's own 25% threshold</strong>
+(11%). It is shown anyway, with the number stated, because the
+map's remaining nodes are respiratory complexes the source table does not cover at all —
+not nodes that were measured and found unchanged.</p><p><strong>1 of 1 nodes reverse direction</strong> during the course (GA_SIGNALLING) — behaviour no single-contrast overlay can represent.</p>
+<p>Values are the authors&#x27; published results from Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374 (doi:10.1002/bem.22123), not a reanalysis: NNMF-grown plants relative to GMF controls at the equivalent timepoint. No raw data was deposited — the Data Availability Statement reads “no Data Availability Statement is present in the article; the quantitative data appear only as main-text tables”. Reported as log2 fold change; values are signed fold change — never reported strictly between -1 and +1 — so a negative number is a reciprocal, not a log. floral meristem, 5 timepoints (21, 22, 23, 28, 30). 1 of 9 identifier-bearing nodes received a series (11%); 10 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) reverse direction during the course (GA_SIGNALLING), which no single-contrast overlay can show.</p>
+<p class="dl"><a href="maps/svg/QBM-08__Agliassa-Narayana-Bertea-Rodgers-Maffei__floral-meristem.svg">SVG</a></p>
+</figcaption>
+</figure>
+<h2>Every value behind the figures</h2>
+<p>The numbers on the maps, in full, so the figures can be checked
+rather than taken on trust. Values are log2 fold change (NNMF vs GMF); the trace uses
+the same encoding as the maps.</p>
+<h3>QBM-10 · Leaves</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace</th><th>17</th><th>19</th><th>21</th><th>22</th><th>23</th><th>28</th><th>Peak</th></tr></thead><tbody>
+<tr><td>CIRCADIAN_CLOCK</td><td><span class='swatch T3'></span>T3</td><td><code>AT2G46830</code> <code>AT1G01060</code> <code>AT5G61380</code> <code>AT1G22770</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="20.0" x2="18.4" y2="14.0" stroke="#0072B2" stroke-width="1.4"/><line x1="18.4" y1="14.0" x2="36.8" y2="12.8" stroke="#0072B2" stroke-width="1.4"/><line x1="36.8" y1="12.8" x2="55.2" y2="14.1" stroke="#0072B2" stroke-width="1.4"/><line x1="55.2" y1="14.1" x2="73.6" y2="16.9" stroke="#0072B2" stroke-width="1.4"/><line x1="73.6" y1="16.9" x2="92.0" y2="14.8" stroke="#0072B2" stroke-width="1.4"/><circle cx="0.0" cy="20.0" r="1.6" fill="#0072B2"/><circle cx="18.4" cy="14.0" r="1.6" fill="#0072B2"/><circle cx="36.8" cy="12.8" r="1.6" fill="#0072B2"/><circle cx="55.2" cy="14.1" r="1.6" fill="#0072B2"/><circle cx="73.6" cy="16.9" r="1.6" fill="#0072B2"/><circle cx="92.0" cy="14.8" r="1.6" fill="#0072B2"/></svg></td><td>-2.39</td><td>-0.79</td><td>-0.48</td><td>-0.82</td><td>-1.56</td><td>-1.01</td><td><b>-2.39</b> @ 17</td></tr>
+<tr><td>GA_SIGNALLING <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25420</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="17.2" x2="18.4" y2="15.8" stroke="#0072B2" stroke-width="1.4"/><line x1="18.4" y1="15.8" x2="36.8" y2="12.2" stroke="#0072B2" stroke-width="1.4"/><line x1="36.8" y1="12.2" x2="55.2" y2="15.5" stroke="#0072B2" stroke-width="1.4"/><line x1="55.2" y1="15.5" x2="73.6" y2="9.9" stroke="#0072B2" stroke-width="1.4"/><line x1="73.6" y1="9.9" x2="92.0" y2="12.0" stroke="#D55E00" stroke-width="1.4"/><circle cx="0.0" cy="17.2" r="1.6" fill="#0072B2"/><circle cx="18.4" cy="15.8" r="1.6" fill="#0072B2"/><circle cx="36.8" cy="12.2" r="1.6" fill="#0072B2"/><circle cx="55.2" cy="15.5" r="1.6" fill="#0072B2"/><circle cx="73.6" cy="9.9" r="1.6" fill="#D55E00"/><circle cx="92.0" cy="12.0" r="1.6" fill="#0072B2"/></svg></td><td>-1.64</td><td>-1.28</td><td>-0.31</td><td>-1.20</td><td>+0.29</td><td>-0.26</td><td><b>-1.64</b> @ 17</td></tr>
+<tr><td>FLOWERING_REGULATORS <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT5G10140</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="7.3" x2="18.4" y2="11.6" stroke="#D55E00" stroke-width="1.4"/><line x1="18.4" y1="11.6" x2="36.8" y2="11.5" stroke="#0072B2" stroke-width="1.4"/><line x1="36.8" y1="11.5" x2="55.2" y2="14.0" stroke="#0072B2" stroke-width="1.4"/><line x1="55.2" y1="14.0" x2="73.6" y2="15.3" stroke="#0072B2" stroke-width="1.4"/><line x1="73.6" y1="15.3" x2="92.0" y2="18.3" stroke="#0072B2" stroke-width="1.4"/><circle cx="0.0" cy="7.3" r="1.6" fill="#D55E00"/><circle cx="18.4" cy="11.6" r="1.6" fill="#0072B2"/><circle cx="36.8" cy="11.5" r="1.6" fill="#0072B2"/><circle cx="55.2" cy="14.0" r="1.6" fill="#0072B2"/><circle cx="73.6" cy="15.3" r="1.6" fill="#0072B2"/><circle cx="92.0" cy="18.3" r="1.6" fill="#0072B2"/></svg></td><td>+0.99</td><td>-0.16</td><td>-0.14</td><td>-0.81</td><td>-1.15</td><td>-1.93</td><td><b>-1.93</b> @ 28</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
+<h3>QBM-10 · Floral Meristem</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace</th><th>17</th><th>19</th><th>21</th><th>22</th><th>23</th><th>28</th><th>Peak</th></tr></thead><tbody>
+<tr><td>GA_SIGNALLING <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25420</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="13.0" x2="23.0" y2="13.2" stroke="#0072B2" stroke-width="1.4"/><line x1="23.0" y1="13.2" x2="46.0" y2="12.1" stroke="#0072B2" stroke-width="1.4"/><line x1="46.0" y1="12.1" x2="69.0" y2="10.9" stroke="#0072B2" stroke-width="1.4"/><line x1="69.0" y1="10.9" x2="92.0" y2="10.9" stroke="#D55E00" stroke-width="1.4"/><circle cx="0.0" cy="13.0" r="1.6" fill="#0072B2"/><circle cx="23.0" cy="13.2" r="1.6" fill="#0072B2"/><circle cx="46.0" cy="12.1" r="1.6" fill="#0072B2"/><circle cx="69.0" cy="10.9" r="1.6" fill="#D55E00"/><circle cx="92.0" cy="10.9" r="1.6" fill="#D55E00"/></svg></td><td>-0.87</td><td>-0.94</td><td>-0.48</td><td>+0.06</td><td>+0.04</td><td><b>-0.94</b> @ 22</td></tr>
+<tr><td>FLOWERING_REGULATORS <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT5G10140</code> <code>AT2G45660</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="16.4" x2="23.0" y2="20.0" stroke="#0072B2" stroke-width="1.4"/><line x1="23.0" y1="20.0" x2="46.0" y2="16.8" stroke="#0072B2" stroke-width="1.4"/><line x1="46.0" y1="16.8" x2="69.0" y2="15.0" stroke="#0072B2" stroke-width="1.4"/><line x1="69.0" y1="15.0" x2="92.0" y2="9.1" stroke="#0072B2" stroke-width="1.4"/><circle cx="0.0" cy="16.4" r="1.6" fill="#0072B2"/><circle cx="23.0" cy="20.0" r="1.6" fill="#0072B2"/><circle cx="46.0" cy="16.8" r="1.6" fill="#0072B2"/><circle cx="69.0" cy="15.0" r="1.6" fill="#0072B2"/><circle cx="92.0" cy="9.1" r="1.6" fill="#D55E00"/></svg></td><td>-2.32</td><td>-3.85</td><td>-2.47</td><td>-1.71</td><td>+0.81</td><td><b>-3.85</b> @ 22</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
+<h3>QBM-08 · Leaves</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace</th><th>17</th><th>19</th><th>21</th><th>22</th><th>23</th><th>28</th><th>Peak</th></tr></thead><tbody>
+<tr><td>GA_SIGNALLING <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25420</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="17.2" x2="18.4" y2="15.8" stroke="#0072B2" stroke-width="1.4"/><line x1="18.4" y1="15.8" x2="36.8" y2="12.2" stroke="#0072B2" stroke-width="1.4"/><line x1="36.8" y1="12.2" x2="55.2" y2="15.5" stroke="#0072B2" stroke-width="1.4"/><line x1="55.2" y1="15.5" x2="73.6" y2="9.9" stroke="#0072B2" stroke-width="1.4"/><line x1="73.6" y1="9.9" x2="92.0" y2="12.0" stroke="#D55E00" stroke-width="1.4"/><circle cx="0.0" cy="17.2" r="1.6" fill="#0072B2"/><circle cx="18.4" cy="15.8" r="1.6" fill="#0072B2"/><circle cx="36.8" cy="12.2" r="1.6" fill="#0072B2"/><circle cx="55.2" cy="15.5" r="1.6" fill="#0072B2"/><circle cx="73.6" cy="9.9" r="1.6" fill="#D55E00"/><circle cx="92.0" cy="12.0" r="1.6" fill="#0072B2"/></svg></td><td>-1.64</td><td>-1.28</td><td>-0.31</td><td>-1.20</td><td>+0.29</td><td>-0.26</td><td><b>-1.64</b> @ 17</td></tr>
+<tr><td>CIRCADIAN_CLOCK</td><td><span class='swatch T3'></span>T3</td><td><code>AT2G46830</code> <code>AT1G01060</code> <code>AT5G61380</code> <code>AT1G22770</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="20.0" x2="18.4" y2="14.0" stroke="#0072B2" stroke-width="1.4"/><line x1="18.4" y1="14.0" x2="36.8" y2="12.8" stroke="#0072B2" stroke-width="1.4"/><line x1="36.8" y1="12.8" x2="55.2" y2="14.1" stroke="#0072B2" stroke-width="1.4"/><line x1="55.2" y1="14.1" x2="73.6" y2="16.9" stroke="#0072B2" stroke-width="1.4"/><line x1="73.6" y1="16.9" x2="92.0" y2="14.8" stroke="#0072B2" stroke-width="1.4"/><circle cx="0.0" cy="20.0" r="1.6" fill="#0072B2"/><circle cx="18.4" cy="14.0" r="1.6" fill="#0072B2"/><circle cx="36.8" cy="12.8" r="1.6" fill="#0072B2"/><circle cx="55.2" cy="14.1" r="1.6" fill="#0072B2"/><circle cx="73.6" cy="16.9" r="1.6" fill="#0072B2"/><circle cx="92.0" cy="14.8" r="1.6" fill="#0072B2"/></svg></td><td>-2.39</td><td>-0.79</td><td>-0.48</td><td>-0.82</td><td>-1.56</td><td>-1.01</td><td><b>-2.39</b> @ 17</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
+<h3>QBM-08 · Floral Meristem</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace</th><th>17</th><th>19</th><th>21</th><th>22</th><th>23</th><th>28</th><th>Peak</th></tr></thead><tbody>
+<tr><td>GA_SIGNALLING <em>(reverses)</em></td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25420</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><line x1="0.0" y1="19.3" x2="23.0" y2="20.0" stroke="#0072B2" stroke-width="1.4"/><line x1="23.0" y1="20.0" x2="46.0" y2="15.5" stroke="#0072B2" stroke-width="1.4"/><line x1="46.0" y1="15.5" x2="69.0" y2="10.5" stroke="#0072B2" stroke-width="1.4"/><line x1="69.0" y1="10.5" x2="92.0" y2="10.6" stroke="#D55E00" stroke-width="1.4"/><circle cx="0.0" cy="19.3" r="1.6" fill="#0072B2"/><circle cx="23.0" cy="20.0" r="1.6" fill="#0072B2"/><circle cx="46.0" cy="15.5" r="1.6" fill="#0072B2"/><circle cx="69.0" cy="10.5" r="1.6" fill="#D55E00"/><circle cx="92.0" cy="10.6" r="1.6" fill="#D55E00"/></svg></td><td>-0.87</td><td>-0.94</td><td>-0.48</td><td>+0.06</td><td>+0.04</td><td><b>-0.94</b> @ 22</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
+<h2>What this does not show</h2>
+<ul>
+<li><strong>Coverage is partial by construction.</strong> The source table was filtered
+by its authors to genes involved in oxidative reactions, so it reaches the redox map well
+and the respiratory map barely. 7 of the atlas's QBO loci
+appear in it: <code>AT1G01060, AT1G22770, AT2G45660, AT2G46830, AT4G25420, AT5G10140, AT5G61380</code>.</li>
+<li><strong>No significance is shown.</strong> The source reports <code>mean ± SD</code>
+with no per-gene adjusted p-value, so there is no threshold to mark and none is invented.
+The atlas's other overlays carry an asterisk for significance; this one deliberately has
+none.</li>
+<li><strong>A tier is not a result.</strong> The border style still reports how much is
+known about each node's field sensitivity, which is independent of how far it moved here.
+A T3 node that responds strongly is still a node with no measured magnetic mechanism.</li>
+<li><strong>One experiment.</strong> Replication across the near-null-field literature is
+what the atlas's pre-registered test addresses, and that test's result was null with a
+minimum detectable effect of 4.0 — this page does not change that.</li>
+</ul>
+
+<h2>Reproducing it</h2>
+<pre><code>PYTHONPATH=src python3 scripts/build_paper_showcase.py --paper Agliassa2018a
+PYTHONPATH=src python3 scripts/build_paper_page.py --paper Agliassa2018a</code></pre>
+<p>The supplementary archive is fetched from EuropePMC and cached under
+<code>data/external/papers/</code>; the parsed values, per-node series and coverage are
+written to <a href="results/papers/Agliassa2018a/record.json"><code>results/papers/Agliassa2018a/record.json</code></a>,
+and this page is generated from that record.</p>
+
+<footer>
+<p><strong>Source.</strong> Agliassa, Narayana, Bertea, Rodgers &amp; Maffei (2018), Bioelectromagnetics 39(5):361-374,
+<a href="https://doi.org/10.1002/bem.22123">doi:10.1002/bem.22123</a>. Published open access
+under CC BY; the values reproduced here are the authors'.</p>
+<p><strong>Provenance class.</strong> <code>published_results</code> — results
+as published, no deposited raw data, no reanalysis.</p>
+<p><a href="index.html">← Quantum Biology Atlas</a></p>
+</footer>
+</div>
+</body>
+</html>

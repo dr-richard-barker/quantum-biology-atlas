@@ -31,9 +31,10 @@ from __future__ import annotations
 import dataclasses
 import io
 import math
+import pathlib
 import re
 import zipfile
-from typing import Iterator, Sequence
+from typing import Iterator, Mapping, Sequence
 
 #: `2.34 ± 0.31`, `1 ± 0.09`, `0.4 ± 0.13`. The separator is U+00B1; some tables use a
 #: plain "+/-" instead, so both are accepted.
@@ -89,6 +90,15 @@ def parse_mean_sd(cell) -> tuple[float, float] | None:
 RATIO = "ratio"
 #: A log2 fold change: 0.0 means no change. What every overlay in the atlas expects.
 LOG2 = "log2"
+#: Signed fold change, the common qPCR reporting convention: +2.0 means doubled, -2.0
+#: means halved, and NOTHING is ever reported strictly between -1 and +1. Agliassa 2018
+#: uses it, and the tell is empirical — of its 196 tabulated values, zero fall inside
+#: (-1, 1) and the smallest magnitude is exactly 1.0000.
+#:
+#: Read as a plain ratio it is catastrophic rather than merely wrong: -3.09 would become
+#: a 3-fold INCREASE read backwards, inverting the paper's central claim that near-null
+#: fields DOWN-regulate flowering genes.
+SIGNED_FOLD = "signed_fold"
 
 
 @dataclasses.dataclass(frozen=True)
@@ -102,6 +112,23 @@ class Measurement:
     def to_log2(self) -> "Measurement":
         if self.scale == LOG2:
             return self
+        if self.scale == SIGNED_FOLD:
+            if -1.0 < self.value < 1.0:
+                raise PaperError(
+                    f"{self.value} lies strictly between -1 and +1, which a signed fold "
+                    f"change never does. Either the scale is wrong or the cell was "
+                    f"misparsed; guessing between those would silently change a "
+                    f"direction."
+                )
+            ratio = self.value if self.value >= 1.0 else -1.0 / self.value
+            # The SD is reported on the signed-fold scale, so it is rescaled to the
+            # ratio first; for a down-regulated value that division is by v^2.
+            sd = self.sd if self.value >= 1.0 else self.sd / (self.value ** 2)
+            return Measurement(
+                value=math.log2(ratio),
+                sd=sd / (ratio * math.log(2)) if sd else 0.0,
+                scale=LOG2,
+            )
         if self.value <= 0:
             raise PaperError(
                 f"cannot take log2 of a non-positive ratio ({self.value}). A ratio scale "
@@ -163,8 +190,12 @@ class Series:
         obs = self.observed
         if not obs:
             return None
-        centre = 0.0 if self.scale == LOG2 else 1.0
-        return max(obs, key=lambda v: abs(v - centre))
+        if self.scale == LOG2:
+            return max(obs, key=abs)
+        if self.scale == SIGNED_FOLD:
+            # No-change is +/-1 here, and -3 is further from it than +2.
+            return max(obs, key=lambda v: abs(v) if abs(v) >= 1 else 1.0)
+        return max(obs, key=lambda v: abs(v - 1.0))
 
 
 @dataclasses.dataclass
@@ -345,3 +376,198 @@ def series_index(series: Sequence[Series]) -> dict[tuple[str, str], Series]:
             )
         out[key] = s
     return out
+
+
+# ---------------------------------------------------------------------------
+# main-text tables, and the symbol->locus key
+# ---------------------------------------------------------------------------
+#
+# Not every paper puts its data in the supplement. Agliassa 2018's supplementary PDFs
+# are a primer list, a phenology table and ANOVA output; the gene expression time course
+# is in the MAIN TEXT, as Tables 1 and 2. EuropePMC serves those as XML, so they can be
+# read exactly rather than scraped from a rendered PDF.
+#
+# The catch is that main-text tables are keyed on gene SYMBOLS, not loci. Resolving a
+# symbol from memory is how the wrong gene ends up on a map — five collisions were caught
+# that way while authoring the ontology (ACO2, LIP1, CAT2, CAT3, and one more, each of
+# which resolves to a different gene than the one intended). So the symbol->locus key is
+# taken from the paper's OWN primer table, which is what the supplementary PDF actually
+# contains and is authoritative for that paper's usage.
+
+EPMC_FULLTEXT = "https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextXML"
+
+_TAG_RX = re.compile(r"<[^>]+>")
+_TR_RX = re.compile(r"<tr\b.*?</tr>", re.S)
+_TD_RX = re.compile(r"<t[hd]\b.*?</t[hd]>", re.S)
+_TABLE_RX = re.compile(r"<table-wrap\b.*?</table-wrap>", re.S)
+#: `−1.04 (±0.01)` — note the Unicode minus, which a plain `-` match would miss.
+_SIGNED_RX = re.compile(r"^([−–\-]?)\s*(\d+(?:\.\d+)?)\s*\(\s*±\s*(\d+(?:\.\d+)?)\s*\)$")
+
+_AGI_LOOSE_RX = re.compile(r"^At[1-5cmCM][Gg]\d{5}$")
+
+
+def _plain(fragment: str) -> str:
+    return re.sub(r"\s+", " ", _TAG_RX.sub("", fragment)).strip()
+
+
+def fetch_fulltext_xml(pmcid: str, cache_dir: pathlib.Path | None = None) -> str:
+    """EuropePMC full text, cached. Raises rather than returning a partial document."""
+    import urllib.request
+
+    if cache_dir is not None:
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        cached = cache_dir / f"{pmcid}_fulltext.xml"
+        if cached.exists() and cached.stat().st_size > 1024:
+            return cached.read_text(encoding="utf-8", errors="replace")
+    req = urllib.request.Request(
+        EPMC_FULLTEXT.format(pmcid=pmcid),
+        headers={"User-Agent": "quantum-biology-atlas/0.1"},
+    )
+    with urllib.request.urlopen(req, timeout=120) as r:
+        text = r.read().decode("utf-8", errors="replace")
+    if "<table-wrap" not in text:
+        raise PaperError(
+            f"{pmcid}: full text carries no tables, so the main-text data cannot be "
+            f"read. Refusing to continue rather than returning nothing."
+        )
+    if cache_dir is not None:
+        (cache_dir / f"{pmcid}_fulltext.xml").write_text(text, encoding="utf-8")
+    return text
+
+
+def parse_signed_fold(cell) -> tuple[float, float] | None:
+    """`'−3.09 (±0.10)'` -> `(-3.09, 0.10)`, handling the Unicode minus."""
+    if cell is None:
+        return None
+    s = str(cell).strip()
+    m = _SIGNED_RX.match(s)
+    if not m:
+        return None
+    sign = -1.0 if m.group(1) else 1.0
+    return (sign * float(m.group(2)), float(m.group(3)))
+
+
+def read_primer_map(pdf_bytes: bytes) -> dict[str, str]:
+    """A paper's own primer table -> {gene symbol: AGI locus}.
+
+    Authoritative for that paper: it is the mapping its authors used, which is what
+    matters when interpreting their gene symbols.
+    """
+    try:
+        import pdfplumber
+    except ImportError:  # pragma: no cover - environment-dependent
+        raise PaperError(
+            "pdfplumber is required to read a primer table from a PDF. Without it the "
+            "symbols cannot be resolved, and resolving them from memory is how the "
+            "wrong gene reaches a map."
+        ) from None
+
+    mapping: dict[str, str] = {}
+    with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+        for page in pdf.pages:
+            for table in page.extract_tables():
+                for row in table:
+                    cells = [(c or "").strip() for c in row]
+                    if len(cells) < 2:
+                        continue
+                    locus = cells[0].replace(" ", "")
+                    if _AGI_LOOSE_RX.match(locus) and cells[1]:
+                        # A symbol cell can carry several aliases; the first is the one
+                        # the paper's tables use.
+                        symbol = cells[1].split(",")[0].split("/")[0].strip()
+                        if symbol:
+                            mapping.setdefault(symbol, locus.upper())
+    if not mapping:
+        raise PaperError(
+            "no gene-symbol to AGI pairs found in that primer table. Refusing to return "
+            "an empty key — every downstream symbol would silently fail to resolve."
+        )
+    return mapping
+
+
+def read_maintext_timecourse(
+    xml: str,
+    *,
+    table_captions: Sequence[str],
+    symbol_to_locus: Mapping[str, str],
+    scale: str = SIGNED_FOLD,
+) -> tuple[list[Series], dict]:
+    """Read main-text time-course tables, one Series per (locus, table).
+
+    `table_captions` selects tables by a distinctive substring of their caption rather
+    than by position, so inserting a table upstream cannot silently shift which data is
+    read. A caption that matches nothing raises.
+    """
+    # Symbols are matched on a normalised form. The XML renders SOC1 as "SOC 1" — a
+    # stray space that loses a central flowering gene if the lookup is exact.
+    def norm(sym: str) -> str:
+        return re.sub(r"[\s\u00a0_-]+", "", sym).upper()
+
+    by_norm = {norm(k): v for k, v in symbol_to_locus.items()}
+
+    wanted = {c.lower(): None for c in table_captions}
+    found: dict[str, tuple[str, list[list[str]]]] = {}
+
+    for frag in _TABLE_RX.findall(xml):
+        caption = _plain(re.search(r"<caption>(.*?)</caption>", frag, re.S).group(1)) \
+            if re.search(r"<caption>(.*?)</caption>", frag, re.S) else ""
+        key = next((c for c in wanted if c in caption.lower()), None)
+        if key is None:
+            continue
+        rows = [[_plain(c) for c in _TD_RX.findall(r)] for r in _TR_RX.findall(frag)]
+        found[key] = (caption, rows)
+
+    missing = [c for c in table_captions if c.lower() not in found]
+    if missing:
+        raise PaperError(
+            f"no main-text table matched {missing}. Selecting by caption rather than "
+            f"position is deliberate; a silent fallback would read the wrong table."
+        )
+
+    series: list[Series] = []
+    report = {
+        "tables": {}, "symbols_unresolved": [], "cells_parsed": 0, "cells_skipped": 0,
+    }
+    for key, (caption, rows) in found.items():
+        header = next(
+            (r for r in rows if len(r) > 2 and all(
+                re.match(r"^\d+(\.\d+)?$", x) for x in r[1:] if x)),
+            None,
+        )
+        if header is None:
+            raise PaperError(f"{caption[:60]}: no numeric header row found")
+        timepoints = tuple(x for x in header[1:] if x)
+
+        n_rows = 0
+        for r in rows:
+            if len(r) < 2 or r is header:
+                continue
+            symbol = r[0].strip()
+            parsed = [parse_signed_fold(c) for c in r[1:1 + len(timepoints)]]
+            if not any(p is not None for p in parsed):
+                continue
+            locus = symbol_to_locus.get(symbol) or by_norm.get(norm(symbol))
+            if locus is None:
+                report["symbols_unresolved"].append(symbol)
+                continue
+            pts = []
+            for p in parsed:
+                if p is None:
+                    report["cells_skipped"] += 1
+                    pts.append(None)
+                else:
+                    report["cells_parsed"] += 1
+                    pts.append(Measurement(p[0], p[1], scale))
+            series.append(Series(
+                locus=locus, tissue=key, timepoints=timepoints,
+                points=tuple(pts), gene_code=symbol,
+            ))
+            n_rows += 1
+        report["tables"][key] = {
+            "caption": caption, "rows": n_rows, "timepoints": list(timepoints),
+        }
+
+    if not series:
+        raise PaperError("parsed 0 series from the main-text tables")
+    report["symbols_unresolved"] = sorted(set(report["symbols_unresolved"]))
+    return series, report

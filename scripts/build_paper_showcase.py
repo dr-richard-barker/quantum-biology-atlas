@@ -50,7 +50,7 @@ class PaperSpec:
     paper: papers.Paper
     #: Nested-zip member holding the tables, or None when they sit in the outer zip.
     inner_zip: str | None
-    table: str
+    table: str | None
     locus_column: str
     band_row: int
     header_row: int
@@ -61,6 +61,17 @@ class PaperSpec:
     extra_columns: dict[str, str]
     title: str
     lede: str
+    #: "xlsx" reads a banded spreadsheet; "maintext" reads EuropePMC's full-text XML
+    #: with a symbol->locus key taken from the paper's own primer table. Not every
+    #: paper puts its data in the supplement — Agliassa 2018's supplementary PDFs are
+    #: a primer list, a phenology table and ANOVA output, while the gene expression
+    #: time course is Tables 1 and 2 of the main text.
+    source: str = "xlsx"
+    table_captions: tuple[str, ...] = ()
+    primer_table: str = ""
+    #: Caption key -> a short label for the page. The caption itself is the reliable
+    #: selector but a poor column heading.
+    tissue_labels: dict[str, str] = dataclasses.field(default_factory=dict)
 
 
 REGISTRY: dict[str, PaperSpec] = {
@@ -110,6 +121,57 @@ REGISTRY: dict[str, PaperSpec] = {
             "projected onto the redox map as trajectories rather than snapshots."
         ),
     ),
+    "Agliassa2018a": PaperSpec(
+        paper=papers.Paper(
+            key="Agliassa2018a",
+            citation=(
+                "Agliassa, Narayana, Bertea, Rodgers & Maffei (2018), "
+                "Bioelectromagnetics 39(5):361-374"
+            ),
+            doi="10.1002/bem.22123",
+            pmcid="PMC6032911",
+            # Verbatim: this article carries no Data Availability Statement, which is
+            # itself the fact worth recording rather than paraphrasing one in.
+            availability=(
+                "no Data Availability Statement is present in the article; the "
+                "quantitative data appear only as main-text tables"
+            ),
+            organism="Arabidopsis thaliana",
+            field_regime=(
+                "near-null magnetic field against the local geomagnetic field, in a "
+                "triaxial Helmholtz coil system"
+            ),
+            comparison=(
+                "NNMF-grown plants relative to GMF controls at the equivalent timepoint"
+            ),
+            scale=papers.SIGNED_FOLD,
+            threshold_note=(
+                "values are signed fold change \u2014 never reported strictly between "
+                "-1 and +1 \u2014 so a negative number is a reciprocal, not a log"
+            ),
+        ),
+        inner_zip=None,
+        table=None,
+        source="maintext",
+        table_captions=(
+            "Time-Course Expression of Leaf Genes",
+            "Time-Course Expression of Floral Meristem Genes",
+        ),
+        primer_table="SuppTable-S1",
+        locus_column="", band_row=0, header_row=0,
+        tissues=("leaves", "floral meristem"),
+        tissue_labels={
+            "time-course expression of leaf genes": "leaves",
+            "time-course expression of floral meristem genes": "floral meristem",
+        },
+        map_targets={"QBM-10": False, "QBM-08": True},
+        extra_columns={},
+        title="Near-null fields delay flowering, gene by gene",
+        lede=(
+            "The paper whose title is the review's own claim, put on the flowering "
+            "map: a six-point time course through the floral transition."
+        ),
+    ),
 }
 
 
@@ -143,6 +205,41 @@ def fetch_supplementary(pmcid: str) -> pathlib.Path:
 
 def load_series(spec: PaperSpec) -> tuple[list[papers.Series], dict]:
     import zipfile
+
+    if spec.source == "maintext":
+        zf = zipfile.ZipFile(fetch_supplementary(spec.paper.pmcid))
+        if spec.inner_zip:
+            zf = papers.open_nested_zip(zf, papers.find_member(zf, spec.inner_zip))
+        primer = papers.read_primer_map(
+            zf.read(papers.find_member(zf, spec.primer_table))
+        )
+        xml = papers.fetch_fulltext_xml(spec.paper.pmcid, cache_dir=CACHE)
+        series, report = papers.read_maintext_timecourse(
+            xml, table_captions=spec.table_captions,
+            symbol_to_locus=primer, scale=spec.paper.scale,
+        )
+        report["symbol_key"] = {
+            "source": spec.primer_table,
+            "pairs": len(primer),
+            "note": (
+                "Gene symbols are resolved from the paper's own primer table, not from "
+                "memory: authoring this ontology turned up five symbol collisions that "
+                "would each have put the wrong gene on a map."
+            ),
+        }
+        if spec.tissue_labels:
+            series = [
+                dataclasses.replace(x, tissue=spec.tissue_labels.get(x.tissue, x.tissue))
+                for x in series
+            ]
+            report["tables"] = {
+                spec.tissue_labels.get(k, k): v for k, v in report["tables"].items()
+            }
+        report["loci"] = sorted({s.locus for s in series})
+        report.setdefault("rows_no_locus", len(report["symbols_unresolved"]))
+        report.setdefault("cells_blank", report.get("cells_skipped", 0))
+        report.setdefault("tissues", {k: v["rows"] for k, v in report["tables"].items()})
+        return series, report
 
     zf = zipfile.ZipFile(fetch_supplementary(spec.paper.pmcid))
     if spec.inner_zip:
