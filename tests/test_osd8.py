@@ -166,7 +166,7 @@ def record():
 
 def test_specificity_is_tested_against_a_real_background(record):
     s = record["specificity"][record["primary_group"]]
-    assert s["n_qbo_loci_measured"] == 125
+    assert s["n_selected_measured"] == 125
     assert s["n_background_loci"] > 20_000
     assert s["permutations"] >= 1_000
 

@@ -293,7 +293,11 @@ def test_overlay_marks_are_placed_in_map_coordinates(parmagnani, qbm07, onto, tm
     assert spark_group, "sparklines are not wrapped in the body transform"
 
     # And the geometry actually lands on the nodes.
-    laid, _, _ = maps.layout_map(spec, onto, reserve_bottom=render.SPARK_RESERVE)
+    # Same reservation the renderer used: it sizes the strip for the widest per-locus
+    # heatmap on the map, which can exceed a sparkline's. Re-laying out with the
+    # sparkline constant would compare the drawn marks against different boxes.
+    reserve = render.heatmap_reserve(proj.values, min_reserve=render.SPARK_RESERVE)
+    laid, _, _ = maps.layout_map(spec, onto, reserve_bottom=reserve)
     boxes = {n.id: n.box for n in laid}
     for m in re.finditer(
         r'<g class="qbm-spark" data-spark-for="([^"]+)"><rect class="qbm-unit" '

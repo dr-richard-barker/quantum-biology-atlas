@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import dataclasses
 import pathlib
+import re
 from typing import Sequence
 
 import yaml
@@ -553,7 +554,8 @@ def _slug(text: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "-", text).strip("-")[:60]
 
 
-def _append_caption(svg: str, extra: str, vmax: float | None = None) -> str:
+def _append_caption(svg: str, extra: str, vmax: float | None = None,
+                    extra_legend=None) -> str:
     """Re-render the caption with the provenance appended, then the colour bar.
 
     The caption is re-wrapped rather than having a line tacked on, so the added text
@@ -594,6 +596,12 @@ def _append_caption(svg: str, extra: str, vmax: float | None = None) -> str:
             x=16.0, y=y + 10.0, vmax=vmax, label="log2 fold change (measured)"
         )
         y += 10.0 + legend_h
+    # A downloaded SVG has to explain its own marks; the page's prose does not travel
+    # with the file.
+    if extra_legend is not None:
+        more_svg, more_h = extra_legend(16.0, y + 12.0)
+        legend_svg += more_svg
+        y += 12.0 + more_h
     new_height = max(height, y + 12.0)
     svg = svg.replace(
         f'viewBox="0 0 {m.group(1)} {m.group(2)}"', f'viewBox="0 0 {m.group(1)} {new_height:.2f}"'
@@ -625,9 +633,15 @@ def render_series_projection(
     compartment-band overlap shipped once: the renderer had no assertion about overlap,
     so nothing failed and the defect reached the page.
     """
-    # Lay the map out with room for the traces. The base map and the OSDR overlays are
-    # unaffected — they call layout_map with no reservation and are byte-identical.
-    nodes, comps, canvas = layout_map(spec, onto, reserve_bottom=render.SPARK_RESERVE)
+    # Lay the map out with room for the traces. A multi-locus node needs more than a
+    # sparkline's strip, because it gets a per-locus heatmap instead: the aggregate is
+    # exactly what hides a gene family splitting. The reservation is sized to the widest
+    # heatmap on this map, so no node has to be shrunk to fit.
+    #
+    # The base map and the single-contrast OSDR overlays are unaffected — they call
+    # layout_map with no reservation and are byte-identical.
+    reserve = render.heatmap_reserve(projection.values, min_reserve=render.SPARK_RESERVE)
+    nodes, comps, canvas = layout_map(spec, onto, reserve_bottom=reserve)
     values = projection.values
     if not values:
         raise MapError(f"{spec.id}: series projection carries no values")
@@ -646,22 +660,37 @@ def render_series_projection(
     peak_values = {nid: _peak_nodevalue(ns) for nid, ns in values.items()}
     boxes = {n.id: n.box for n in nodes}
 
+    # A node with one locus gets a sparkline; a node with several gets a heatmap.
+    with_box = {nid: boxes[nid] for nid in values if nid in boxes}
+    single = {nid: ns for nid, ns in values.items()
+              if nid in with_box and len(getattr(ns, "per_locus", {})) <= 1}
+    multi = {nid: ns for nid, ns in values.items()
+             if nid in with_box and len(getattr(ns, "per_locus", {})) > 1}
+
     spark_svg, collisions = render.sparkline_svg(
-        {nid: boxes[nid] for nid in values if nid in boxes}, values, limit
+        {nid: with_box[nid] for nid in single}, single, limit
     )
+    heat_svg, heat_collisions = render.locus_heatmap_svg(
+        {nid: with_box[nid] for nid in multi}, multi, limit
+    )
+    collisions = list(collisions) + list(heat_collisions)
     if collisions:
         raise MapError(
-            f"{spec.id}: {len(collisions)} sparkline(s) overlap a node box — the figure "
-            f"would be legible-looking and wrong. Widen the lane gutters for this map.\n  "
+            f"{spec.id}: {len(collisions)} overlay mark(s) do not sit inside their node "
+            f"— the figure would be legible-looking and wrong.\n  "
             + "\n  ".join(collisions[:8])
         )
+    spark_svg = spark_svg + heat_svg
 
     caption_add = (
         " " + projection.provenance()
-        + " Each node is tinted by its most extreme timepoint and carries a sparkline of "
-        "the full trajectory: the colour says how far it moved, the line says when. A "
-        "node with no measurement is left unfilled, which is not the same as a measured "
-        "zero."
+        + " Each node is tinted by its most extreme timepoint. A node standing for ONE "
+        "locus carries a sparkline of its trajectory — the colour says how far it moved, "
+        "the line says when. A node standing for SEVERAL carries a per-locus heatmap "
+        "instead, one row per locus and one column per timepoint, because an aggregate "
+        "cannot show a gene family splitting and under a strong perturbation families "
+        "do split. A node with no measurement is left unfilled, which is not the same "
+        "as a measured zero."
     )
     tf = render.body_transform(svg)
     svg = svg.replace(
@@ -669,7 +698,16 @@ def render_series_projection(
         render.overlay_svg(peak_values, limit)
         + f'<g transform="{tf}">{spark_svg}</g></svg>',
     )
-    svg = _append_caption(svg, caption_add, vmax=limit)
+    heat_legend = None
+    if multi:
+        tps = projection.timepoints
+
+        page_w = float(re.search(r'viewBox="0 0 ([\d.]+)', svg).group(1))
+
+        def heat_legend(x, y, _tps=tps, _w=page_w):
+            return render.heatmap_legend_svg(x, y, _tps, page_width=_w)
+
+    svg = _append_caption(svg, caption_add, vmax=limit, extra_legend=heat_legend)
 
     (out_dir / "svg").mkdir(parents=True, exist_ok=True)
     stem = f"{spec.id}__{_slug(projection.study)}__{_slug(projection.tissue)}"
@@ -688,6 +726,10 @@ def render_series_projection(
         "fraction_covered": round(projection.fraction_covered, 4),
         "vmax": round(limit, 4),
         "nodes_reversing_direction": reversing,
+        "nodes_with_heatmap": sorted(multi),
+        "nodes_with_diverging_loci": sorted(
+            nid for nid, ns in values.items() if getattr(ns, "loci_diverge", False)
+        ),
         "provenance": projection.provenance(),
         "dropped_edge_labels": stats["dropped_edge_labels"],
     }

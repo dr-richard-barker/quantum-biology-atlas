@@ -32,7 +32,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from qbio import maps, ontology, osd8, project  # noqa: E402
+from qbio import compare, maps, ontology, osd8, project  # noqa: E402
 from qbio.osdr import ExpressionTable  # noqa: E402
 
 PLATFORM_FILE = ROOT / "data" / "external" / "GPL9020.txt"
@@ -50,48 +50,16 @@ N_PERMUTATIONS = 10_000
 SEED = 20260924
 
 
-def specificity_test(
-    values: dict[str, float], qbo_loci: set[str], *, n: int = N_PERMUTATIONS, seed: int = SEED
-) -> dict:
-    """Do the atlas's loci respond more than the same number of random loci?
+def specificity_test(values, qbo_loci, *, n=N_PERMUTATIONS, seed=SEED):
+    """Delegates to `qbio.compare.specificity_test`.
 
-    A one-sided permutation test on mean |log2 fold change|. The null is that the QBO
-    set is an arbitrary subset of the array; the alternative is that selecting for
-    quantum chemistry selects for responsiveness to the field.
-
-    Reported whichever way it comes out. A null here does not invalidate the ontology —
-    it constrains what a coloured map may be said to show.
+    Moved out of this script so the OSD-782 radiation page reports a number produced by
+    the same function with the same seed and permutation count. Two differently-computed
+    numbers are not a comparison, and the radiation page exists to compare.
     """
-    measured = {g: v for g, v in values.items() if g in qbo_loci}
-    if len(measured) < 10:
-        raise SystemExit(f"only {len(measured)} QBO loci measured — too few to test")
-    observed = statistics.fmean(abs(v) for v in measured.values())
-
-    pool = [v for g, v in values.items() if g not in qbo_loci]
-    rng = random.Random(seed)
-    k = len(measured)
-    ge = 0
-    draws = []
-    for _ in range(n):
-        s = statistics.fmean(abs(v) for v in rng.sample(pool, k))
-        draws.append(s)
-        if s >= observed:
-            ge += 1
-    # +1 in numerator and denominator: a permutation p-value of exactly 0 is not
-    # attainable and reporting one would overstate the evidence.
-    p = (ge + 1) / (n + 1)
-    return {
-        "n_qbo_loci_measured": k,
-        "n_background_loci": len(pool),
-        "observed_mean_abs_log2fc": round(observed, 5),
-        "background_mean": round(statistics.fmean(draws), 5),
-        "background_sd": round(statistics.pstdev(draws), 5),
-        "p_value": round(p, 5),
-        "permutations": n,
-        "seed": seed,
-        "one_sided": "QBO loci respond MORE than random loci",
-        "significant_at_0.05": p <= 0.05,
-    }
+    return compare.specificity_test(
+        values, qbo_loci, permutations=n, seed=seed
+    )
 
 
 def main() -> int:

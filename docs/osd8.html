@@ -119,14 +119,14 @@ species, at full coverage.</p>
 <p><strong>The atlas's loci are not more field-responsive than random loci.</strong>
 In the field-isolating contrast, the 125 QBO loci move by a mean
 |log<sub>2</sub> fold change| of <strong>0.1660</strong>,
-against <strong>0.1767</strong> for the same number of loci drawn
+against <strong>0.1763</strong> for the same number of loci drawn
 at random from the other 29,202 on the array
-(<strong>p = 0.717</strong>, 10,000 permutations,
+(<strong>p = 0.705</strong>, 10,000 permutations,
 one-sided). They move slightly <strong>less</strong>, not more.</p>
 <p>And it is not a quirk of one group. The same test in all
 7 groups — including the two that change gravity with no magnet —
-gives p between 0.66 and
-0.92, never once favouring the atlas's
+gives p between 0.65 and
+0.91, never once favouring the atlas's
 loci.</p>
 </div>
 <h2>What that does and does not mean</h2>
@@ -149,13 +149,13 @@ the near-null regime the review is about. A locus unmoved at 16.5&nbsp;T has not
 shown unmoved at 30&nbsp;nT.</li>
 </ul>
 <div class="tablewrap"><table><thead><tr><th>Group</th><th>What varies</th><th>QBO mean |log2FC|</th><th>Random background</th><th>p</th></tr></thead><tbody>
-<tr><td><code>MAG_1g</code></td><td><strong>field only</strong></td><td>0.1660</td><td>0.1767 ± 0.0181</td><td>0.717</td></tr>
-<tr><td><code>MAG_mg</code></td><td>field and gravity together</td><td>0.1933</td><td>0.2242 ± 0.0228</td><td>0.920</td></tr>
-<tr><td><code>MAG_0.1g</code></td><td>field and gravity together</td><td>0.1946</td><td>0.2180 ± 0.0225</td><td>0.853</td></tr>
-<tr><td><code>MAG_1.9g</code></td><td>field and gravity together</td><td>0.2073</td><td>0.2249 ± 0.0257</td><td>0.742</td></tr>
-<tr><td><code>MAG_2g</code></td><td>field and gravity together</td><td>0.1415</td><td>0.1487 ± 0.0158</td><td>0.659</td></tr>
-<tr><td><code>RPM_mg</code></td><td>gravity only, no magnet</td><td>0.1837</td><td>0.1986 ± 0.0186</td><td>0.783</td></tr>
-<tr><td><code>LDC_2g</code></td><td>gravity only, no magnet</td><td>0.1933</td><td>0.2082 ± 0.0236</td><td>0.725</td></tr>
+<tr><td><code>MAG_1g</code></td><td><strong>field only</strong></td><td>0.1660</td><td>0.1763 ± 0.0181</td><td>0.705</td></tr>
+<tr><td><code>MAG_mg</code></td><td>field and gravity together</td><td>0.1933</td><td>0.2237 ± 0.0231</td><td>0.913</td></tr>
+<tr><td><code>MAG_0.1g</code></td><td>field and gravity together</td><td>0.1946</td><td>0.2175 ± 0.0223</td><td>0.846</td></tr>
+<tr><td><code>MAG_1.9g</code></td><td>field and gravity together</td><td>0.2073</td><td>0.2245 ± 0.0261</td><td>0.737</td></tr>
+<tr><td><code>MAG_2g</code></td><td>field and gravity together</td><td>0.1415</td><td>0.1483 ± 0.0159</td><td>0.653</td></tr>
+<tr><td><code>RPM_mg</code></td><td>gravity only, no magnet</td><td>0.1837</td><td>0.1984 ± 0.0186</td><td>0.786</td></tr>
+<tr><td><code>LDC_2g</code></td><td>gravity only, no magnet</td><td>0.1933</td><td>0.2074 ± 0.0231</td><td>0.719</td></tr>
 </tbody></table></div>
 <h2>Why this design is worth the trouble</h2>
 <p>Diamagnetic levitation normally confounds field with gravity: position inside the bore
@@ -298,7 +298,14 @@ is visible as such. Values are log<sub>2</sub> fold change, test over reference.
 <pre><code>PYTHONPATH=src python3 scripts/build_osd8_showcase.py
 PYTHONPATH=src python3 scripts/build_osd8_page.py</code></pre>
 <p>The permutation test is seeded (<code>20260924</code>) and runs
-10,000 draws, so the p-values above reproduce exactly. The design table,
+10,000 draws, and its pool is built in sorted key order so the p-values
+above reproduce exactly. That second part was a real defect: the platform parser built
+its index by iterating a <code>set</code>, so the dictionary's key order differed on
+every run, <code>random.sample</code> drew different background loci, and a seeded test
+still gave a slightly different p-value each time while this page claimed it did not.
+Both the parser and the test are now order-independent, verified across repeated runs.
+The correction moved this contrast's p-value from 0.717 to 0.705 — the
+conclusion is unchanged, but the earlier figure was not reproducible. The design table,
 the platform join report, per-group specificity and every per-node value are written to
 <a href="results/osd8/record.json"><code>results/osd8/record.json</code></a>, and this
 page is generated from that record.</p>

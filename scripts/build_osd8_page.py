@@ -62,7 +62,7 @@ species, at full coverage.</p>
                  else "more")
     out.append(f"""<div class="note">
 <p><strong>The atlas's loci are not more field-responsive than random loci.</strong>
-In the field-isolating contrast, the {ps['n_qbo_loci_measured']} QBO loci move by a mean
+In the field-isolating contrast, the {ps['n_selected_measured']} QBO loci move by a mean
 |log<sub>2</sub> fold change| of <strong>{ps['observed_mean_abs_log2fc']:.4f}</strong>,
 against <strong>{ps['background_mean']:.4f}</strong> for the same number of loci drawn
 at random from the other {ps['n_background_loci']:,} on the array
@@ -221,7 +221,14 @@ is visible as such. Values are log<sub>2</sub> fold change, test over reference.
 <pre><code>PYTHONPATH=src python3 scripts/build_osd8_showcase.py
 PYTHONPATH=src python3 scripts/build_osd8_page.py</code></pre>
 <p>The permutation test is seeded (<code>{ps['seed']}</code>) and runs
-{ps['permutations']:,} draws, so the p-values above reproduce exactly. The design table,
+{ps['permutations']:,} draws, and its pool is built in sorted key order so the p-values
+above reproduce exactly. That second part was a real defect: the platform parser built
+its index by iterating a <code>set</code>, so the dictionary's key order differed on
+every run, <code>random.sample</code> drew different background loci, and a seeded test
+still gave a slightly different p-value each time while this page claimed it did not.
+Both the parser and the test are now order-independent, verified across repeated runs.
+The correction moved this contrast's p-value from 0.717 to {ps['p_value']:.3f} — the
+conclusion is unchanged, but the earlier figure was not reproducible. The design table,
 the platform join report, per-group specificity and every per-node value are written to
 <a href="results/osd8/record.json"><code>results/osd8/record.json</code></a>, and this
 page is generated from that record.</p>

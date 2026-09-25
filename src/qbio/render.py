@@ -168,6 +168,11 @@ def _stylesheet() -> str:
         .qbm-spark-zero {{ stroke: var(--qbm-hairline); stroke-width: 0.8; }}
         .qbm-spark-line {{ stroke-width: 1.4; stroke-linecap: round; fill: none; }}
         .qbm-spark-dot  {{ stroke: none; }}
+
+        /* Per-locus heatmap: one row per locus, one column per timepoint. */
+        .qbm-heat-cell  {{ stroke: var(--qbm-hairline); stroke-width: 0.25; }}
+        .qbm-heat-label {{ font-size: {HEAT_LABEL_SIZE}px; fill: var(--qbm-ink-soft);
+                           font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }}
         """
     ).strip()
 
@@ -768,3 +773,168 @@ def body_transform(svg: str) -> str:
             "no qbm-body group found — cannot place overlay marks in map coordinates"
         )
     return m.group(1)
+
+
+# ---------------------------------------------------------------------------
+# per-locus heatmaps
+# ---------------------------------------------------------------------------
+#
+# A sparkline shows a node's aggregate. That is exactly what hides a gene family
+# splitting: under ionising radiation the alternative oxidases go opposite ways —
+# AOX1D up, AOX2 down — and `extreme` then picks a different gene at each timepoint, so
+# the node's single trace swings for reasons that are not biological.
+#
+# So a node standing for more than one locus gets a small heatmap instead: one row per
+# locus, one column per timepoint. A split family is then visible as one warm row above
+# a cool one, which is the thing the aggregate cannot say.
+
+HEAT_CELL_W = 9.0
+HEAT_CELL_H = 6.0
+HEAT_GAP = 1.0
+HEAT_PAD = 3.0
+HEAT_LABEL_SIZE = 5.6
+#: Width reserved for the per-row locus label. Short-form AGI ("1g32350") fits.
+HEAT_LABEL_W = 34.0
+#: Beyond this many loci the rows stop being legible; the rest are summarised.
+HEAT_MAX_ROWS = 8
+
+
+def _short_locus(locus: str) -> str:
+    """`AT1G32350` -> `1g32350`. The AT prefix is the same on every row."""
+    return locus[2:].lower() if locus.upper().startswith("AT") else locus
+
+
+def heatmap_size(n_loci: int, n_timepoints: int) -> tuple[float, float]:
+    rows = min(n_loci, HEAT_MAX_ROWS)
+    w = HEAT_LABEL_W + n_timepoints * (HEAT_CELL_W + HEAT_GAP) + 2 * HEAT_PAD
+    h = rows * (HEAT_CELL_H + HEAT_GAP) + 2 * HEAT_PAD
+    return (w, h)
+
+
+def heatmap_reserve(node_series: dict, min_reserve: float = 0.0) -> float:
+    """How much height `layout_map` must reserve for the widest heatmap on this map."""
+    need = min_reserve
+    for ns in node_series.values():
+        if len(getattr(ns, "per_locus", {})) > 1:
+            _, h = heatmap_size(len(ns.per_locus), len(ns.timepoints))
+            need = max(need, h + 2.0)
+    return need
+
+
+def locus_heatmap_svg(node_boxes: dict, node_series: dict, vmax: float) -> tuple[str, list[str]]:
+    """One small heatmap per multi-locus node; single-locus nodes are left to the
+    sparkline, which reads better when there is genuinely one trace.
+
+    Returns (svg, collisions), the collisions being heatmaps that do not fit inside
+    their node. Reported rather than logged so the caller can refuse to publish.
+    """
+    if vmax <= 0:
+        raise ValueError("heatmap vmax must be positive")
+
+    out: list[str] = []
+    collisions: list[str] = []
+
+    for nid, ns in node_series.items():
+        per_locus = getattr(ns, "per_locus", {})
+        if len(per_locus) <= 1:
+            continue
+        box = node_boxes.get(nid)
+        if box is None:
+            continue
+
+        loci = sorted(per_locus)
+        shown = loci[:HEAT_MAX_ROWS]
+        n_t = len(ns.timepoints)
+        w, h = heatmap_size(len(loci), n_t)
+        x = box.cx - w / 2.0
+        y = box.y2 - h - 2.0
+
+        if x < box.x - 0.5 or x + w > box.x2 + 0.5 or y < box.y:
+            collisions.append(
+                f"{nid} heatmap ({w:.0f}x{h:.0f}) does not fit its node "
+                f"({box.w:.0f}x{box.h:.0f})"
+            )
+            continue
+
+        g = [f'<g class="qbm-heat" data-heat-for="{esc(nid)}">']
+        g.append(
+            f'<rect class="qbm-unit" x="{x:.2f}" y="{y:.2f}" width="{w:.2f}" '
+            f'height="{h:.2f}" rx="3"/>'
+        )
+        for r, locus in enumerate(shown):
+            ry = y + HEAT_PAD + r * (HEAT_CELL_H + HEAT_GAP)
+            g.append(
+                f'<text class="qbm-heat-label" x="{x + HEAT_PAD:.2f}" '
+                f'y="{ry + HEAT_CELL_H - 1.2:.2f}">{esc(_short_locus(locus))}</text>'
+            )
+            for c, v in enumerate(per_locus[locus][:n_t]):
+                cx = x + HEAT_PAD + HEAT_LABEL_W + c * (HEAT_CELL_W + HEAT_GAP)
+                fill = "none" if v is None else diverging_fill(v, vmax)
+                title = (f"{locus} {ns.timepoints[c]}: "
+                         + ("no value" if v is None else f"{v:+.2f}"))
+                g.append(
+                    f'<rect class="qbm-heat-cell" x="{cx:.2f}" y="{ry:.2f}" '
+                    f'width="{HEAT_CELL_W:.2f}" height="{HEAT_CELL_H:.2f}" '
+                    f'style="fill:{fill}"><title>{esc(title)}</title></rect>'
+                )
+        if len(loci) > HEAT_MAX_ROWS:
+            g.append(
+                f'<text class="qbm-heat-label" x="{x + HEAT_PAD:.2f}" '
+                f'y="{y + h - 1.0:.2f}">+{len(loci) - HEAT_MAX_ROWS} more</text>'
+            )
+        g.append("</g>")
+        out.append("".join(g))
+
+    return "".join(out), collisions
+
+
+def heatmap_legend_svg(
+    x: float, y: float, timepoints, page_width: float = 560.0
+) -> tuple[str, float]:
+    """Explain the heatmap, and say why it is there.
+
+    The explanatory text is WRAPPED against the page width. Written as a single line it
+    ran to x=939 on an 840px canvas, and the legibility probe caught it clipped on all
+    six radiation maps — the same class of defect as an unwrapped caption, just lower
+    down the page.
+    """
+    n = len(timepoints)
+    w, h = heatmap_size(3, n)
+    out = [f'<g class="qbm-heat-legend" transform="translate({x:.2f},{y:.2f})">']
+    out.append(
+        '<text class="qbm-legend" x="0" y="0" style="font-weight:700">'
+        'Per-locus heatmap (multi-locus nodes)</text>'
+    )
+    demo = [[0.9, 0.7, 0.8, 1.0], [-0.8, -0.3, 0.2, -0.9], [0.1, 0.0, -0.1, 0.05]]
+    names = ["1g32350", "5g64210", "3g22370"]
+    out.append(f'<rect class="qbm-unit" x="0" y="8" width="{w:.2f}" height="{h:.2f}" rx="3"/>')
+    for r, (name, row) in enumerate(zip(names, demo)):
+        ry = 8 + HEAT_PAD + r * (HEAT_CELL_H + HEAT_GAP)
+        out.append(
+            f'<text class="qbm-heat-label" x="{HEAT_PAD:.2f}" '
+            f'y="{ry + HEAT_CELL_H - 1.2:.2f}">{esc(name)}</text>'
+        )
+        for c in range(n):
+            v = row[c % len(row)]
+            cx = HEAT_PAD + HEAT_LABEL_W + c * (HEAT_CELL_W + HEAT_GAP)
+            out.append(
+                f'<rect class="qbm-heat-cell" x="{cx:.2f}" y="{ry:.2f}" '
+                f'width="{HEAT_CELL_W:.2f}" height="{HEAT_CELL_H:.2f}" '
+                f'style="fill:{diverging_fill(v, 1.0)}"/>'
+            )
+    text = (
+        "one row per locus, one column per timepoint, earliest left \u2014 so a gene "
+        "family that splits shows as a warm row above a cool one, which the node\u2019s "
+        "single value cannot say"
+    )
+    text_x = w + 12.0
+    lines, _, _ = text_block(text, LEGEND_SIZE, max(120.0, page_width - x - text_x - 16.0))
+    ty = 8 + h / 2 - (len(lines) - 1) * LEGEND_SIZE * LINE_SPACING / 2 + 3
+    for line in lines:
+        out.append(
+            f'<text class="qbm-legend" x="{text_x:.2f}" y="{ty:.2f}">{esc(line)}</text>'
+        )
+        ty += LEGEND_SIZE * LINE_SPACING
+    out.append("</g>")
+    used = max(h, len(lines) * LEGEND_SIZE * LINE_SPACING)
+    return "".join(out), used + 16.0

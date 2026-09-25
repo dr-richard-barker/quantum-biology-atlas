@@ -354,6 +354,29 @@ rather than after. It also names the nodes that collapse onto a shared gene.</p>
 <p class="dl"><a href="explore.html">Open the tool →</a></p>
 </figcaption></figure>""")
 
+    rad = ROOT / "results" / "osd782" / "record.json"
+    ovl = ROOT / "results" / "overlap" / "record.json"
+    if rad.exists() and ovl.exists():
+        import json as _json
+
+        r782 = _json.loads(rad.read_text())
+        o = _json.loads(ovl.read_text())["nnmf_locus_arm"]["summary"]
+        out.append(f"""<figure class="map"><figcaption>
+<span class="t"><a href="osd782.html">OSD-782 — does ionising radiation move the same chemistry?</a></span>
+<p>A dose × time radiation course in <em>Arabidopsis</em> ({len(r782['doses_gy'])} doses,
+{len(r782['timepoints'])} timepoints, {r782['qbo_loci_measured']} atlas loci), asked
+against the magnetic-field studies. <strong>Radiation is not a field regime</strong> and
+the page does not treat it as one — the question is overlap.</p>
+<p><strong>{o['directions_agree']} of {o['units_compared']} shared loci respond to both
+radiation and a near-null field in the same direction.</strong> Reported as a lead, not
+a result: eleven loci is too few to test, and the page says so rather than computing a
+p-value that would look like evidence.</p>
+<p>It also forced a check the atlas lacked: under radiation almost every multi-locus node
+has loci that <em>disagree in sign</em>, so a node's single trace can be the aggregator
+choosing between genes doing different things. The AOX family is the worked case.</p>
+<p class="dl"><a href="osd782.html">Open the demonstration →</a></p>
+</figcaption></figure>""")
+
     osd8p = ROOT / "results" / "osd8" / "record.json"
     if osd8p.exists():
         import json as _json
@@ -366,7 +389,7 @@ rather than after. It also names the nodes that collapse onto a shared gene.</p>
 outside it, in <em>Arabidopsis</em>, at <strong>100% node coverage</strong> on every
 map. The study also carries gravity controls that use no magnet at all.</p>
 <p><strong>And the result that constrains every other page:</strong> the atlas's
-{s8['n_qbo_loci_measured']} loci move no more than {s8['n_background_loci']:,} random
+{s8['n_selected_measured']} loci move no more than {s8['n_background_loci']:,} random
 loci from the same array (p&nbsp;=&nbsp;{s8['p_value']:.2f}). Selecting for quantum
 chemistry did not select for field responsiveness here, and the page says so.</p>
 <p><strong>Provenance:</strong> <code>{e(r8['provenance_class'])}</code> — the
@@ -540,6 +563,11 @@ def main() -> int:
     # to ../results/ resolves on a local checkout and 404s on the deployed site.
     for rec in sorted((ROOT / "results" / "papers").glob("*/record.json")):
         dst = args.out.parent / "results" / "papers" / rec.parent.name / "record.json"
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(rec, dst)
+        copied += 1
+    for rec in sorted(ROOT.glob("results/overlap/record.json")):
+        dst = args.out.parent / "results" / "overlap" / "record.json"
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(rec, dst)
         copied += 1

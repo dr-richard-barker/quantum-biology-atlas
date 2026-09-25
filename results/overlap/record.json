@@ -1,0 +1,440 @@
+{
+  "question": "Do ionising radiation and magnetic-field perturbation move the same quantum-biology nodes? Overlap is a lead, not a shared mechanism.",
+  "response_threshold_log2fc": 0.5,
+  "caveats": [
+    "Ionising radiation is not a magnetic field regime; QBO's field_regimes vocabulary is not used for it and is not extended.",
+    "Different labs, growth systems (callus vs seedling) and platforms (microarray ratio vs RNA-seq DE). Direction agreement is the robust comparison; magnitude is not.",
+    "Overlap is not shared mechanism. Catalase responds to almost every stress, so its presence in two lists means little on its own."
+  ],
+  "locus_arm": {
+    "unit": "locus",
+    "perturbations": [
+      "radiation",
+      "strong_MF"
+    ],
+    "summary": {
+      "units_compared": 123,
+      "responded_in_more_than_one": 3,
+      "directions_agree": 0,
+      "directions_disagree": 3,
+      "shared_keys": [
+        "AT3G27620",
+        "ATCG00720",
+        "ATCG01060"
+      ],
+      "agreeing_keys": []
+    },
+    "chance": {
+      "perturbations": [
+        "radiation",
+        "strong_MF"
+      ],
+      "units_compared": 123,
+      "responders_radiation": 37,
+      "responders_strong_MF": 7,
+      "observed_overlap": 3,
+      "expected_overlap": 2.112,
+      "background_sd": 1.187,
+      "p_value": 0.35226,
+      "permutations": 10000,
+      "seed": 20260924,
+      "one_sided": "observed co-response exceeds chance",
+      "significant_at_0.05": false,
+      "tested": true
+    },
+    "rows": [
+      {
+        "locus": "AT3G27620",
+        "radiation": 0.9757,
+        "strong_MF": -0.82,
+        "responded_in": [
+          "radiation",
+          "strong_MF"
+        ],
+        "directions_agree": false
+      },
+      {
+        "locus": "ATCG00720",
+        "radiation": -0.9233,
+        "strong_MF": 0.64,
+        "responded_in": [
+          "radiation",
+          "strong_MF"
+        ],
+        "directions_agree": false
+      },
+      {
+        "locus": "ATCG01060",
+        "radiation": -2.4361,
+        "strong_MF": 0.5367,
+        "responded_in": [
+          "radiation",
+          "strong_MF"
+        ],
+        "directions_agree": false
+      }
+    ]
+  },
+  "nnmf_locus_arm": {
+    "unit": "locus",
+    "perturbations": [
+      "radiation",
+      "NNMF"
+    ],
+    "summary": {
+      "units_compared": 11,
+      "responded_in_more_than_one": 4,
+      "directions_agree": 2,
+      "directions_disagree": 2,
+      "shared_keys": [
+        "AT1G20630",
+        "AT1G32350",
+        "AT3G09640",
+        "AT5G64210"
+      ],
+      "agreeing_keys": [
+        "AT1G20630",
+        "AT1G32350"
+      ]
+    },
+    "chance": {
+      "tested": false,
+      "reason": "only 11 units are shared between radiation and NNMF; below 20 no permutation test is interpretable. Report the overlap as a table and say that it is not tested."
+    },
+    "rows": [
+      {
+        "locus": "AT1G07890",
+        "radiation": -0.271,
+        "radiation_at": "0.1 Gy, 24 hour",
+        "NNMF": 0.275,
+        "NNMF_at": "shoots, 24 h",
+        "responded_in": [],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT1G08830",
+        "radiation": -0.4367,
+        "radiation_at": "0.1 Gy, 1 hour",
+        "NNMF": 0.2987,
+        "NNMF_at": "shoots, 24 h",
+        "responded_in": [],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT1G15550",
+        "radiation": 1.5074,
+        "radiation_at": "0.1 Gy, 1 hour",
+        "NNMF": 0.4222,
+        "NNMF_at": "shoots, 10 min",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT1G20630",
+        "radiation": 0.9061,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": 0.9411,
+        "NNMF_at": "shoots, 4 h",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": true
+      },
+      {
+        "locus": "AT1G32350",
+        "radiation": 3.9572,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": 0.7312,
+        "NNMF_at": "shoots, 48 h",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": true
+      },
+      {
+        "locus": "AT2G28190",
+        "radiation": -0.5871,
+        "radiation_at": "0.1 Gy, 1 hour",
+        "NNMF": 0.4957,
+        "NNMF_at": "shoots, 24 h",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT3G09640",
+        "radiation": 1.8973,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": -1.0893,
+        "NNMF_at": "roots, 24 h",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": false
+      },
+      {
+        "locus": "AT3G22370",
+        "radiation": 0.7022,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": 0.3448,
+        "NNMF_at": "shoots, 24 h",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT4G25100",
+        "radiation": 0.4263,
+        "radiation_at": "0.1 Gy, 1 hour",
+        "NNMF": -0.4344,
+        "NNMF_at": "shoots, 24 h",
+        "responded_in": [],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT4G28220",
+        "radiation": -0.268,
+        "radiation_at": "0.1 Gy, 24 hour",
+        "NNMF": -0.2863,
+        "NNMF_at": "roots, 4 h",
+        "responded_in": [],
+        "directions_agree": null
+      },
+      {
+        "locus": "AT5G64210",
+        "radiation": -2.4339,
+        "radiation_at": "1 Gy, 24 hour",
+        "NNMF": 1.406,
+        "NNMF_at": "shoots, 48 h",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": false
+      }
+    ]
+  },
+  "node_arm": {
+    "unit": "node",
+    "perturbations": [
+      "radiation",
+      "strong_MF",
+      "NNMF"
+    ],
+    "summary": {
+      "units_compared": 6,
+      "responded_in_more_than_one": 3,
+      "directions_agree": 2,
+      "directions_disagree": 1,
+      "shared_keys": [
+        "AOX",
+        "ASCORBATE_PEROXIDASE",
+        "CATALASE"
+      ],
+      "agreeing_keys": [
+        "AOX",
+        "CATALASE"
+      ]
+    },
+    "chance": {
+      "tested": false,
+      "reason": "only 6 units are shared between radiation and NNMF; below 20 no permutation test is interpretable. Report the overlap as a table and say that it is not tested."
+    },
+    "rows": [
+      {
+        "node_id": "ALT_NADH_DH",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null,
+        "verdict": "radiation_only",
+        "by_perturbation": {
+          "radiation": {
+            "value": -1.6548,
+            "responded": true,
+            "at": "1 Gy, 3 hour"
+          },
+          "strong_MF": {
+            "value": -0.0057,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": -0.2863,
+            "responded": false,
+            "at": "roots, 4 h"
+          }
+        }
+      },
+      {
+        "node_id": "AOX",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": true,
+        "verdict": "shared",
+        "by_perturbation": {
+          "radiation": {
+            "value": 3.9572,
+            "responded": true,
+            "at": "1 Gy, 72 hour"
+          },
+          "strong_MF": {
+            "value": -0.1757,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": 1.406,
+            "responded": true,
+            "at": "shoots, 48 h"
+          }
+        }
+      },
+      {
+        "node_id": "ASCORBATE_PEROXIDASE",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": false,
+        "verdict": "shared",
+        "by_perturbation": {
+          "radiation": {
+            "value": 1.8973,
+            "responded": true,
+            "at": "1 Gy, 72 hour"
+          },
+          "strong_MF": {
+            "value": 0.0267,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": -1.0893,
+            "responded": true,
+            "at": "roots, 24 h"
+          }
+        }
+      },
+      {
+        "node_id": "CATALASE",
+        "responded_in": [
+          "NNMF",
+          "radiation"
+        ],
+        "directions_agree": true,
+        "verdict": "shared",
+        "by_perturbation": {
+          "radiation": {
+            "value": 0.9061,
+            "responded": true,
+            "at": "1 Gy, 72 hour"
+          },
+          "strong_MF": {
+            "value": -0.0989,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": 0.9411,
+            "responded": true,
+            "at": "shoots, 4 h"
+          }
+        }
+      },
+      {
+        "node_id": "PLASTID_ROS",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null,
+        "verdict": "radiation_only",
+        "by_perturbation": {
+          "radiation": {
+            "value": -0.5871,
+            "responded": true,
+            "at": "0.1 Gy, 1 hour"
+          },
+          "strong_MF": {
+            "value": 0.1817,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": 0.4957,
+            "responded": false,
+            "at": "shoots, 24 h"
+          }
+        }
+      },
+      {
+        "node_id": "SUPEROXIDE_DISMUTASES",
+        "responded_in": [
+          "radiation"
+        ],
+        "directions_agree": null,
+        "verdict": "radiation_only",
+        "by_perturbation": {
+          "radiation": {
+            "value": -0.5871,
+            "responded": true,
+            "at": "0.1 Gy, 1 hour"
+          },
+          "strong_MF": {
+            "value": 0.0967,
+            "responded": false,
+            "at": "16.5 T vs 0 T"
+          },
+          "NNMF": {
+            "value": 0.4957,
+            "responded": false,
+            "at": "shoots, 24 h"
+          }
+        }
+      }
+    ]
+  },
+  "divergence_example": {
+    "node_id": "AOX",
+    "why": "At node level AOX appears to respond to both radiation and near-null field in the same direction, which reads as one clean shared response. At locus level it is two stories. AOX1D (AT1G32350) rises under both and genuinely agrees. AOX2 (AT5G64210) also responds to both, but FALLS under radiation while rising under near-null field. The two family members move in opposite directions under radiation, so the node's single trace is the aggregator choosing a different gene at each timepoint - it swung from -2.43 at 24 h to +3.96 at 72 h for that reason, not because anything reversed. A gene family is not a unit of response, and the node-level agreement here is partly real (AOX1D) and partly an artefact (AOX2 cancelling into it).",
+    "loci": [
+      {
+        "locus": "AT3G22370",
+        "radiation": 0.7022,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": 0.3448,
+        "NNMF_at": "shoots, 24 h"
+      },
+      {
+        "locus": "AT3G27620",
+        "radiation": 0.9757,
+        "radiation_at": "1 Gy, 24 hour",
+        "NNMF": null,
+        "NNMF_at": null
+      },
+      {
+        "locus": "AT1G32350",
+        "radiation": 3.9572,
+        "radiation_at": "1 Gy, 72 hour",
+        "NNMF": 0.7312,
+        "NNMF_at": "shoots, 48 h"
+      },
+      {
+        "locus": "AT5G64210",
+        "radiation": -2.4339,
+        "radiation_at": "1 Gy, 24 hour",
+        "NNMF": 1.406,
+        "NNMF_at": "shoots, 48 h"
+      }
+    ]
+  }
+}

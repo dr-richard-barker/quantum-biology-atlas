@@ -1,0 +1,2010 @@
+{
+  "accession": "OSD-782",
+  "glds": "GLDS-679",
+  "title": "Multi-omics profiling reveals ethylene signalling as a key pathway underlying both genetic and epigenetic responses to low-dose ionizing radiation in Arabidopsis",
+  "provenance_class": "genelab_processed",
+  "organism": "Arabidopsis thaliana",
+  "perturbation": {
+    "kind": "ionising_radiation",
+    "source": "cesium-137 gamma radiation",
+    "doses_gy": [
+      0.1,
+      1.0
+    ],
+    "control": "non-irradiated",
+    "note": "Ionising radiation is a different perturbation axis from magnetic field strength, not a point on it. QBO's field_regimes vocabulary is not used here and is not extended."
+  },
+  "factors": [
+    "Ionizing Radiation",
+    "Absorbed Radiation Dose",
+    "Time of Sample Collection After Treatment"
+  ],
+  "timepoints": [
+    "1 hour",
+    "3 hour",
+    "24 hour",
+    "72 hour"
+  ],
+  "doses_gy": [
+    0.1,
+    1.0
+  ],
+  "contrasts": [
+    {
+      "label": "(cesium-137 gamma radiation & 10 centigray & 1 hour)v(non-irradiated & 0 centigray & 1 hour)",
+      "dose_gy": 0.1,
+      "time": "1 hour",
+      "hours": 1.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 10 centigray & 3 hour)v(non-irradiated & 0 centigray & 3 hour)",
+      "dose_gy": 0.1,
+      "time": "3 hour",
+      "hours": 3.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 10 centigray & 24 hour)v(non-irradiated & 0 centigray & 24 hour)",
+      "dose_gy": 0.1,
+      "time": "24 hour",
+      "hours": 24.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 10 centigray & 72 hour)v(non-irradiated & 0 centigray & 72 hour)",
+      "dose_gy": 0.1,
+      "time": "72 hour",
+      "hours": 72.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 100 centigray & 1 hour)v(non-irradiated & 0 centigray & 1 hour)",
+      "dose_gy": 1.0,
+      "time": "1 hour",
+      "hours": 1.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 100 centigray & 3 hour)v(non-irradiated & 0 centigray & 3 hour)",
+      "dose_gy": 1.0,
+      "time": "3 hour",
+      "hours": 3.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 100 centigray & 24 hour)v(non-irradiated & 0 centigray & 24 hour)",
+      "dose_gy": 1.0,
+      "time": "24 hour",
+      "hours": 24.0,
+      "is_single_factor": false
+    },
+    {
+      "label": "(cesium-137 gamma radiation & 100 centigray & 72 hour)v(non-irradiated & 0 centigray & 72 hour)",
+      "dose_gy": 1.0,
+      "time": "72 hour",
+      "hours": 72.0,
+      "is_single_factor": false
+    }
+  ],
+  "alpha": 0.05,
+  "slice": {
+    "cached": true,
+    "output": "data/external/osd782_dose_contrasts.csv"
+  },
+  "qbo_loci_measured": 123,
+  "specificity": {
+    "0.1 Gy": {
+      "1 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.28959,
+        "background_mean": 0.4226,
+        "background_sd": 0.05657,
+        "p_value": 0.9971,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "3 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.2409,
+        "background_mean": 0.34849,
+        "background_sd": 0.05753,
+        "p_value": 0.9888,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "24 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.20417,
+        "background_mean": 0.32512,
+        "background_sd": 0.05646,
+        "p_value": 0.9984,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "72 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.1815,
+        "background_mean": 0.33456,
+        "background_sd": 0.05078,
+        "p_value": 1.0,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      }
+    },
+    "1 Gy": {
+      "1 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.19362,
+        "background_mean": 0.37893,
+        "background_sd": 0.05641,
+        "p_value": 1.0,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "3 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.29872,
+        "background_mean": 0.35666,
+        "background_sd": 0.05546,
+        "p_value": 0.86521,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "24 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.20918,
+        "background_mean": 0.29701,
+        "background_sd": 0.04908,
+        "p_value": 0.9806,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      },
+      "72 hour": {
+        "n_selected_measured": 123,
+        "n_background_loci": 23544,
+        "observed_mean_abs_log2fc": 0.29266,
+        "background_mean": 0.37862,
+        "background_sd": 0.06436,
+        "p_value": 0.92471,
+        "permutations": 10000,
+        "seed": 20260924,
+        "one_sided": "selected loci respond MORE than random loci",
+        "significant_at_0.05": false
+      }
+    }
+  },
+  "maps": {
+    "QBM-07": {
+      "0.1 Gy": {
+        "nodes_with_data": 8,
+        "addressable": 8,
+        "fraction": 1.0
+      },
+      "1 Gy": {
+        "nodes_with_data": 8,
+        "addressable": 8,
+        "fraction": 1.0
+      }
+    },
+    "QBM-01": {
+      "0.1 Gy": {
+        "nodes_with_data": 10,
+        "addressable": 10,
+        "fraction": 1.0
+      },
+      "1 Gy": {
+        "nodes_with_data": 10,
+        "addressable": 10,
+        "fraction": 1.0
+      }
+    },
+    "QBM-04": {
+      "0.1 Gy": {
+        "nodes_with_data": 10,
+        "addressable": 10,
+        "fraction": 1.0
+      },
+      "1 Gy": {
+        "nodes_with_data": 10,
+        "addressable": 10,
+        "fraction": 1.0
+      }
+    }
+  },
+  "figures": [
+    {
+      "id": "QBM-07",
+      "study": "OSD-782 \u2014 0.1 Gy",
+      "tissue": "0.1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 8,
+      "fraction_covered": 1.0,
+      "vmax": 1.8937,
+      "nodes_reversing_direction": [
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "COMPLEX_I",
+        "MITO_SUPEROXIDE",
+        "PEROXIREDOXIN_TRX"
+      ],
+      "nodes_with_heatmap": [
+        "ASCORBATE_PEROXIDASE",
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "COMPLEX_I",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ASCORBATE_PEROXIDASE",
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "COMPLEX_I",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 8 of 8 identifier-bearing nodes received a series (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 6 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 5 node(s) reverse direction during the course (COMPLEX_I, MITO_SUPEROXIDE, CATALASE, PEROXIREDOXIN_TRX\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [
+        "MITO_SUPEROXIDE->SUPEROXIDE_DISMUTASES: 'O2\u00b7\u2212 \u2192 H2O2'"
+      ],
+      "dose_gy": 0.1,
+      "per_node": [
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0392,
+            0.055,
+            -0.1818,
+            -0.1282
+          ],
+          "peak": -0.1818,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "loci": [
+            "AT4G25100",
+            "AT2G28190"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.5871,
+            -0.55,
+            -0.4376,
+            -0.4365
+          ],
+          "peak": -0.5871,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "loci": [
+            "AT3G10920"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0123,
+            0.039,
+            -0.0797,
+            -0.0507
+          ],
+          "peak": -0.0797,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190",
+            "AT3G10920",
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.5871,
+            -0.55,
+            -0.4376,
+            -0.4365
+          ],
+          "peak": -0.5871,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "loci": [
+            "AT1G07890",
+            "AT3G09640"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.2423,
+            -1.8937,
+            -0.2709,
+            -0.8474
+          ],
+          "peak": -1.8937,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "loci": [
+            "AT1G20630",
+            "AT4G35090",
+            "AT1G20620"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.2473,
+            0.2635,
+            -0.2713,
+            0.6145
+          ],
+          "peak": 0.6145,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "PEROXIREDOXIN_TRX",
+          "qbo": "QBO:PEROXIREDOXIN_TRX",
+          "loci": [
+            "AT3G06050"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0063,
+            0.0512,
+            -0.12,
+            -0.0594
+          ],
+          "peak": -0.12,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASC_GSH_CYCLE",
+          "qbo": "QBO:ASC_GSH_CYCLE",
+          "loci": [
+            "AT3G24170",
+            "AT1G19570",
+            "AT3G52880"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.2712,
+            0.7967,
+            0.4394,
+            0.3075
+          ],
+          "peak": 0.7967,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-01",
+      "study": "OSD-782 \u2014 0.1 Gy",
+      "tissue": "0.1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 10,
+      "fraction_covered": 1.0,
+      "vmax": 2.1334,
+      "nodes_reversing_direction": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I",
+        "COMPLEX_II",
+        "COMPLEX_I_FMN",
+        "MITO_SUPEROXIDE",
+        "RIESKE_FES"
+      ],
+      "nodes_with_heatmap": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I",
+        "COMPLEX_II",
+        "CYTOCHROME_C",
+        "RIESKE_FES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I",
+        "COMPLEX_II",
+        "RIESKE_FES"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 6 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, COMPLEX_II, ALT_NADH_DH, AOX\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 8 node(s) reverse direction during the course (COMPLEX_I, COMPLEX_I_FMN, COMPLEX_II, ALT_NADH_DH\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "dose_gy": 0.1,
+      "per_node": [
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0392,
+            0.055,
+            -0.1818,
+            -0.1282
+          ],
+          "peak": -0.1818,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "COMPLEX_I_FMN",
+          "qbo": "QBO:COMPLEX_I_FMN",
+          "loci": [
+            "AT5G08530"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0392,
+            0.055,
+            -0.1818,
+            -0.0361
+          ],
+          "peak": -0.1818,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "COMPLEX_II",
+          "qbo": "QBO:COMPLEX_II",
+          "loci": [
+            "AT5G66760",
+            "AT3G27380",
+            "AT5G40650",
+            "AT5G09600",
+            "AT2G46505"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1687,
+            0.22,
+            0.1878,
+            -0.182
+          ],
+          "peak": 0.22,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "ALT_NADH_DH",
+          "qbo": "QBO:ALT_NADH_DH",
+          "loci": [
+            "AT1G07180",
+            "AT2G29990",
+            "AT4G28220",
+            "AT4G05020",
+            "AT2G20800"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            1.4948,
+            0.5436,
+            -0.9216,
+            -0.9275
+          ],
+          "peak": 1.4948,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "AOX",
+          "qbo": "QBO:AOX",
+          "loci": [
+            "AT3G22370",
+            "AT3G27620",
+            "AT1G32350",
+            "AT5G64210"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            2.1334,
+            1.9498,
+            1.7554,
+            -0.8766
+          ],
+          "peak": 2.1334,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "RIESKE_FES",
+          "qbo": "QBO:RIESKE_FES",
+          "loci": [
+            "AT5G13430",
+            "AT5G13440"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0589,
+            -0.1101,
+            -0.1149,
+            -0.1931
+          ],
+          "peak": -0.1931,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CYTOCHROME_C",
+          "qbo": "QBO:CYTOCHROME_C",
+          "loci": [
+            "AT1G22840",
+            "AT4G10040"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0519,
+            -0.0257,
+            -0.2718,
+            -0.2087
+          ],
+          "peak": -0.2718,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": false,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "loci": [
+            "AT3G10920"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0123,
+            0.039,
+            -0.0797,
+            -0.0507
+          ],
+          "peak": -0.0797,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "ACONITASE",
+          "qbo": "QBO:ACONITASE",
+          "loci": [
+            "AT4G35830",
+            "AT4G26970",
+            "AT2G05710"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.1062,
+            0.1324,
+            -0.0819,
+            0.2201
+          ],
+          "peak": 0.2201,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "LIPOYL_SYNTHASE",
+          "qbo": "QBO:LIPOYL_SYNTHASE",
+          "loci": [
+            "AT2G20860"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0305,
+            -0.005,
+            -0.163,
+            -0.1087
+          ],
+          "peak": -0.163,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": false,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-04",
+      "study": "OSD-782 \u2014 0.1 Gy",
+      "tissue": "0.1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 10,
+      "fraction_covered": 1.0,
+      "vmax": 0.3692,
+      "nodes_reversing_direction": [
+        "ATM3_EXPORT",
+        "CIA_SYSTEM",
+        "CNFU_HCF101",
+        "FRATAXIN",
+        "HSCB_GRXS15",
+        "ISU1",
+        "NFS1",
+        "NFU_CARRIERS",
+        "SUF_SYSTEM"
+      ],
+      "nodes_with_heatmap": [
+        "CIA_SYSTEM",
+        "FES_CLIENTS",
+        "HSCB_GRXS15",
+        "NFU_CARRIERS",
+        "SUF_SYSTEM"
+      ],
+      "nodes_with_diverging_loci": [
+        "CIA_SYSTEM",
+        "FES_CLIENTS",
+        "HSCB_GRXS15",
+        "NFU_CARRIERS",
+        "SUF_SYSTEM"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (HSCB_GRXS15, NFU_CARRIERS, SUF_SYSTEM, CIA_SYSTEM\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 9 node(s) reverse direction during the course (NFS1, ISU1, FRATAXIN, HSCB_GRXS15\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [
+        "NFS1->ISU1: 'persulfide'",
+        "FRATAXIN->ISU1: 'Fe donation'",
+        "ISU1->HSCB_GRXS15: 'release'"
+      ],
+      "dose_gy": 0.1,
+      "per_node": [
+        {
+          "node_id": "NFS1",
+          "qbo": "QBO:NFS1",
+          "loci": [
+            "AT5G65720"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0585,
+            -0.0008,
+            -0.1344,
+            -0.0511
+          ],
+          "peak": -0.1344,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ISU1",
+          "qbo": "QBO:ISU1",
+          "loci": [
+            "AT4G22220"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0499,
+            0.0482,
+            -0.1069,
+            -0.0089
+          ],
+          "peak": -0.1069,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "FRATAXIN",
+          "qbo": "QBO:FRATAXIN",
+          "loci": [
+            "AT4G03240"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1578,
+            -0.0353,
+            0.1301,
+            -0.0651
+          ],
+          "peak": 0.1578,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "HSCB_GRXS15",
+          "qbo": "QBO:HSCB_GRXS15",
+          "loci": [
+            "AT5G06410",
+            "AT3G15660"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0751,
+            0.0965,
+            -0.1187,
+            -0.1538
+          ],
+          "peak": -0.1538,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 1,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "NFU_CARRIERS",
+          "qbo": "QBO:NFU_CARRIERS",
+          "loci": [
+            "AT3G20970",
+            "AT1G51390"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.087,
+            -0.1339,
+            0.1034,
+            0.0974
+          ],
+          "peak": -0.1339,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 1,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "ATM3_EXPORT",
+          "qbo": "QBO:ATM3_EXPORT",
+          "loci": [
+            "AT5G58270"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0366,
+            0.053,
+            -0.1437,
+            -0.1277
+          ],
+          "peak": -0.1437,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "SUF_SYSTEM",
+          "qbo": "QBO:SUF_SYSTEM",
+          "loci": [
+            "AT1G08490",
+            "AT4G26500"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.2402,
+            0.0907,
+            -0.1175,
+            -0.0485
+          ],
+          "peak": -0.2402,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CNFU_HCF101",
+          "qbo": "QBO:CNFU_HCF101",
+          "loci": [
+            "AT3G24430"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0627,
+            0.0144,
+            -0.2143,
+            -0.0891
+          ],
+          "peak": -0.2143,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CIA_SYSTEM",
+          "qbo": "QBO:CIA_SYSTEM",
+          "loci": [
+            "AT5G50960",
+            "AT4G16440",
+            "AT2G26060",
+            "AT1G68310",
+            "AT5G48120"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.2437,
+            0.1514,
+            -0.2299,
+            -0.1949
+          ],
+          "peak": 0.2437,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "FES_CLIENTS",
+          "qbo": "QBO:FES_CLIENTS",
+          "loci": [
+            "AT4G35830",
+            "AT5G66760",
+            "AT5G13430",
+            "AT4G03280",
+            "AT1G10960",
+            "AT2G20860",
+            "AT2G21790"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.3051,
+            -0.2591,
+            -0.2572,
+            -0.3692
+          ],
+          "peak": -0.3692,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-07",
+      "study": "OSD-782 \u2014 1 Gy",
+      "tissue": "1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 8,
+      "fraction_covered": 1.0,
+      "vmax": 1.8973,
+      "nodes_reversing_direction": [
+        "ASCORBATE_PEROXIDASE",
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "MITO_SUPEROXIDE",
+        "PEROXIREDOXIN_TRX",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_heatmap": [
+        "ASCORBATE_PEROXIDASE",
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "COMPLEX_I",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ASC_GSH_CYCLE",
+        "CATALASE",
+        "COMPLEX_I",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 8 of 8 identifier-bearing nodes received a series (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, PLASTID_ROS, SUPEROXIDE_DISMUTASES, CATALASE\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 7 node(s) reverse direction during the course (PLASTID_ROS, MITO_SUPEROXIDE, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [
+        "MITO_SUPEROXIDE->SUPEROXIDE_DISMUTASES: 'O2\u00b7\u2212 \u2192 H2O2'"
+      ],
+      "dose_gy": 1.0,
+      "per_node": [
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0335,
+            -0.2636,
+            -0.0556,
+            -0.1516
+          ],
+          "peak": -0.2636,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "loci": [
+            "AT4G25100",
+            "AT2G28190"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1047,
+            -0.5556,
+            -0.2087,
+            -0.2582
+          ],
+          "peak": -0.5556,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "loci": [
+            "AT3G10920"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0115,
+            -0.0742,
+            -0.0469,
+            -0.0202
+          ],
+          "peak": -0.0742,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "loci": [
+            "AT1G08830",
+            "AT2G28190",
+            "AT3G10920",
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1047,
+            -0.5556,
+            -0.2087,
+            -0.2582
+          ],
+          "peak": -0.5556,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "loci": [
+            "AT1G07890",
+            "AT3G09640"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.4925,
+            -1.7937,
+            -0.2751,
+            1.8973
+          ],
+          "peak": 1.8973,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "loci": [
+            "AT1G20630",
+            "AT4G35090",
+            "AT1G20620"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.1997,
+            -0.2058,
+            0.2931,
+            0.9061
+          ],
+          "peak": 0.9061,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "PEROXIREDOXIN_TRX",
+          "qbo": "QBO:PEROXIREDOXIN_TRX",
+          "loci": [
+            "AT3G06050"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0608,
+            -0.1007,
+            -0.035,
+            0.0337
+          ],
+          "peak": -0.1007,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ASC_GSH_CYCLE",
+          "qbo": "QBO:ASC_GSH_CYCLE",
+          "loci": [
+            "AT3G24170",
+            "AT1G19570",
+            "AT3G52880"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1696,
+            0.3373,
+            -0.1262,
+            0.3435
+          ],
+          "peak": 0.3435,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-01",
+      "study": "OSD-782 \u2014 1 Gy",
+      "tissue": "1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 10,
+      "fraction_covered": 1.0,
+      "vmax": 3.9572,
+      "nodes_reversing_direction": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I_FMN",
+        "MITO_SUPEROXIDE",
+        "RIESKE_FES"
+      ],
+      "nodes_with_heatmap": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I",
+        "COMPLEX_II",
+        "CYTOCHROME_C",
+        "RIESKE_FES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ACONITASE",
+        "ALT_NADH_DH",
+        "AOX",
+        "COMPLEX_I",
+        "COMPLEX_II",
+        "CYTOCHROME_C",
+        "RIESKE_FES"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 7 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, COMPLEX_II, ALT_NADH_DH, AOX\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 6 node(s) reverse direction during the course (COMPLEX_I_FMN, ALT_NADH_DH, AOX, RIESKE_FES\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [],
+      "dose_gy": 1.0,
+      "per_node": [
+        {
+          "node_id": "COMPLEX_I",
+          "qbo": "QBO:COMPLEX_I",
+          "loci": [
+            "AT5G37510",
+            "AT5G08530",
+            "AT4G02580",
+            "AT5G11770"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0335,
+            -0.2636,
+            -0.0556,
+            -0.1516
+          ],
+          "peak": -0.2636,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "COMPLEX_I_FMN",
+          "qbo": "QBO:COMPLEX_I_FMN",
+          "loci": [
+            "AT5G08530"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0263,
+            -0.0858,
+            -0.0556,
+            -0.0342
+          ],
+          "peak": -0.0858,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "COMPLEX_II",
+          "qbo": "QBO:COMPLEX_II",
+          "loci": [
+            "AT5G66760",
+            "AT3G27380",
+            "AT5G40650",
+            "AT5G09600",
+            "AT2G46505"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1565,
+            0.2244,
+            0.0713,
+            0.4806
+          ],
+          "peak": 0.4806,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "ALT_NADH_DH",
+          "qbo": "QBO:ALT_NADH_DH",
+          "loci": [
+            "AT1G07180",
+            "AT2G29990",
+            "AT4G28220",
+            "AT4G05020",
+            "AT2G20800"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            1.0767,
+            -1.6548,
+            -1.6197,
+            -1.0843
+          ],
+          "peak": -1.6548,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "AOX",
+          "qbo": "QBO:AOX",
+          "loci": [
+            "AT3G22370",
+            "AT3G27620",
+            "AT1G32350",
+            "AT5G64210"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            1.9218,
+            1.7079,
+            -2.4339,
+            3.9572
+          ],
+          "peak": 3.9572,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "RIESKE_FES",
+          "qbo": "QBO:RIESKE_FES",
+          "loci": [
+            "AT5G13430",
+            "AT5G13440"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0768,
+            -0.1151,
+            -0.0201,
+            -0.1008
+          ],
+          "peak": -0.1151,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CYTOCHROME_C",
+          "qbo": "QBO:CYTOCHROME_C",
+          "loci": [
+            "AT1G22840",
+            "AT4G10040"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.1294,
+            -0.1303,
+            -0.1804,
+            -0.1264
+          ],
+          "peak": -0.1804,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 1,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "MITO_SUPEROXIDE",
+          "qbo": "QBO:MITO_SUPEROXIDE",
+          "loci": [
+            "AT3G10920"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0115,
+            -0.0742,
+            -0.0469,
+            -0.0202
+          ],
+          "peak": -0.0742,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T2"
+        },
+        {
+          "node_id": "ACONITASE",
+          "qbo": "QBO:ACONITASE",
+          "loci": [
+            "AT4G35830",
+            "AT4G26970",
+            "AT2G05710"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.106,
+            -0.0933,
+            0.0787,
+            0.1722
+          ],
+          "peak": 0.1722,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "LIPOYL_SYNTHASE",
+          "qbo": "QBO:LIPOYL_SYNTHASE",
+          "loci": [
+            "AT2G20860"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0227,
+            -0.196,
+            -0.0061,
+            -0.1093
+          ],
+          "peak": -0.196,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": false,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        }
+      ]
+    },
+    {
+      "id": "QBM-04",
+      "study": "OSD-782 \u2014 1 Gy",
+      "tissue": "1 Gy",
+      "organism": "Arabidopsis thaliana",
+      "svg": "maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg",
+      "timepoints": [
+        "1 hour",
+        "3 hour",
+        "24 hour",
+        "72 hour"
+      ],
+      "nodes_with_data": 10,
+      "fraction_covered": 1.0,
+      "vmax": 0.6098,
+      "nodes_reversing_direction": [
+        "CIA_SYSTEM",
+        "FRATAXIN",
+        "HSCB_GRXS15",
+        "ISU1",
+        "NFS1",
+        "NFU_CARRIERS"
+      ],
+      "nodes_with_heatmap": [
+        "CIA_SYSTEM",
+        "FES_CLIENTS",
+        "HSCB_GRXS15",
+        "NFU_CARRIERS",
+        "SUF_SYSTEM"
+      ],
+      "nodes_with_diverging_loci": [
+        "CIA_SYSTEM",
+        "FES_CLIENTS",
+        "HSCB_GRXS15",
+        "NFU_CARRIERS",
+        "SUF_SYSTEM"
+      ],
+      "provenance": "NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (HSCB_GRXS15, NFU_CARRIERS, SUF_SYSTEM, CIA_SYSTEM\u2026), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 6 node(s) reverse direction during the course (NFS1, ISU1, FRATAXIN, HSCB_GRXS15\u2026), which no single-contrast overlay can show.",
+      "dropped_edge_labels": [
+        "NFS1->ISU1: 'persulfide'",
+        "FRATAXIN->ISU1: 'Fe donation'",
+        "ISU1->HSCB_GRXS15: 'release'"
+      ],
+      "dose_gy": 1.0,
+      "per_node": [
+        {
+          "node_id": "NFS1",
+          "qbo": "QBO:NFS1",
+          "loci": [
+            "AT5G65720"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.013,
+            0.0185,
+            -0.0425,
+            -0.0126
+          ],
+          "peak": -0.0425,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "ISU1",
+          "qbo": "QBO:ISU1",
+          "loci": [
+            "AT4G22220"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.063,
+            -0.0236,
+            -0.0667,
+            0.015
+          ],
+          "peak": -0.0667,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "FRATAXIN",
+          "qbo": "QBO:FRATAXIN",
+          "loci": [
+            "AT4G03240"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0752,
+            0.0449,
+            -0.0327,
+            -0.2047
+          ],
+          "peak": -0.2047,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": true,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "HSCB_GRXS15",
+          "qbo": "QBO:HSCB_GRXS15",
+          "loci": [
+            "AT5G06410",
+            "AT3G15660"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.0739,
+            0.1081,
+            -0.1777,
+            0.0213
+          ],
+          "peak": -0.1777,
+          "peak_timepoint": "24 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 2,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "NFU_CARRIERS",
+          "qbo": "QBO:NFU_CARRIERS",
+          "loci": [
+            "AT3G20970",
+            "AT1G51390"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1914,
+            0.0898,
+            -0.0801,
+            0.033
+          ],
+          "peak": 0.1914,
+          "peak_timepoint": "1 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "ATM3_EXPORT",
+          "qbo": "QBO:ATM3_EXPORT",
+          "loci": [
+            "AT5G58270"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0444,
+            -0.0585,
+            -0.0631,
+            -0.0763
+          ],
+          "peak": -0.0763,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": false,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T4"
+        },
+        {
+          "node_id": "SUF_SYSTEM",
+          "qbo": "QBO:SUF_SYSTEM",
+          "loci": [
+            "AT1G08490",
+            "AT4G26500"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0336,
+            -0.0743,
+            -0.0569,
+            -0.1754
+          ],
+          "peak": -0.1754,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 1,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CNFU_HCF101",
+          "qbo": "QBO:CNFU_HCF101",
+          "loci": [
+            "AT3G24430"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.0741,
+            -0.1079,
+            -0.0909,
+            -0.1491
+          ],
+          "peak": -0.1491,
+          "peak_timepoint": "72 hour",
+          "reverses_direction": false,
+          "loci_diverge": false,
+          "diverging_timepoints": 0,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "CIA_SYSTEM",
+          "qbo": "QBO:CIA_SYSTEM",
+          "loci": [
+            "AT5G50960",
+            "AT4G16440",
+            "AT2G26060",
+            "AT1G68310",
+            "AT5G48120"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            0.1779,
+            0.305,
+            -0.0898,
+            -0.085
+          ],
+          "peak": 0.305,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": true,
+          "loci_diverge": true,
+          "diverging_timepoints": 3,
+          "evidence_tier": "T3"
+        },
+        {
+          "node_id": "FES_CLIENTS",
+          "qbo": "QBO:FES_CLIENTS",
+          "loci": [
+            "AT4G35830",
+            "AT5G66760",
+            "AT5G13430",
+            "AT4G03280",
+            "AT1G10960",
+            "AT2G20860",
+            "AT2G21790"
+          ],
+          "timepoints": [
+            "1 hour",
+            "3 hour",
+            "24 hour",
+            "72 hour"
+          ],
+          "log2": [
+            -0.1117,
+            -0.6098,
+            -0.1844,
+            -0.4892
+          ],
+          "peak": -0.6098,
+          "peak_timepoint": "3 hour",
+          "reverses_direction": false,
+          "loci_diverge": true,
+          "diverging_timepoints": 4,
+          "evidence_tier": "T3"
+        }
+      ]
+    }
+  ],
+  "related_work": "OSD-782 is the held-out validation set of the Plant Ionizing-Radiation Kinetic Landscape pipeline (Barker 2026), so this projection does not duplicate that analysis."
+}

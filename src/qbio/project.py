@@ -281,10 +281,33 @@ class NodeSeries:
     loci_missing: tuple[str, ...]
     aggregator: str
     evidence_tier: str
+    #: locus -> its own trace, kept alongside the aggregate so a node standing for a
+    #: gene family can be drawn per locus. The aggregate alone cannot show a family
+    #: splitting, and under a strong perturbation families do split.
+    per_locus: dict[str, tuple[float | None, ...]] = dataclasses.field(default_factory=dict)
+    #: Per timepoint: did the contributing loci disagree in SIGN at that timepoint?
+    #:
+    #: A node standing for a gene family can hide a real split. The alternative oxidases
+    #: are the case that forced this: under radiation AOX1D rises steadily while AOX2
+    #: falls at 24 h, and `extreme` then picks a different gene at each timepoint, so
+    #: the node's trace swung from -2.43 to +3.96 and looked like a dramatic reversal.
+    #: It is not the biology, it is the aggregator switching lanes. A node with
+    #: divergence cannot be honestly summarised by one number, and the figure has to
+    #: say so rather than draw the swing.
+    diverged: tuple[bool, ...] = ()
 
     @property
     def observed(self) -> list[float]:
         return [p for p in self.points if p is not None]
+
+    @property
+    def loci_diverge(self) -> bool:
+        """True if the contributing loci disagreed in sign at any timepoint."""
+        return any(self.diverged)
+
+    @property
+    def n_diverging_timepoints(self) -> int:
+        return sum(1 for d in self.diverged if d)
 
     def extreme(self) -> float:
         """The timepoint furthest from no-change, in either direction."""
@@ -389,6 +412,14 @@ class SeriesProjection:
         bits.append(f"multi-locus nodes aggregated by {self.aggregator} at each timepoint")
         if self.scale_note:
             bits.append(self.scale_note)
+        split = [n for n, ns in self.values.items() if ns.loci_diverge]
+        if split:
+            bits.append(
+                f"{len(split)} node(s) have loci that disagree in direction at the same "
+                f"timepoint ({', '.join(split[:4])}{'…' if len(split) > 4 else ''}), so "
+                f"their single trace is the aggregator choosing between genes that are "
+                f"doing different things — read those per locus, not as a node"
+            )
         reversing = [n for n, ns in self.values.items() if ns.crosses_zero()]
         if reversing:
             bits.append(
@@ -466,12 +497,20 @@ def project_series(
             continue
         points: list[float | None] = []
         sds: list[float | None] = []
+        diverged: list[bool] = []
+        per_locus: dict[str, list[float | None]] = {l: [] for l, _ in found}
         for i in range(len(timepoints)):
+            for locus, s in found:
+                m = s.points[i]
+                per_locus[locus].append(None if m is None else float(m.value))
             at_t = [s.points[i] for _, s in found if s.points[i] is not None]
             if not at_t:
                 points.append(None)
                 sds.append(None)
+                diverged.append(False)
                 continue
+            signs = {1 if m.value > 0 else -1 if m.value < 0 else 0 for m in at_t}
+            diverged.append(1 in signs and -1 in signs)
             points.append(float(combine([m.value for m in at_t])))
             # The dispersion shown is the largest reported, not a pooled estimate:
             # these are published summary statistics with no access to the underlying
@@ -488,6 +527,8 @@ def project_series(
             loci_missing=tuple(l for l in ent.agi if l.upper() not in series_by_locus),
             aggregator=aggregator,
             evidence_tier=ent.evidence_tier,
+            diverged=tuple(diverged),
+            per_locus={l: tuple(v) for l, v in per_locus.items()},
         )
 
     proj = SeriesProjection(

@@ -161,8 +161,19 @@ def test_orthodb_matrix_strips_version_suffixes():
 @pytest.mark.network
 def test_pan_homology_is_the_division_that_crosses_kingdoms():
     """`plants` does not reach animals; `pan_homology` does. The whole cross-kingdom
-    capability rests on this, so it is checked rather than assumed."""
-    divisions = ortho.available_divisions()
+    capability rests on this, so it is checked rather than assumed.
+
+    SKIPS when Ensembl is unavailable rather than failing. `/info/comparas` returns 500
+    in bursts — 200, 200, 200, 500 across four consecutive requests was observed, and
+    six retries with backoff still hit a bad window. A red test here would say
+    "pan_homology does not exist", which is a claim about the data; the truth would be
+    "Ensembl did not answer", which is a claim about the network. `available_divisions`
+    itself makes that distinction in its error message, and this test honours it.
+    """
+    try:
+        divisions = ortho.available_divisions()
+    except ortho.OrthologyError as e:
+        pytest.skip(f"Ensembl unavailable, which is not evidence about divisions: {e}")
     assert "pan_homology" in divisions, f"pan_homology missing from {divisions}"
 
     fly = ortho.ensembl_orthologs(["AT4G08920"], "drosophila_melanogaster")

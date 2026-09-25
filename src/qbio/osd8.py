@@ -181,7 +181,12 @@ def parse_platform(path: pathlib.Path) -> tuple[dict[str, list[str]], dict]:
         if not loci:
             n_unmapped += 1
             continue
-        for g in loci:
+        # SORTED, not raw set order. Iterating the set directly made this dict's key
+        # order differ on every run (Python randomises string hashing per process),
+        # which changed which loci `random.sample` drew in the downstream permutation
+        # test — so a seeded test still produced a different p-value each run, while
+        # the page claimed it reproduced exactly.
+        for g in sorted(loci):
             by_locus.setdefault(g, []).append(pid)
 
     if not by_locus:

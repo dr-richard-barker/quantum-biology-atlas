@@ -219,8 +219,11 @@ def available_divisions(timeout: int = 30) -> list[str]:
     therefore reports "Ensembl has no pan_homology division", which is a claim about
     the data rather than about the network, and is the wrong thing to conclude.
     """
+    # Six attempts with a widening gap. Four was not enough: the endpoint fails in
+    # BURSTS rather than independently — 200, 200, 200, 500 across four consecutive
+    # requests was observed, and four consecutive 500s inside one burst is ordinary.
     last: Exception | None = None
-    for attempt in range(4):
+    for attempt in range(6):
         req = urllib.request.Request(
             ENSEMBL + "/info/comparas",
             headers={"Accept": "application/json", "User-Agent": UA},
@@ -230,9 +233,9 @@ def available_divisions(timeout: int = 30) -> list[str]:
                 return sorted(c["name"] for c in json.load(r).get("comparas", []))
         except (urllib.error.HTTPError, *RETRIABLE) as e:
             last = e
-            time.sleep(2 + attempt * 3)
+            time.sleep(2 + attempt * 4)
     raise OrthologyError(
-        f"Ensembl /info/comparas did not answer after 4 attempts ({last}). "
+        f"Ensembl /info/comparas did not answer after 6 attempts ({last}). "
         f"This is an availability failure, not evidence about which divisions exist."
     )
 
