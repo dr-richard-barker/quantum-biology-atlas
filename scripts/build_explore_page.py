@@ -25,7 +25,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from build_site import e, head  # noqa: E402
+from build_site import e, head, tail  # noqa: E402
 
 DOCS = ROOT / "docs"
 EXAMPLE = "example-data/OSD-8_MAG-1g_field-contrast.csv"
@@ -183,12 +183,9 @@ WormBase and SGD systematic names.</p>
 <footer>
 <p><a href="index.html">← Quantum Biology Atlas</a></p>
 </footer>
-
-<script type="module" src="assets/qbm-explore-ui.js"></script>
-</div>
-</body>
-</html>
 """)
+    out.append("""<script type="module" src="assets/qbm-explore-ui.js"></script>""")
+    out.append(tail())
     return "\n".join(out)
 
 

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 700.51 1009.44" width="700.51" height="1009.44" role="img" aria-label="QBM-03 · Cryptochrome radical-pair photochemistry">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-theme="light" viewBox="0 0 700.51 1009.44" width="700.51" height="1009.44" role="img" aria-label="QBM-03 · Cryptochrome radical-pair photochemistry">
 <style>:root {
   --qbm-bg: #ffffff;
   --qbm-ink: #16181d;
@@ -8,18 +8,6 @@
   --qbm-hairline: #9aa3b0;
   --qbm-edge: #55606e;
   --qbm-compartment-fill: rgba(0,0,0,0.035);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --qbm-bg: #0f1115;
-    --qbm-ink: #e8eaee;
-    --qbm-ink-soft: #a3adbb;
-    --qbm-node-fill: #191d24;
-    --qbm-node-stroke: #e8eaee;
-    --qbm-hairline: #5b6572;
-    --qbm-edge: #a3adbb;
-    --qbm-compartment-fill: rgba(255,255,255,0.045);
-  }
 }
 :root[data-theme="dark"] {
   --qbm-bg: #0f1115;
@@ -32,7 +20,7 @@
   --qbm-compartment-fill: rgba(255,255,255,0.045);
 }
 
-.qbm-canvas { fill: var(--qbm-bg); }
+.qbm-canvas { fill: var(--qbm-bg, #ffffff); }
 text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
 .qbm-title  { font-size: 20.0px; font-weight: 700; }
 .qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
@@ -76,9 +64,14 @@ text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-seri
    without it an all-up series and an all-down one look identical. */
 .qbm-spark-zero { stroke: var(--qbm-hairline); stroke-width: 0.8; }
 .qbm-spark-line { stroke-width: 1.4; stroke-linecap: round; fill: none; }
-.qbm-spark-dot  { stroke: none; }</style>
+.qbm-spark-dot  { stroke: none; }
+
+/* Per-locus heatmap: one row per locus, one column per timepoint. */
+.qbm-heat-cell  { stroke: var(--qbm-hairline); stroke-width: 0.25; }
+.qbm-heat-label { font-size: 5.6px; fill: var(--qbm-ink-soft);
+                   font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }</style>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
-<rect class="qbm-canvas" x="0" y="0" width="700.51" height="1009.44"/>
+<rect class="qbm-canvas" x="0" y="0" width="700.51" height="1009.44" fill="#ffffff"/>
 <text class="qbm-title" x="16" y="31.20">QBM-03 · Cryptochrome radical-pair photochemistry</text>
 <text class="qbm-subtitle" x="16" y="58.80">The reference mechanism — and the failed replication that has to travel with it</text>
 <g class="qbm-body" transform="translate(52.00,226.60)"><g class="qbm-compartment-group" data-compartment="nucleus"><rect class="qbm-compartment" data-compartment-rect="nucleus" x="-26.00" y="-46.00" width="648.51" height="321.52" rx="12" ry="12" style="stroke:#4a2a55"/><text class="qbm-compartment-label" x="-12.00" y="-31.00" style="fill:#4a2a55">Nucleus</text></g><g class="qbm-compartment-group" data-compartment="organism"><rect class="qbm-compartment" data-compartment-rect="organism" x="179.17" y="293.52" width="238.17" height="106.64" rx="12" ry="12" style="stroke:#3d3d3d"/><text class="qbm-compartment-label" x="193.17" y="308.52" style="fill:#3d3d3d">Organism</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;CRY_FAD" data-edge-class="cofactor_insertion"><path class="qbm-edge qbm-edge-cofactor_insertion" d="M132.21,47.44 L109.09,113.84" marker-end="url(#arrow-cofactor)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;CRY_FAD" data-edge-class="cofactor_insertion"><path class="qbm-edge qbm-edge-cofactor_insertion" d="M257.58,47.44 L135.03,113.84" marker-end="url(#arrow-cofactor)"/></g><g class="qbm-edge-group" data-edge="CRY_FAD-&gt;TRP_TRIAD" data-edge-class="electron_transfer"><path class="qbm-edge qbm-edge-electron_transfer" d="M206.12,131.16 L240.12,131.16" marker-end="url(#arrow-electron)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY_FAD-&gt;TRP_TRIAD" x="211.23" y="124.66" width="23.80" height="13.00" rx="3"/><text class="qbm-edge-label" x="223.12" y="134.46" text-anchor="middle">1e−</text></g><g class="qbm-edge-group" data-edge="TRP_TRIAD-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M389.11,131.16 L423.11,131.16" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="TRP_TRIAD-&gt;SINGLET_TRIPLET" x="382.44" y="158.66" width="47.35" height="13.00" rx="3"/><text class="qbm-edge-label" x="406.11" y="168.46" text-anchor="middle">pair born</text></g><g class="qbm-edge-group" data-edge="CRY_FAD-&gt;SINGLET_TRIPLET" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M206.12,131.16 L423.11,131.16" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY_FAD-&gt;SINGLET_TRIPLET" x="289.67" y="158.66" width="49.91" height="13.00" rx="3"/><text class="qbm-edge-label" x="314.62" y="168.46" text-anchor="middle">hyperfine</text></g><g class="qbm-edge-group" data-edge="SINGLET_TRIPLET-&gt;COP1_SPA" data-edge-class="direct_influence"><path class="qbm-edge qbm-edge-direct_influence" d="M473.55,148.48 L334.52,214.88" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="SINGLET_TRIPLET-&gt;COP1_SPA" x="366.11" y="175.18" width="75.85" height="13.00" rx="3"/><text class="qbm-edge-label" x="404.03" y="184.98" text-anchor="middle">signalling yield</text></g><g class="qbm-edge-group" data-edge="CRY1-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M158.42,47.44 L285.15,214.88" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="CRY2-&gt;COP1_SPA" data-edge-class="inhibition"><path class="qbm-edge qbm-edge-inhibition" d="M301.01,47.44 L298.51,214.88" marker-end="url(#bar)"/></g><g class="qbm-edge-group" data-edge="COP1_SPA-&gt;FLOWERING_OUTPUT" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M298.26,249.52 L298.26,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="COP1_SPA-&gt;FLOWERING_OUTPUT" x="264.99" y="277.22" width="66.53" height="13.00" rx="3"/><text class="qbm-edge-label" x="298.26" y="287.02" text-anchor="middle">degrades CO</text></g><g class="qbm-edge-group" data-edge="CRY2-&gt;FLOWERING_OUTPUT" data-edge-class="hormonal_feedback"><path class="qbm-edge qbm-edge-hormonal_feedback" d="M301.14,47.44 L298.42,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="CRY2-&gt;FLOWERING_OUTPUT" x="268.81" y="186.98" width="61.94" height="13.00" rx="3"/><text class="qbm-edge-label" x="299.78" y="196.78" text-anchor="middle">photoperiod</text></g><g class="qbm-edge-group" data-edge="PHYB-&gt;FLOWERING_OUTPUT" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M447.69,47.44 L306.62,339.52" marker-end="url(#arrow)"/><rect class="qbm-edge-label-bg" data-edge-label="PHYB-&gt;FLOWERING_OUTPUT" x="349.91" y="186.98" width="54.50" height="13.00" rx="3"/><text class="qbm-edge-label" x="377.16" y="196.78" text-anchor="middle">red/far-red</text></g><g class="qbm-edge-group" data-edge="PHYB-&gt;COP1_SPA" data-edge-class="indirect_influence"><path class="qbm-edge qbm-edge-indirect_influence" d="M440.84,47.44 L311.62,214.88" marker-end="url(#arrow)"/></g><g class="qbm-node-group" data-node-id="CRY1" data-tier="T1" data-qbo="QBO:CRY1"><title>Cryptochrome 1 (CRY1)

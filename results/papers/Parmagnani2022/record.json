@@ -54,7 +54,17 @@
         "PLASTID_ROS",
         "SUPEROXIDE_DISMUTASES"
       ],
-      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 3 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, CATALASE), which no single-contrast overlay can show.",
+      "nodes_with_heatmap": [
+        "ASCORBATE_PEROXIDASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ASCORBATE_PEROXIDASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 3 node(s) have loci that disagree in direction at the same timepoint (PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 3 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, CATALASE), which no single-contrast overlay can show.",
       "dropped_edge_labels": [],
       "low_coverage_published": false,
       "per_node": [
@@ -95,7 +105,28 @@
           "peak": -0.2688,
           "peak_timepoint": "10 min",
           "reverses_direction": true,
-          "evidence_tier": "T2"
+          "evidence_tier": "T2",
+          "per_locus": {
+            "AT4G25100": [
+              -0.2688,
+              0.0,
+              0.111,
+              0.0426,
+              0.2141,
+              0.1243,
+              0.2016
+            ],
+            "AT2G28190": [
+              -0.0145,
+              0.0286,
+              -0.0439,
+              0.0,
+              0.0976,
+              -0.0439,
+              0.1243
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "SUPEROXIDE_DISMUTASES",
@@ -135,7 +166,37 @@
           "peak": -0.2688,
           "peak_timepoint": "10 min",
           "reverses_direction": true,
-          "evidence_tier": "T4"
+          "evidence_tier": "T4",
+          "per_locus": {
+            "AT1G08830": [
+              0.0841,
+              0.1506,
+              0.1243,
+              0.0566,
+              0.0144,
+              0.0144,
+              -0.0893
+            ],
+            "AT2G28190": [
+              -0.0145,
+              0.0286,
+              -0.0439,
+              0.0,
+              0.0976,
+              -0.0439,
+              0.1243
+            ],
+            "AT4G25100": [
+              -0.2688,
+              0.0,
+              0.111,
+              0.0426,
+              0.2141,
+              0.1243,
+              0.2016
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "ASCORBATE_PEROXIDASE",
@@ -174,7 +235,28 @@
           "peak": -1.0893,
           "peak_timepoint": "24 h",
           "reverses_direction": false,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G07890": [
+              0.0144,
+              0.0426,
+              -0.1203,
+              -0.1047,
+              0.0,
+              -0.1203,
+              -0.0893
+            ],
+            "AT3G09640": [
+              -0.7612,
+              -0.2863,
+              -0.7612,
+              -0.3771,
+              -1.0893,
+              -0.0439,
+              -0.2176
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "CATALASE",
@@ -212,7 +294,19 @@
           "peak": -0.6215,
           "peak_timepoint": "24 h",
           "reverses_direction": true,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G20630": [
+              0.0426,
+              -0.2176,
+              0.5753,
+              -0.3959,
+              -0.6215,
+              -0.2345,
+              0.3448
+            ]
+          },
+          "loci_diverge": false
         }
       ]
     },
@@ -240,7 +334,17 @@
         "PLASTID_ROS",
         "SUPEROXIDE_DISMUTASES"
       ],
-      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 4 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE, CATALASE), which no single-contrast overlay can show.",
+      "nodes_with_heatmap": [
+        "ASCORBATE_PEROXIDASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_diverging_loci": [
+        "ASCORBATE_PEROXIDASE",
+        "PLASTID_ROS",
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 3 node(s) have loci that disagree in direction at the same timepoint (PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 4 node(s) reverse direction during the course (PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE, CATALASE), which no single-contrast overlay can show.",
       "dropped_edge_labels": [],
       "low_coverage_published": false,
       "per_node": [
@@ -281,7 +385,28 @@
           "peak": 0.4957,
           "peak_timepoint": "24 h",
           "reverses_direction": true,
-          "evidence_tier": "T2"
+          "evidence_tier": "T2",
+          "per_locus": {
+            "AT4G25100": [
+              0.189,
+              0.0286,
+              -0.0893,
+              0.251,
+              -0.4344,
+              -0.0589,
+              0.0426
+            ],
+            "AT2G28190": [
+              -0.0893,
+              -0.0145,
+              -0.1361,
+              -0.1203,
+              0.4957,
+              -0.0893,
+              -0.2863
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "SUPEROXIDE_DISMUTASES",
@@ -321,7 +446,37 @@
           "peak": 0.4957,
           "peak_timepoint": "24 h",
           "reverses_direction": true,
-          "evidence_tier": "T4"
+          "evidence_tier": "T4",
+          "per_locus": {
+            "AT1G08830": [
+              -0.1203,
+              0.111,
+              -0.0439,
+              -0.0439,
+              0.2987,
+              -0.1203,
+              -0.0589
+            ],
+            "AT2G28190": [
+              -0.0893,
+              -0.0145,
+              -0.1361,
+              -0.1203,
+              0.4957,
+              -0.0893,
+              -0.2863
+            ],
+            "AT4G25100": [
+              0.189,
+              0.0286,
+              -0.0893,
+              0.251,
+              -0.4344,
+              -0.0589,
+              0.0426
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "ASCORBATE_PEROXIDASE",
@@ -360,7 +515,28 @@
           "peak": 0.7991,
           "peak_timepoint": "4 h",
           "reverses_direction": true,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G07890": [
+              0.111,
+              0.0286,
+              -0.2515,
+              0.0144,
+              0.275,
+              -0.0291,
+              -0.0145
+            ],
+            "AT3G09640": [
+              -0.454,
+              -0.0145,
+              -0.3959,
+              0.7991,
+              -0.5564,
+              0.2265,
+              -0.6666
+            ]
+          },
+          "loci_diverge": true
         },
         {
           "node_id": "CATALASE",
@@ -398,7 +574,19 @@
           "peak": 0.9411,
           "peak_timepoint": "4 h",
           "reverses_direction": true,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G20630": [
+              0.0144,
+              -0.2515,
+              0.4647,
+              0.9411,
+              -0.2515,
+              -0.5995,
+              -0.3959
+            ]
+          },
+          "loci_diverge": false
         }
       ]
     },
@@ -424,7 +612,13 @@
         "ALT_NADH_DH",
         "AOX"
       ],
-      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 2 node(s) reverse direction during the course (ALT_NADH_DH, AOX), which no single-contrast overlay can show.",
+      "nodes_with_heatmap": [
+        "AOX"
+      ],
+      "nodes_with_diverging_loci": [
+        "AOX"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. roots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 1 node(s) have loci that disagree in direction at the same timepoint (AOX), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 2 node(s) reverse direction during the course (ALT_NADH_DH, AOX), which no single-contrast overlay can show.",
       "dropped_edge_labels": [],
       "low_coverage_published": true,
       "per_node": [
@@ -464,7 +658,19 @@
           "peak": -0.2863,
           "peak_timepoint": "4 h",
           "reverses_direction": true,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT4G28220": [
+              -0.0893,
+              -0.152,
+              -0.0893,
+              -0.2863,
+              0.0144,
+              -0.1047,
+              -0.1361
+            ]
+          },
+          "loci_diverge": false
         },
         {
           "node_id": "AOX",
@@ -505,7 +711,46 @@
           "peak": -1.2176,
           "peak_timepoint": "10 min",
           "reverses_direction": true,
-          "evidence_tier": "T4"
+          "evidence_tier": "T4",
+          "per_locus": {
+            "AT3G22370": [
+              0.0704,
+              0.0566,
+              -0.0291,
+              -0.0893,
+              0.1375,
+              -0.0893,
+              -0.1203
+            ],
+            "AT3G22360": [
+              -0.0145,
+              -0.3771,
+              0.0,
+              -0.1844,
+              -0.2009,
+              -0.1047,
+              0.2869
+            ],
+            "AT1G32350": [
+              0.0566,
+              -0.4344,
+              -0.0439,
+              -0.454,
+              0.0286,
+              -0.0145,
+              -0.2345
+            ],
+            "AT5G64210": [
+              -1.2176,
+              -1.1844,
+              0.3103,
+              0.9635,
+              -0.4344,
+              0.0426,
+              0.2388
+            ]
+          },
+          "loci_diverge": true
         }
       ]
     },
@@ -530,7 +775,13 @@
       "nodes_reversing_direction": [
         "AOX"
       ],
-      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 1 node(s) reverse direction during the course (AOX), which no single-contrast overlay can show.",
+      "nodes_with_heatmap": [
+        "AOX"
+      ],
+      "nodes_with_diverging_loci": [
+        "AOX"
+      ],
+      "provenance": "Values are the authors' published results from Parmagnani, Mannino & Maffei (2022), Biomolecules 12(12):1824 (doi:10.3390/biom12121824), not a reanalysis: NNMF-grown plants relative to GMF-grown controls. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData are available as supplementary tables and further data can be provided upon request\u201d. Reported as fold change; the authors treat a gene as regulated only outside their own thresholds of \u22652 and \u22640.5, which this page preserves rather than re-thresholding. shoots, 7 timepoints (10 min, 1 h, 2 h, 4 h, 24 h, 48 h, 96 h). 2 of 10 identifier-bearing nodes received a series (20%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. values were published as fold change and converted to log2 for display; the reported SD is carried through the same transform. 1 node(s) have loci that disagree in direction at the same timepoint (AOX), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node. 1 node(s) reverse direction during the course (AOX), which no single-contrast overlay can show.",
       "dropped_edge_labels": [],
       "low_coverage_published": true,
       "per_node": [
@@ -570,7 +821,19 @@
           "peak": -0.1203,
           "peak_timepoint": "1 h",
           "reverses_direction": false,
-          "evidence_tier": "T3"
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT4G28220": [
+              -0.0893,
+              -0.1203,
+              -0.1047,
+              -0.074,
+              0.0,
+              -0.0589,
+              -0.0291
+            ]
+          },
+          "loci_diverge": false
         },
         {
           "node_id": "AOX",
@@ -611,7 +874,46 @@
           "peak": 1.406,
           "peak_timepoint": "48 h",
           "reverses_direction": true,
-          "evidence_tier": "T4"
+          "evidence_tier": "T4",
+          "per_locus": {
+            "AT3G22370": [
+              0.1375,
+              0.0976,
+              -0.2009,
+              -0.1361,
+              0.3448,
+              0.0,
+              -0.1203
+            ],
+            "AT3G22360": [
+              0.111,
+              0.9411,
+              0.774,
+              0.0286,
+              0.0,
+              0.5558,
+              0.3674
+            ],
+            "AT1G32350": [
+              -0.0291,
+              -0.152,
+              -0.1844,
+              -0.3959,
+              -0.2688,
+              0.7312,
+              -0.1203
+            ],
+            "AT5G64210": [
+              -0.2176,
+              -0.415,
+              0.8237,
+              0.7398,
+              1.1309,
+              1.406,
+              1.2928
+            ]
+          },
+          "loci_diverge": true
         }
       ]
     }

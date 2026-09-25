@@ -100,18 +100,6 @@ def _stylesheet() -> str:
           --qbm-edge: #55606e;
           --qbm-compartment-fill: rgba(0,0,0,0.035);
         }}
-        @media (prefers-color-scheme: dark) {{
-          :root:not([data-theme="light"]) {{
-            --qbm-bg: #0f1115;
-            --qbm-ink: #e8eaee;
-            --qbm-ink-soft: #a3adbb;
-            --qbm-node-fill: #191d24;
-            --qbm-node-stroke: #e8eaee;
-            --qbm-hairline: #5b6572;
-            --qbm-edge: #a3adbb;
-            --qbm-compartment-fill: rgba(255,255,255,0.045);
-          }}
-        }}
         :root[data-theme="dark"] {{
           --qbm-bg: #0f1115;
           --qbm-ink: #e8eaee;
@@ -123,7 +111,7 @@ def _stylesheet() -> str:
           --qbm-compartment-fill: rgba(255,255,255,0.045);
         }}
 
-        .qbm-canvas {{ fill: var(--qbm-bg); }}
+        .qbm-canvas {{ fill: var(--qbm-bg, #ffffff); }}
         text {{ font-family: {SVG_FONT_STACK}; fill: var(--qbm-ink); }}
         .qbm-title  {{ font-size: {TITLE_SIZE}px; font-weight: 700; }}
         .qbm-subtitle,.qbm-caption {{ font-size: {SUBTITLE_SIZE}px; fill: var(--qbm-ink-soft); }}
@@ -493,11 +481,12 @@ def document(
 
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+        f'data-theme="light" '
         f'viewBox="0 0 {total_w:.2f} {total_h:.2f}" width="{total_w:.2f}" height="{total_h:.2f}" '
         f'role="img" aria-label="{esc(title)}">',
         f"<style>{_stylesheet()}</style>",
         _defs(),
-        f'<rect class="qbm-canvas" x="0" y="0" width="{total_w:.2f}" height="{total_h:.2f}"/>',
+        f'<rect class="qbm-canvas" x="0" y="0" width="{total_w:.2f}" height="{total_h:.2f}" fill="#ffffff"/>',
         f'<g class="qbm-body" transform="translate({-canvas.x:.2f},{header_h - canvas.y:.2f})">{body}</g>',
     ]
 

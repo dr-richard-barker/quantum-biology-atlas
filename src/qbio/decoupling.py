@@ -29,7 +29,7 @@ def render_decoupling_svg(out_path: pathlib.Path | None = None) -> str:
     rule = "#e5e9f0"
 
     svg = []
-    svg.append(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {WIDTH} {HEIGHT}" width="{WIDTH}" height="{HEIGHT}">')
+    svg.append(f'<svg xmlns="http://www.w3.org/2000/svg" data-theme="light" viewBox="0 0 {WIDTH} {HEIGHT}" width="{WIDTH}" height="{HEIGHT}">')
     svg.append('<style>')
     svg.append(f"""
       .title {{ font: bold 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; fill: {ink}; }}

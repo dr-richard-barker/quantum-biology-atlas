@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 780.56 1027.72" width="780.56" height="1027.72" role="img" aria-label="QBM-02 · Photosynthetic electron transport and plastid redox">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-theme="light" viewBox="0 0 780.56 1027.72" width="780.56" height="1027.72" role="img" aria-label="QBM-02 · Photosynthetic electron transport and plastid redox">
 <style>:root {
   --qbm-bg: #ffffff;
   --qbm-ink: #16181d;
@@ -8,18 +8,6 @@
   --qbm-hairline: #9aa3b0;
   --qbm-edge: #55606e;
   --qbm-compartment-fill: rgba(0,0,0,0.035);
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --qbm-bg: #0f1115;
-    --qbm-ink: #e8eaee;
-    --qbm-ink-soft: #a3adbb;
-    --qbm-node-fill: #191d24;
-    --qbm-node-stroke: #e8eaee;
-    --qbm-hairline: #5b6572;
-    --qbm-edge: #a3adbb;
-    --qbm-compartment-fill: rgba(255,255,255,0.045);
-  }
 }
 :root[data-theme="dark"] {
   --qbm-bg: #0f1115;
@@ -32,7 +20,7 @@
   --qbm-compartment-fill: rgba(255,255,255,0.045);
 }
 
-.qbm-canvas { fill: var(--qbm-bg); }
+.qbm-canvas { fill: var(--qbm-bg, #ffffff); }
 text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; fill: var(--qbm-ink); }
 .qbm-title  { font-size: 20.0px; font-weight: 700; }
 .qbm-subtitle,.qbm-caption { font-size: 12.5px; fill: var(--qbm-ink-soft); }
@@ -83,7 +71,7 @@ text { font-family: 'DejaVu Sans', 'Helvetica Neue', Helvetica, Arial, sans-seri
 .qbm-heat-label { font-size: 5.6px; fill: var(--qbm-ink-soft);
                    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }</style>
 <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--qbm-edge)"/></marker><marker id="arrow-electron" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#0072B2"/></marker><marker id="arrow-cofactor" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#CC79A7"/></marker><marker id="arrow-inhibit" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" style="fill:#D55E00"/></marker><marker id="bar" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><rect x="4" y="0.5" width="2" height="9" style="fill:#D55E00"/></marker></defs>
-<rect class="qbm-canvas" x="0" y="0" width="780.56" height="1027.72"/>
+<rect class="qbm-canvas" x="0" y="0" width="780.56" height="1027.72" fill="#ffffff"/>
 <text class="qbm-title" x="16" y="31.20">QBM-02 · Photosynthetic electron transport and plastid redox</text>
 <text class="qbm-subtitle" x="16" y="58.80">Magnetically addressable nodes of the chloroplast, from water oxidation to NADPH, with the evidence tier for each</text>
 <text class="qbm-subtitle" x="16" y="74.80">shown as a border style</text>
