@@ -14,9 +14,15 @@ Two independent backbones, because neither is trustworthy alone:
   returns 118 species, all plants plus yeast — so `pan_homology` is the division that
   matters here and the default below.
 
-  **OrthoDB v12** — the frozen, human-anchored matrix already computed for
+  **OrthoDB** — the frozen, human-anchored matrix already computed for
   `OSDR_X-species_V2` across exactly the six species of interest. Offline and
-  reproducible, but fixed at that version and that species set.
+  reproducible, but fixed at whatever release produced it and at that species set.
+
+  No version is asserted. The matrix was previously labelled "v12", which cannot be
+  substantiated: the file records no version, and OrthoDB's latest publication is v11
+  (Kuznetsov et al. 2022). Its orthologous-group ids do resolve against OrthoDB's live
+  API, so the data is genuine OrthoDB — but "genuine" and "v12" are different claims,
+  and only the first one is checkable here.
 
 Where they disagree, the disagreement is REPORTED, not resolved by preferring one.
 An ortholog call is a hypothesis about shared function; two methods disagreeing is
@@ -74,7 +80,7 @@ class Ortholog:
     target_species: str
     target_symbol: str = ""
     homology_type: str = ""      # ortholog_one2one, ortholog_one2many, …
-    method: str = ""             # "ensembl_pan_homology" | "orthodb_v12"
+    method: str = ""             # "ensembl_pan_homology" | "orthodb"
 
     @property
     def is_one_to_one(self) -> bool:
@@ -241,7 +247,7 @@ def available_divisions(timeout: int = 30) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
-# OrthoDB v12 matrix (from OSDR_X-species_V2)
+# OrthoDB matrix (from OSDR_X-species_V2) — version not asserted, see module docstring
 # ---------------------------------------------------------------------------
 #: Where the committed matrix lives if the sibling repo is cloned alongside this one.
 ORTHODB_CANDIDATES = (
@@ -273,7 +279,7 @@ def orthodb_orthologs(
     matrix_path: pathlib.Path | None = None,
     source_species: str = "arabidopsis_thaliana",
 ) -> list[Ortholog]:
-    """Map loci via the committed OrthoDB v12 matrix.
+    """Map loci via the committed OrthoDB matrix.
 
     Returns [] when the matrix is not available locally — the caller decides whether
     a single-method projection is acceptable, and `Coverage.methods_used` records
@@ -326,7 +332,7 @@ def orthodb_orthologs(
                         source_species=source_species,
                         target_id=one,
                         target_species=target_species,
-                        method="orthodb_v12",
+                        method="orthodb",
                     )
                 )
     # The table repeats ids within a cell (A|B|A), which would otherwise inflate
@@ -398,11 +404,11 @@ def project(
         # Only claim OrthoDB as a method when it actually returned calls. The matrix
         # existing on disk is not the same as it being able to reach this species:
         # it is human-anchored, so for fly, worm and yeast it contributes nothing.
-        # Listing it anyway put "via ensembl_pan_homology, orthodb_v12" into coverage
+        # Listing it anyway put "via ensembl_pan_homology, orthodb" into coverage
         # reports and figure captions for projections only one method could make,
         # which reads as corroboration that never happened.
         if odb:
-            methods.append("orthodb_v12")
+            methods.append("orthodb")
 
     by_locus: dict[str, list[Ortholog]] = {l: [] for l in loci}
     for o in ens + odb:

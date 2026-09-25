@@ -8,3 +8,14 @@ data/manuscript_text.txt
 data/external/
 maps/svg/_probe_all.svg
 .abai/
+
+# LaTeX intermediates. The .tex, the generated numbers.tex/references.bib, the figure
+# panels and the built PDF ARE tracked: the PDF is the deliverable, and tests/
+# test_manuscript.py asserts it is newer than everything it is built from, so a stale
+# PDF cannot ship alongside an edited source.
+manuscript/*.aux
+manuscript/*.log
+manuscript/*.out
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/figures/_light_*
