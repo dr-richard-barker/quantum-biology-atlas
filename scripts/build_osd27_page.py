@@ -214,7 +214,7 @@ illustration, the table is the evidence.</p>""")
         png = f"maps/png/{pathlib.Path(f['svg']).stem}.png"
         fac = f["factors"]
         out.append(f"""<figure class="map">
-<a href="{e(f['svg'])}"><img src="{e(png)}" alt="{e(f['id'])} with the OSD-27 fly data projected" loading="lazy"></a>
+<a href="{e(f['svg'])}"><img src="{e(f['svg'])}" alt="{e(f['id'])} with the OSD-27 fly data projected" loading="lazy"></a>
 <figcaption>
 <span class="t">{e(f['id'])} · {e(fac['duration'])}, {e(fac['temperature'])}, {e(fac['sex'])} · {f['nodes_with_data']} nodes ({f['fraction_covered']:.0%})</span>
 <p>{e(f['provenance'])}</p>

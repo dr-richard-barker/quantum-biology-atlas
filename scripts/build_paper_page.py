@@ -164,7 +164,8 @@ scale.</p>
 
     for f in figs:
         svg_link = f["svg"]
-        img_src = f["svg"] if key == "Mannino2026" else f"maps/png/{pathlib.Path(f['svg']).stem}.png"
+        png_link = f"maps/png/{pathlib.Path(f['svg']).stem}.png"
+        img_src = svg_link
         low = ""
         if f["low_coverage_published"]:
             low = (f"""<p><strong>Coverage is below the atlas's own 25% threshold</strong>
@@ -191,7 +192,7 @@ not nodes that were measured and found unchanged.</p>""")
 <span class="t">{e(f['id'])} · {e(f['tissue'].title())} · {f['nodes_with_data']} nodes with data ({f['fraction_covered']:.0%})</span>
 {low}{revtxt}{divtxt}
 <p>{e(f['provenance'])}</p>
-<p class="dl"><a href="{e(svg_link)}">SVG</a></p>
+<p class="dl"><a href="{e(svg_link)}">SVG</a> · <a href="{e(png_link)}">PNG</a></p>
 </figcaption>
 </figure>""")
 

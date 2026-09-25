@@ -141,12 +141,17 @@ def head(title: str, description: str) -> str:
   pre code {{ overflow-wrap:normal; white-space:pre; }}
 
   /* CoSE Components */
-  .btns {{ display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }}
-  .btn {{ display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:8px; font-weight:600; font-size:.9rem;
-    border:1px solid var(--qba-rule); background:var(--qba-card); color:var(--qba-ink); text-decoration:none; }}
-  .btn:hover {{ text-decoration:none; filter:brightness(1.05); }}
+  .btns {{ display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }}
+  .btn {{ display:inline-flex; align-items:center; gap:6px; padding:7px 13px; border-radius:8px; font-weight:600; font-size:.86rem;
+    border:1px solid var(--qba-rule); background:var(--qba-card); color:var(--qba-ink); text-decoration:none;
+    transition:background .15s ease, border-color .15s ease, color .15s ease; }}
+  .btn:hover {{ text-decoration:none; border-color:var(--qba-accent); background:var(--qba-card2); }}
   .btn.primary {{ background:var(--qba-accent); border-color:var(--qba-accent); color:#fff; }}
-  .btn.primary:hover {{ filter:brightness(1.1); color:#fff; }}
+  .btn.primary:hover {{ filter:brightness(1.08); color:#fff; background:var(--qba-accent); }}
+  .btn.active {{ border-color:var(--qba-accent); background:var(--qba-card2); color:var(--qba-accent); box-shadow:inset 0 0 0 1px var(--qba-accent); }}
+
+  .cose-tab-bar {{ display:flex; flex-wrap:wrap; align-items:center; gap:7px; padding:10px 0 14px; border-bottom:1px solid var(--qba-rule); margin-bottom:20px; }}
+  .cose-tab-bar .tab-label {{ font-size:.73rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--qba-soft); margin:0 2px 0 6px; }}
 
   .stats {{ display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }}
   .stats li {{ background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
@@ -179,9 +184,9 @@ def head(title: str, description: str) -> str:
   /* Figures with white background */
   figure.map {{ margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
     overflow:hidden; background:var(--qba-card); }}
-  figure.map > a {{ display:block; background:#ffffff; }}
+  figure.map > a {{ display:block; background:#ffffff; padding:12px 12px 6px; }}
   figure.map img, figure.map svg {{ width:100%; height:auto; display:block; background:#ffffff; }}
-  figcaption {{ padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }}
+  figcaption {{ padding:14px 18px; font-size:.9rem; color:var(--qba-soft); border-top:1px solid var(--qba-rule); }}
   figcaption .t {{ color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
     margin-bottom:4px; }}
   .tiers {{ font-size:.82rem; color:var(--qba-soft); margin-top:8px; }}
@@ -207,6 +212,20 @@ def head(title: str, description: str) -> str:
     <span class="theme-label">Theme</span>
   </button>
 </div>
+<nav class="cose-tab-bar" aria-label="Atlas demonstrations and resources">
+  <a href="index.html" class="btn">Atlas Maps</a>
+  <a href="explore.html" class="btn">Explore Your Data</a>
+  <span class="tab-label">Demonstrations:</span>
+  <a href="paper-Mannino2026.html" class="btn">Mannino 2026 (Basil hMF)</a>
+  <a href="paper-Parmagnani2022.html" class="btn">Parmagnani 2022 (ROS Time-Course)</a>
+  <a href="paper-Agliassa2018a.html" class="btn">Agliassa 2018 (Flowering)</a>
+  <a href="osd8.html" class="btn">OSD-8 (16.5 T Magnet)</a>
+  <a href="osd27.html" class="btn">OSD-27 (Drosophila 16.5 T)</a>
+  <a href="osd782.html" class="btn">OSD-782 (Radiation × NNMF)</a>
+  <span class="tab-label">Links:</span>
+  <a href="manuscript.pdf" class="btn primary">Draft Manuscript (PDF)</a>
+  <a href="https://github.com/dr-richard-barker/quantum-biology-atlas" class="btn">GitHub Code</a>
+</nav>
 """
 
 
@@ -217,6 +236,15 @@ def tail() -> str:
     """
     return """<script>
 (function() {
+  var path = (window.location.pathname.split('/').pop() || 'index.html');
+  var links = document.querySelectorAll('.cose-tab-bar a.btn');
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (href === path) {
+      links[i].classList.add('active');
+      links[i].setAttribute('aria-current', 'page');
+    }
+  }
   var btn = document.getElementById('cose-theme-toggle');
   if (!btn) return;
   function update(theme) {
@@ -293,6 +321,17 @@ supporting citations, and an explicit statement of how much is actually known.</
 <p class="lede">Companion software to the review <em>“Plant Responses to Near-Null
 Magnetic Fields: Geomagnetism, Bioenergetics, and Primary Metabolism in Arabidopsis
 and Brassica”</em> (D. M. Porterfield &amp; R. Barker, Purdue University).</p>
+<div class="btns" aria-label="Primary links and demonstrations">
+  <a href="manuscript.pdf" class="btn primary">Draft Manuscript (PDF)</a>
+  <a href="https://github.com/dr-richard-barker/quantum-biology-atlas" class="btn">GitHub Code</a>
+  <a href="explore.html" class="btn">Explore Your Data</a>
+  <a href="paper-Mannino2026.html" class="btn">Demo: Mannino 2026 (Basil hMF)</a>
+  <a href="paper-Parmagnani2022.html" class="btn">Demo: Parmagnani 2022 (ROS)</a>
+  <a href="paper-Agliassa2018a.html" class="btn">Demo: Agliassa 2018 (Flowering)</a>
+  <a href="osd8.html" class="btn">Demo: OSD-8 (16.5 T Magnet)</a>
+  <a href="osd27.html" class="btn">Demo: OSD-27 (Drosophila 16.5 T)</a>
+  <a href="osd782.html" class="btn">Demo: OSD-782 (Radiation × NNMF)</a>
+</div>
 <ul class="stats">
   <li><b>{t['maps']}</b> pathway maps</li>
   <li><b>{t['nodes']}</b> annotated nodes</li>
@@ -649,6 +688,10 @@ def main() -> int:
         dst = args.out.parent / "results" / rec.parent.name / "record.json"
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(rec, dst)
+        copied += 1
+    ms_pdf = ROOT / "manuscript" / "manuscript.pdf"
+    if ms_pdf.exists():
+        shutil.copy2(ms_pdf, args.out.parent / "manuscript.pdf")
         copied += 1
     print(f"  copied {copied} artefact files into docs/ (site is self-contained)")
     print(f"wrote {args.out.relative_to(ROOT)} ({args.out.stat().st_size/1024:.0f} KB)")

@@ -68,28 +68,11 @@ def tier_panel(path: pathlib.Path) -> None:
 
 
 def svg_to_pdf(src: pathlib.Path, dst: pathlib.Path) -> bool:
-    """Rasterise via qlmanage. No rsvg/cairosvg/inkscape on this machine.
+    """Rasterise via render.rasterize_svg_full so portrait SVGs are never square-cropped."""
+    sys.path.insert(0, str(ROOT / "src"))
+    from qbio import render
 
-    Forces the LIGHT theme first. The maps follow `prefers-color-scheme`, and the
-    renderer picks up the machine's appearance — which produced a figure with three
-    dark panels beside one light one. The maps already guard their dark rule with
-    `:root:not([data-theme="light"])`, so setting that attribute on the root uses the
-    mechanism that is already there rather than stripping the stylesheet.
-    """
-    text = src.read_text(encoding="utf-8")
-    if 'data-theme=' not in text.split(">", 1)[0]:
-        text = text.replace("<svg ", '<svg data-theme="light" ', 1)
-    light = dst.parent / f"_light_{src.name}"
-    light.write_text(text, encoding="utf-8")
-
-    tmp = dst.parent / (light.name + ".png")
-    subprocess.run(["qlmanage", "-t", "-s", "2000", "-o", str(dst.parent), str(light)],
-                   capture_output=True)
-    light.unlink(missing_ok=True)
-    if not tmp.exists():
-        return False
-    tmp.rename(dst.with_suffix(".png"))
-    return True
+    return render.rasterize_svg_full(src, dst.with_suffix(".png"), max_dim=2000)
 
 
 def main() -> int:

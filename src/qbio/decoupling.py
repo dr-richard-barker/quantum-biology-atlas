@@ -15,7 +15,7 @@ from typing import Sequence
 from .render import OKABE_ITO, esc
 
 WIDTH = 960.0
-HEIGHT = 700.0
+HEIGHT = 715.0
 
 
 def render_decoupling_svg(out_path: pathlib.Path | None = None) -> str:
@@ -74,8 +74,8 @@ def render_decoupling_svg(out_path: pathlib.Path | None = None) -> str:
     svg.append(f'<rect x="480" y="100" width="456" height="280" fill="#fafbfc" stroke="{rule}" rx="10"/>')
     svg.append(f'<text class="band-label" x="494" y="122">Flavonoid Biosynthesis &amp; Glycoside Remodelling</text>')
 
-    # Panel 3: Terpene / Monoterpenes (x=480, y=396, w=456, h=154)
-    svg.append(f'<rect x="480" y="396" width="456" height="154" fill="#fafbfc" stroke="{rule}" rx="10"/>')
+    # Panel 3: Terpene / Monoterpenes (x=480, y=396, w=456, h=164)
+    svg.append(f'<rect x="480" y="396" width="456" height="164" fill="#fafbfc" stroke="{rule}" rx="10"/>')
     svg.append(f'<text class="band-label" x="494" y="418">Monoterpenes &amp; Sesquiterpenes (Volatilome)</text>')
 
     # Helper function for drawing chemical / metabolite nodes
@@ -192,11 +192,11 @@ def render_decoupling_svg(out_path: pathlib.Path | None = None) -> str:
     # 1,8-Cineole
     svg.append(draw_metabolite(780, 465, 170, 54, "1,8-CINEOLE", "+35% (+1.35x)", "0.57 ± 0.02 mg/g d.w."))
     # Total Essential Oil
-    svg.append(draw_metabolite(680, 524, 280, 38, "TOTAL IDENTIFIED ESSENTIAL OIL", "+29% (+1.29x)", "5.75 ± 0.53 vs 4.44 ± 0.38 mg/g d.w."))
+    svg.append(draw_metabolite(680, 526, 290, 48, "TOTAL IDENTIFIED ESSENTIAL OIL", "+29% (+1.29x)", "5.75 ± 0.53 vs 4.44 ± 0.38 mg/g d.w."))
 
     # Bottom Callout: The Decoupling Paradox Banner
-    svg.append(f'<rect x="24" y="565" width="{WIDTH - 48}" height="115" fill="#f4f6fa" stroke="{rule}" rx="8"/>')
-    svg.append(f'<text class="label-node" x="40" y="588" style="text-anchor:start;fill:{ink};font-size:13px">THE GENE-METABOLITE DECOUPLING PARADOX UNDER NEAR-NULL MAGNETIC FIELDS</text>')
+    svg.append(f'<rect x="24" y="574" width="{WIDTH - 48}" height="118" fill="#f4f6fa" stroke="{rule}" rx="8"/>')
+    svg.append(f'<text class="label-node" x="40" y="596" style="text-anchor:start;fill:{ink};font-size:13px">THE GENE-METABOLITE DECOUPLING PARADOX UNDER NEAR-NULL MAGNETIC FIELDS</text>')
     desc_lines = [
         "• Transcriptional Repression (Blue): Every analysed phenylpropanoid & early flavonoid transcript (ObPAL, ObCOMT, ObEGS, ObEOMT, Ob4CL, ObCHS, ObCHI, ObCHIL)",
         "  is significantly downregulated under hMF (< 40 nT) compared with GMF controls (log2 fold change from -0.70 to -1.65, P < 0.05).",
@@ -205,7 +205,7 @@ def render_decoupling_svg(out_path: pathlib.Path | None = None) -> str:
         "• Biological Significance: Demonstrates that near-null magnetic field adaptation in aromatic crops involves post-transcriptional control, metabolic flux redirection,",
         "  and altered precursor allocation (shikimate pathway) rather than steady-state transcript abundance, critical for space agriculture (BLSS) optimization."
     ]
-    dy = 606
+    dy = 614
     for line in desc_lines:
         svg.append(f'<text class="label-sub" x="40" y="{dy}" style="text-anchor:start;font-size:10px;fill:{ink}">{esc(line)}</text>')
         dy += 13

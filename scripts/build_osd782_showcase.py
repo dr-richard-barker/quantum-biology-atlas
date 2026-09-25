@@ -246,15 +246,12 @@ def main() -> int:
     }, indent=2))
 
     if not args.no_png:
+        from qbio import render
         out = DOCS / "maps" / "png"
         out.mkdir(parents=True, exist_ok=True)
         for f in figures:
             svg = ROOT / f["svg"]
-            subprocess.run(["qlmanage", "-t", "-s", "1400", "-o", str(out), str(svg)],
-                           capture_output=True)
-            produced = out / (svg.name + ".png")
-            if produced.exists():
-                produced.rename(out / (svg.stem + ".png"))
+            render.rasterize_svg_full(svg, out / f"{svg.stem}.png", max_dim=1800)
 
     print(f"\nwrote results/osd782/record.json ({len(figures)} figures)")
     return 0

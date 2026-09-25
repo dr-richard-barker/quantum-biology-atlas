@@ -457,17 +457,11 @@ def main() -> int:
 
 
 def render_pngs(svgs: list[pathlib.Path]) -> None:
-    """Rasterise for the page. The SVG stays the primary artefact and is linked."""
+    """Rasterise for the page without square-thumbnail bottom cropping."""
     out = DOCS / "maps" / "png"
     out.mkdir(parents=True, exist_ok=True)
     for svg in svgs:
-        subprocess.run(
-            ["qlmanage", "-t", "-s", "1400", "-o", str(out), str(svg)],
-            capture_output=True,
-        )
-        produced = out / (svg.name + ".png")
-        if produced.exists():
-            produced.rename(out / (svg.stem + ".png"))
+        render.rasterize_svg_full(svg, out / f"{svg.stem}.png", max_dim=1800)
 
 
 if __name__ == "__main__":

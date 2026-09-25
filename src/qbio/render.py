@@ -927,3 +927,59 @@ def heatmap_legend_svg(
     out.append("</g>")
     used = max(h, len(lines) * LEGEND_SIZE * LINE_SPACING)
     return "".join(out), used + 16.0
+
+
+def rasterize_svg_full(svg_path, png_path, max_dim: int = 1800) -> bool:
+    """Rasterize an SVG to PNG without qlmanage's 1:1 square viewport crop.
+
+    macOS `qlmanage -t` renders SVGs into a square viewport where width=100%, which
+    truncates the bottom of any portrait SVG (H > W) and the right of any landscape SVG.
+    Wrapping the SVG content centered inside a `max(W, H) x max(W, H)` square viewBox
+    before calling `qlmanage -t` and then cropping around the center with `/usr/bin/sips -c`
+    recovers the exact W:H aspect ratio with zero clipping.
+    """
+    import pathlib
+    import subprocess
+
+    src = pathlib.Path(svg_path)
+    dst = pathlib.Path(png_path)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    svg = src.read_text(encoding="utf-8")
+    m = re.search(r'viewBox="0 0 ([\d.]+) ([\d.]+)"', svg)
+    if not m:
+        return False
+    w, h = float(m.group(1)), float(m.group(2))
+    side = max(w, h)
+    dx, dy = (side - w) / 2.0, (side - h) / 2.0
+
+    inner = svg[svg.index(">") + 1 : svg.rindex("</svg>")]
+    square_svg = (
+        f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
+        f'data-theme="light" viewBox="0 0 {side:.2f} {side:.2f}" width="{side:.2f}" height="{side:.2f}">'
+        f'<rect x="0" y="0" width="{side:.2f}" height="{side:.2f}" fill="#ffffff"/>'
+        f'<g transform="translate({dx:.2f},{dy:.2f})">{inner}</g></svg>'
+    )
+    tmp_svg = dst.parent / f"_tmp_sq_{src.stem}.svg"
+    tmp_png = dst.parent / f"{tmp_svg.name}.png"
+    tmp_svg.write_text(square_svg, encoding="utf-8")
+    try:
+        subprocess.run(
+            ["qlmanage", "-t", "-s", str(max_dim), "-o", str(dst.parent), str(tmp_svg)],
+            capture_output=True,
+            check=True,
+        )
+        if not tmp_png.exists():
+            return False
+        tw = max(1, int(round(max_dim * w / side)))
+        th = max(1, int(round(max_dim * h / side)))
+        subprocess.run(
+            ["/usr/bin/sips", "-c", str(th), str(tw), str(tmp_png)],
+            capture_output=True,
+            check=True,
+        )
+        tmp_png.replace(dst)
+        return True
+    finally:
+        tmp_svg.unlink(missing_ok=True)
+        tmp_png.unlink(missing_ok=True)
+

@@ -82,12 +82,17 @@
   pre code { overflow-wrap:normal; white-space:pre; }
 
   /* CoSE Components */
-  .btns { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; }
-  .btn { display:inline-flex; align-items:center; gap:6px; padding:8px 14px; border-radius:8px; font-weight:600; font-size:.9rem;
-    border:1px solid var(--qba-rule); background:var(--qba-card); color:var(--qba-ink); text-decoration:none; }
-  .btn:hover { text-decoration:none; filter:brightness(1.05); }
+  .btns { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0; }
+  .btn { display:inline-flex; align-items:center; gap:6px; padding:7px 13px; border-radius:8px; font-weight:600; font-size:.86rem;
+    border:1px solid var(--qba-rule); background:var(--qba-card); color:var(--qba-ink); text-decoration:none;
+    transition:background .15s ease, border-color .15s ease, color .15s ease; }
+  .btn:hover { text-decoration:none; border-color:var(--qba-accent); background:var(--qba-card2); }
   .btn.primary { background:var(--qba-accent); border-color:var(--qba-accent); color:#fff; }
-  .btn.primary:hover { filter:brightness(1.1); color:#fff; }
+  .btn.primary:hover { filter:brightness(1.08); color:#fff; background:var(--qba-accent); }
+  .btn.active { border-color:var(--qba-accent); background:var(--qba-card2); color:var(--qba-accent); box-shadow:inset 0 0 0 1px var(--qba-accent); }
+
+  .cose-tab-bar { display:flex; flex-wrap:wrap; align-items:center; gap:7px; padding:10px 0 14px; border-bottom:1px solid var(--qba-rule); margin-bottom:20px; }
+  .cose-tab-bar .tab-label { font-size:.73rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--qba-soft); margin:0 2px 0 6px; }
 
   .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
   .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
@@ -120,9 +125,9 @@
   /* Figures with white background */
   figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
     overflow:hidden; background:var(--qba-card); }
-  figure.map > a { display:block; background:#ffffff; }
+  figure.map > a { display:block; background:#ffffff; padding:12px 12px 6px; }
   figure.map img, figure.map svg { width:100%; height:auto; display:block; background:#ffffff; }
-  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); border-top:1px solid var(--qba-rule); }
   figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
     margin-bottom:4px; }
   .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
@@ -148,6 +153,20 @@
     <span class="theme-label">Theme</span>
   </button>
 </div>
+<nav class="cose-tab-bar" aria-label="Atlas demonstrations and resources">
+  <a href="index.html" class="btn">Atlas Maps</a>
+  <a href="explore.html" class="btn">Explore Your Data</a>
+  <span class="tab-label">Demonstrations:</span>
+  <a href="paper-Mannino2026.html" class="btn">Mannino 2026 (Basil hMF)</a>
+  <a href="paper-Parmagnani2022.html" class="btn">Parmagnani 2022 (ROS Time-Course)</a>
+  <a href="paper-Agliassa2018a.html" class="btn">Agliassa 2018 (Flowering)</a>
+  <a href="osd8.html" class="btn">OSD-8 (16.5 T Magnet)</a>
+  <a href="osd27.html" class="btn">OSD-27 (Drosophila 16.5 T)</a>
+  <a href="osd782.html" class="btn">OSD-782 (Radiation × NNMF)</a>
+  <span class="tab-label">Links:</span>
+  <a href="manuscript.pdf" class="btn primary">Draft Manuscript (PDF)</a>
+  <a href="https://github.com/dr-richard-barker/quantum-biology-atlas" class="btn">GitHub Code</a>
+</nav>
 
 <header class="hero">
 <h1>Does radiation move the same chemistry a magnetic field does?</h1>
@@ -286,51 +305,51 @@ trajectory. Read them with the divergence warning above in mind: where a node's 
 disagree in sign, its trace is the aggregator choosing between them, and the caption
 says which nodes those are.</p>
 <figure class="map">
-<a href="maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/png/QBM-07__OSD-782-0-1-Gy__0-1-Gy.png" alt="QBM-07 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg" alt="QBM-07 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-07 · 0.1 Gy · 8 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 8 of 8 identifier-bearing nodes received a series (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 6 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, PLASTID_ROS, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 5 node(s) reverse direction during the course (COMPLEX_I, MITO_SUPEROXIDE, CATALASE, PEROXIREDOXIN_TRX…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-07__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a> · <a href="maps/png/QBM-07__OSD-782-0-1-Gy__0-1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <figure class="map">
-<a href="maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/png/QBM-01__OSD-782-0-1-Gy__0-1-Gy.png" alt="QBM-01 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg" alt="QBM-01 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-01 · 0.1 Gy · 10 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 6 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, COMPLEX_II, ALT_NADH_DH, AOX…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 8 node(s) reverse direction during the course (COMPLEX_I, COMPLEX_I_FMN, COMPLEX_II, ALT_NADH_DH…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-01__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a> · <a href="maps/png/QBM-01__OSD-782-0-1-Gy__0-1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <figure class="map">
-<a href="maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/png/QBM-04__OSD-782-0-1-Gy__0-1-Gy.png" alt="QBM-04 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg"><img src="maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg" alt="QBM-04 with the OSD-782 0.1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-04 · 0.1 Gy · 10 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 0.1 Gy against non-irradiated controls at matched time. 0.1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (HSCB_GRXS15, NFU_CARRIERS, SUF_SYSTEM, CIA_SYSTEM…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 9 node(s) reverse direction during the course (NFS1, ISU1, FRATAXIN, HSCB_GRXS15…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-04__OSD-782-0-1-Gy__0-1-Gy.svg">SVG</a> · <a href="maps/png/QBM-04__OSD-782-0-1-Gy__0-1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <figure class="map">
-<a href="maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg"><img src="maps/png/QBM-07__OSD-782-1-Gy__1-Gy.png" alt="QBM-07 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg"><img src="maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg" alt="QBM-07 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-07 · 1 Gy · 8 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 8 of 8 identifier-bearing nodes received a series (100%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, PLASTID_ROS, SUPEROXIDE_DISMUTASES, CATALASE…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 7 node(s) reverse direction during the course (PLASTID_ROS, MITO_SUPEROXIDE, SUPEROXIDE_DISMUTASES, ASCORBATE_PEROXIDASE…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-07__OSD-782-1-Gy__1-Gy.svg">SVG</a> · <a href="maps/png/QBM-07__OSD-782-1-Gy__1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <figure class="map">
-<a href="maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg"><img src="maps/png/QBM-01__OSD-782-1-Gy__1-Gy.png" alt="QBM-01 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg"><img src="maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg" alt="QBM-01 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-01 · 1 Gy · 10 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 7 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 7 node(s) have loci that disagree in direction at the same timepoint (COMPLEX_I, COMPLEX_II, ALT_NADH_DH, AOX…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 6 node(s) reverse direction during the course (COMPLEX_I_FMN, ALT_NADH_DH, AOX, RIESKE_FES…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-01__OSD-782-1-Gy__1-Gy.svg">SVG</a> · <a href="maps/png/QBM-01__OSD-782-1-Gy__1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <figure class="map">
-<a href="maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg"><img src="maps/png/QBM-04__OSD-782-1-Gy__1-Gy.png" alt="QBM-04 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
+<a href="maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg"><img src="maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg" alt="QBM-04 with the OSD-782 1 Gy radiation time course projected" loading="lazy"></a>
 <figcaption>
 <span class="t">QBM-04 · 1 Gy · 10 nodes (100%)</span>
 <p>NASA OSDR OSD-782 / GLDS-679, GeneLab-processed differential expression. cesium-137 gamma radiation at 1 Gy against non-irradiated controls at matched time. 1 gy, 4 timepoints (1 hour, 3 hour, 24 hour, 72 hour). 10 of 10 identifier-bearing nodes received a series (100%); 1 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. GeneLab reports log2 fold change directly; no conversion applied. 5 node(s) have loci that disagree in direction at the same timepoint (HSCB_GRXS15, NFU_CARRIERS, SUF_SYSTEM, CIA_SYSTEM…), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node. 6 node(s) reverse direction during the course (NFS1, ISU1, FRATAXIN, HSCB_GRXS15…), which no single-contrast overlay can show.</p>
-<p class="dl"><a href="maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg">SVG</a></p>
+<p class="dl"><a href="maps/svg/QBM-04__OSD-782-1-Gy__1-Gy.svg">SVG</a> · <a href="maps/png/QBM-04__OSD-782-1-Gy__1-Gy.png">PNG</a></p>
 </figcaption>
 </figure>
 <h2>What this does not show</h2>
@@ -371,6 +390,15 @@ GeneLab-processed differential expression. Provenance class
 </footer>
 <script>
 (function() {
+  var path = (window.location.pathname.split('/').pop() || 'index.html');
+  var links = document.querySelectorAll('.cose-tab-bar a.btn');
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (href === path) {
+      links[i].classList.add('active');
+      links[i].setAttribute('aria-current', 'page');
+    }
+  }
   var btn = document.getElementById('cose-theme-toggle');
   if (!btn) return;
   function update(theme) {

@@ -181,11 +181,11 @@ result above in mind.</p>""")
     for f in r["figures"]:
         png = f"maps/png/{pathlib.Path(f['svg']).stem}.png"
         out.append(f"""<figure class="map">
-<a href="{e(f['svg'])}"><img src="{e(png)}" alt="{e(f['id'])} with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
+<a href="{e(f['svg'])}"><img src="{e(f['svg'])}" alt="{e(f['id'])} with the OSD-8 field-isolating contrast projected" loading="lazy"></a>
 <figcaption>
 <span class="t">{e(f['id'])} · {e(f['group_label'])} · {f['nodes_with_data']} of {f['nodes_with_data']} nodes ({f['fraction_covered']:.0%})</span>
 <p>{e(f['provenance'])}</p>
-<p class="dl"><a href="{e(f['svg'])}">SVG</a></p>
+<p class="dl"><a href="{e(f['svg'])}">SVG</a> · <a href="{e(png)}">PNG</a></p>
 </figcaption>
 </figure>""")
 
