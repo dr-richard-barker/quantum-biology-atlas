@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mannino, Caldo &amp; Maffei — near-null field demonstration</title>
+<meta name="description" content="Published results from Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872 projected onto the quantum pathway maps.">
+<meta name="author" content="Richard Barker">
+<meta name="color-scheme" content="light dark">
+<style>
+  /* Tokens are namespaced --qba-* and mapped onto the CoSE palette loaded from
+     cose-map.css. Each falls back to a literal, so the page is still legible and
+     correctly themed if that stylesheet cannot be fetched.
+
+     Note --qba-soft maps to --muted, NOT to --soft: in the CoSE vocabulary --soft is
+     a surface colour, and using it for text renders near-white on white. */
+  :root {
+    --qba-bg:     var(--bg,       #ffffff);
+    --qba-ink:    var(--ink,      #1a2230);
+    --qba-soft:   var(--muted,    #5a6473);
+    --qba-faint:  var(--ink-faint,#8892a3);
+    --qba-rule:   var(--line,     #e5e9f0);
+    --qba-card:   var(--surface,  #f7f9fc);
+    --qba-card2:  var(--surface-2,#eef2f8);
+    --qba-accent: var(--accent,   #3B6EA5);
+    --qba-accent2:var(--accent2,  #3FB6A8);
+    /* Okabe-Ito vermillion: the CoSE palette has no warning token, and this is the
+       same colour the maps use for a down-regulated node. */
+    --qba-warn:   #D55E00;
+    --qba-t1: var(--ink,       #1a2230);
+    --qba-t2: var(--muted,     #5a6473);
+    --qba-t3: var(--ink-faint, #8892a3);
+    --qba-t4: var(--line,      #c9d1dc);
+  }
+
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--qba-bg); color:var(--qba-ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 16px 96px; }
+  header.hero { padding:56px 0 28px; border-bottom:1px solid var(--qba-rule); }
+  h1 { font-size:clamp(1.7rem,4vw,2.5rem); line-height:1.18; margin:0 0 10px; letter-spacing:-.02em; }
+  .lede { font-size:1.12rem; color:var(--qba-soft); max-width:62ch; margin:0 0 18px; }
+  h2 { font-size:1.35rem; margin:44px 0 10px; letter-spacing:-.01em; }
+  h3 { font-size:1.05rem; margin:26px 0 6px; }
+  p, li { max-width:74ch; }
+  a { color:var(--qba-accent); }
+  code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.9em;
+    background:var(--qba-card); padding:1px 5px; border-radius:4px;
+    /* Long identifiers — an AGI locus list, a DOI — must break rather than push the
+       page wider than the screen. */
+    overflow-wrap:anywhere; }
+  /* A code block scrolls inside itself. Without this every page overflowed the
+     viewport on a phone: the index scrolled to 736px at a 375px width. */
+  pre { overflow-x:auto; -webkit-overflow-scrolling:touch; max-width:100%; }
+  pre code { overflow-wrap:normal; white-space:pre; }
+  .stats { display:flex; flex-wrap:wrap; gap:10px; margin:18px 0 0; padding:0; list-style:none; }
+  .stats li { background:var(--qba-card); border:1px solid var(--qba-rule); border-radius:10px;
+    padding:9px 14px; font-size:.9rem; }
+  .stats b { font-size:1.18rem; display:block; font-weight:700; }
+  .note { border-left:3px solid var(--qba-warn); background:var(--qba-card); padding:12px 16px;
+    border-radius:0 8px 8px 0; margin:20px 0; }
+  table { border-collapse:collapse; width:100%; margin:14px 0; font-size:.93rem; }
+  /* A wide table scrolls inside its own box rather than making the whole page scroll
+     sideways. The per-node value tables are 11 columns and overflowed the viewport on
+     the deployed page by 70px at desktop width, and far more on a phone. */
+  .tablewrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:14px 0; }
+  .tablewrap table { margin:0; min-width:760px; }
+  /* Inside a scrolling table an identifier must NOT break: `overflow-wrap:anywhere`
+     on code turned AT4G25100 into "AT4 G251 00". The wrapper scrolls instead. */
+  .tablewrap code { overflow-wrap:normal; white-space:nowrap; }
+  .tablewrap + .tablenote { font-size:.82rem; color:var(--qba-soft); margin:-4px 0 18px; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--qba-rule);
+    vertical-align:top; }
+  th { font-weight:650; color:var(--qba-soft); font-size:.84rem; text-transform:uppercase;
+    letter-spacing:.05em; }
+  .swatch { display:inline-block; width:34px; height:15px; border-radius:4px;
+    background:var(--qba-card); vertical-align:-2px; margin-right:8px; }
+  .swatch.T1 { border:2.6px solid var(--qba-t1); }
+  .swatch.T2 { border:1.7px solid var(--qba-t2); }
+  .swatch.T3 { border:1.5px dashed var(--qba-t3); }
+  .swatch.T4 { border:1px solid var(--qba-t4); }
+  figure.map { margin:0 0 40px; border:1px solid var(--qba-rule); border-radius:12px;
+    overflow:hidden; background:var(--qba-card); }
+  figure.map > a { display:block; background:var(--qba-bg); }
+  figure.map img { width:100%; height:auto; display:block; }
+  figcaption { padding:14px 18px; font-size:.9rem; color:var(--qba-soft); }
+  figcaption .t { color:var(--qba-ink); font-weight:650; font-size:1rem; display:block;
+    margin-bottom:4px; }
+  .tiers { font-size:.82rem; color:var(--qba-soft); margin-top:8px; }
+  .dl { margin-top:8px; font-size:.85rem; }
+  footer { border-top:1px solid var(--qba-rule); margin-top:56px; padding-top:22px;
+    font-size:.88rem; color:var(--qba-soft); }
+  @media (max-width:640px) { header.hero { padding-top:34px; } }
+</style>
+<!-- CoSE colour scheme only. cose-chrome.css and theme.js would inject the
+     navigation rail, and are deliberately not loaded. -->
+<link rel="stylesheet" href="https://dr-richard-barker.github.io/Plant_response_to_radiation/cose/cose-map.css">
+</head>
+<body data-site-id="quantum-biology-atlas">
+<div class="wrap">
+
+<header class="hero">
+<h1>Gene-metabolite decoupling &amp; SOD isoform divergence</h1>
+<p class="lede">Sweet basil (Ocimum basilicum) exposed continuously for 4 weeks to near-null magnetic fields (<40 nT vs GMF ~44.4 µT): essential oils and flavonoids rise while their biosynthetic transcripts fall, and superoxide dismutase isoforms split in opposite directions.</p>
+<p class="lede">Source: Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872,
+<a href="https://doi.org/10.1016/j.jplph.2026.154872">doi:10.1016/j.jplph.2026.154872</a>,
+Ocimum basilicum.</p>
+<ul class="stats">
+<li><b>21</b>loci in the source table</li>
+<li><b>4</b>are QBO atlas loci</li>
+<li><b>1</b>timepoints × 1 tissues</li>
+<li><b>21</b>values parsed</li>
+</ul>
+</header>
+<div class="note">
+<p><strong>These are the authors' published results, not a reanalysis.</strong>
+No raw data was deposited in any public repository. The article's Data Availability
+Statement reads, in full: <em>“Data will be made available on request”</em></p>
+<p>So nothing on this page can be recomputed, re-thresholded or re-tested from source
+data. What is drawn is what the authors chose to report, read out of
+<code>gene_expression.tsv</code> and re-projected onto the maps. That is a weaker
+provenance than the NASA OSDR pages in this atlas, which rest on processed data anyone
+can download, and it is labelled differently throughout:
+<code>published_results</code>.</p>
+</div>
+<h2>What was measured</h2>
+<p>near-null magnetic field (&lt;40 nT) against the local geomagnetic field (~44.4 µT), generated in a triaxial Helmholtz coil system and monitored with a three-axis Bartington Mag-03 magnetometer. Values are Mannino's reported
+fold change for hMF-grown plants relative to GMF-grown controls, as
+<code>mean ± SD</code>.</p>
+<p><strong>Two findings that require structural representation:</strong></p>
+<ul>
+<li><strong>2-Row Heatmap on Superoxide Dismutases (Isoform Divergence):</strong> Under hMF, cytosolic/chloroplastic Cu/Zn-SOD (<code>ObCSD</code> → <code>AT1G08830</code>) is strongly downregulated (log2FC = <code>-1.45 ± 0.15</code>, blue), whereas chloroplast Fe-SOD (<code>ObFSD1</code> → <code>AT4G25100</code>) is strongly upregulated (log2FC = <code>+1.15 ± 0.12</code>, vermillion). Averaging them into a single node value would yield <code>-0.15</code> — falsely reporting that superoxide dismutation did not respond. The 2-row heatmap preserves both isoforms side by side.</li>
+<li><strong>Gene-Metabolite Decoupling in Phenylpropanoid &amp; Volatilome Biosynthesis:</strong> Essential oil volatiles (eugenol <code>+28%</code>, methyl eugenol <code>+79%</code>, cis-ocimene <code>+119%</code>) and total flavonoids (<code>+18%</code>) increase significantly, yet every measured biosynthetic transcript (<code>ObPAL</code>, <code>ObCOMT</code>, <code>ObEGS</code>, <code>ObEOMT</code>, <code>Ob4CL</code>, <code>ObCHS</code>, <code>ObCHI</code>, <code>ObCHIL</code>) is significantly repressed (log2FC <code>-0.70</code> to <code>-1.65</code>).</li>
+</ul>
+<h2>Dedicated Sub-Map: Phenylpropanoid &amp; Volatilome Gene-Metabolite Decoupling</h2>
+<p>In sweet basil under near-null magnetic fields (&lt;40 nT), secondary metabolism decouples from steady-state transcript abundance: blue boxes show significant downregulation across all 8 phenylpropanoid and early flavonoid enzymes, while vermillion boxes show significant physical accumulation of their volatile and flavonoid end-products.</p>
+<figure class="map">
+<a href="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg"><img src="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg" alt="Phenylpropanoid and Volatilome Pathway Gene-Metabolite Decoupling Sub-Map" loading="lazy"></a>
+<figcaption>
+<span class="t">Sub-Map · Phenylpropanoid &amp; Volatilome Pathway (Ocimum basilicum)</span>
+<p><strong>Decoupling of transcript abundance and metabolite accumulation.</strong> Blue enzyme boxes carry qRT-PCR log2 fold changes (hMF/GMF ± SD, all P &lt; 0.05); vermillion metabolite boxes carry GC-FID/GC-MS absolute accumulation fold changes and concentrations (mg g⁻¹ dry weight ± SD, P &lt; 0.05).</p>
+<p class="dl"><a href="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg">SVG</a></p>
+</figcaption>
+</figure>
+<h2>The QBO pathway maps</h2>
+<p>Each node is tinted by its extreme value; multi-locus nodes where isoforms diverge in sign (such as <code>SUPEROXIDE_DISMUTASES</code> displaying <code>ObCSD</code> vs <code>ObFSD1</code>) render a 2-row heatmap directly inside the node box.</p>
+<figure class="map">
+<a href="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg"><img src="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg" alt="QBM-07 with leaves data projected" loading="lazy"></a>
+<figcaption>
+<span class="t">QBM-07 · Leaves · 4 nodes with data (50%)</span>
+<p><strong>2-Row Heatmap (Isoform Divergence) on SUPEROXIDE_DISMUTASES:</strong> <code>AT1G08830</code> (ObCSD, Cu/Zn-SOD) is downregulated (<code>-1.45</code>, blue) while <code>AT4G25100</code> (ObFSD1, Fe-SOD) is upregulated (<code>+1.15</code>, vermillion).</p>
+<p>Values are the authors&#x27; published results from Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872 (doi:10.1016/j.jplph.2026.154872), not a reanalysis: hMF-grown plants relative to GMF controls after 4 weeks exposure. No raw data was deposited — the Data Availability Statement reads “Data will be made available on request”. Reported as log2 fold change; values are published directly as log2 fold change (hMF/GMF) ± SD from qRT-PCR; no conversion needed. leaves, 1 timepoints (4w). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (SUPEROXIDE_DISMUTASES), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node.</p>
+<p class="dl"><a href="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg">SVG</a></p>
+</figcaption>
+</figure>
+<h2>Every value behind the figures</h2>
+<p>The numbers on the maps, in full, so the figures can be checked
+rather than taken on trust. Values are log2 fold change (hMF vs GMF); multi-locus nodes display their 2-row per-locus heatmap.</p>
+<h3>QBM-07 · Leaves</h3>
+<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace / 2-Row Heatmap</th><th>4w</th><th>Peak</th></tr></thead><tbody>
+<tr><td>PLASTID_ROS</td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25100</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="3.9" r="1.6" fill="#D55E00"/></svg></td><td>+1.15</td><td><b>+1.15</b> @ 4w</td></tr>
+<tr><td>SUPEROXIDE_DISMUTASES <em>(isoforms diverge: 2-row heatmap)</em></td><td><span class='swatch T4'></span>T4</td><td><code>AT1G08830</code> <code>AT4G25100</code></td><td><svg viewBox="0 0 145.0 30.0" width="145.0" height="30.0" role="img" aria-label="2-row isoform heatmap"><rect x="2" y="2.0" width="18" height="10" rx="2" fill="#0072B2"/><text x="24" y="10.5" font-size="9.5" fill="currentColor" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">AT1G08830: -1.45</text><rect x="2" y="15.0" width="18" height="10" rx="2" fill="#D55E00"/><text x="24" y="23.5" font-size="9.5" fill="currentColor" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">AT4G25100: +1.15</text></svg></td><td>-1.45</td><td><b>-1.45</b> @ 4w</td></tr>
+<tr><td>ASCORBATE_PEROXIDASE</td><td><span class='swatch T3'></span>T3</td><td><code>AT1G07890</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="10.3" r="1.6" fill="#D55E00"/></svg></td><td>+0.12</td><td><b>+0.12</b> @ 4w</td></tr>
+<tr><td>CATALASE</td><td><span class='swatch T3'></span>T3</td><td><code>AT1G20630</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="15.2" r="1.6" fill="#0072B2"/></svg></td><td>-0.68</td><td><b>-0.68</b> @ 4w</td></tr>
+</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
+<h2>What this does not show</h2>
+<ul>
+<li><strong>Coverage is partial by construction.</strong> The source table was filtered
+by its authors to genes involved in oxidative reactions, so it reaches the redox map well
+and the respiratory map barely. 4 of the atlas's QBO loci
+appear in it: <code>AT1G07890, AT1G08830, AT1G20630, AT4G25100</code>.</li>
+<li><strong>No significance is shown.</strong> The source reports <code>mean ± SD</code>
+with no per-gene adjusted p-value, so there is no threshold to mark and none is invented.
+The atlas's other overlays carry an asterisk for significance; this one deliberately has
+none.</li>
+<li><strong>A tier is not a result.</strong> The border style still reports how much is
+known about each node's field sensitivity, which is independent of how far it moved here.
+A T3 node that responds strongly is still a node with no measured magnetic mechanism.</li>
+<li><strong>One experiment.</strong> Replication across the near-null-field literature is
+what the atlas's pre-registered test addresses, and that test's result was null with a
+minimum detectable effect of 4.0 — this page does not change that.</li>
+</ul>
+
+<h2>Reproducing it</h2>
+<pre><code>PYTHONPATH=src python3 scripts/build_paper_showcase.py --paper Mannino2026
+PYTHONPATH=src python3 scripts/build_paper_page.py --paper Mannino2026</code></pre>
+<p>The supplementary archive is fetched from EuropePMC and cached under
+<code>data/external/papers/</code>; the parsed values, per-node series and coverage are
+written to <a href="results/papers/Mannino2026/record.json"><code>results/papers/Mannino2026/record.json</code></a>,
+and this page is generated from that record.</p>
+
+<footer>
+<p><strong>Source.</strong> Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872,
+<a href="https://doi.org/10.1016/j.jplph.2026.154872">doi:10.1016/j.jplph.2026.154872</a>. Published open access
+under CC BY; the values reproduced here are the authors'.</p>
+<p><strong>Provenance class.</strong> <code>published_results</code> — results
+as published, no deposited raw data, no reanalysis.</p>
+<p><a href="index.html">← Quantum Biology Atlas</a></p>
+</footer>
+</div>
+</body>
+</html>

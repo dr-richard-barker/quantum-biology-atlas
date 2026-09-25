@@ -63,6 +63,12 @@
       "verdict": "built",
       "reason": "Its supplementary PDFs are also not data - a primer list, a phenology table and ANOVA output - but its main text carries the gene expression time course as Tables 1 and 2, and the primer PDF supplies the authoritative symbol-to-locus key for reading them.",
       "page": "docs/paper-Agliassa2018a.html"
+    },
+    "Mannino2026": {
+      "doi": "10.1016/j.jplph.2026.154872",
+      "verdict": "built",
+      "reason": "Paywalled Elsevier article provided directly by author with supplementary data. Quantitative gene expression (Fig 2, 3E, 6), essential oils (Table 1), flavonoids (Table S3), and photochemistry (Fig 5) extracted; primers (Table S1) mapped to Arabidopsis AGI orthologs; built on QBM-07 with a 2-row heatmap for SOD isoform divergence and a dedicated sub-map for phenylpropanoid gene-metabolite decoupling.",
+      "page": "docs/paper-Mannino2026.html"
     }
   }
 }

@@ -1,0 +1,23 @@
+compound	rt_min	ri_calc	diagnostic_ions	hmf_rel_pct	hmf_mg_g	hmf_sd	gmf_rel_pct	gmf_mg_g	gmf_sd	fold_change	significant
+1,8-Cineole	4.47	1030	154	9.9	0.57	0.02	9.5	0.42	0.04	1.35	true
+cis-Ocimene	9.16	1047	136	1.6	0.09	0.01	0.9	0.04	0.02	2.19	true
+trans-Sabinene hydrate	10.81	1082	154	0.3	0.02	0.005	0.5	0.02	0.005	1.25	false
+Linalool	11.67	1111	154	15.5	0.89	0.17	18.5	0.82	0.12	1.09	false
+Camphor	13.10	1162	152	1.2	0.07	0.01	1.4	0.06	0.01	1.07	false
+alpha-Terpineol	16.07	1221	154	0.2	0.01	0.005	0.2	0.01	0.005	1.05	false
+beta-Citronellol	17.03	1261	156	0.2	0.01	0.005	0.2	0.01	0.005	1.18	false
+Bornyl acetate	21.09	1325	196	0.7	0.04	0.005	0.5	0.02	0.005	1.47	false
+Bicycloelemene	24.32	1372	204	0.5	0.03	0.01	0.5	0.02	0.005	1.29	false
+Eugenol	25.92	1406	164	53.6	3.08	0.15	54.3	2.41	0.10	1.28	true
+beta-Elemene	27.65	1437	204	1.2	0.07	0.01	1.1	0.05	0.01	1.37	false
+Methyl eugenol	28.36	1449	178	5.9	0.34	0.05	4.3	0.19	0.02	1.79	true
+alpha-Bergamotene	29.16	1483	204	0.3	0.02	0.005	0.5	0.02	0.005	1.23	false
+beta-Copaene	29.62	1498	204	0.2	0.01	0.005	0.2	0.01	0.005	1.04	false
+trans-alpha-Bisabolene	30.37	1500	204	3.5	0.20	0.04	2.9	0.13	0.02	1.52	false
+beta-Cubebene	31.69	1521	204	1.6	0.09	0.02	1.4	0.06	0.01	1.67	false
+gamma-Cadinene	32.80	1538	204	1.2	0.07	0.01	1.1	0.05	0.005	1.35	false
+trans-Isoeugenol	33.76	1589	164	0.7	0.04	0.01	0.7	0.03	0.005	1.27	false
+Cubenol	34.36	1671	222	0.7	0.04	0.01	0.7	0.03	0.01	1.33	false
+tau-Cadinol	34.79	1688	222	1.0	0.06	0.01	0.9	0.04	0.01	1.34	false
+Total identified	NA	NA	NA	76.4	5.75	0.53	74.4	4.44	0.38	1.29	true
+Total analysis	NA	NA	NA	100.0	7.53	1.39	100.0	5.97	0.48	1.26	true

@@ -1,0 +1,160 @@
+{
+  "key": "Mannino2026",
+  "citation": "Mannino, Caldo & Maffei (2026), Journal of Plant Physiology 326:154872",
+  "doi": "10.1016/j.jplph.2026.154872",
+  "pmcid": "DOI:10.1016/j.jplph.2026.154872",
+  "provenance_class": "published_results",
+  "data_availability_verbatim": "Data will be made available on request",
+  "organism": "Ocimum basilicum",
+  "field_regime": "near-null magnetic field (<40 nT) against the local geomagnetic field (~44.4 \u00b5T), generated in a triaxial Helmholtz coil system and monitored with a three-axis Bartington Mag-03 magnetometer",
+  "source_table": "gene_expression.tsv",
+  "loci_in_table": 21,
+  "qbo_loci_covered": [
+    "AT1G07890",
+    "AT1G08830",
+    "AT1G20630",
+    "AT4G25100"
+  ],
+  "cells_parsed": 21,
+  "cells_blank": 0,
+  "rows_without_locus": 0,
+  "tissues": [
+    "leaves"
+  ],
+  "figures": [
+    {
+      "id": "QBM-07",
+      "study": "Mannino, Caldo & Maffei",
+      "tissue": "leaves",
+      "organism": "Ocimum basilicum",
+      "svg": "maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg",
+      "timepoints": [
+        "4w"
+      ],
+      "nodes_with_data": 4,
+      "fraction_covered": 0.5,
+      "vmax": 1.45,
+      "nodes_reversing_direction": [],
+      "nodes_with_heatmap": [
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "nodes_with_diverging_loci": [
+        "SUPEROXIDE_DISMUTASES"
+      ],
+      "provenance": "Values are the authors' published results from Mannino, Caldo & Maffei (2026), Journal of Plant Physiology 326:154872 (doi:10.1016/j.jplph.2026.154872), not a reanalysis: hMF-grown plants relative to GMF controls after 4 weeks exposure. No raw data was deposited \u2014 the Data Availability Statement reads \u201cData will be made available on request\u201d. Reported as log2 fold change; values are published directly as log2 fold change (hMF/GMF) \u00b1 SD from qRT-PCR; no conversion needed. leaves, 1 timepoints (4w). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (SUPEROXIDE_DISMUTASES), so their single trace is the aggregator choosing between genes that are doing different things \u2014 read those per locus, not as a node.",
+      "dropped_edge_labels": [],
+      "low_coverage_published": false,
+      "per_node": [
+        {
+          "node_id": "PLASTID_ROS",
+          "qbo": "QBO:PLASTID_ROS",
+          "loci": [
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "4w"
+          ],
+          "log2": [
+            1.15
+          ],
+          "sd": [
+            0.12
+          ],
+          "peak": 1.15,
+          "peak_timepoint": "4w",
+          "reverses_direction": false,
+          "evidence_tier": "T2",
+          "per_locus": {
+            "AT4G25100": [
+              1.15
+            ]
+          },
+          "loci_diverge": false
+        },
+        {
+          "node_id": "SUPEROXIDE_DISMUTASES",
+          "qbo": "QBO:SUPEROXIDE_DISMUTASES",
+          "loci": [
+            "AT1G08830",
+            "AT4G25100"
+          ],
+          "timepoints": [
+            "4w"
+          ],
+          "log2": [
+            -1.45
+          ],
+          "sd": [
+            0.15
+          ],
+          "peak": -1.45,
+          "peak_timepoint": "4w",
+          "reverses_direction": false,
+          "evidence_tier": "T4",
+          "per_locus": {
+            "AT1G08830": [
+              -1.45
+            ],
+            "AT4G25100": [
+              1.15
+            ]
+          },
+          "loci_diverge": true
+        },
+        {
+          "node_id": "ASCORBATE_PEROXIDASE",
+          "qbo": "QBO:ASCORBATE_PEROXIDASE",
+          "loci": [
+            "AT1G07890"
+          ],
+          "timepoints": [
+            "4w"
+          ],
+          "log2": [
+            0.12
+          ],
+          "sd": [
+            0.08
+          ],
+          "peak": 0.12,
+          "peak_timepoint": "4w",
+          "reverses_direction": false,
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G07890": [
+              0.12
+            ]
+          },
+          "loci_diverge": false
+        },
+        {
+          "node_id": "CATALASE",
+          "qbo": "QBO:CATALASE",
+          "loci": [
+            "AT1G20630"
+          ],
+          "timepoints": [
+            "4w"
+          ],
+          "log2": [
+            -0.68
+          ],
+          "sd": [
+            0.1
+          ],
+          "peak": -0.68,
+          "peak_timepoint": "4w",
+          "reverses_direction": false,
+          "evidence_tier": "T3",
+          "per_locus": {
+            "AT1G20630": [
+              -0.68
+            ]
+          },
+          "loci_diverge": false
+        }
+      ]
+    }
+  ],
+  "submap_svg": "maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg"
+}

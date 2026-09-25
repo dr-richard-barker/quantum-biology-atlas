@@ -490,3 +490,83 @@ def test_a_pdf_with_no_symbol_pairs_raises():
     data = inner.read(papers.find_member(inner, "Table S2"))
     with pytest.raises(papers.PaperError, match="no gene-symbol"):
         papers.read_primer_map(data)
+
+
+# ---------------------------------------------------------------------------
+# Mannino 2026: sweet basil under near-null magnetic field
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(scope="module")
+def mannino():
+    tsv = ROOT / "data" / "external" / "papers" / "Mannino2026" / "gene_expression.tsv"
+    if not tsv.exists():
+        pytest.skip("Mannino 2026 curated TSV not found")
+    series, report = papers.read_curated_table(tsv, tissue="leaves", timepoint="4w", scale=papers.LOG2)
+    return series, report
+
+
+def test_mannino2026_curated_table_parses_cleanly(mannino):
+    series, report = mannino
+    assert len(series) >= 20
+    assert report["rows_no_locus"] == 0
+    assert report["cells_blank"] == 0
+    assert "AT1G08830" in report["loci"]  # CSD1 (ObCSD)
+    assert "AT4G25100" in report["loci"]  # FSD1 (ObFSD1)
+
+
+def test_mannino2026_scale_preserves_log2_directly(mannino):
+    """Values are published as log2 fold change and must NOT undergo a second log2."""
+    series, _ = mannino
+    csd = next(s for s in series if s.locus == "AT1G08830")
+    assert csd.scale == papers.LOG2
+    assert csd.points[0].value == pytest.approx(-1.45)
+    # to_log2 is an idempotent no-op for LOG2 scale
+    assert csd.to_log2().points[0].value == pytest.approx(-1.45)
+
+
+def test_mannino2026_sod_isoforms_diverge_into_2row_heatmap(mannino, onto):
+    """Cu/Zn-SOD (ObCSD) falls while Fe-SOD (ObFSD1) rises: averaging would hide both."""
+    series, _ = mannino
+    spec = maps.load_spec(ROOT / "maps" / "src" / "QBM-07_ros_redox.yaml")
+    nodes = [(n, onto.get(spec.nodes.get(n, {}).get("qbo", ""))) for n in spec.node_ids]
+    by_locus = {s.locus: s.to_log2() for s in series}
+
+    proj = project.project_series(
+        map_id="QBM-07",
+        nodes=nodes,
+        series_by_locus=by_locus,
+        study="Mannino, Caldo & Maffei",
+        tissue="leaves",
+        organism="Ocimum basilicum",
+    )
+    assert "SUPEROXIDE_DISMUTASES" in proj.values
+    sod_ns = proj.values["SUPEROXIDE_DISMUTASES"]
+    assert sod_ns.n_loci == 2
+    assert sod_ns.loci_diverge is True
+    # The two rows must have opposing signs
+    per_loc = sod_ns.per_locus
+    assert "AT1G08830" in per_loc and "AT4G25100" in per_loc
+    assert per_loc["AT1G08830"][0] < 0
+    assert per_loc["AT4G25100"][0] > 0
+
+
+def test_mannino2026_all_phenylpropanoid_transcripts_are_downregulated(mannino):
+    """The decoupling finding: every phenylpropanoid biosynthetic transcript is down."""
+    series, _ = mannino
+    phenyl_genes = {"ObPAL", "ObCOMT", "ObEGS", "ObEOMT", "Ob4CL", "ObCHS", "ObCHI", "ObCHIL"}
+    found_genes = [s for s in series if s.gene_code in phenyl_genes]
+    assert len(found_genes) == 8
+    for s in found_genes:
+        assert s.points[0].value < 0, f"{s.gene_code} expected downregulated, got {s.points[0].value}"
+
+
+def test_mannino2026_decoupling_submap_renders(root):
+    from qbio.decoupling import render_decoupling_svg
+    svg = render_decoupling_svg()
+    assert "THE GENE-METABOLITE DECOUPLING PARADOX" in svg
+    assert "EUGENOL" in svg
+    assert "METHYL EUGENOL" in svg
+    assert "ObPAL" in svg
+    assert "ObEOMT" in svg
+

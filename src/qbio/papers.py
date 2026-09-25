@@ -571,3 +571,82 @@ def read_maintext_timecourse(
         raise PaperError("parsed 0 series from the main-text tables")
     report["symbols_unresolved"] = sorted(set(report["symbols_unresolved"]))
     return series, report
+
+
+def read_curated_table(
+    tsv_path: pathlib.Path,
+    *,
+    tissue: str = "leaves",
+    timepoint: str = "4w",
+    scale: str = LOG2,
+) -> tuple[list[Series], dict]:
+    """Read a curated table of published results from a paper whose raw data is unavailable.
+
+    Guards:
+      * Scale is verified: if scale is LOG2, values are imported directly without
+        double-log transform.
+      * Unusable or missing AGI loci are recorded in report, never silently ignored.
+    """
+    if not tsv_path.exists():
+        raise PaperError(f"curated table {tsv_path} does not exist")
+
+    series: list[Series] = []
+    report = {
+        "rows_read": 0,
+        "rows_no_locus": 0,
+        "cells_parsed": 0,
+        "cells_blank": 0,
+        "loci": set(),
+        "symbols_unresolved": [],
+        "tissues": {},
+        "tables": {tissue: {"caption": tsv_path.name, "rows": 0, "timepoints": [timepoint]}},
+    }
+
+    lines = tsv_path.read_text(encoding="utf-8").strip().splitlines()
+    if not lines:
+        raise PaperError(f"{tsv_path} is empty")
+    header = lines[0].split("\t")
+    col_idx = {h.strip().lower(): i for i, h in enumerate(header)}
+
+    for line in lines[1:]:
+        if not line.strip():
+            continue
+        report["rows_read"] += 1
+        parts = line.split("\t")
+        raw_locus = parts[col_idx["locus"]] if "locus" in col_idx and col_idx["locus"] < len(parts) else ""
+        locus = normalise_agi(raw_locus)
+        if not locus:
+            report["rows_no_locus"] += 1
+            continue
+        report["loci"].add(locus)
+        sym = parts[col_idx["symbol"]] if "symbol" in col_idx and col_idx["symbol"] < len(parts) else ""
+        name = parts[col_idx["name"]] if "name" in col_idx and col_idx["name"] < len(parts) else ""
+        val_str = parts[col_idx["log2fc"]] if "log2fc" in col_idx and col_idx["log2fc"] < len(parts) else ""
+        sd_str = parts[col_idx["sd"]] if "sd" in col_idx and col_idx["sd"] < len(parts) else "0.0"
+
+        try:
+            val = float(val_str)
+            sd = float(sd_str) if sd_str else 0.0
+            m = Measurement(val, sd, scale)
+            report["cells_parsed"] += 1
+            series.append(
+                Series(
+                    locus=locus,
+                    tissue=tissue,
+                    timepoints=(timepoint,),
+                    points=(m,),
+                    gene_code=sym,
+                    gene_function=name,
+                )
+            )
+        except ValueError:
+            report["cells_blank"] += 1
+
+    if not series:
+        raise PaperError(f"parsed 0 series from {tsv_path}")
+
+    report["loci"] = sorted(report["loci"])
+    report["tissues"][tissue] = len(series)
+    report["tables"][tissue]["rows"] = len(series)
+    return series, report
+

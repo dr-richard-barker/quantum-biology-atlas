@@ -1,0 +1,17 @@
+parameter	category	unit	gmf_mean	gmf_sd	hmf_mean	hmf_sd	fold_change	significant
+Total soluble protein	biochemistry	mg BSAE g-1 d.wt	95.0	4.5	78.0	3.8	0.82	true
+Total phenolic content	biochemistry	mg GAE g-1 d.wt	290.0	12.0	280.0	10.5	0.97	false
+Total flavonoid content	biochemistry	mg RUE g-1 d.wt	110.0	5.2	130.0	6.1	1.18	true
+Steady-state H2O2	redox	mM H2O2 g-1 d.wt	1.55	0.06	1.45	0.05	0.94	true
+Chlorophyll a	pigment	ug g-1 d.wt	1450.0	85.0	1480.0	90.0	1.02	false
+Chlorophyll b	pigment	ug g-1 d.wt	850.0	45.0	1050.0	55.0	1.24	true
+Total Chlorophyll a+b	pigment	ug g-1 d.wt	2300.0	120.0	2530.0	135.0	1.10	true
+Total Carotenoids	pigment	ug g-1 d.wt	500.0	35.0	520.0	40.0	1.04	false
+Chlorophyll a/b ratio	pigment	ratio	1.71	0.08	1.41	0.07	0.82	true
+Fv/Fm (dark-adapted)	fluorescence	ratio	0.82	0.015	0.81	0.018	0.99	false
+PhiPSII (1000 umol m-2 s-1)	fluorescence	quantum_yield	0.58	0.02	0.53	0.02	0.91	true
+NPQ (1000 umol m-2 s-1)	fluorescence	quenching	1.05	0.06	0.81	0.05	0.77	true
+Mo (initial PSII closure rate)	ojip	relative	0.85	0.05	1.15	0.07	1.35	true
+ABS/RC (apparent antenna size)	ojip	relative	2.45	0.12	3.10	0.15	1.27	true
+TR0/RC (trapping per active RC)	ojip	relative	2.00	0.10	2.52	0.12	1.26	true
+Phi_E0 (electron transport beyond QA)	ojip	relative	0.52	0.03	0.44	0.02	0.85	true

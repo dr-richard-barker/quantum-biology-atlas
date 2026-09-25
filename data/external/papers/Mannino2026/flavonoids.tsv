@@ -1,0 +1,38 @@
+compound	aglycone	flavonoid_class	conjugation	rt_min	cluster	hmf_vs_gmf
+apigenin	apigenin	Flavone	Aglycone	26.80	Cluster 1	enriched
+apigenin O-hexoside	apigenin	Flavone	Hexoside	22.90	Cluster 2	depleted
+apigenin O-rutinoside	apigenin	Flavone	Rutinoside	20.70	Cluster 1	enriched
+apigenin O-diglucoside	apigenin	Flavone	Diglucoside	19.60	Cluster 2	depleted
+apigenin O-sambubioside	apigenin	Flavone	Sambubioside	20.10	Cluster 1	enriched
+apigenin O-rhamnoside	apigenin	Flavone	Rhamnoside	23.70	Cluster 1	enriched
+apigenin O-glucuronide	apigenin	Flavone	Glucuronide	22.20	Cluster 1	enriched
+apigenin O-dirhamnoside	apigenin	Flavone	Dirhamnoside	21.20	Cluster 1	enriched
+catechin	catechin	Flavan-3-ol	Aglycone	18.70	Cluster 2	depleted
+catechin O-hexoside	catechin	Flavan-3-ol	Hexoside	16.50	Cluster 2	depleted
+catechin O-rutinoside	catechin	Flavan-3-ol	Rutinoside	14.70	Cluster 1	enriched
+catechin O-arabinoside	catechin	Flavan-3-ol	Arabinoside	16.90	Cluster 2	depleted
+catechin O-diglucoside	catechin	Flavan-3-ol	Diglucoside	14.10	Cluster 2	depleted
+catechin O-sambubioside	catechin	Flavan-3-ol	Sambubioside	14.50	Cluster 1	enriched
+catechin O-rhamnoside	catechin	Flavan-3-ol	Rhamnoside	17.20	Cluster 1	enriched (log2FC > 1)
+catechin O-glucuronide	catechin	Flavan-3-ol	Glucuronide	16.00	Cluster 2	depleted
+catechin O-dirhamnoside	catechin	Flavan-3-ol	Dirhamnoside	15.10	Cluster 2	depleted
+dihydrokaempferol	dihydrokaempferol	Dihydroflavonol	Aglycone	21.80	Cluster 2	depleted
+dihydrokaempferol O-hexoside	dihydrokaempferol	Dihydroflavonol	Hexoside	18.60	Cluster 2	depleted
+dihydrokaempferol O-rutinoside	dihydrokaempferol	Dihydroflavonol	Rutinoside	16.70	Cluster 1	enriched
+dihydrokaempferol O-arabinoside	dihydrokaempferol	Dihydroflavonol	Arabinoside	19.00	Cluster 2	depleted
+dihydrokaempferol O-diglucoside	dihydrokaempferol	Dihydroflavonol	Diglucoside	15.90	Cluster 2	depleted
+dihydrokaempferol O-sambubioside	dihydrokaempferol	Dihydroflavonol	Sambubioside	16.30	Cluster 1	enriched
+dihydrokaempferol O-rhamnoside	dihydrokaempferol	Dihydroflavonol	Rhamnoside	19.50	Cluster 1	enriched
+dihydrokaempferol O-glucuronide	dihydrokaempferol	Dihydroflavonol	Glucuronide	18.10	Cluster 1	enriched
+dihydrokaempferol O-dirhamnoside	dihydrokaempferol	Dihydroflavonol	Dirhamnoside	17.00	Cluster 2	depleted
+dihydromyricetin O-arabinoside	dihydromyricetin	Dihydroflavonol	Arabinoside	17.20	Cluster 1	enriched (log2FC > 1)
+kaempferol O-hexoside	kaempferol	Flavonol	Hexoside	21.80	Cluster 1	enriched
+kaempferol O-rutinoside	kaempferol	Flavonol	Rutinoside	19.60	Cluster 1	enriched
+myricetin	myricetin	Flavonol	Aglycone	23.00	Cluster 1	enriched
+quercetin	quercetin	Flavonol	Aglycone	24.60	Cluster 2	depleted
+quercetin O-hexoside	quercetin	Flavonol	Hexoside	20.80	Cluster 2	depleted
+quercetin O-rutinoside	quercetin	Flavonol	Rutinoside	18.70	Cluster 2	depleted
+quercetin O-glucuronide	quercetin	Flavonol	Glucuronide	20.10	Cluster 2	depleted
+rhamnetin O-glucuronide	rhamnetin	O-methylated flavonol	Glucuronide	21.50	Cluster 1	enriched
+dihydroquercetin	dihydroquercetin	Dihydroflavonol	Aglycone	20.40	Cluster 2	depleted
+dihydroquercetin O-hexoside	dihydroquercetin	Dihydroflavonol	Hexoside	17.60	Cluster 2	depleted

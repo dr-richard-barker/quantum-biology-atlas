@@ -172,6 +172,49 @@ REGISTRY: dict[str, PaperSpec] = {
             "map: a six-point time course through the floral transition."
         ),
     ),
+    "Mannino2026": PaperSpec(
+        paper=papers.Paper(
+            key="Mannino2026",
+            citation=(
+                "Mannino, Caldo & Maffei (2026), "
+                "Journal of Plant Physiology 326:154872"
+            ),
+            doi="10.1016/j.jplph.2026.154872",
+            pmcid="DOI:10.1016/j.jplph.2026.154872",
+            availability="Data will be made available on request",
+            organism="Ocimum basilicum",
+            field_regime=(
+                "near-null magnetic field (<40 nT) against the local geomagnetic field "
+                "(~44.4 µT), generated in a triaxial Helmholtz coil system and monitored "
+                "with a three-axis Bartington Mag-03 magnetometer"
+            ),
+            comparison="hMF-grown plants relative to GMF controls after 4 weeks exposure",
+            scale=papers.LOG2,
+            threshold_note=(
+                "values are published directly as log2 fold change (hMF/GMF) ± SD from qRT-PCR; "
+                "no conversion needed"
+            ),
+        ),
+        inner_zip=None,
+        table="gene_expression.tsv",
+        source="curated_tsv",
+        locus_column="locus",
+        band_row=0,
+        header_row=0,
+        tissues=("leaves",),
+        tissue_labels={"leaves": "leaves"},
+        map_targets={"QBM-07": False},
+        extra_columns={
+            "gene_code": "symbol",
+            "gene_function": "name",
+        },
+        title="Hypomagnetic field remodels secondary metabolism and ROS homeostasis in sweet basil",
+        lede=(
+            "The first aromatic crop under true near-null magnetic field (<40 nT): "
+            "showing marked gene-metabolite decoupling in phenylpropanoid biosynthesis, "
+            "isoform-divergent SOD regulation, and altered PSII photochemistry."
+        ),
+    ),
 }
 
 
@@ -205,6 +248,28 @@ def fetch_supplementary(pmcid: str) -> pathlib.Path:
 
 def load_series(spec: PaperSpec) -> tuple[list[papers.Series], dict]:
     import zipfile
+
+    if spec.source == "curated_tsv":
+        tsv_path = ROOT / "data" / "external" / "papers" / spec.paper.key / (spec.table or "gene_expression.tsv")
+        series, report = papers.read_curated_table(
+            tsv_path,
+            tissue=spec.tissues[0] if spec.tissues else "leaves",
+            timepoint="4w",
+            scale=spec.paper.scale,
+        )
+        report["symbol_key"] = {
+            "source": "Supplementary Table S1",
+            "pairs": len(series),
+            "note": (
+                "Gene symbols are resolved from the paper's own primer table "
+                "(Supplementary Table S1) to canonical Arabidopsis AGI orthologs."
+            ),
+        }
+        report["loci"] = sorted({s.locus for s in series})
+        report.setdefault("rows_no_locus", 0)
+        report.setdefault("cells_blank", 0)
+        report.setdefault("tissues", {k: v["rows"] for k, v in report["tables"].items()})
+        return series, report
 
     if spec.source == "maintext":
         zf = zipfile.ZipFile(fetch_supplementary(spec.paper.pmcid))
@@ -314,6 +379,11 @@ def build(key: str) -> dict:
                     "peak_timepoint": ns.peak_timepoint(),
                     "reverses_direction": ns.crosses_zero(),
                     "evidence_tier": ns.evidence_tier,
+                    "per_locus": {
+                        l: [None if v is None else round(v, 4) for v in vals]
+                        for l, vals in ns.per_locus.items()
+                    },
+                    "loci_diverge": ns.loci_diverge,
                 }
                 for nid, ns in proj.values.items()
             ]
@@ -339,7 +409,27 @@ def build(key: str) -> dict:
         "tissues": list(spec.tissues),
         "figures": figures,
     }
+    if key == "Mannino2026":
+        from qbio.decoupling import render_decoupling_svg
+        submap_rel = "maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg"
+        submap_path = ROOT / submap_rel
+        render_decoupling_svg(submap_path)
+        record["submap_svg"] = submap_rel
+        docs_submap = DOCS / submap_rel
+        docs_submap.parent.mkdir(parents=True, exist_ok=True)
+        docs_submap.write_text(submap_path.read_text(encoding="utf-8"), encoding="utf-8")
+
+    for f in figures:
+        svg_src = ROOT / f["svg"]
+        svg_dst = DOCS / f["svg"]
+        svg_dst.parent.mkdir(parents=True, exist_ok=True)
+        if svg_src.exists():
+            svg_dst.write_text(svg_src.read_text(encoding="utf-8"), encoding="utf-8")
+
     (out_dir / "record.json").write_text(json.dumps(record, indent=2))
+    docs_rec_dir = DOCS / "results" / "papers" / key
+    docs_rec_dir.mkdir(parents=True, exist_ok=True)
+    (docs_rec_dir / "record.json").write_text(json.dumps(record, indent=2))
     return record
 
 
@@ -358,7 +448,10 @@ def main() -> int:
               f"{f['fraction_covered']:.0%}  reversing={len(f['nodes_reversing_direction'])}{flag}")
 
     if not args.no_png:
-        render_pngs([ROOT / f["svg"] for f in rec["figures"]])
+        all_svgs = [ROOT / f["svg"] for f in rec["figures"]]
+        if "submap_svg" in rec:
+            all_svgs.append(ROOT / rec["submap_svg"])
+        render_pngs(all_svgs)
     print(f"\nwrote results/papers/{rec['key']}/record.json")
     return 0
 

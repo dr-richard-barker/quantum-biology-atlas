@@ -51,6 +51,8 @@ METHODS = [
      "OrthoDB v11: annotation of orthologs"),
     ("Berrios2021", "10.1093/nar/gkaa887",
      "NASA GeneLab: interfaces for the exploration of space omics data"),
+    ("Mannino2026", "10.1016/j.jplph.2026.154872",
+     "Near-null magnetic fields remodel flavonoid profiles and essential oil content in Ocimum basilicum and are associated with altered photochemical performance and ROS homeostasis"),
 ]
 
 #: The companion review. No DOI is asserted and none is invented.

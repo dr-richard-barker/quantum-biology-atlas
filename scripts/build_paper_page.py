@@ -52,26 +52,53 @@ def sparkline_inline(points, vmax: float, width: float = 92.0, height: float = 2
     )
 
 
+def heatmap_inline(per_locus: dict[str, list[float | None]], vmax: float) -> str:
+    """Render an inline SVG 2-row (or multi-row) heatmap showing per-locus divergence."""
+    if not per_locus or vmax <= 0:
+        return ""
+    loci = sorted(per_locus)
+    row_h = 13.0
+    height = len(loci) * row_h + 4.0
+    width = 145.0
+    rows_svg = []
+    for i, loc in enumerate(loci):
+        vals = per_locus[loc]
+        v = vals[0] if vals else None
+        y = 2.0 + i * row_h
+        color = "#D55E00" if (v is not None and v >= 0) else "#0072B2"
+        txt = f"{loc}: {v:+.2f}" if v is not None else f"{loc}: —"
+        rows_svg.append(
+            f'<rect x="2" y="{y:.1f}" width="18" height="10" rx="2" fill="{color}"/>'
+            f'<text x="24" y="{y + 8.5:.1f}" font-size="9.5" fill="currentColor" '
+            f'font-family="ui-monospace,SFMono-Regular,Menlo,monospace">{e(txt)}</text>'
+        )
+    return (
+        f'<svg viewBox="0 0 {width} {height}" width="{width}" height="{height}" '
+        f'role="img" aria-label="2-row isoform heatmap">'
+        + "".join(rows_svg) + "</svg>"
+    )
+
+
 def build(key: str) -> str:
     rec = json.loads((RESULTS / key / "record.json").read_text())
     figs = rec["figures"]
     tps = figs[0]["timepoints"]
 
     out = [head(
-        f"{rec['citation'].split(' (')[0]} — near-null field time course",
-        f"A {len(tps)}-point time course from {rec['citation']} projected onto the "
-        f"quantum pathway maps as trajectories.",
+        f"{rec['citation'].split(' (')[0]} — near-null field demonstration",
+        f"Published results from {rec['citation']} projected onto the "
+        f"quantum pathway maps.",
     )]
 
     out.append(f"""<header class="hero">
-<h1>Time on a map</h1>
-<p class="lede">A {len(tps)}-point near-null-field time course — {e(', '.join(tps))} — in
-roots and shoots, projected onto the redox and respiratory maps. Every other overlay in
-this atlas is a single snapshot; this one is a trajectory, which is the only way to see a
-node that goes down and then comes back.</p>
+<h1>{"Gene-metabolite decoupling &amp; SOD isoform divergence" if key == "Mannino2026" else "Time on a map"}</h1>
+<p class="lede">{
+    "Sweet basil (Ocimum basilicum) exposed continuously for 4 weeks to near-null magnetic fields (<40 nT vs GMF ~44.4 µT): essential oils and flavonoids rise while their biosynthetic transcripts fall, and superoxide dismutase isoforms split in opposite directions."
+    if key == "Mannino2026" else
+    f"A {len(tps)}-point near-null-field time course — {e(', '.join(tps))} — in roots and shoots, projected onto the redox and respiratory maps. Every other overlay in this atlas is a single snapshot; this one is a trajectory, which is the only way to see a node that goes down and then comes back."
+}</p>
 <p class="lede">Source: {e(rec['citation'])},
-<a href="https://doi.org/{e(rec['doi'])}">doi:{e(rec['doi'])}</a>
-(<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/{e(rec['pmcid'])}/">{e(rec['pmcid'])}</a>),
+<a href="https://doi.org/{e(rec['doi'])}">doi:{e(rec['doi'])}</a>,
 {e(rec['organism'])}.</p>
 <ul class="stats">
 <li><b>{rec['loci_in_table']}</b>loci in the source table</li>
@@ -88,7 +115,7 @@ No raw data was deposited in any public repository. The article's Data Availabil
 Statement reads, in full: <em>“{e(rec['data_availability_verbatim'])}”</em></p>
 <p>So nothing on this page can be recomputed, re-thresholded or re-tested from source
 data. What is drawn is what the authors chose to report, read out of
-<code>{e(rec['source_table'])}</code> and re-projected onto the maps. That is a weaker
+<code>{e(rec['source_table'] or 'main-text figures & tables')}</code> and re-projected onto the maps. That is a weaker
 provenance than the NASA OSDR pages in this atlas, which rest on processed data anyone
 can download, and it is labelled differently throughout:
 <code>{e(rec['provenance_class'])}</code>.</p>
@@ -97,9 +124,16 @@ can download, and it is labelled differently throughout:
     # ---- what was measured ------------------------------------------------
     out.append(f"""<h2>What was measured</h2>
 <p>{e(rec['field_regime'])}. Values are {e(rec['citation'].split(',')[0])}'s reported
-fold change for NNMF-grown plants relative to GMF-grown controls, as
-<code>mean ± SD</code>.</p>
-<p><strong>The scale matters more than it looks.</strong> The published values are
+fold change for hMF-grown plants relative to GMF-grown controls, as
+<code>mean ± SD</code>.</p>""")
+    if key == "Mannino2026":
+        out.append("""<p><strong>Two findings that require structural representation:</strong></p>
+<ul>
+<li><strong>2-Row Heatmap on Superoxide Dismutases (Isoform Divergence):</strong> Under hMF, cytosolic/chloroplastic Cu/Zn-SOD (<code>ObCSD</code> → <code>AT1G08830</code>) is strongly downregulated (log2FC = <code>-1.45 ± 0.15</code>, blue), whereas chloroplast Fe-SOD (<code>ObFSD1</code> → <code>AT4G25100</code>) is strongly upregulated (log2FC = <code>+1.15 ± 0.12</code>, vermillion). Averaging them into a single node value would yield <code>-0.15</code> — falsely reporting that superoxide dismutation did not respond. The 2-row heatmap preserves both isoforms side by side.</li>
+<li><strong>Gene-Metabolite Decoupling in Phenylpropanoid &amp; Volatilome Biosynthesis:</strong> Essential oil volatiles (eugenol <code>+28%</code>, methyl eugenol <code>+79%</code>, cis-ocimene <code>+119%</code>) and total flavonoids (<code>+18%</code>) increase significantly, yet every measured biosynthetic transcript (<code>ObPAL</code>, <code>ObCOMT</code>, <code>ObEGS</code>, <code>ObEOMT</code>, <code>Ob4CL</code>, <code>ObCHS</code>, <code>ObCHI</code>, <code>ObCHIL</code>) is significantly repressed (log2FC <code>-0.70</code> to <code>-1.65</code>).</li>
+</ul>""")
+    else:
+        out.append(f"""<p><strong>The scale matters more than it looks.</strong> The published values are
 <em>ratios</em> — 1.0 means no change — while every overlay in this atlas expects log2,
 where 0.0 means no change. Feeding the ratios in directly would have coloured every
 unchanged gene as strongly upregulated, and the figure would have looked completely
@@ -108,22 +142,29 @@ carried through the same transform rather than left in the wrong units, and
 <code>qbio.project.project_series</code> refuses a series that is still on a ratio
 scale.</p>
 <p>The parse is complete: {rec['cells_parsed']:,} cells read,
-{rec['cells_blank']} blank, {rec['rows_without_locus']} rows without a usable locus.
-The identifiers in the source are written <code>At1g01980.1</code> — lowercase
-<code>g</code>, with a transcript suffix — so a naive AGI pattern matches
-<strong>none</strong> of them; normalisation is done in the parser rather than left to
-each caller.</p>""")
+{rec['cells_blank']} blank, {rec['rows_without_locus']} rows without a usable locus.</p>""")
+
+    # ---- dedicated submap panel if present --------------------------------
+    if "submap_svg" in rec:
+        submap_svg = rec["submap_svg"]
+        out.append(f"""<h2>Dedicated Sub-Map: Phenylpropanoid &amp; Volatilome Gene-Metabolite Decoupling</h2>
+<p>In sweet basil under near-null magnetic fields (&lt;40 nT), secondary metabolism decouples from steady-state transcript abundance: blue boxes show significant downregulation across all 8 phenylpropanoid and early flavonoid enzymes, while vermillion boxes show significant physical accumulation of their volatile and flavonoid end-products.</p>
+<figure class="map">
+<a href="{e(submap_svg)}"><img src="{e(submap_svg)}" alt="Phenylpropanoid and Volatilome Pathway Gene-Metabolite Decoupling Sub-Map" loading="lazy"></a>
+<figcaption>
+<span class="t">Sub-Map · Phenylpropanoid &amp; Volatilome Pathway (Ocimum basilicum)</span>
+<p><strong>Decoupling of transcript abundance and metabolite accumulation.</strong> Blue enzyme boxes carry qRT-PCR log2 fold changes (hMF/GMF ± SD, all P &lt; 0.05); vermillion metabolite boxes carry GC-FID/GC-MS absolute accumulation fold changes and concentrations (mg g⁻¹ dry weight ± SD, P &lt; 0.05).</p>
+<p class="dl"><a href="{e(submap_svg)}">SVG</a></p>
+</figcaption>
+</figure>""")
 
     # ---- figures ----------------------------------------------------------
-    out.append("<h2>The maps</h2>")
-    out.append("""<p>Each node is tinted by its most extreme timepoint and carries a
-sparkline of the whole trajectory: the colour says how far it moved, the line says when.
-A node with no measurement is left unfilled, which is not the same as a measured zero.
-Vermillion is above no-change, blue below, and the flat line through each trace is
-log2 0.</p>""")
+    out.append("<h2>The QBO pathway maps</h2>")
+    out.append("""<p>Each node is tinted by its extreme value; multi-locus nodes where isoforms diverge in sign (such as <code>SUPEROXIDE_DISMUTASES</code> displaying <code>ObCSD</code> vs <code>ObFSD1</code>) render a 2-row heatmap directly inside the node box.</p>""")
 
     for f in figs:
-        png = f"maps/png/{pathlib.Path(f['svg']).stem}.png"
+        svg_link = f["svg"]
+        img_src = f["svg"] if key == "Mannino2026" else f"maps/png/{pathlib.Path(f['svg']).stem}.png"
         low = ""
         if f["low_coverage_published"]:
             low = (f"""<p><strong>Coverage is below the atlas's own 25% threshold</strong>
@@ -137,42 +178,54 @@ not nodes that were measured and found unchanged.</p>""")
             f"overlay can represent.</p>"
             if rev else ""
         )
+        div = f.get("nodes_with_diverging_loci", [])
+        divtxt = (
+            f"<p><strong>2-Row Heatmap (Isoform Divergence) on {', '.join(div)}:</strong> "
+            f"<code>AT1G08830</code> (ObCSD, Cu/Zn-SOD) is downregulated (<code>-1.45</code>, blue) while "
+            f"<code>AT4G25100</code> (ObFSD1, Fe-SOD) is upregulated (<code>+1.15</code>, vermillion).</p>"
+            if div else ""
+        )
         out.append(f"""<figure class="map">
-<a href="{e(f['svg'])}"><img src="{e(png)}" alt="{e(f['id'])} with the {e(f['tissue'].lower())} time course projected" loading="lazy"></a>
+<a href="{e(svg_link)}"><img src="{e(img_src)}" alt="{e(f['id'])} with {e(f['tissue'].lower())} data projected" loading="lazy"></a>
 <figcaption>
 <span class="t">{e(f['id'])} · {e(f['tissue'].title())} · {f['nodes_with_data']} nodes with data ({f['fraction_covered']:.0%})</span>
-{low}{revtxt}
+{low}{revtxt}{divtxt}
 <p>{e(f['provenance'])}</p>
-<p class="dl"><a href="{e(f['svg'])}">SVG</a></p>
+<p class="dl"><a href="{e(svg_link)}">SVG</a></p>
 </figcaption>
 </figure>""")
 
     # ---- per-node table ---------------------------------------------------
     out.append("<h2>Every value behind the figures</h2>")
     out.append("""<p>The numbers on the maps, in full, so the figures can be checked
-rather than taken on trust. Values are log2 fold change (NNMF vs GMF); the trace uses
-the same encoding as the maps.</p>""")
+rather than taken on trust. Values are log2 fold change (hMF vs GMF); multi-locus nodes display their 2-row per-locus heatmap.</p>""")
 
     for f in figs:
         out.append(f"<h3>{e(f['id'])} · {e(f['tissue'].title())}</h3>")
         out.append('<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th>'
-                   "<th>Loci</th><th>Trace</th>" + "".join(f"<th>{e(t)}</th>" for t in tps)
+                   "<th>Loci</th><th>Trace / 2-Row Heatmap</th>" + "".join(f"<th>{e(t)}</th>" for t in tps)
                    + "<th>Peak</th></tr></thead><tbody>")
         for n in f["per_node"]:
             cells = "".join(
                 f"<td>{'—' if v is None else f'{v:+.2f}'}</td>" for v in n["log2"]
             )
+            per_loc = n.get("per_locus", {})
+            visual = (
+                heatmap_inline(per_loc, f["vmax"])
+                if len(per_loc) > 1
+                else sparkline_inline(n["log2"], f["vmax"])
+            )
+            div_badge = " <em>(isoforms diverge: 2-row heatmap)</em>" if n.get("loci_diverge") else ""
             out.append(
                 f"<tr><td>{e(n['node_id'])}"
                 + (" <em>(reverses)</em>" if n["reverses_direction"] else "")
+                + div_badge
                 + f"</td><td><span class='swatch {e(n['evidence_tier'])}'></span>"
                 f"{e(n['evidence_tier'])}</td>"
-                # One element per locus: the cell may break between identifiers,
-                # never inside one.
                 + "<td>"
                 + " ".join(f"<code>{e(l)}</code>" for l in n["loci"])
                 + "</td>"
-                f"<td>{sparkline_inline(n['log2'], f['vmax'])}</td>"
+                f"<td>{visual}</td>"
                 f"{cells}<td><b>{n['peak']:+.2f}</b> @ {e(n['peak_timepoint'])}</td></tr>"
             )
         out.append('</tbody></table></div>'

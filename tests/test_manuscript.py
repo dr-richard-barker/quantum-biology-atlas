@@ -178,6 +178,7 @@ def test_the_bibliography_matches_the_evidence_base():
     ("Cunningham2022", "10.1093/nar/gkab1049"),
     ("Kuznetsov2022", "10.1093/nar/gkac998"),
     ("Berrios2021", "10.1093/nar/gkaa887"),
+    ("Mannino2026", "10.1016/j.jplph.2026.154872"),
 ])
 def test_method_citations_resolve_at_crossref(key, doi):
     """The method citations are not in the evidence base, so nothing else checks them.

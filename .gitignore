@@ -5,7 +5,10 @@ __pycache__/
 data/manuscript_text.txt
 .ortho_cache/
 .osdr_cache/
-data/external/
+data/external/*
+!data/external/papers/
+data/external/papers/*
+!data/external/papers/Mannino2026/
 maps/svg/_probe_all.svg
 .abai/
 
