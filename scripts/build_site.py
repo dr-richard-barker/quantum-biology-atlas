@@ -215,6 +215,8 @@ def head(title: str, description: str) -> str:
 <nav class="cose-tab-bar" aria-label="Atlas demonstrations and resources">
   <a href="index.html" class="btn">Atlas Maps</a>
   <a href="explore.html" class="btn">Explore Your Data</a>
+  <a href="knowledge_graph.html" class="btn">Knowledge Graph</a>
+  <a href="heatmap.html" class="btn">Collective Heatmap</a>
   <span class="tab-label">Demonstrations:</span>
   <a href="paper-Mannino2026.html" class="btn">Mannino 2026 (Basil hMF)</a>
   <a href="paper-Parmagnani2022.html" class="btn">Parmagnani 2022 (ROS Time-Course)</a>
@@ -325,6 +327,8 @@ and Brassica”</em> (D. M. Porterfield &amp; R. Barker, Purdue University).</p>
   <a href="manuscript.pdf" class="btn primary">Draft Manuscript (PDF)</a>
   <a href="https://github.com/dr-richard-barker/quantum-biology-atlas" class="btn">GitHub Code</a>
   <a href="explore.html" class="btn">Explore Your Data</a>
+  <a href="knowledge_graph.html" class="btn">Knowledge Graph</a>
+  <a href="heatmap.html" class="btn">Collective Heatmap</a>
   <a href="paper-Mannino2026.html" class="btn">Demo: Mannino 2026 (Basil hMF)</a>
   <a href="paper-Parmagnani2022.html" class="btn">Demo: Parmagnani 2022 (ROS)</a>
   <a href="paper-Agliassa2018a.html" class="btn">Demo: Agliassa 2018 (Flowering)</a>

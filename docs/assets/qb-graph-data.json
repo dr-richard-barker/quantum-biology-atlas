@@ -1,0 +1,2519 @@
+{
+  "elements": {
+    "nodes": [
+      {
+        "data": {
+          "id": "PSII",
+          "label": "Photosystem II",
+          "kind": "complex",
+          "quantum_class": [
+            "semiquinone_radical",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOQUINONE_POOL",
+          "label": "Plastoquinone pool (PQ / PQH2)",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOSEMIQUINONE",
+          "label": "Plastosemiquinone (PQ\u00b7\u2212)",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "semiquinone_radical",
+            "radical_pair_donor",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CYTB6F_RIESKE",
+          "label": "Cytochrome b6f Rieske [2Fe-2S] (PETC)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "rieske_2Fe2S",
+            "semiquinone_radical"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CYT_B6",
+          "label": "Cytochrome b6 / f hemes (PETA, PETB)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "heme_electron_carrier"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOCYANIN",
+          "label": "Plastocyanin (PETE1/2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "spin_relaxation_modulated"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PSI_FES",
+          "label": "Photosystem I Fe/S centres (FX, FA, FB)",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S",
+            "radical_pair_acceptor",
+            "triplet_yield_sensitive"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "FERREDOXIN",
+          "label": "Ferredoxin (FD1, FD2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_2Fe2S"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "FNR",
+          "label": "Ferredoxin-NADP+ reductase (FNR1, FNR2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "flavin_semiquinone",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PGR5_PGRL1",
+          "label": "Cyclic electron flow (PGR5 / PGRL1)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "NADPH_POOL",
+          "label": "NADPH / NADP+",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTID_ROS",
+          "label": "Plastid superoxide / H2O2",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "THYLAKOID_ATP_SYNTHASE",
+          "label": "Thylakoid ATP synthase",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "H2O",
+          "label": "H2O",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "CRY1",
+          "label": "Cryptochrome 1 (CRY1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "radical_pair_acceptor",
+            "flavin_semiquinone",
+            "triplet_yield_sensitive"
+          ],
+          "evidence_tier": "T1",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CRY2",
+          "label": "Cryptochrome 2 (CRY2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "radical_pair_acceptor",
+            "flavin_semiquinone",
+            "triplet_yield_sensitive"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CRY_FAD",
+          "label": "Cryptochrome FAD cofactor",
+          "kind": "cofactor",
+          "quantum_class": [
+            "flavin_semiquinone",
+            "radical_pair_acceptor",
+            "triplet_yield_sensitive"
+          ],
+          "evidence_tier": "T1",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "TRP_TRIAD",
+          "label": "Tryptophan triad (Trp\u00b7+)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "radical_pair_donor",
+            "hyperfine_coupled"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "SINGLET_TRIPLET",
+          "label": "Singlet \u21c4 triplet interconversion",
+          "kind": "process",
+          "quantum_class": [
+            "triplet_yield_sensitive",
+            "spin_correlated_pair",
+            "hyperfine_coupled"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PHYB",
+          "label": "Phytochrome B",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "COP1_SPA",
+          "label": "COP1 / SPA complex",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FLOWERING_OUTPUT",
+          "label": "Flowering time (CO \u2192 FT)",
+          "kind": "phenotype",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "NFS1",
+          "label": "Cysteine desulfurase NFS1 (ISC)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ISU1",
+          "label": "Scaffold ISU1 (ISC)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_2Fe2S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "FRATAXIN",
+          "label": "Frataxin (FH)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "HSCB_GRXS15",
+          "label": "Transfer machinery (HSCB, GRXS15)",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_2Fe2S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "NFU_CARRIERS",
+          "label": "NFU carriers (NFU4, NFU5)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "SUF_SYSTEM",
+          "label": "SUF system (plastid assembly)",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CNFU_HCF101",
+          "label": "Plastid cluster carriers (CnfU, HCF101)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CIA_SYSTEM",
+          "label": "CIA system (cytosolic assembly)",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "ATM3_EXPORT",
+          "label": "ATM3 / ABCB25 sulfur export",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY",
+          "label": "Cellular Fe / S supply",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FES_CLIENTS",
+          "label": "Fe/S client proteins",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S",
+            "iron_sulfur_2Fe2S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT",
+          "label": "Near-null magnetic field (< 1 uT)",
+          "kind": "perturbation",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "GMF_REFERENCE",
+          "label": "Geomagnetic field (25-65 uT)",
+          "kind": "perturbation",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FE_UPTAKE",
+          "label": "Root iron uptake (FRO2, IRT1, FIT)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FE_STORAGE",
+          "label": "Iron storage and distribution (FER1/4, NAS4, NRAMP3/4)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "S_ASSIMILATION",
+          "label": "Sulfate assimilation (SULTR, APS1, APR, SIR)",
+          "kind": "complex",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CYSTEINE_SYNTHESIS",
+          "label": "Cysteine synthesis (SAT1, OASA1)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "GA_SIGNALLING",
+          "label": "Gibberellin signalling (GA3OX1, GA20OX1, RGA, GAI, RGL2)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "AUXIN_TRANSPORT",
+          "label": "Auxin transport and signalling (PIN1/2/3, AUX1, TIR1, ARF7)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "CIRCADIAN_CLOCK",
+          "label": "Circadian clock (CCA1, LHY, TOC1, PRR5/7/9, GI, ELF4)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FLOWERING_REGULATORS",
+          "label": "Flowering regulators (CO, FT, FLC, SOC1)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "REPRODUCTIVE_OUTPUT",
+          "label": "Reproductive output (siliques, seed yield)",
+          "kind": "phenotype",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "PRIMARY_METABOLISM",
+          "label": "Primary metabolism",
+          "kind": "process",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "BRASSICA_TRANSLATION",
+          "label": "Brassica crop translation",
+          "kind": "phenotype",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I",
+          "label": "Complex I (NADH:ubiquinone oxidoreductase)",
+          "kind": "complex",
+          "quantum_class": [
+            "flavin_semiquinone",
+            "iron_sulfur_4Fe4S",
+            "iron_sulfur_2Fe2S",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I_FMN",
+          "label": "Complex I FMN site",
+          "kind": "cofactor",
+          "quantum_class": [
+            "flavin_semiquinone",
+            "radical_pair_acceptor",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_II",
+          "label": "Complex II (succinate dehydrogenase)",
+          "kind": "complex",
+          "quantum_class": [
+            "flavin_semiquinone",
+            "iron_sulfur_2Fe2S",
+            "iron_sulfur_4Fe4S",
+            "iron_sulfur_3Fe4S",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "RIESKE_FES",
+          "label": "Rieske [2Fe-2S] centre (complex III)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "rieske_2Fe2S",
+            "semiquinone_radical",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "UBISEMIQUINONE",
+          "label": "Ubisemiquinone (UQ\u00b7\u2212)",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "semiquinone_radical",
+            "radical_pair_donor",
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_IV",
+          "label": "Complex IV (cytochrome c oxidase)",
+          "kind": "complex",
+          "quantum_class": [
+            "heme_copper_binuclear",
+            "cu_a_binuclear",
+            "heme_electron_carrier"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CYTOCHROME_C",
+          "label": "Cytochrome c",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "heme_electron_carrier"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "AOX",
+          "label": "Alternative oxidase (AOX)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ALT_NADH_DH",
+          "label": "Alternative NAD(P)H dehydrogenases (NDA/NDB)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "flavin_semiquinone"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "ACONITASE",
+          "label": "Aconitase (ACO1/2/3)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "LIPOYL_SYNTHASE",
+          "label": "Lipoyl synthase (LIP1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "iron_sulfur_4Fe4S",
+            "radical_pair_donor"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE",
+          "label": "Mitochondrial superoxide / H2O2",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ATP_SYNTHASE",
+          "label": "ATP synthase (complex V)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "NADH_POOL",
+          "label": "NADH / NAD+",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "SUCCINATE",
+          "label": "Succinate",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "UBIQUINONE_POOL",
+          "label": "Ubiquinone pool (UQ / UQH2)",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "O2",
+          "label": "O2",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "SUPEROXIDE_DISMUTASES",
+          "label": "Superoxide dismutases (CSD1/2, MSD1, FSD1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ASCORBATE_PEROXIDASE",
+          "label": "Ascorbate peroxidase (APX1, APX2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "heme_electron_carrier"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "CATALASE",
+          "label": "Catalase (CAT1, CAT2, CAT3)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "heme_electron_carrier"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "ASC_GSH_CYCLE",
+          "label": "Ascorbate-glutathione cycle (GR1, DHAR1, MDAR1)",
+          "kind": "complex",
+          "quantum_class": [
+            "flavin_semiquinone"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": true
+        }
+      },
+      {
+        "data": {
+          "id": "PEROXIREDOXIN_TRX",
+          "label": "Peroxiredoxin / thioredoxin system (PRXIIF)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "REDOX_POOLS",
+          "label": "Ascorbate / glutathione / NAD(P)H pools",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ROS_TRANSCRIPTIONAL_RESPONSE",
+          "label": "ROS-responsive transcriptional programme",
+          "kind": "process",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T2",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "CITRATE_SYNTHASE",
+          "label": "Citrate synthase (CSY4)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ISOCITRATE_DH",
+          "label": "Isocitrate dehydrogenase (IDH1, IDH2)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "FUMARASE",
+          "label": "Fumarase (FUM1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "MALATE_DH",
+          "label": "Malate dehydrogenase (MMDH1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "CITRATE",
+          "label": "Citrate",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ISOCITRATE",
+          "label": "Isocitrate",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "OXALOACETATE",
+          "label": "Oxaloacetate",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "ACETYL_COA",
+          "label": "Acetyl-CoA",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "TAG_LIPASE",
+          "label": "TAG lipase (SDP1)",
+          "kind": "macromolecule",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "BETA_OXIDATION",
+          "label": "Peroxisomal beta-oxidation",
+          "kind": "process",
+          "quantum_class": [
+            "ros_leak_site"
+          ],
+          "evidence_tier": "T3",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "GLYOXYLATE_CYCLE",
+          "label": "Glyoxylate cycle (ICL, MLS)",
+          "kind": "complex",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "GERMINATION_ATP",
+          "label": "ATP / ADP ratio (pre-photosynthetic)",
+          "kind": "simple_chemical",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      },
+      {
+        "data": {
+          "id": "RADICLE_EMERGENCE",
+          "label": "Radicle emergence",
+          "kind": "phenotype",
+          "quantum_class": [
+            "structural_context"
+          ],
+          "evidence_tier": "T4",
+          "is_magnetically_addressable": false
+        }
+      }
+    ],
+    "edges": [
+      {
+        "data": {
+          "id": "TAG_LIPASE-BETA_OXIDATION-catalysis",
+          "source": "TAG_LIPASE",
+          "target": "BETA_OXIDATION",
+          "interaction": "catalysis",
+          "label": "fatty acids"
+        }
+      },
+      {
+        "data": {
+          "id": "BETA_OXIDATION-GLYOXYLATE_CYCLE-electron_transfer",
+          "source": "BETA_OXIDATION",
+          "target": "GLYOXYLATE_CYCLE",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "BETA_OXIDATION-MITO_SUPEROXIDE-direct_influence",
+          "source": "BETA_OXIDATION",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "H2O2"
+        }
+      },
+      {
+        "data": {
+          "id": "GLYOXYLATE_CYCLE-ACETYL_COA-electron_transfer",
+          "source": "GLYOXYLATE_CYCLE",
+          "target": "ACETYL_COA",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ACETYL_COA-ACONITASE-indirect_influence",
+          "source": "ACETYL_COA",
+          "target": "ACONITASE",
+          "interaction": "indirect_influence",
+          "label": "via citrate"
+        }
+      },
+      {
+        "data": {
+          "id": "ACETYL_COA-COMPLEX_I-indirect_influence",
+          "source": "ACETYL_COA",
+          "target": "COMPLEX_I",
+          "interaction": "indirect_influence",
+          "label": "via NADH"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I-COMPLEX_IV-electron_transfer",
+          "source": "COMPLEX_I",
+          "target": "COMPLEX_IV",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_IV-GERMINATION_ATP-energy_feedback",
+          "source": "COMPLEX_IV",
+          "target": "GERMINATION_ATP",
+          "interaction": "energy_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I-MITO_SUPEROXIDE-direct_influence",
+          "source": "COMPLEX_I",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "leak"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_IV-CYTOCHROME_C-electron_transfer",
+          "source": "COMPLEX_IV",
+          "target": "CYTOCHROME_C",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CYTOCHROME_C-RADICLE_EMERGENCE-hormonal_feedback",
+          "source": "CYTOCHROME_C",
+          "target": "RADICLE_EMERGENCE",
+          "interaction": "hormonal_feedback",
+          "label": "ABI4 / ABA"
+        }
+      },
+      {
+        "data": {
+          "id": "GERMINATION_ATP-RADICLE_EMERGENCE-energy_feedback",
+          "source": "GERMINATION_ATP",
+          "target": "RADICLE_EMERGENCE",
+          "interaction": "energy_feedback",
+          "label": "sets the pace"
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-RADICLE_EMERGENCE-redox_feedback",
+          "source": "MITO_SUPEROXIDE",
+          "target": "RADICLE_EMERGENCE",
+          "interaction": "redox_feedback",
+          "label": "signalling window"
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-ACONITASE-redox_feedback",
+          "source": "MITO_SUPEROXIDE",
+          "target": "ACONITASE",
+          "interaction": "redox_feedback",
+          "label": "cluster damage"
+        }
+      },
+      {
+        "data": {
+          "id": "ACONITASE-GERMINATION_ATP-indirect_influence",
+          "source": "ACONITASE",
+          "target": "GERMINATION_ATP",
+          "interaction": "indirect_influence",
+          "label": "TCA flux"
+        }
+      },
+      {
+        "data": {
+          "id": "ACETYL_COA-CITRATE_SYNTHASE-catalysis",
+          "source": "ACETYL_COA",
+          "target": "CITRATE_SYNTHASE",
+          "interaction": "catalysis",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "OXALOACETATE-CITRATE_SYNTHASE-catalysis",
+          "source": "OXALOACETATE",
+          "target": "CITRATE_SYNTHASE",
+          "interaction": "catalysis",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CITRATE_SYNTHASE-CITRATE-electron_transfer",
+          "source": "CITRATE_SYNTHASE",
+          "target": "CITRATE",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CITRATE-ACONITASE-catalysis",
+          "source": "CITRATE",
+          "target": "ACONITASE",
+          "interaction": "catalysis",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ACONITASE-ISOCITRATE-electron_transfer",
+          "source": "ACONITASE",
+          "target": "ISOCITRATE",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ISOCITRATE-ISOCITRATE_DH-catalysis",
+          "source": "ISOCITRATE",
+          "target": "ISOCITRATE_DH",
+          "interaction": "catalysis",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ISOCITRATE_DH-NADH_POOL-electron_transfer",
+          "source": "ISOCITRATE_DH",
+          "target": "NADH_POOL",
+          "interaction": "electron_transfer",
+          "label": "NADH"
+        }
+      },
+      {
+        "data": {
+          "id": "ISOCITRATE_DH-COMPLEX_II-indirect_influence",
+          "source": "ISOCITRATE_DH",
+          "target": "COMPLEX_II",
+          "interaction": "indirect_influence",
+          "label": "via 2-OG, succinyl-CoA"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_II-FUMARASE-electron_transfer",
+          "source": "COMPLEX_II",
+          "target": "FUMARASE",
+          "interaction": "electron_transfer",
+          "label": "fumarate"
+        }
+      },
+      {
+        "data": {
+          "id": "FUMARASE-MALATE_DH-electron_transfer",
+          "source": "FUMARASE",
+          "target": "MALATE_DH",
+          "interaction": "electron_transfer",
+          "label": "malate"
+        }
+      },
+      {
+        "data": {
+          "id": "MALATE_DH-OXALOACETATE-electron_transfer",
+          "source": "MALATE_DH",
+          "target": "OXALOACETATE",
+          "interaction": "electron_transfer",
+          "label": "cycle closes"
+        }
+      },
+      {
+        "data": {
+          "id": "MALATE_DH-NADH_POOL-electron_transfer",
+          "source": "MALATE_DH",
+          "target": "NADH_POOL",
+          "interaction": "electron_transfer",
+          "label": "NADH"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_II-NADH_POOL-indirect_influence",
+          "source": "COMPLEX_II",
+          "target": "NADH_POOL",
+          "interaction": "indirect_influence",
+          "label": "FADH2"
+        }
+      },
+      {
+        "data": {
+          "id": "LIPOYL_SYNTHASE-ISOCITRATE_DH-cofactor_insertion",
+          "source": "LIPOYL_SYNTHASE",
+          "target": "ISOCITRATE_DH",
+          "interaction": "cofactor_insertion",
+          "label": "lipoylates 2-OGDH"
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-LIPOYL_SYNTHASE-redox_feedback",
+          "source": "MITO_SUPEROXIDE",
+          "target": "LIPOYL_SYNTHASE",
+          "interaction": "redox_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_II-MITO_SUPEROXIDE-direct_influence",
+          "source": "COMPLEX_II",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "leak"
+        }
+      },
+      {
+        "data": {
+          "id": "CRY1-CRY_FAD-cofactor_insertion",
+          "source": "CRY1",
+          "target": "CRY_FAD",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CRY2-CRY_FAD-cofactor_insertion",
+          "source": "CRY2",
+          "target": "CRY_FAD",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CRY_FAD-TRP_TRIAD-electron_transfer",
+          "source": "CRY_FAD",
+          "target": "TRP_TRIAD",
+          "interaction": "electron_transfer",
+          "label": "1e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "TRP_TRIAD-SINGLET_TRIPLET-direct_influence",
+          "source": "TRP_TRIAD",
+          "target": "SINGLET_TRIPLET",
+          "interaction": "direct_influence",
+          "label": "pair born"
+        }
+      },
+      {
+        "data": {
+          "id": "CRY_FAD-SINGLET_TRIPLET-direct_influence",
+          "source": "CRY_FAD",
+          "target": "SINGLET_TRIPLET",
+          "interaction": "direct_influence",
+          "label": "hyperfine"
+        }
+      },
+      {
+        "data": {
+          "id": "SINGLET_TRIPLET-COP1_SPA-direct_influence",
+          "source": "SINGLET_TRIPLET",
+          "target": "COP1_SPA",
+          "interaction": "direct_influence",
+          "label": "signalling yield"
+        }
+      },
+      {
+        "data": {
+          "id": "CRY1-COP1_SPA-inhibition",
+          "source": "CRY1",
+          "target": "COP1_SPA",
+          "interaction": "inhibition",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CRY2-COP1_SPA-inhibition",
+          "source": "CRY2",
+          "target": "COP1_SPA",
+          "interaction": "inhibition",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COP1_SPA-FLOWERING_OUTPUT-indirect_influence",
+          "source": "COP1_SPA",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "indirect_influence",
+          "label": "degrades CO"
+        }
+      },
+      {
+        "data": {
+          "id": "CRY2-FLOWERING_OUTPUT-hormonal_feedback",
+          "source": "CRY2",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "hormonal_feedback",
+          "label": "photoperiod"
+        }
+      },
+      {
+        "data": {
+          "id": "PHYB-FLOWERING_OUTPUT-indirect_influence",
+          "source": "PHYB",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "indirect_influence",
+          "label": "red/far-red"
+        }
+      },
+      {
+        "data": {
+          "id": "PHYB-COP1_SPA-indirect_influence",
+          "source": "PHYB",
+          "target": "COP1_SPA",
+          "interaction": "indirect_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "H2O-PSII-electron_transfer",
+          "source": "H2O",
+          "target": "PSII",
+          "interaction": "electron_transfer",
+          "label": "4e\u2212 + O2"
+        }
+      },
+      {
+        "data": {
+          "id": "PSII-PLASTOQUINONE_POOL-electron_transfer",
+          "source": "PSII",
+          "target": "PLASTOQUINONE_POOL",
+          "interaction": "electron_transfer",
+          "label": "2e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOQUINONE_POOL-PLASTOSEMIQUINONE-electron_transfer",
+          "source": "PLASTOQUINONE_POOL",
+          "target": "PLASTOSEMIQUINONE",
+          "interaction": "electron_transfer",
+          "label": "1e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOSEMIQUINONE-CYTB6F_RIESKE-electron_transfer",
+          "source": "PLASTOSEMIQUINONE",
+          "target": "CYTB6F_RIESKE",
+          "interaction": "electron_transfer",
+          "label": "Qo"
+        }
+      },
+      {
+        "data": {
+          "id": "CYTB6F_RIESKE-CYT_B6-electron_transfer",
+          "source": "CYTB6F_RIESKE",
+          "target": "CYT_B6",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CYTB6F_RIESKE-PLASTOCYANIN-electron_transfer",
+          "source": "CYTB6F_RIESKE",
+          "target": "PLASTOCYANIN",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTOCYANIN-PSI_FES-electron_transfer",
+          "source": "PLASTOCYANIN",
+          "target": "PSI_FES",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PSI_FES-FERREDOXIN-electron_transfer",
+          "source": "PSI_FES",
+          "target": "FERREDOXIN",
+          "interaction": "electron_transfer",
+          "label": "1e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "FERREDOXIN-FNR-electron_transfer",
+          "source": "FERREDOXIN",
+          "target": "FNR",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FNR-NADPH_POOL-electron_transfer",
+          "source": "FNR",
+          "target": "NADPH_POOL",
+          "interaction": "electron_transfer",
+          "label": "2e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "FERREDOXIN-PGR5_PGRL1-electron_transfer",
+          "source": "FERREDOXIN",
+          "target": "PGR5_PGRL1",
+          "interaction": "electron_transfer",
+          "label": "cyclic"
+        }
+      },
+      {
+        "data": {
+          "id": "PGR5_PGRL1-PLASTOQUINONE_POOL-electron_transfer",
+          "source": "PGR5_PGRL1",
+          "target": "PLASTOQUINONE_POOL",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PSII-THYLAKOID_ATP_SYNTHASE-energy_feedback",
+          "source": "PSII",
+          "target": "THYLAKOID_ATP_SYNTHASE",
+          "interaction": "energy_feedback",
+          "label": "H+"
+        }
+      },
+      {
+        "data": {
+          "id": "CYT_B6-THYLAKOID_ATP_SYNTHASE-energy_feedback",
+          "source": "CYT_B6",
+          "target": "THYLAKOID_ATP_SYNTHASE",
+          "interaction": "energy_feedback",
+          "label": "H+"
+        }
+      },
+      {
+        "data": {
+          "id": "PSI_FES-PLASTID_ROS-direct_influence",
+          "source": "PSI_FES",
+          "target": "PLASTID_ROS",
+          "interaction": "direct_influence",
+          "label": "Mehler"
+        }
+      },
+      {
+        "data": {
+          "id": "PSII-PLASTID_ROS-direct_influence",
+          "source": "PSII",
+          "target": "PLASTID_ROS",
+          "interaction": "direct_influence",
+          "label": "1O2"
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTID_ROS-FERREDOXIN-redox_feedback",
+          "source": "PLASTID_ROS",
+          "target": "FERREDOXIN",
+          "interaction": "redox_feedback",
+          "label": "cluster damage"
+        }
+      },
+      {
+        "data": {
+          "id": "NADPH_POOL-PLASTID_ROS-redox_feedback",
+          "source": "NADPH_POOL",
+          "target": "PLASTID_ROS",
+          "interaction": "redox_feedback",
+          "label": "buffering"
+        }
+      },
+      {
+        "data": {
+          "id": "PLASTID_ROS-MITO_SUPEROXIDE-direct_influence",
+          "source": "PLASTID_ROS",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "Mehler"
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-SUPEROXIDE_DISMUTASES-catalysis",
+          "source": "MITO_SUPEROXIDE",
+          "target": "SUPEROXIDE_DISMUTASES",
+          "interaction": "catalysis",
+          "label": "O2\u00b7\u2212 \u2192 H2O2"
+        }
+      },
+      {
+        "data": {
+          "id": "SUPEROXIDE_DISMUTASES-ASCORBATE_PEROXIDASE-electron_transfer",
+          "source": "SUPEROXIDE_DISMUTASES",
+          "target": "ASCORBATE_PEROXIDASE",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SUPEROXIDE_DISMUTASES-CATALASE-electron_transfer",
+          "source": "SUPEROXIDE_DISMUTASES",
+          "target": "CATALASE",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SUPEROXIDE_DISMUTASES-PEROXIREDOXIN_TRX-electron_transfer",
+          "source": "SUPEROXIDE_DISMUTASES",
+          "target": "PEROXIREDOXIN_TRX",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ASCORBATE_PEROXIDASE-ASC_GSH_CYCLE-redox_feedback",
+          "source": "ASCORBATE_PEROXIDASE",
+          "target": "ASC_GSH_CYCLE",
+          "interaction": "redox_feedback",
+          "label": "regeneration"
+        }
+      },
+      {
+        "data": {
+          "id": "ASC_GSH_CYCLE-REDOX_POOLS-redox_feedback",
+          "source": "ASC_GSH_CYCLE",
+          "target": "REDOX_POOLS",
+          "interaction": "redox_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "NADPH_POOL-ASC_GSH_CYCLE-energy_feedback",
+          "source": "NADPH_POOL",
+          "target": "ASC_GSH_CYCLE",
+          "interaction": "energy_feedback",
+          "label": "reducing power"
+        }
+      },
+      {
+        "data": {
+          "id": "REDOX_POOLS-ROS_TRANSCRIPTIONAL_RESPONSE-redox_feedback",
+          "source": "REDOX_POOLS",
+          "target": "ROS_TRANSCRIPTIONAL_RESPONSE",
+          "interaction": "redox_feedback",
+          "label": "poise"
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-ROS_TRANSCRIPTIONAL_RESPONSE-direct_influence",
+          "source": "MITO_SUPEROXIDE",
+          "target": "ROS_TRANSCRIPTIONAL_RESPONSE",
+          "interaction": "direct_influence",
+          "label": "threshold"
+        }
+      },
+      {
+        "data": {
+          "id": "PEROXIREDOXIN_TRX-REDOX_POOLS-redox_feedback",
+          "source": "PEROXIREDOXIN_TRX",
+          "target": "REDOX_POOLS",
+          "interaction": "redox_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CATALASE-REDOX_POOLS-redox_feedback",
+          "source": "CATALASE",
+          "target": "REDOX_POOLS",
+          "interaction": "redox_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CRY1-SINGLET_TRIPLET-direct_influence",
+          "source": "CRY1",
+          "target": "SINGLET_TRIPLET",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CRY2-SINGLET_TRIPLET-direct_influence",
+          "source": "CRY2",
+          "target": "SINGLET_TRIPLET",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SINGLET_TRIPLET-CIRCADIAN_CLOCK-circadian_feedback",
+          "source": "SINGLET_TRIPLET",
+          "target": "CIRCADIAN_CLOCK",
+          "interaction": "circadian_feedback",
+          "label": "CRY is a clock input"
+        }
+      },
+      {
+        "data": {
+          "id": "COP1_SPA-FLOWERING_REGULATORS-inhibition",
+          "source": "COP1_SPA",
+          "target": "FLOWERING_REGULATORS",
+          "interaction": "inhibition",
+          "label": "degrades CO"
+        }
+      },
+      {
+        "data": {
+          "id": "CIRCADIAN_CLOCK-FLOWERING_REGULATORS-circadian_feedback",
+          "source": "CIRCADIAN_CLOCK",
+          "target": "FLOWERING_REGULATORS",
+          "interaction": "circadian_feedback",
+          "label": "photoperiod"
+        }
+      },
+      {
+        "data": {
+          "id": "GA_SIGNALLING-FLOWERING_REGULATORS-hormonal_feedback",
+          "source": "GA_SIGNALLING",
+          "target": "FLOWERING_REGULATORS",
+          "interaction": "hormonal_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "AUXIN_TRANSPORT-FLOWERING_REGULATORS-hormonal_feedback",
+          "source": "AUXIN_TRANSPORT",
+          "target": "FLOWERING_REGULATORS",
+          "interaction": "hormonal_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CIRCADIAN_CLOCK-GA_SIGNALLING-circadian_feedback",
+          "source": "CIRCADIAN_CLOCK",
+          "target": "GA_SIGNALLING",
+          "interaction": "circadian_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FLOWERING_REGULATORS-FLOWERING_OUTPUT-direct_influence",
+          "source": "FLOWERING_REGULATORS",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FLOWERING_OUTPUT-REPRODUCTIVE_OUTPUT-direct_influence",
+          "source": "FLOWERING_OUTPUT",
+          "target": "REPRODUCTIVE_OUTPUT",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "AUXIN_TRANSPORT-REPRODUCTIVE_OUTPUT-hormonal_feedback",
+          "source": "AUXIN_TRANSPORT",
+          "target": "REPRODUCTIVE_OUTPUT",
+          "interaction": "hormonal_feedback",
+          "label": "fruit growth"
+        }
+      },
+      {
+        "data": {
+          "id": "NADH_POOL-COMPLEX_I-electron_transfer",
+          "source": "NADH_POOL",
+          "target": "COMPLEX_I",
+          "interaction": "electron_transfer",
+          "label": "2e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "NADH_POOL-ALT_NADH_DH-electron_transfer",
+          "source": "NADH_POOL",
+          "target": "ALT_NADH_DH",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I-COMPLEX_I_FMN-cofactor_insertion",
+          "source": "COMPLEX_I",
+          "target": "COMPLEX_I_FMN",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SUCCINATE-COMPLEX_II-electron_transfer",
+          "source": "SUCCINATE",
+          "target": "COMPLEX_II",
+          "interaction": "electron_transfer",
+          "label": "2e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I-UBIQUINONE_POOL-electron_transfer",
+          "source": "COMPLEX_I",
+          "target": "UBIQUINONE_POOL",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_II-UBIQUINONE_POOL-electron_transfer",
+          "source": "COMPLEX_II",
+          "target": "UBIQUINONE_POOL",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ALT_NADH_DH-UBIQUINONE_POOL-electron_transfer",
+          "source": "ALT_NADH_DH",
+          "target": "UBIQUINONE_POOL",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "UBIQUINONE_POOL-UBISEMIQUINONE-electron_transfer",
+          "source": "UBIQUINONE_POOL",
+          "target": "UBISEMIQUINONE",
+          "interaction": "electron_transfer",
+          "label": "1e\u2212"
+        }
+      },
+      {
+        "data": {
+          "id": "UBISEMIQUINONE-RIESKE_FES-electron_transfer",
+          "source": "UBISEMIQUINONE",
+          "target": "RIESKE_FES",
+          "interaction": "electron_transfer",
+          "label": "Qo"
+        }
+      },
+      {
+        "data": {
+          "id": "UBIQUINONE_POOL-AOX-electron_transfer",
+          "source": "UBIQUINONE_POOL",
+          "target": "AOX",
+          "interaction": "electron_transfer",
+          "label": "bypass"
+        }
+      },
+      {
+        "data": {
+          "id": "RIESKE_FES-CYTOCHROME_C-electron_transfer",
+          "source": "RIESKE_FES",
+          "target": "CYTOCHROME_C",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CYTOCHROME_C-COMPLEX_IV-electron_transfer",
+          "source": "CYTOCHROME_C",
+          "target": "COMPLEX_IV",
+          "interaction": "electron_transfer",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_IV-O2-electron_transfer",
+          "source": "COMPLEX_IV",
+          "target": "O2",
+          "interaction": "electron_transfer",
+          "label": "4e\u2212 \u2192 2 H2O"
+        }
+      },
+      {
+        "data": {
+          "id": "AOX-O2-electron_transfer",
+          "source": "AOX",
+          "target": "O2",
+          "interaction": "electron_transfer",
+          "label": "no H+ pumped"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I-ATP_SYNTHASE-energy_feedback",
+          "source": "COMPLEX_I",
+          "target": "ATP_SYNTHASE",
+          "interaction": "energy_feedback",
+          "label": "H+"
+        }
+      },
+      {
+        "data": {
+          "id": "RIESKE_FES-ATP_SYNTHASE-energy_feedback",
+          "source": "RIESKE_FES",
+          "target": "ATP_SYNTHASE",
+          "interaction": "energy_feedback",
+          "label": "H+"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_IV-ATP_SYNTHASE-energy_feedback",
+          "source": "COMPLEX_IV",
+          "target": "ATP_SYNTHASE",
+          "interaction": "energy_feedback",
+          "label": "H+"
+        }
+      },
+      {
+        "data": {
+          "id": "COMPLEX_I_FMN-MITO_SUPEROXIDE-direct_influence",
+          "source": "COMPLEX_I_FMN",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "leak"
+        }
+      },
+      {
+        "data": {
+          "id": "UBISEMIQUINONE-MITO_SUPEROXIDE-direct_influence",
+          "source": "UBISEMIQUINONE",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": "leak"
+        }
+      },
+      {
+        "data": {
+          "id": "LIPOYL_SYNTHASE-SUCCINATE-indirect_influence",
+          "source": "LIPOYL_SYNTHASE",
+          "target": "SUCCINATE",
+          "interaction": "indirect_influence",
+          "label": "via 2-OGDH / PDH"
+        }
+      },
+      {
+        "data": {
+          "id": "ACONITASE-SUCCINATE-indirect_influence",
+          "source": "ACONITASE",
+          "target": "SUCCINATE",
+          "interaction": "indirect_influence",
+          "label": "TCA flux"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-FE_UPTAKE-direct_influence",
+          "source": "FE_SUPPLY",
+          "target": "FE_UPTAKE",
+          "interaction": "direct_influence",
+          "label": "Fe(III) \u2192 Fe(II)"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-S_ASSIMILATION-direct_influence",
+          "source": "FE_SUPPLY",
+          "target": "S_ASSIMILATION",
+          "interaction": "direct_influence",
+          "label": "sulfate"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_UPTAKE-FE_STORAGE-direct_influence",
+          "source": "FE_UPTAKE",
+          "target": "FE_STORAGE",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "S_ASSIMILATION-CYSTEINE_SYNTHESIS-direct_influence",
+          "source": "S_ASSIMILATION",
+          "target": "CYSTEINE_SYNTHESIS",
+          "interaction": "direct_influence",
+          "label": "sulfide"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_STORAGE-ISU1-cofactor_insertion",
+          "source": "FE_STORAGE",
+          "target": "ISU1",
+          "interaction": "cofactor_insertion",
+          "label": "Fe"
+        }
+      },
+      {
+        "data": {
+          "id": "CYSTEINE_SYNTHESIS-NFS1-direct_influence",
+          "source": "CYSTEINE_SYNTHESIS",
+          "target": "NFS1",
+          "interaction": "direct_influence",
+          "label": "cysteine"
+        }
+      },
+      {
+        "data": {
+          "id": "NFS1-ISU1-cofactor_insertion",
+          "source": "NFS1",
+          "target": "ISU1",
+          "interaction": "cofactor_insertion",
+          "label": "persulfide"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_STORAGE-SUF_SYSTEM-cofactor_insertion",
+          "source": "FE_STORAGE",
+          "target": "SUF_SYSTEM",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CYSTEINE_SYNTHESIS-SUF_SYSTEM-direct_influence",
+          "source": "CYSTEINE_SYNTHESIS",
+          "target": "SUF_SYSTEM",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ISU1-FES_CLIENTS-cofactor_insertion",
+          "source": "ISU1",
+          "target": "FES_CLIENTS",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SUF_SYSTEM-FERREDOXIN-cofactor_insertion",
+          "source": "SUF_SYSTEM",
+          "target": "FERREDOXIN",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FERREDOXIN-S_ASSIMILATION-redox_feedback",
+          "source": "FERREDOXIN",
+          "target": "S_ASSIMILATION",
+          "interaction": "redox_feedback",
+          "label": "SiR needs reduced Fd"
+        }
+      },
+      {
+        "data": {
+          "id": "FES_CLIENTS-FE_UPTAKE-redox_feedback",
+          "source": "FES_CLIENTS",
+          "target": "FE_UPTAKE",
+          "interaction": "redox_feedback",
+          "label": "Fe demand signalling"
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT-CRY1-direct_influence",
+          "source": "NNMF_INPUT",
+          "target": "CRY1",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT-COMPLEX_I-direct_influence",
+          "source": "NNMF_INPUT",
+          "target": "COMPLEX_I",
+          "interaction": "direct_influence",
+          "label": "proposed"
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT-RIESKE_FES-direct_influence",
+          "source": "NNMF_INPUT",
+          "target": "RIESKE_FES",
+          "interaction": "direct_influence",
+          "label": "proposed"
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT-PSI_FES-direct_influence",
+          "source": "NNMF_INPUT",
+          "target": "PSI_FES",
+          "interaction": "direct_influence",
+          "label": "proposed"
+        }
+      },
+      {
+        "data": {
+          "id": "NNMF_INPUT-FE_SUPPLY-direct_influence",
+          "source": "NNMF_INPUT",
+          "target": "FE_SUPPLY",
+          "interaction": "direct_influence",
+          "label": "observed"
+        }
+      },
+      {
+        "data": {
+          "id": "GMF_REFERENCE-NNMF_INPUT-indirect_influence",
+          "source": "GMF_REFERENCE",
+          "target": "NNMF_INPUT",
+          "interaction": "indirect_influence",
+          "label": "compensated"
+        }
+      },
+      {
+        "data": {
+          "id": "RIESKE_FES-MITO_SUPEROXIDE-direct_influence",
+          "source": "RIESKE_FES",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PSI_FES-MITO_SUPEROXIDE-direct_influence",
+          "source": "PSI_FES",
+          "target": "MITO_SUPEROXIDE",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-FES_CLIENTS-cofactor_insertion",
+          "source": "FE_SUPPLY",
+          "target": "FES_CLIENTS",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FES_CLIENTS-PRIMARY_METABOLISM-direct_influence",
+          "source": "FES_CLIENTS",
+          "target": "PRIMARY_METABOLISM",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "MITO_SUPEROXIDE-PRIMARY_METABOLISM-redox_feedback",
+          "source": "MITO_SUPEROXIDE",
+          "target": "PRIMARY_METABOLISM",
+          "interaction": "redox_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SINGLET_TRIPLET-ROS_TRANSCRIPTIONAL_RESPONSE-indirect_influence",
+          "source": "SINGLET_TRIPLET",
+          "target": "ROS_TRANSCRIPTIONAL_RESPONSE",
+          "interaction": "indirect_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PRIMARY_METABOLISM-GA_SIGNALLING-energy_feedback",
+          "source": "PRIMARY_METABOLISM",
+          "target": "GA_SIGNALLING",
+          "interaction": "energy_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "PRIMARY_METABOLISM-AUXIN_TRANSPORT-energy_feedback",
+          "source": "PRIMARY_METABOLISM",
+          "target": "AUXIN_TRANSPORT",
+          "interaction": "energy_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "SINGLET_TRIPLET-CIRCADIAN_CLOCK-indirect_influence",
+          "source": "SINGLET_TRIPLET",
+          "target": "CIRCADIAN_CLOCK",
+          "interaction": "indirect_influence",
+          "label": "CRY is a clock input"
+        }
+      },
+      {
+        "data": {
+          "id": "PRIMARY_METABOLISM-RADICLE_EMERGENCE-energy_feedback",
+          "source": "PRIMARY_METABOLISM",
+          "target": "RADICLE_EMERGENCE",
+          "interaction": "energy_feedback",
+          "label": "ATP sets the pace"
+        }
+      },
+      {
+        "data": {
+          "id": "GA_SIGNALLING-RADICLE_EMERGENCE-hormonal_feedback",
+          "source": "GA_SIGNALLING",
+          "target": "RADICLE_EMERGENCE",
+          "interaction": "hormonal_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "GA_SIGNALLING-FLOWERING_OUTPUT-hormonal_feedback",
+          "source": "GA_SIGNALLING",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "hormonal_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "AUXIN_TRANSPORT-FLOWERING_OUTPUT-hormonal_feedback",
+          "source": "AUXIN_TRANSPORT",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "hormonal_feedback",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CIRCADIAN_CLOCK-FLOWERING_OUTPUT-circadian_feedback",
+          "source": "CIRCADIAN_CLOCK",
+          "target": "FLOWERING_OUTPUT",
+          "interaction": "circadian_feedback",
+          "label": "photoperiod"
+        }
+      },
+      {
+        "data": {
+          "id": "ROS_TRANSCRIPTIONAL_RESPONSE-REPRODUCTIVE_OUTPUT-indirect_influence",
+          "source": "ROS_TRANSCRIPTIONAL_RESPONSE",
+          "target": "REPRODUCTIVE_OUTPUT",
+          "interaction": "indirect_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "RADICLE_EMERGENCE-BRASSICA_TRANSLATION-indirect_influence",
+          "source": "RADICLE_EMERGENCE",
+          "target": "BRASSICA_TRANSLATION",
+          "interaction": "indirect_influence",
+          "label": "untested"
+        }
+      },
+      {
+        "data": {
+          "id": "REPRODUCTIVE_OUTPUT-BRASSICA_TRANSLATION-indirect_influence",
+          "source": "REPRODUCTIVE_OUTPUT",
+          "target": "BRASSICA_TRANSLATION",
+          "interaction": "indirect_influence",
+          "label": "untested"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-NFS1-direct_influence",
+          "source": "FE_SUPPLY",
+          "target": "NFS1",
+          "interaction": "direct_influence",
+          "label": "S"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-ISU1-direct_influence",
+          "source": "FE_SUPPLY",
+          "target": "ISU1",
+          "interaction": "direct_influence",
+          "label": "Fe"
+        }
+      },
+      {
+        "data": {
+          "id": "FE_SUPPLY-SUF_SYSTEM-direct_influence",
+          "source": "FE_SUPPLY",
+          "target": "SUF_SYSTEM",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "FRATAXIN-ISU1-cofactor_insertion",
+          "source": "FRATAXIN",
+          "target": "ISU1",
+          "interaction": "cofactor_insertion",
+          "label": "Fe donation"
+        }
+      },
+      {
+        "data": {
+          "id": "ISU1-HSCB_GRXS15-cofactor_insertion",
+          "source": "ISU1",
+          "target": "HSCB_GRXS15",
+          "interaction": "cofactor_insertion",
+          "label": "release"
+        }
+      },
+      {
+        "data": {
+          "id": "HSCB_GRXS15-NFU_CARRIERS-cofactor_insertion",
+          "source": "HSCB_GRXS15",
+          "target": "NFU_CARRIERS",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "NFU_CARRIERS-FES_CLIENTS-cofactor_insertion",
+          "source": "NFU_CARRIERS",
+          "target": "FES_CLIENTS",
+          "interaction": "cofactor_insertion",
+          "label": "mito clients"
+        }
+      },
+      {
+        "data": {
+          "id": "ISU1-ATM3_EXPORT-direct_influence",
+          "source": "ISU1",
+          "target": "ATM3_EXPORT",
+          "interaction": "direct_influence",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "ATM3_EXPORT-CIA_SYSTEM-direct_influence",
+          "source": "ATM3_EXPORT",
+          "target": "CIA_SYSTEM",
+          "interaction": "direct_influence",
+          "label": "X-S intermediate"
+        }
+      },
+      {
+        "data": {
+          "id": "SUF_SYSTEM-CNFU_HCF101-cofactor_insertion",
+          "source": "SUF_SYSTEM",
+          "target": "CNFU_HCF101",
+          "interaction": "cofactor_insertion",
+          "label": ""
+        }
+      },
+      {
+        "data": {
+          "id": "CNFU_HCF101-FES_CLIENTS-cofactor_insertion",
+          "source": "CNFU_HCF101",
+          "target": "FES_CLIENTS",
+          "interaction": "cofactor_insertion",
+          "label": "PSI, ferredoxin"
+        }
+      },
+      {
+        "data": {
+          "id": "CIA_SYSTEM-FES_CLIENTS-cofactor_insertion",
+          "source": "CIA_SYSTEM",
+          "target": "FES_CLIENTS",
+          "interaction": "cofactor_insertion",
+          "label": "RNR, DNA pol"
+        }
+      },
+      {
+        "data": {
+          "id": "FRATAXIN-SUF_SYSTEM-indirect_influence",
+          "source": "FRATAXIN",
+          "target": "SUF_SYSTEM",
+          "interaction": "indirect_influence",
+          "label": "dual localisation"
+        }
+      }
+    ]
+  },
+  "experiments": {
+    "OSD-8": {
+      "ACONITASE": 0.4044,
+      "COMPLEX_I_FMN": 0.32,
+      "AOX": -0.1757,
+      "LIPOYL_SYNTHASE": 0.1733,
+      "CYTOCHROME_C": -0.1617,
+      "RIESKE_FES": 0.0483,
+      "COMPLEX_II": -0.0367,
+      "MITO_SUPEROXIDE": 0.0217,
+      "COMPLEX_I": -0.0137,
+      "ALT_NADH_DH": -0.0057,
+      "CRY1": 0.255,
+      "TRP_TRIAD": 0.1442,
+      "PHYB": -0.1067,
+      "CRY2": 0.0333,
+      "PLASTID_ROS": 0.1817,
+      "CATALASE": -0.0989,
+      "SUPEROXIDE_DISMUTASES": 0.0967,
+      "PEROXIREDOXIN_TRX": -0.0717,
+      "ASC_GSH_CYCLE": 0.0467,
+      "ASCORBATE_PEROXIDASE": 0.0267,
+      "CYSTEINE_SYNTHESIS": 0.23,
+      "NFS1": 0.2233,
+      "ISU1": 0.1533,
+      "SUF_SYSTEM": -0.1417,
+      "FE_UPTAKE": 0.0739,
+      "FES_CLIENTS": 0.0338,
+      "FERREDOXIN": -0.0267,
+      "S_ASSIMILATION": 0.0169,
+      "FE_STORAGE": 0.0047
+    },
+    "OSD-27": {
+      "CYTOCHROME_C": -0.0841,
+      "COMPLEX_II": -0.0589,
+      "ACONITASE": 0.0557,
+      "RIESKE_FES": 0.0537,
+      "COMPLEX_I": -0.0352,
+      "COMPLEX_I_FMN": -0.024,
+      "LIPOYL_SYNTHASE": 0.0051,
+      "CRY1": -0.0246,
+      "CRY2": -0.0246,
+      "TRP_TRIAD": -0.0246,
+      "ASC_GSH_CYCLE": -0.0988,
+      "CATALASE": -0.0344,
+      "PLASTID_ROS": 0.0071,
+      "SUPEROXIDE_DISMUTASES": 0.0001
+    },
+    "OSD-782": {
+      "COMPLEX_I": -0.2636,
+      "PLASTID_ROS": -0.5871,
+      "MITO_SUPEROXIDE": -0.0797,
+      "SUPEROXIDE_DISMUTASES": -0.5871,
+      "ASCORBATE_PEROXIDASE": 1.8973,
+      "CATALASE": 0.9061,
+      "PEROXIREDOXIN_TRX": -0.12,
+      "ASC_GSH_CYCLE": 0.7967,
+      "COMPLEX_I_FMN": -0.1818,
+      "COMPLEX_II": 0.4806,
+      "ALT_NADH_DH": -1.6548,
+      "AOX": 3.9572,
+      "RIESKE_FES": -0.1931,
+      "CYTOCHROME_C": -0.2718,
+      "ACONITASE": 0.2201,
+      "LIPOYL_SYNTHASE": -0.196,
+      "NFS1": -0.1344,
+      "ISU1": -0.1069,
+      "FRATAXIN": -0.2047,
+      "HSCB_GRXS15": -0.1777,
+      "NFU_CARRIERS": 0.1914,
+      "ATM3_EXPORT": -0.1437,
+      "SUF_SYSTEM": -0.2402,
+      "CNFU_HCF101": -0.2143,
+      "CIA_SYSTEM": 0.305,
+      "FES_CLIENTS": -0.6098
+    },
+    "Parmagnani 2022": {
+      "PLASTID_ROS": 0.4957,
+      "SUPEROXIDE_DISMUTASES": 0.4957,
+      "ASCORBATE_PEROXIDASE": -1.0893,
+      "CATALASE": 0.9411,
+      "ALT_NADH_DH": -0.2863,
+      "AOX": 1.406
+    },
+    "Agliassa 2018": {
+      "CIRCADIAN_CLOCK": -2.3923,
+      "GA_SIGNALLING": -1.6369,
+      "FLOWERING_REGULATORS": -3.847
+    },
+    "Mannino 2026": {
+      "PLASTID_ROS": 1.15,
+      "SUPEROXIDE_DISMUTASES": -1.45,
+      "ASCORBATE_PEROXIDASE": 0.12,
+      "CATALASE": -0.68
+    }
+  }
+}

@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mannino, Caldo &amp; Maffei — near-null field demonstration</title>
-<meta name="description" content="Published results from Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872 projected onto the quantum pathway maps.">
+<title>Interactive Knowledge Graph</title>
+<meta name="description" content="View and overlay collective experimental effects across the QB ontology.">
 <meta name="author" content="Richard Barker">
 <meta name="color-scheme" content="light dark">
 <script>
@@ -170,104 +170,188 @@
   <a href="https://github.com/dr-richard-barker/quantum-biology-atlas" class="btn">GitHub Code</a>
 </nav>
 
+<style>
+  #cy {
+    width: 100%;
+    height: 700px;
+    border: 1px solid var(--qba-rule);
+    border-radius: 12px;
+    background: var(--qba-card);
+    margin-top: 20px;
+  }
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .controls button {
+    border: 1px solid var(--qba-rule);
+    background: var(--qba-bg);
+    color: var(--qba-ink);
+    border-radius: 9px;
+    padding: 7px 12px;
+    cursor: pointer;
+    font-size: .85rem;
+  }
+  .controls button.active {
+    background: var(--qba-accent);
+    color: #fff;
+    border-color: var(--qba-accent);
+  }
+  .tooltip {
+    position: absolute;
+    background: var(--qba-bg);
+    border: 1px solid var(--qba-rule);
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 0.85rem;
+    pointer-events: none;
+    z-index: 100;
+    display: none;
+  }
+</style>
 <header class="hero">
-<h1>Gene-metabolite decoupling &amp; SOD isoform divergence</h1>
-<p class="lede">Sweet basil (Ocimum basilicum) exposed continuously for 4 weeks to near-null magnetic fields (<40 nT vs GMF ~44.4 µT): essential oils and flavonoids rise while their biosynthetic transcripts fall, and superoxide dismutase isoforms split in opposite directions.</p>
-<p class="lede">Source: Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872,
-<a href="https://doi.org/10.1016/j.jplph.2026.154872">doi:10.1016/j.jplph.2026.154872</a>,
-Ocimum basilicum.</p>
-<ul class="stats">
-<li><b>21</b>loci in the source table</li>
-<li><b>4</b>are QBO atlas loci</li>
-<li><b>1</b>timepoints × 1 tissues</li>
-<li><b>21</b>values parsed</li>
-</ul>
+<h1>Interactive Knowledge Graph</h1>
+<p class="lede">Explore the QB ontology as a graph and overlay data from all experiments.</p>
 </header>
-<div class="note">
-<p><strong>These are the authors' published results, not a reanalysis.</strong>
-No raw data was deposited in any public repository. The article's Data Availability
-Statement reads, in full: <em>“Data will be made available on request”</em></p>
-<p>So nothing on this page can be recomputed, re-thresholded or re-tested from source
-data. What is drawn is what the authors chose to report, read out of
-<code>gene_expression.tsv</code> and re-projected onto the maps. That is a weaker
-provenance than the NASA OSDR pages in this atlas, which rest on processed data anyone
-can download, and it is labelled differently throughout:
-<code>published_results</code>.</p>
-</div>
-<h2>What was measured</h2>
-<p>near-null magnetic field (&lt;40 nT) against the local geomagnetic field (~44.4 µT), generated in a triaxial Helmholtz coil system and monitored with a three-axis Bartington Mag-03 magnetometer. Values are Mannino's reported
-fold change for hMF-grown plants relative to GMF-grown controls, as
-<code>mean ± SD</code>.</p>
-<p><strong>Two findings that require structural representation:</strong></p>
-<ul>
-<li><strong>2-Row Heatmap on Superoxide Dismutases (Isoform Divergence):</strong> Under hMF, cytosolic/chloroplastic Cu/Zn-SOD (<code>ObCSD</code> → <code>AT1G08830</code>) is strongly downregulated (log2FC = <code>-1.45 ± 0.15</code>, blue), whereas chloroplast Fe-SOD (<code>ObFSD1</code> → <code>AT4G25100</code>) is strongly upregulated (log2FC = <code>+1.15 ± 0.12</code>, vermillion). Averaging them into a single node value would yield <code>-0.15</code> — falsely reporting that superoxide dismutation did not respond. The 2-row heatmap preserves both isoforms side by side.</li>
-<li><strong>Gene-Metabolite Decoupling in Phenylpropanoid &amp; Volatilome Biosynthesis:</strong> Essential oil volatiles (eugenol <code>+28%</code>, methyl eugenol <code>+79%</code>, cis-ocimene <code>+119%</code>) and total flavonoids (<code>+18%</code>) increase significantly, yet every measured biosynthetic transcript (<code>ObPAL</code>, <code>ObCOMT</code>, <code>ObEGS</code>, <code>ObEOMT</code>, <code>Ob4CL</code>, <code>ObCHS</code>, <code>ObCHI</code>, <code>ObCHIL</code>) is significantly repressed (log2FC <code>-0.70</code> to <code>-1.65</code>).</li>
-</ul>
-<h2>Dedicated Sub-Map: Phenylpropanoid &amp; Volatilome Gene-Metabolite Decoupling</h2>
-<p>In sweet basil under near-null magnetic fields (&lt;40 nT), secondary metabolism decouples from steady-state transcript abundance: blue boxes show significant downregulation across all 8 phenylpropanoid and early flavonoid enzymes, while vermillion boxes show significant physical accumulation of their volatile and flavonoid end-products.</p>
-<figure class="map">
-<a href="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg"><img src="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg" alt="Phenylpropanoid and Volatilome Pathway Gene-Metabolite Decoupling Sub-Map" loading="lazy"></a>
-<figcaption>
-<span class="t">Sub-Map · Phenylpropanoid &amp; Volatilome Pathway (Ocimum basilicum)</span>
-<p><strong>Decoupling of transcript abundance and metabolite accumulation.</strong> Blue enzyme boxes carry qRT-PCR log2 fold changes (hMF/GMF ± SD, all P &lt; 0.05); vermillion metabolite boxes carry GC-FID/GC-MS absolute accumulation fold changes and concentrations (mg g⁻¹ dry weight ± SD, P &lt; 0.05).</p>
-<p class="dl"><a href="maps/svg/submap__phenylpropanoid_volatilome__Mannino2026.svg">SVG</a></p>
-</figcaption>
-</figure>
-<h2>The QBO pathway maps</h2>
-<p>Each node is tinted by its extreme value; multi-locus nodes where isoforms diverge in sign (such as <code>SUPEROXIDE_DISMUTASES</code> displaying <code>ObCSD</code> vs <code>ObFSD1</code>) render a 2-row heatmap directly inside the node box.</p>
-<figure class="map">
-<a href="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg"><img src="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg" alt="QBM-07 with leaves data projected" loading="lazy"></a>
-<figcaption>
-<span class="t">QBM-07 · Leaves · 4 nodes with data (50%)</span>
-<p><strong>2-Row Heatmap (Isoform Divergence) on SUPEROXIDE_DISMUTASES:</strong> <code>AT1G08830</code> (ObCSD, Cu/Zn-SOD) is downregulated (<code>-1.45</code>, blue) while <code>AT4G25100</code> (ObFSD1, Fe-SOD) is upregulated (<code>+1.15</code>, vermillion).</p>
-<p>Values are the authors&#x27; published results from Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872 (doi:10.1016/j.jplph.2026.154872), not a reanalysis: hMF-grown plants relative to GMF controls after 4 weeks exposure. No raw data was deposited — the Data Availability Statement reads “Data will be made available on request”. Reported as log2 fold change; values are published directly as log2 fold change (hMF/GMF) ± SD from qRT-PCR; no conversion needed. leaves, 1 timepoints (4w). 4 of 8 identifier-bearing nodes received a series (50%); 4 nodes carry no gene identifier and cannot. multi-locus nodes aggregated by extreme at each timepoint. 1 node(s) have loci that disagree in direction at the same timepoint (SUPEROXIDE_DISMUTASES), so their single trace is the aggregator choosing between genes that are doing different things — read those per locus, not as a node.</p>
-<p class="dl"><a href="maps/svg/QBM-07__Mannino-Caldo-Maffei__leaves.svg">SVG</a> · <a href="maps/png/QBM-07__Mannino-Caldo-Maffei__leaves.png">PNG</a></p>
-</figcaption>
-</figure>
-<h2>Every value behind the figures</h2>
-<p>The numbers on the maps, in full, so the figures can be checked
-rather than taken on trust. Values are log2 fold change (hMF vs GMF); multi-locus nodes display their 2-row per-locus heatmap.</p>
-<h3>QBM-07 · Leaves</h3>
-<div class="tablewrap"><table><thead><tr><th>Node</th><th>Tier</th><th>Loci</th><th>Trace / 2-Row Heatmap</th><th>4w</th><th>Peak</th></tr></thead><tbody>
-<tr><td>PLASTID_ROS</td><td><span class='swatch T2'></span>T2</td><td><code>AT4G25100</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="3.9" r="1.6" fill="#D55E00"/></svg></td><td>+1.15</td><td><b>+1.15</b> @ 4w</td></tr>
-<tr><td>SUPEROXIDE_DISMUTASES <em>(isoforms diverge: 2-row heatmap)</em></td><td><span class='swatch T4'></span>T4</td><td><code>AT1G08830</code> <code>AT4G25100</code></td><td><svg viewBox="0 0 145.0 30.0" width="145.0" height="30.0" role="img" aria-label="2-row isoform heatmap"><rect x="2" y="2.0" width="18" height="10" rx="2" fill="#0072B2"/><text x="24" y="10.5" font-size="9.5" fill="currentColor" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">AT1G08830: -1.45</text><rect x="2" y="15.0" width="18" height="10" rx="2" fill="#D55E00"/><text x="24" y="23.5" font-size="9.5" fill="currentColor" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">AT4G25100: +1.15</text></svg></td><td>-1.45</td><td><b>-1.45</b> @ 4w</td></tr>
-<tr><td>ASCORBATE_PEROXIDASE</td><td><span class='swatch T3'></span>T3</td><td><code>AT1G07890</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="10.3" r="1.6" fill="#D55E00"/></svg></td><td>+0.12</td><td><b>+0.12</b> @ 4w</td></tr>
-<tr><td>CATALASE</td><td><span class='swatch T3'></span>T3</td><td><code>AT1G20630</code></td><td><svg viewBox="0 0 92.0 22.0" width="92.0" height="22.0" role="img" aria-label="time course trace"><line x1="0" y1="11.0" x2="92.0" y2="11.0" stroke="currentColor" stroke-width="0.7" opacity=".28"/><circle cx="0.0" cy="15.2" r="1.6" fill="#0072B2"/></svg></td><td>-0.68</td><td><b>-0.68</b> @ 4w</td></tr>
-</tbody></table></div><p class="tablenote">Scroll the table sideways to see every timepoint.</p>
-<h2>What this does not show</h2>
-<ul>
-<li><strong>Coverage is partial by construction.</strong> The source table was filtered
-by its authors to genes involved in oxidative reactions, so it reaches the redox map well
-and the respiratory map barely. 4 of the atlas's QBO loci
-appear in it: <code>AT1G07890, AT1G08830, AT1G20630, AT4G25100</code>.</li>
-<li><strong>No significance is shown.</strong> The source reports <code>mean ± SD</code>
-with no per-gene adjusted p-value, so there is no threshold to mark and none is invented.
-The atlas's other overlays carry an asterisk for significance; this one deliberately has
-none.</li>
-<li><strong>A tier is not a result.</strong> The border style still reports how much is
-known about each node's field sensitivity, which is independent of how far it moved here.
-A T3 node that responds strongly is still a node with no measured magnetic mechanism.</li>
-<li><strong>One experiment.</strong> Replication across the near-null-field literature is
-what the atlas's pre-registered test addresses, and that test's result was null with a
-minimum detectable effect of 4.0 — this page does not change that.</li>
-</ul>
+<div class="controls" id="exp-toggles"></div>
+<div id="cy"></div>
+<div id="tooltip" class="tooltip"></div>
 
-<h2>Reproducing it</h2>
-<pre><code>PYTHONPATH=src python3 scripts/build_paper_showcase.py --paper Mannino2026
-PYTHONPATH=src python3 scripts/build_paper_page.py --paper Mannino2026</code></pre>
-<p>The supplementary archive is fetched from EuropePMC and cached under
-<code>data/external/papers/</code>; the parsed values, per-node series and coverage are
-written to <a href="results/papers/Mannino2026/record.json"><code>results/papers/Mannino2026/record.json</code></a>,
-and this page is generated from that record.</p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.26.0/cytoscape.min.js"></script>
+<script>
+  let cy;
+  let graphData = null;
+  let activeExps = new Set();
 
-<footer>
-<p><strong>Source.</strong> Mannino, Caldo &amp; Maffei (2026), Journal of Plant Physiology 326:154872,
-<a href="https://doi.org/10.1016/j.jplph.2026.154872">doi:10.1016/j.jplph.2026.154872</a>. Published open access
-under CC BY; the values reproduced here are the authors'.</p>
-<p><strong>Provenance class.</strong> <code>published_results</code> — results
-as published, no deposited raw data, no reanalysis.</p>
-<p><a href="index.html">← Quantum Biology Atlas</a></p>
-</footer>
+  fetch('assets/qb-graph-data.json').then(r => r.json()).then(data => {
+    graphData = data;
+    initGraph();
+    initControls();
+  });
+
+  function initControls() {
+    const container = document.getElementById('exp-toggles');
+    for (const exp of Object.keys(graphData.experiments)) {
+      const btn = document.createElement('button');
+      btn.textContent = exp;
+      btn.onclick = () => {
+        if (activeExps.has(exp)) {
+          activeExps.delete(exp);
+          btn.classList.remove('active');
+        } else {
+          activeExps.add(exp);
+          btn.classList.add('active');
+        }
+        updateNodeColors();
+      };
+      container.appendChild(btn);
+    }
+  }
+  
+  function getColor(val) {
+      if (val === undefined || val === null) return '#ccc';
+      if (val > 0) return '#D55E00'; // Vermillion (Upregulated)
+      if (val < 0) return '#0072B2'; // Blue (Downregulated)
+      return '#f0f0f0';
+  }
+
+  function updateNodeColors() {
+    cy.nodes().forEach(node => {
+      const nid = node.id();
+      let vals = [];
+      for (const exp of activeExps) {
+        let v = graphData.experiments[exp][nid];
+        if (typeof v === 'object' && v !== null) {
+          v = v.log2fc || v.mean_log2fc;
+        }
+        if (v !== undefined && v !== null) {
+          vals.push(v);
+        }
+      }
+      
+      let avg = null;
+      if (vals.length > 0) {
+        avg = vals.reduce((a, b) => a + b, 0) / vals.length;
+      }
+      
+      let color = (avg !== null) ? getColor(avg) : '#ccc';
+      node.style('background-color', color);
+      node.data('avg_log2fc', avg);
+    });
+  }
+
+  function initGraph() {
+    cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: graphData.elements,
+      style: [
+        {
+          selector: 'node',
+          style: {
+            'label': 'data(label)',
+            'background-color': '#ccc',
+            'border-width': 2,
+            'border-style': 'solid',
+            'border-color': ele => ele.data('evidence_tier') === 'T1' ? '#1a2230' : (ele.data('evidence_tier') === 'T2' ? '#5a6473' : '#8892a3'),
+            'font-size': '10px',
+            'text-valign': 'bottom',
+            'text-margin-y': 5
+          }
+        },
+        {
+          selector: 'edge',
+          style: {
+            'width': 1.5,
+            'line-color': '#e5e9f0',
+            'target-arrow-color': '#e5e9f0',
+            'target-arrow-shape': 'triangle',
+            'curve-style': 'bezier',
+            'label': 'data(label)',
+            'font-size': '8px',
+            'color': '#8892a3',
+            'text-rotation': 'autorotate'
+          }
+        }
+      ],
+      layout: {
+        name: 'cose',
+        padding: 50,
+        nodeRepulsion: 8000,
+        idealEdgeLength: 100,
+        edgeElasticity: 0.45,
+        nestingFactor: 0.1,
+        gravity: 0.25,
+        numIter: 2500,
+      }
+    });
+
+    cy.on('mouseover', 'node', function(e) {
+      const node = e.target;
+      const tooltip = document.getElementById('tooltip');
+      const val = node.data('avg_log2fc');
+      tooltip.innerHTML = `<strong>${node.data('label')}</strong><br/>
+                           Evidence: ${node.data('evidence_tier')}<br/>
+                           Avg Log2FC: ${val !== null ? val.toFixed(2) : 'N/A'}`;
+      tooltip.style.display = 'block';
+    });
+
+    cy.on('mousemove', function(e) {
+      const tooltip = document.getElementById('tooltip');
+      if(tooltip.style.display === 'block') {
+        tooltip.style.left = (e.originalEvent.pageX + 10) + 'px';
+        tooltip.style.top = (e.originalEvent.pageY + 10) + 'px';
+      }
+    });
+
+    cy.on('mouseout', 'node', function(e) {
+      document.getElementById('tooltip').style.display = 'none';
+    });
+  }
+</script>
+
 <script>
 (function() {
   var path = (window.location.pathname.split('/').pop() || 'index.html');
