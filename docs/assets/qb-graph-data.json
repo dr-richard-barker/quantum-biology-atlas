@@ -3,6 +3,69 @@
     "nodes": [
       {
         "data": {
+          "id": "comp_chloroplast",
+          "label": "Chloroplast (17)",
+          "is_compartment": true,
+          "organelle_name": "Chloroplast",
+          "count": 17
+        }
+      },
+      {
+        "data": {
+          "id": "comp_cytosol",
+          "label": "Cytosol (5)",
+          "is_compartment": true,
+          "organelle_name": "Cytosol",
+          "count": 5
+        }
+      },
+      {
+        "data": {
+          "id": "comp_mitochondria",
+          "label": "Mitochondria (32)",
+          "is_compartment": true,
+          "organelle_name": "Mitochondria",
+          "count": 32
+        }
+      },
+      {
+        "data": {
+          "id": "comp_nucleus",
+          "label": "Nucleus (11)",
+          "is_compartment": true,
+          "organelle_name": "Nucleus",
+          "count": 11
+        }
+      },
+      {
+        "data": {
+          "id": "comp_peroxisome",
+          "label": "Peroxisome (4)",
+          "is_compartment": true,
+          "organelle_name": "Peroxisome",
+          "count": 4
+        }
+      },
+      {
+        "data": {
+          "id": "comp_plasma_membrane",
+          "label": "Plasma Membrane & Cell (8)",
+          "is_compartment": true,
+          "organelle_name": "Plasma Membrane & Cell",
+          "count": 8
+        }
+      },
+      {
+        "data": {
+          "id": "comp_environment",
+          "label": "Whole Organism & Environment (6)",
+          "is_compartment": true,
+          "organelle_name": "Whole Organism & Environment",
+          "count": 6
+        }
+      },
+      {
+        "data": {
           "id": "PSII",
           "label": "Photosystem II",
           "kind": "complex",
@@ -11,7 +74,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Water-plastoquinone photo-oxidoreductase. Splits water at the Mn4CaO5 cluster and reduces plastoquinone through the QA/QB sites.\n",
+          "cofactors": []
         }
       },
       {
@@ -23,7 +94,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Mobile two-electron carrier between PSII and cytochrome b6f. Its redox poise is the plastid's central regulatory signal.\n",
+          "cofactors": []
         }
       },
       {
@@ -37,7 +116,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "One-electron-reduced plastoquinone at the QA/QB and Qo sites.",
+          "cofactors": []
         }
       },
       {
@@ -50,7 +137,15 @@
             "semiquinone_radical"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "His/Cys-ligated [2Fe-2S] centre of the cytochrome b6f complex, driving the plastid Q cycle and contributing to the proton motive force.\n",
+          "cofactors": []
         }
       },
       {
@@ -62,7 +157,15 @@
             "heme_electron_carrier"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "The b- and f-type hemes of the b6f complex, including the unusual covalently bound heme ci.\n",
+          "cofactors": []
         }
       },
       {
@@ -74,7 +177,15 @@
             "spin_relaxation_modulated"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_lumen",
+          "compartment_name": "Thylakoid Lumen",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Mobile type-I copper carrier from cytochrome b6f to photosystem I.",
+          "cofactors": []
         }
       },
       {
@@ -88,7 +199,15 @@
             "triplet_yield_sensitive"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Three [4Fe-4S] clusters carrying electrons from the P700 primary acceptors to ferredoxin. FX sits on the PsaA/PsaB heterodimer; FA and FB on PsaC.\n",
+          "cofactors": []
         }
       },
       {
@@ -100,7 +219,15 @@
             "iron_sulfur_2Fe2S"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Soluble [2Fe-2S] one-electron carrier distributing electrons from PSI to FNR, nitrite reductase, sulfite reductase, glutamate synthase and the thioredoxin system.\n",
+          "cofactors": []
         }
       },
       {
@@ -113,7 +240,17 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "FAD enzyme converting two one-electron transfers from ferredoxin into the two-electron reduction of NADP+.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -125,7 +262,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Antimycin-sensitive cyclic route returning electrons from ferredoxin to the plastoquinone pool, raising ATP yield relative to NADPH.\n",
+          "cofactors": []
         }
       },
       {
@@ -137,7 +282,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -149,7 +302,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "ROS from the PSI acceptor side (Mehler reaction) and PSII, dismutated by stromal FeSOD and CuZnSOD.\n",
+          "cofactors": []
         }
       },
       {
@@ -161,7 +322,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "thylakoid_membrane",
+          "compartment_name": "Thylakoid Membrane",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Uses the thylakoid proton motive force to phosphorylate ADP.",
+          "cofactors": []
         }
       },
       {
@@ -173,7 +342,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "thylakoid_lumen",
+          "compartment_name": "Thylakoid Lumen",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -187,7 +364,17 @@
             "triplet_yield_sensitive"
           ],
           "evidence_tier": "T1",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "Blue-light photoreceptor with a non-covalently bound FAD. Photoreduction proceeds through a conserved tryptophan triad, generating a FAD\u00b7\u2212/Trp\u00b7+ radical pair.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -201,7 +388,17 @@
             "triplet_yield_sensitive"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "Blue-light receptor governing photoperiodic flowering through CO and FT. Light-labile, unlike CRY1.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -215,7 +412,17 @@
             "triplet_yield_sensitive"
           ],
           "evidence_tier": "T1",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "The flavin adenine dinucleotide whose redox state (FADox / FAD\u00b7\u2212 / FADH\u00b7) carries the photoreceptor's signalling state.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -228,7 +435,15 @@
             "hyperfine_coupled"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "Three conserved tryptophans conducting an electron from the protein surface to the flavin, leaving a tryptophanyl radical as the pair's second member.\n",
+          "cofactors": []
         }
       },
       {
@@ -242,7 +457,15 @@
             "hyperfine_coupled"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "Coherent mixing of the radical pair's spin states, at a rate set by hyperfine couplings and modulated by an external field. The step at which a weak field can change a chemical yield without changing any activation energy.\n",
+          "cofactors": []
         }
       },
       {
@@ -254,7 +477,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "Red/far-red photoreceptor with a bilin chromophore, acting with cryptochrome on flowering and hypocotyl growth.\n",
+          "cofactors": []
         }
       },
       {
@@ -266,7 +497,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "E3 ubiquitin ligase complex inhibited by photoactivated cryptochrome; degrades HY5 and CO in darkness.\n",
+          "cofactors": []
         }
       },
       {
@@ -278,7 +517,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "organism",
+          "compartment_name": "Whole Organism Phenotype",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "Photoperiodic flowering output. The most reproducible near-null-field phenotype in the Arabidopsis literature.\n",
+          "cofactors": []
         }
       },
       {
@@ -290,7 +537,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "PLP-dependent cysteine desulfurase supplying persulfide sulfur for mitochondrial cluster assembly. The sulfur entry point of the ISC pathway.\n",
+          "cofactors": []
         }
       },
       {
@@ -302,7 +557,15 @@
             "iron_sulfur_2Fe2S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "The scaffold on which a nascent [2Fe-2S] cluster is built before transfer to a recipient apoprotein.\n",
+          "cofactors": []
         }
       },
       {
@@ -314,7 +577,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Iron chaperone/regulator of ISC assembly, dual-targeted to mitochondria and chloroplasts in Arabidopsis and required for chloroplast Fe-S protein function.\n",
+          "cofactors": []
         }
       },
       {
@@ -326,7 +597,15 @@
             "iron_sulfur_2Fe2S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Co-chaperone and monothiol glutaredoxin handling cluster release from the scaffold and delivery to recipients.\n",
+          "cofactors": []
         }
       },
       {
@@ -338,7 +617,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Late-acting carrier proteins delivering clusters to specific apoproteins.",
+          "cofactors": []
         }
       },
       {
@@ -350,7 +637,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "The plastid's sulfur-mobilisation machinery: the SUFB-C-D scaffold complex with the SUFE-activated cysteine desulfurase CpNifS.\n",
+          "cofactors": []
         }
       },
       {
@@ -362,7 +657,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "NifU-like scaffold and the [4Fe-4S] carrier required for photosystem I assembly.\n",
+          "cofactors": []
         }
       },
       {
@@ -374,7 +677,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "cytosol",
+          "compartment_name": "Cytosol",
+          "organelle": "Cytosol",
+          "organelle_id": "comp_cytosol",
+          "parent": "comp_cytosol",
+          "default_parent": "comp_cytosol",
+          "description": "Cytosolic iron-sulfur assembly machinery maturing cytosolic and nuclear Fe/S proteins, including DNA polymerases, primase, helicases and ribonucleotide reductase.\n",
+          "cofactors": []
         }
       },
       {
@@ -386,7 +697,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Inner-membrane ABC transporter exporting a sulfur-containing intermediate from the mitochondrion to the cytosol.\n",
+          "cofactors": []
         }
       },
       {
@@ -398,7 +717,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cytosol",
+          "compartment_name": "Cytosol",
+          "organelle": "Cytosol",
+          "organelle_id": "comp_cytosol",
+          "parent": "comp_cytosol",
+          "default_parent": "comp_cytosol",
+          "description": "The iron and sulfur pools every assembly system draws on. Where the review's actual near-null-field evidence sits.\n",
+          "cofactors": []
         }
       },
       {
@@ -411,7 +738,15 @@
             "iron_sulfur_2Fe2S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Everything downstream: aconitase, succinate dehydrogenase, the Rieske centres, PSI, ferredoxin, lipoyl synthase, ribonucleotide reductase, nitrite and sulfite reductases, glutamate synthase, and the DNA replication and repair enzymes.\n",
+          "cofactors": []
         }
       },
       {
@@ -423,7 +758,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "environment",
+          "compartment_name": "Extracellular / Magnetic Field Environment",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "The experimental condition: the local geomagnetic field actively compensated or shielded to nanotesla-to-low-microtesla values.\n",
+          "cofactors": []
         }
       },
       {
@@ -435,7 +778,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "environment",
+          "compartment_name": "Extracellular / Magnetic Field Environment",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "The ambient terrestrial field \u2014 the reference condition, not a treatment.",
+          "cofactors": []
         }
       },
       {
@@ -447,7 +798,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "plasma_membrane",
+          "compartment_name": "Plasma Membrane",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Strategy I iron acquisition: ferric chelate reductase FRO2 reduces Fe(III) at the root surface, IRT1 transports Fe(II), and the bHLH transcription factor FIT coordinates both.\n",
+          "cofactors": []
         }
       },
       {
@@ -459,7 +818,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Ferritin storage, nicotianamine-mediated distribution and vacuolar remobilisation \u2014 the buffering between uptake and the assembly systems on QBM-04.\n",
+          "cofactors": []
         }
       },
       {
@@ -471,7 +838,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "chloroplast_stroma",
+          "compartment_name": "Chloroplast Stroma",
+          "organelle": "Chloroplast",
+          "organelle_id": "comp_chloroplast",
+          "parent": "comp_chloroplast",
+          "default_parent": "comp_chloroplast",
+          "description": "Sulfate uptake and reduction to sulfide: transporters, ATP sulfurylase, APS reductase and the Fe/S-containing sulfite reductase.\n",
+          "cofactors": []
         }
       },
       {
@@ -483,7 +858,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cytosol",
+          "compartment_name": "Cytosol",
+          "organelle": "Cytosol",
+          "organelle_id": "comp_cytosol",
+          "parent": "comp_cytosol",
+          "default_parent": "comp_cytosol",
+          "description": "Serine acetyltransferase and O-acetylserine(thiol)lyase, producing the cysteine that is the sulfur donor for Fe/S assembly.\n",
+          "cofactors": []
         }
       },
       {
@@ -495,7 +878,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "GA biosynthesis and the DELLA repressors it degrades. Controls germination potential and flowering time.\n",
+          "cofactors": []
         }
       },
       {
@@ -507,7 +898,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "plasma_membrane",
+          "compartment_name": "Plasma Membrane",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Polar auxin efflux carriers, influx carrier, receptor and response factor \u2014 the machinery that sets root and shoot architecture.\n",
+          "cofactors": []
         }
       },
       {
@@ -519,7 +918,15 @@
             "structural_context"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "The transcriptional-translational oscillator gating light input and photoperiodic flowering.\n",
+          "cofactors": []
         }
       },
       {
@@ -531,7 +938,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "The photoperiod and vernalisation integrators through which the clock and cryptochrome set flowering time.\n",
+          "cofactors": []
         }
       },
       {
@@ -543,7 +958,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "organism",
+          "compartment_name": "Whole Organism Phenotype",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "Silique number, fruit growth and seed yield \u2014 the agronomic endpoint, and the reason the review argues the question matters for crop support.\n",
+          "cofactors": []
         }
       },
       {
@@ -555,7 +978,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "ATP supply, NAD(P)H balance, carbon skeleton flux \u2014 the layer the review argues has been overlooked in favour of photoreceptor signalling.\n",
+          "cofactors": []
         }
       },
       {
@@ -567,7 +998,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "organism",
+          "compartment_name": "Whole Organism Phenotype",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "Seed vigour, oil mobilisation, chloroplast establishment and yield in B. napus and B. oleracea.\n",
+          "cofactors": []
         }
       },
       {
@@ -582,7 +1021,17 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Entry point for matrix NADH. Carries one FMN and a chain of Fe/S clusters that conduct electrons roughly 90 \u00c5 to the quinone site, pumping protons.\n",
+          "cofactors": [
+            "CHEBI:58210"
+          ]
         }
       },
       {
@@ -596,7 +1045,17 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "The flavin mononucleotide that accepts a hydride from NADH and passes electrons on singly, transiting a semiquinone radical state.\n",
+          "cofactors": [
+            "CHEBI:58210"
+          ]
         }
       },
       {
@@ -612,7 +1071,17 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Shared node of the TCA cycle and the respiratory chain. A covalent FAD on SDH1 oxidises succinate; [2Fe-2S], [4Fe-4S] and [3Fe-4S] clusters on SDH2 carry the electrons to ubiquinone.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -626,7 +1095,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "His/Cys-ligated [2Fe-2S] centre whose large domain movement drives the bifurcated Q cycle.\n",
+          "cofactors": []
         }
       },
       {
@@ -640,7 +1117,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "One-electron-reduced ubiquinone, the radical intermediate of the Q cycle.",
+          "cofactors": []
         }
       },
       {
@@ -654,7 +1139,15 @@
             "heme_electron_carrier"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Terminal oxidase. Electrons enter at the binuclear CuA site, pass through heme a to the heme a3/CuB binuclear centre where O2 is reduced to water through paramagnetic intermediates.\n",
+          "cofactors": []
         }
       },
       {
@@ -666,7 +1159,15 @@
             "heme_electron_carrier"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_intermembrane_space",
+          "compartment_name": "Mitochondrial Intermembrane Space",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Mobile c-type heme carrier between complex III and complex IV; also links mitochondrial state to ABA-dependent germination control.\n",
+          "cofactors": []
         }
       },
       {
@@ -678,7 +1179,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Di-iron quinol oxidase that bypasses complexes III and IV, reducing O2 without pumping protons. Uncouples electron flux from ATP yield.\n",
+          "cofactors": []
         }
       },
       {
@@ -690,7 +1199,17 @@
             "flavin_semiquinone"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Rotenone-insensitive type II NAD(P)H dehydrogenases on both faces of the inner membrane. They oxidise NAD(P)H without proton pumping, bypassing complex I.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -702,7 +1221,15 @@
             "iron_sulfur_4Fe4S"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Citrate-isocitrate isomerase carrying a solvent-exposed [4Fe-4S] cluster with one non-cysteinyl-ligated iron used for substrate binding.\n",
+          "cofactors": []
         }
       },
       {
@@ -715,7 +1242,15 @@
             "radical_pair_donor"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Radical-SAM enzyme that inserts sulfur into the lipoyl cofactor, consuming one of its own [4Fe-4S] clusters as the sulfur donor.\n",
+          "cofactors": []
         }
       },
       {
@@ -727,7 +1262,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "ROS produced at complex I's flavin and complex III's Qo site, dismutated by matrix MnSOD. The signalling amplifier between a small change in electron branching and a transcriptional response.\n",
+          "cofactors": []
         }
       },
       {
@@ -739,7 +1282,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Uses the proton motive force to phosphorylate ADP.",
+          "cofactors": []
         }
       },
       {
@@ -751,7 +1302,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Matrix redox couple; substrate for complex I.",
+          "cofactors": []
         }
       },
       {
@@ -763,7 +1322,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -775,7 +1342,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_inner_membrane",
+          "compartment_name": "Mitochondrial Inner Membrane",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Two-electron carrier whose one-electron intermediate is the semiquinone.",
+          "cofactors": []
         }
       },
       {
@@ -787,7 +1362,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -799,7 +1382,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Cu/Zn, Mn and Fe superoxide dismutases converting superoxide to hydrogen peroxide in the cytosol, chloroplast and mitochondrial matrix respectively.\n",
+          "cofactors": []
         }
       },
       {
@@ -811,7 +1402,15 @@
             "heme_electron_carrier"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "cytosol",
+          "compartment_name": "Cytosol",
+          "organelle": "Cytosol",
+          "organelle_id": "comp_cytosol",
+          "parent": "comp_cytosol",
+          "default_parent": "comp_cytosol",
+          "description": "Heme peroxidases reducing H2O2 at the expense of ascorbate; the first step of the ascorbate-glutathione cycle.\n",
+          "cofactors": []
         }
       },
       {
@@ -823,7 +1422,15 @@
             "heme_electron_carrier"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "peroxisome",
+          "compartment_name": "Peroxisome",
+          "organelle": "Peroxisome",
+          "organelle_id": "comp_peroxisome",
+          "parent": "comp_peroxisome",
+          "default_parent": "comp_peroxisome",
+          "description": "Heme enzymes dismutating H2O2 to water and oxygen, dominant in the peroxisome where beta-oxidation generates peroxide by design.\n",
+          "cofactors": []
         }
       },
       {
@@ -835,7 +1442,17 @@
             "flavin_semiquinone"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": true
+          "is_magnetically_addressable": true,
+          "compartment": "cytosol",
+          "compartment_name": "Cytosol",
+          "organelle": "Cytosol",
+          "organelle_id": "comp_cytosol",
+          "parent": "comp_cytosol",
+          "default_parent": "comp_cytosol",
+          "description": "Glutathione reductase, dehydroascorbate reductase and monodehydroascorbate reductase, regenerating ascorbate and glutathione at the cost of NAD(P)H.\n",
+          "cofactors": [
+            "CHEBI:57692"
+          ]
         }
       },
       {
@@ -847,7 +1464,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Thiol-based peroxide reduction, regenerated by thioredoxin. The mitochondrial matrix's main peroxide sink.\n",
+          "cofactors": []
         }
       },
       {
@@ -859,7 +1484,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "The cell's redox buffers. Their ratios, not their totals, are what a near-null-field metabolomics experiment should report.\n",
+          "cofactors": []
         }
       },
       {
@@ -871,7 +1504,15 @@
             "structural_context"
           ],
           "evidence_tier": "T2",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "nucleus",
+          "compartment_name": "Nucleus",
+          "organelle": "Nucleus",
+          "organelle_id": "comp_nucleus",
+          "parent": "comp_nucleus",
+          "default_parent": "comp_nucleus",
+          "description": "The downstream gene-expression response to a shift in redox poise \u2014 the layer at which the most substantial near-null-field dataset was actually measured.\n",
+          "cofactors": []
         }
       },
       {
@@ -883,7 +1524,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Condenses acetyl-CoA with oxaloacetate to close the cycle. The step that makes the TCA cycle a cycle.\n",
+          "cofactors": []
         }
       },
       {
@@ -895,7 +1544,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "Oxidative decarboxylation of isocitrate to 2-oxoglutarate, generating NADH.\n",
+          "cofactors": []
         }
       },
       {
@@ -907,7 +1564,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -919,7 +1584,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -931,7 +1604,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -943,7 +1624,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -955,7 +1644,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -967,7 +1664,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "mitochondrial_matrix",
+          "compartment_name": "Mitochondrial Matrix",
+          "organelle": "Mitochondria",
+          "organelle_id": "comp_mitochondria",
+          "parent": "comp_mitochondria",
+          "default_parent": "comp_mitochondria",
+          "description": "",
+          "cofactors": []
         }
       },
       {
@@ -979,7 +1684,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "peroxisome",
+          "compartment_name": "Peroxisome",
+          "organelle": "Peroxisome",
+          "organelle_id": "comp_peroxisome",
+          "parent": "comp_peroxisome",
+          "default_parent": "comp_peroxisome",
+          "description": "Initiates triacylglycerol breakdown in the oil body, releasing fatty acids for beta-oxidation. The first committed step of oilseed reserve mobilisation.\n",
+          "cofactors": []
         }
       },
       {
@@ -991,7 +1704,15 @@
             "ros_leak_site"
           ],
           "evidence_tier": "T3",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "peroxisome",
+          "compartment_name": "Peroxisome",
+          "organelle": "Peroxisome",
+          "organelle_id": "comp_peroxisome",
+          "parent": "comp_peroxisome",
+          "default_parent": "comp_peroxisome",
+          "description": "Converts stored fatty acids to acetyl-CoA, feeding the glyoxylate cycle during heterotrophic establishment.\n",
+          "cofactors": []
         }
       },
       {
@@ -1003,7 +1724,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "peroxisome",
+          "compartment_name": "Peroxisome",
+          "organelle": "Peroxisome",
+          "organelle_id": "comp_peroxisome",
+          "parent": "comp_peroxisome",
+          "default_parent": "comp_peroxisome",
+          "description": "Isocitrate lyase and malate synthase bypass the two decarboxylating steps of the TCA cycle, letting a seedling make sugars from stored lipid.\n",
+          "cofactors": []
         }
       },
       {
@@ -1015,7 +1744,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "cell",
+          "compartment_name": "Cellular Context",
+          "organelle": "Plasma Membrane & Cell",
+          "organelle_id": "comp_plasma_membrane",
+          "parent": "comp_plasma_membrane",
+          "default_parent": "comp_plasma_membrane",
+          "description": "Adenylate energy charge during imbibition and radicle emergence, supplied almost entirely by mitochondrial respiration.\n",
+          "cofactors": []
         }
       },
       {
@@ -1027,7 +1764,15 @@
             "structural_context"
           ],
           "evidence_tier": "T4",
-          "is_magnetically_addressable": false
+          "is_magnetically_addressable": false,
+          "compartment": "organism",
+          "compartment_name": "Whole Organism Phenotype",
+          "organelle": "Whole Organism & Environment",
+          "organelle_id": "comp_environment",
+          "parent": "comp_environment",
+          "default_parent": "comp_environment",
+          "description": "The completion of germination, and the earliest visible endpoint at which a pre-photosynthetic metabolic lesion could be detected.\n",
+          "cofactors": []
         }
       }
     ],

@@ -12,19 +12,87 @@ DOCS_ASSETS = ROOT / "docs" / "assets"
 DOCS_ASSETS.mkdir(parents=True, exist_ok=True)
 OUT_FILE = DOCS_ASSETS / "qb-graph-data.json"
 
+ORGANELLE_MAP = {
+    "mitochondrial_matrix": ("comp_mitochondria", "Mitochondria"),
+    "mitochondrial_inner_membrane": ("comp_mitochondria", "Mitochondria"),
+    "mitochondrial_intermembrane_space": ("comp_mitochondria", "Mitochondria"),
+    "chloroplast_stroma": ("comp_chloroplast", "Chloroplast"),
+    "thylakoid_membrane": ("comp_chloroplast", "Chloroplast"),
+    "thylakoid_lumen": ("comp_chloroplast", "Chloroplast"),
+    "nucleus": ("comp_nucleus", "Nucleus"),
+    "cytosol": ("comp_cytosol", "Cytosol"),
+    "peroxisome": ("comp_peroxisome", "Peroxisome"),
+    "plasma_membrane": ("comp_plasma_membrane", "Plasma Membrane & Cell"),
+    "cell": ("comp_plasma_membrane", "Plasma Membrane & Cell"),
+    "organism": ("comp_environment", "Whole Organism & Environment"),
+    "environment": ("comp_environment", "Whole Organism & Environment"),
+}
+
+COMPARTMENT_LABELS = {
+    "mitochondrial_matrix": "Mitochondrial Matrix",
+    "mitochondrial_inner_membrane": "Mitochondrial Inner Membrane",
+    "mitochondrial_intermembrane_space": "Mitochondrial Intermembrane Space",
+    "chloroplast_stroma": "Chloroplast Stroma",
+    "thylakoid_membrane": "Thylakoid Membrane",
+    "thylakoid_lumen": "Thylakoid Lumen",
+    "nucleus": "Nucleus",
+    "cytosol": "Cytosol",
+    "peroxisome": "Peroxisome",
+    "plasma_membrane": "Plasma Membrane",
+    "cell": "Cellular Context",
+    "organism": "Whole Organism Phenotype",
+    "environment": "Extracellular / Magnetic Field Environment",
+}
+
 def main():
     qbo = ontology.load()
     
-    nodes_out = []
+    # Calculate counts per organelle
+    organelle_counts = {}
     for entity in qbo:
+        org_id, org_name = ORGANELLE_MAP.get(entity.compartment, ("comp_cell", "Cellular Context"))
+        organelle_counts[org_id] = organelle_counts.get(org_id, 0) + 1
+
+    # Create parent compound nodes
+    parent_nodes = []
+    seen_orgs = set()
+    for entity in qbo:
+        org_id, org_name = ORGANELLE_MAP.get(entity.compartment, ("comp_cell", "Cellular Context"))
+        if org_id not in seen_orgs:
+            seen_orgs.add(org_id)
+            parent_nodes.append({
+                "data": {
+                    "id": org_id,
+                    "label": f"{org_name} ({organelle_counts[org_id]})",
+                    "is_compartment": True,
+                    "organelle_name": org_name,
+                    "count": organelle_counts[org_id]
+                }
+            })
+
+    # Sort parent nodes predictably
+    parent_nodes.sort(key=lambda p: p["data"]["label"])
+
+    nodes_out = list(parent_nodes)
+    for entity in qbo:
+        org_id, org_name = ORGANELLE_MAP.get(entity.compartment, ("comp_cell", "Cellular Context"))
+        comp_display = COMPARTMENT_LABELS.get(entity.compartment, entity.compartment or "Unspecified")
         nodes_out.append({
             "data": {
                 "id": entity.id.replace("QBO:", ""),
                 "label": entity.label,
                 "kind": entity.kind,
-                "quantum_class": entity.quantum_class,
+                "quantum_class": list(entity.quantum_class),
                 "evidence_tier": entity.evidence_tier,
-                "is_magnetically_addressable": entity.is_magnetically_addressable(qbo.core)
+                "is_magnetically_addressable": entity.is_magnetically_addressable(qbo.core),
+                "compartment": entity.compartment or "",
+                "compartment_name": comp_display,
+                "organelle": org_name,
+                "organelle_id": org_id,
+                "parent": org_id,  # Default to subcellular localisation grouping
+                "default_parent": org_id,
+                "description": entity.description or "",
+                "cofactors": list(entity.cofactors) if hasattr(entity, "cofactors") else []
             }
         })
         
