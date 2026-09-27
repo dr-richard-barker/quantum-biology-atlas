@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Collective Heatmap</title>
-<meta name="description" content="A dense summary of all experimental data across all ontology entities.">
+<title>Collective Heatmap — Quantum Biology Atlas</title>
+<meta name="description" content="A dense, high-contrast summary table of all experimental data across all ontology entities.">
 <meta name="author" content="Richard Barker">
 <meta name="color-scheme" content="light dark">
 <script>
@@ -175,23 +175,25 @@
     overflow-x: auto;
     margin-top: 20px;
     border: 1px solid var(--qba-rule);
-    border-radius: 8px;
-    background: var(--qba-bg);
+    border-radius: 10px;
+    background: var(--qba-bg, #ffffff);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   table.heatmap {
     border-collapse: collapse;
     width: 100%;
     font-size: 0.85rem;
-    color: var(--qba-ink);
+    color: var(--qba-ink, #0f172a);
   }
   table.heatmap th, table.heatmap td {
-    padding: 6px 10px;
+    padding: 7px 12px;
     text-align: left;
     border-bottom: 1px solid var(--qba-rule);
   }
   table.heatmap th {
     background: var(--qba-card);
     font-weight: 700;
+    color: var(--qba-ink, #0f172a);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -199,11 +201,12 @@
   table.heatmap th:first-child {
     left: 0;
     z-index: 3;
-    min-width: 200px;
+    min-width: 220px;
   }
   table.heatmap td:first-child {
     background: var(--qba-card);
     font-weight: 600;
+    color: var(--qba-ink, #0f172a);
     position: sticky;
     left: 0;
     z-index: 1;
@@ -212,20 +215,38 @@
   .cell {
     text-align: center;
     font-weight: 600;
-    color: #fff;
-    text-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    font-family: system-ui, -apple-system, sans-serif;
   }
-  .controls { margin-bottom: 15px; }
-  select { padding: 5px 10px; border-radius: 5px; }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .controls label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--qba-soft, #475569);
+  }
+  select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--qba-rule);
+    background: var(--qba-bg, #ffffff);
+    color: var(--qba-ink, #0f172a);
+    font: inherit;
+    font-size: 0.88rem;
+  }
 </style>
 <header class="hero">
 <h1>Collective Heatmap</h1>
-<p class="lede">A consolidated view of all experiments across all entities.</p>
+<p class="lede">A consolidated high-contrast view of all experimental data across all 83 Quantum Biology entities. Cells show the log₂ fold change, color-scaled from blue (downregulation) through white to vermillion (upregulation).</p>
 </header>
 <div class="controls">
   <label for="sort">Sort by:</label>
   <select id="sort" onchange="renderHeatmap()">
-    <option value="name">Entity Name</option>
+    <option value="name">Entity Name (Alphabetical)</option>
     <option value="mean_abs">Mean Absolute Response</option>
   </select>
 </div>
@@ -244,7 +265,8 @@
       const max = 2.0; 
       let intensity = Math.min(Math.abs(val) / max, 1.0);
       
-      // Interpolate to red (#D55E00 = 213,94,0) or blue (#0072B2 = 0,114,178)
+      // Vermillion #D55E00 (213, 94, 0)
+      // Blue #0072B2 (0, 114, 178)
       if (val > 0) {
           let r = Math.round(255 - (255 - 213) * intensity);
           let g = Math.round(255 - (255 - 94) * intensity);
@@ -260,17 +282,21 @@
 
   function renderHeatmap() {
     const experiments = Object.keys(graphData.experiments);
-    let nodes = graphData.elements.nodes.map(n => {
-       let vals = [];
-       experiments.forEach(e => {
-         let v = graphData.experiments[e][n.data.id];
-         if (typeof v === 'object' && v !== null) v = v.log2fc || v.mean_log2fc;
-         vals.push(v);
-       });
-       let validVals = vals.filter(v => v !== undefined && v !== null);
-       let meanAbs = validVals.length ? validVals.reduce((a,b) => a + Math.abs(b), 0) / validVals.length : 0;
-       return { id: n.data.id, label: n.data.label, vals: vals, meanAbs: meanAbs };
-    });
+    
+    // Filter out parent compound nodes so only actual entities appear
+    let nodes = graphData.elements.nodes
+      .filter(n => !n.data.is_compartment)
+      .map(n => {
+         let vals = [];
+         experiments.forEach(e => {
+           let v = graphData.experiments[e] ? graphData.experiments[e][n.data.id] : undefined;
+           if (typeof v === 'object' && v !== null) v = v.log2fc !== undefined ? v.log2fc : v.mean_log2fc;
+           vals.push(v);
+         });
+         let validVals = vals.filter(v => v !== undefined && v !== null);
+         let meanAbs = validVals.length ? validVals.reduce((a,b) => a + Math.abs(b), 0) / validVals.length : 0;
+         return { id: n.data.id, label: n.data.label, vals: vals, meanAbs: meanAbs };
+      });
     
     // sorting
     const sortMode = document.getElementById('sort').value;
@@ -288,8 +314,21 @@
       html += `<tr><td>${n.label}</td>`;
       n.vals.forEach(v => {
         let color = getHexColor(v);
-        let text = (v !== undefined && v !== null) ? v.toFixed(2) : '-';
-        let style = color !== 'transparent' ? `background-color: ${color}; color: ${(Math.abs(v)>0.8)?'#fff':'#333'}; text-shadow: none;` : `color: #aaa;`;
+        let text = (v !== undefined && v !== null) ? (v > 0 ? '+' : '') + v.toFixed(2) : '—';
+        
+        // High contrast text check:
+        // White text ONLY on heavily saturated cells (|v| >= 1.0)
+        // Dark ink (#0f172a) on light/white cells (|v| < 1.0)
+        let textColor = '#0f172a';
+        if (v !== undefined && v !== null && Math.abs(v) >= 1.0) {
+          textColor = '#ffffff';
+        } else if (color === 'transparent') {
+          textColor = '#64748b';
+        }
+        
+        let style = color !== 'transparent' 
+          ? `background-color: ${color}; color: ${textColor};` 
+          : `color: #64748b;`;
         html += `<td class="cell" style="${style}">${text}</td>`;
       });
       html += `</tr>`;

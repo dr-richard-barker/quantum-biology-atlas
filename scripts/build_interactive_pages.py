@@ -13,10 +13,11 @@ DOCS = ROOT / "docs"
 ASSETS = DOCS / "assets"
 GRAPH_DATA = ASSETS / "qb-graph-data.json"
 
+
 def build_kg():
     out = [head(
         "Interactive Knowledge Graph — Quantum Biology Atlas",
-        "Interactive network of 83 quantum-annotated entities across 7 subcellular compartments, with mathematical clustering, circular and CoSE layouts, and experimental data overlays.",
+        "Interactive network of 83 quantum-annotated entities across 7 subcellular compartments, with mathematical clustering, circular and CoSE layouts, distance scaling, and experimental data overlays.",
     )]
     
     out.append("""<style>
@@ -32,8 +33,16 @@ def build_kg():
     background: var(--qba-card);
     padding: 14px 18px;
   }
-  .panel-box h3 {
-    margin: 0 0 10px;
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .panel-header h3, .panel-box h3 {
+    margin: 0;
     font-size: 0.88rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -42,40 +51,59 @@ def build_kg():
     align-items: center;
     gap: 8px;
   }
+  .spacing-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spacing-label {
+    font-size: 0.78rem;
+    color: var(--qba-soft);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
   .btn-group {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
     align-items: center;
   }
-  .btn-group button {
+  .btn-group button, .tool-btn {
     border: 1px solid var(--qba-rule);
     background: var(--qba-bg);
-    color: var(--qba-ink);
+    color: var(--qba-ink, #0f172a);
     border-radius: 8px;
     padding: 7px 13px;
     cursor: pointer;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 550;
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
   }
-  .btn-group button:hover {
+  .btn-group button:hover, .tool-btn:hover {
     border-color: var(--qba-accent);
     color: var(--qba-accent);
     background: var(--qba-card2);
   }
   .btn-group button.active {
     background: var(--qba-accent);
-    color: #fff;
+    color: #ffffff !important;
     border-color: var(--qba-accent);
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(59,110,165,0.25);
   }
-  .btn-group button.accent-btn {
-    border-color: var(--qba-accent2);
+  .btn-group button.spacing-btn, .tool-btn.spacing-btn {
+    background: var(--qba-card2);
+    border-color: var(--qba-rule);
+    font-weight: 600;
+  }
+  .btn-group button.spacing-btn:hover, .tool-btn.spacing-btn:hover {
+    background: var(--qba-accent);
+    color: #ffffff;
+    border-color: var(--qba-accent);
   }
   .btn-group button.clear-btn {
     color: var(--qba-soft);
@@ -91,7 +119,7 @@ def build_kg():
     border-radius: 0 8px 8px 0;
     padding: 10px 14px;
     font-size: 0.88rem;
-    color: var(--qba-ink);
+    color: var(--qba-ink, #0f172a);
     line-height: 1.45;
   }
   .canvas-wrapper {
@@ -99,7 +127,7 @@ def build_kg():
     border: 1px solid var(--qba-rule);
     border-radius: 12px;
     overflow: hidden;
-    background: var(--qba-bg);
+    background: var(--qba-bg, #ffffff);
   }
   .canvas-toolbar {
     position: absolute;
@@ -125,9 +153,9 @@ def build_kg():
     padding: 6px 12px;
     border: 1px solid var(--qba-rule);
     border-radius: 8px;
-    background: var(--qba-bg);
-    color: var(--qba-ink);
-    width: 220px;
+    background: var(--qba-bg, #ffffff);
+    color: var(--qba-ink, #0f172a);
+    width: 240px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.06);
     outline: none;
   }
@@ -135,24 +163,11 @@ def build_kg():
     border-color: var(--qba-accent);
     box-shadow: 0 0 0 2px rgba(59,110,165,0.2);
   }
-  .tool-btn {
-    border: 1px solid var(--qba-rule);
-    background: var(--qba-bg);
-    color: var(--qba-ink);
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-size: 0.82rem;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-  }
-  .tool-btn:hover {
-    border-color: var(--qba-accent);
-    color: var(--qba-accent);
-  }
   #cy {
     width: 100%;
-    height: 750px;
+    height: 760px;
     display: block;
+    background: var(--qba-bg, #ffffff);
   }
   .legend-box {
     display: flex;
@@ -164,6 +179,7 @@ def build_kg():
     background: var(--qba-card);
     border-top: 1px solid var(--qba-rule);
     font-size: 0.82rem;
+    color: var(--qba-ink, #0f172a);
   }
   .legend-group {
     display: flex;
@@ -175,7 +191,7 @@ def build_kg():
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--qba-soft);
+    color: var(--qba-soft, #475569);
   }
   .tier-pill {
     display: inline-block;
@@ -184,8 +200,8 @@ def build_kg():
     background: #cbd5e1;
     border-radius: 2px;
   }
-  .tier-t1 { border: 2.5px solid #1a2230; }
-  .tier-t2 { border: 1.5px solid #475569; }
+  .tier-t1 { border: 2.5px solid #0f172a; }
+  .tier-t2 { border: 1.5px solid #334155; }
   .tier-t3 { border: 1.5px dashed #64748b; }
   .tier-t4 { border: 1px dotted #94a3b8; }
   .color-bar {
@@ -198,12 +214,13 @@ def build_kg():
   }
   .tooltip {
     position: absolute;
-    background: var(--qba-bg);
+    background: var(--qba-bg, #ffffff);
     border: 1px solid var(--qba-rule);
     padding: 12px 14px;
     border-radius: 9px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.16);
     font-size: 0.84rem;
+    color: var(--qba-ink, #0f172a);
     pointer-events: none;
     z-index: 1000;
     display: none;
@@ -212,43 +229,53 @@ def build_kg():
   }
   .tooltip strong {
     font-size: 0.95rem;
-    color: var(--qba-ink);
+    color: var(--qba-ink, #0f172a);
   }
   .badge {
     display: inline-block;
-    padding: 2px 6px;
+    padding: 2px 7px;
     border-radius: 4px;
     font-size: 0.72rem;
     font-weight: 600;
     margin-right: 4px;
     margin-top: 4px;
   }
-  .badge-tier { background: var(--qba-card2); border: 1px solid var(--qba-rule); }
-  .badge-chem { background: rgba(59,110,165,0.12); color: var(--qba-accent); }
+  .badge-tier { background: #f1f5f9; border: 1px solid #cbd5e1; color: #0f172a; }
+  .badge-org { background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; }
+  .badge-chem { background: #fef3c7; border: 1px solid #fde68a; color: #92400e; }
+  .badge-mag { background: #ffedd5; border: 1px solid #fed7aa; color: #c2410c; }
   .exp-table {
     width: 100%;
     margin-top: 8px;
     border-collapse: collapse;
     font-size: 0.78rem;
+    color: var(--qba-ink, #0f172a);
   }
   .exp-table td {
     padding: 3px 0;
     border-top: 1px solid var(--qba-rule);
   }
-  .val-up { color: #D55E00; font-weight: 600; text-align: right; }
-  .val-down { color: #0072B2; font-weight: 600; text-align: right; }
-  .val-none { color: var(--qba-soft); text-align: right; }
+  .val-up { color: #c2410c; font-weight: 700; text-align: right; }
+  .val-down { color: #0369a1; font-weight: 700; text-align: right; }
+  .val-none { color: #64748b; text-align: right; }
 </style>""")
 
     out.append("""<header class="hero">
 <h1>Interactive Knowledge Graph</h1>
-<p class="lede">Explore the Quantum Biology Ontology as an interconnected network of <strong>83 entities</strong> across <strong>7 subcellular compartments</strong> connected by <strong>154 biochemical edges</strong>. Project differential expression data across multiple experimental studies, or partition the topology using mathematical clustering algorithms.</p>
+<p class="lede">Explore the Quantum Biology Ontology as an interconnected network of <strong>83 entities</strong> across <strong>7 subcellular compartments</strong> connected by <strong>154 biochemical edges</strong>. Project differential expression data across multiple experimental studies, partition the topology using mathematical clustering algorithms, or expand/contract node distances to resolve dense clusters.</p>
 </header>
 
 <div class="kg-container">
   <!-- Layout & Clustering Controls -->
   <div class="panel-box">
-    <h3>Layout &amp; Mathematical Clustering</h3>
+    <div class="panel-header">
+      <h3>Layout &amp; Mathematical Clustering</h3>
+      <div class="spacing-controls">
+        <span class="spacing-label">Cluster Distance:</span>
+        <button class="tool-btn spacing-btn" id="btn-expand" title="Spread out nodes to resolve dense clusters">&plus; Expand Distance</button>
+        <button class="tool-btn spacing-btn" id="btn-contract" title="Pack nodes closer together">&minus; Contract Distance</button>
+      </div>
+    </div>
     <div class="btn-group" id="layout-toggles">
       <button class="active" data-layout="subcellular">Subcellular Localisation (Default)</button>
       <button data-layout="cose">CoSE (Force-Directed)</button>
@@ -268,7 +295,7 @@ def build_kg():
 
   <!-- Dynamic Algorithm Info Banner -->
   <div class="algo-banner" id="layout-info">
-    <strong>Subcellular Localisation (Default):</strong> Grouping 83 entities into 7 biological compartments (Mitochondria, Chloroplast, Nucleus, Cytosol, Peroxisome, Plasma Membrane &amp; Cell, Environment) using compound physics relaxation.
+    <strong>Subcellular Localisation (Default):</strong> Grouping 83 entities into 7 biological compartments (Mitochondria, Chloroplast, Nucleus, Cytosol, Peroxisome, Plasma Membrane &amp; Cell, Environment) inside compound boundaries using physics-based relaxation. Use <em>Expand Distance</em> to spread dense clusters.
   </div>
 
   <!-- Canvas Stage -->
@@ -278,6 +305,8 @@ def build_kg():
         <input type="text" class="search-input" id="search-input" placeholder="Search entity (e.g. AOX, CRY1, CSD)..." autocomplete="off">
       </div>
       <div class="toolbar-right">
+        <button class="tool-btn spacing-btn" id="btn-expand-canvas" title="Spread out nodes to resolve dense clusters">&harr; Expand Spacing</button>
+        <button class="tool-btn spacing-btn" id="btn-contract-canvas" title="Pack nodes closer together">&rarr;&larr; Contract Spacing</button>
         <button class="tool-btn" id="btn-zoom-in" title="Zoom In">+ Zoom In</button>
         <button class="tool-btn" id="btn-zoom-out" title="Zoom Out">- Zoom Out</button>
         <button class="tool-btn" id="btn-fit" title="Fit to View">Fit View</button>
@@ -286,18 +315,18 @@ def build_kg():
     <div id="cy"></div>
     <div class="legend-box">
       <div class="legend-group">
-        <span style="font-weight:600; color:var(--qba-ink);">Evidence Tier:</span>
+        <span style="font-weight:650; color:var(--qba-ink, #0f172a);">Evidence Tier:</span>
         <span class="legend-item"><span class="tier-pill tier-t1"></span> T1 Demonstrated</span>
         <span class="legend-item"><span class="tier-pill tier-t2"></span> T2 Inferred</span>
         <span class="legend-item"><span class="tier-pill tier-t3"></span> T3 Plausible</span>
         <span class="legend-item"><span class="tier-pill tier-t4"></span> T4 Context</span>
       </div>
       <div class="legend-group">
-        <span style="font-weight:600; color:var(--qba-ink);">Expression Response:</span>
+        <span style="font-weight:650; color:var(--qba-ink, #0f172a);">Expression Response:</span>
         <span class="legend-item"><span class="color-bar"></span></span>
-        <span class="legend-item" style="color:#0072B2; font-weight:600;">Down (&le; -2.0)</span>
-        <span class="legend-item" style="color:var(--qba-soft);">Neutral</span>
-        <span class="legend-item" style="color:#D55E00; font-weight:600;">Up (&ge; +2.0)</span>
+        <span class="legend-item" style="color:#0369a1; font-weight:700;">Down (&le; -2.0)</span>
+        <span class="legend-item" style="color:var(--qba-soft, #475569);">Neutral</span>
+        <span class="legend-item" style="color:#c2410c; font-weight:700;">Up (&ge; +2.0)</span>
       </div>
     </div>
   </div>
@@ -311,6 +340,7 @@ def build_kg():
   let graphData = null;
   let activeExps = new Set();
   let currentLayoutName = 'subcellular';
+  let spacingMultiplier = 1.0;
 
   fetch('assets/qb-graph-data.json').then(r => r.json()).then(data => {
     graphData = data;
@@ -357,7 +387,16 @@ def build_kg():
       };
     });
 
-    // Toolbar buttons
+    // Distance Spacing buttons (both top panel and canvas toolbar)
+    const handleExpand = () => scaleSpacing(1.25);
+    const handleContract = () => scaleSpacing(0.80);
+    
+    document.getElementById('btn-expand').onclick = handleExpand;
+    document.getElementById('btn-contract').onclick = handleContract;
+    document.getElementById('btn-expand-canvas').onclick = handleExpand;
+    document.getElementById('btn-contract-canvas').onclick = handleContract;
+
+    // Zoom and Fit buttons
     document.getElementById('btn-zoom-in').onclick = () => {
       if (cy) cy.zoom({ level: cy.zoom() * 1.25, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
     };
@@ -365,7 +404,7 @@ def build_kg():
       if (cy) cy.zoom({ level: cy.zoom() * 0.8, renderedPosition: { x: cy.width() / 2, y: cy.height() / 2 } });
     };
     document.getElementById('btn-fit').onclick = () => {
-      if (cy) cy.animate({ fit: { padding: 40 }, duration: 400 });
+      if (cy) cy.animate({ fit: { padding: 45 }, duration: 350 });
     };
 
     // Search input
@@ -394,6 +433,89 @@ def build_kg():
         }
       });
     };
+  }
+
+  function scaleSpacing(factor) {
+    if (!cy) return;
+    spacingMultiplier *= factor;
+
+    const childNodes = cy.nodes('[!is_compartment]');
+    if (childNodes.length === 0) return;
+
+    if (currentLayoutName === 'subcellular') {
+      // In subcellular layout, scale intra-compartment node positions relative to compartment centroid,
+      // and scale compartment centroids relative to global center.
+      let gX = 0, gY = 0, total = 0;
+      childNodes.forEach(n => {
+        const p = n.position();
+        gX += p.x;
+        gY += p.y;
+        total++;
+      });
+      const centerX = gX / total;
+      const centerY = gY / total;
+
+      const compCenters = {};
+      const parents = cy.nodes('[?is_compartment]');
+      parents.forEach(pNode => {
+        const cChildren = childNodes.filter(n => n.data('default_parent') === pNode.id());
+        if (cChildren.length > 0) {
+          let cX = 0, cY = 0;
+          cChildren.forEach(n => {
+            const pos = n.position();
+            cX += pos.x;
+            cY += pos.y;
+          });
+          compCenters[pNode.id()] = {
+            x: cX / cChildren.length,
+            y: cY / cChildren.length
+          };
+        }
+      });
+
+      cy.batch(() => {
+        childNodes.forEach(n => {
+          const pId = n.data('default_parent');
+          const cCenter = compCenters[pId] || { x: centerX, y: centerY };
+          const pos = n.position();
+
+          const dx = (pos.x - cCenter.x) * factor;
+          const dy = (pos.y - cCenter.y) * factor;
+
+          const newCenterX = centerX + (cCenter.x - centerX) * factor;
+          const newCenterY = centerY + (cCenter.y - centerY) * factor;
+
+          n.position({
+            x: newCenterX + dx,
+            y: newCenterY + dy
+          });
+        });
+      });
+    } else {
+      // Global centroid scaling for flat layouts
+      let gX = 0, gY = 0, total = 0;
+      childNodes.forEach(n => {
+        const p = n.position();
+        gX += p.x;
+        gY += p.y;
+        total++;
+      });
+      const centerX = gX / total;
+      const centerY = gY / total;
+
+      cy.batch(() => {
+        childNodes.forEach(n => {
+          const pos = n.position();
+          n.position({
+            x: centerX + (pos.x - centerX) * factor,
+            y: centerY + (pos.y - centerY) * factor
+          });
+        });
+      });
+    }
+
+    // Smoothly fit into view
+    cy.animate({ fit: { padding: 45 }, duration: 300 });
   }
 
   function getExpressionColor(val) {
@@ -439,18 +561,20 @@ def build_kg():
         }
         node.data('avg_log2fc', avg);
 
+        // ALWAYS keep label color dark slate/ink (#0f172a) with white outline halo!
+        // NEVER set label to white on white canvas.
+        node.style('color', '#0f172a');
+        node.style('text-outline-color', '#ffffff');
+        node.style('text-outline-width', 2.5);
+
         if (activeExps.size > 0) {
           node.style('background-color', getExpressionColor(avg));
-          node.style('color', (avg !== null && Math.abs(avg) >= 0.8) ? '#ffffff' : 'var(--qba-ink, #1a2230)');
         } else if (currentLayoutName === 'mcl' && node.data('mcl_color')) {
           node.style('background-color', node.data('mcl_color'));
-          node.style('color', '#ffffff');
         } else if (currentLayoutName === 'kmeans' && node.data('kmeans_color')) {
           node.style('background-color', node.data('kmeans_color'));
-          node.style('color', '#ffffff');
         } else {
           node.style('background-color', '#e2e8f0');
-          node.style('color', 'var(--qba-ink, #1a2230)');
         }
       });
     });
@@ -466,20 +590,23 @@ def build_kg():
           selector: ':parent',
           style: {
             'background-color': '#f8fafc',
-            'background-opacity': 0.65,
+            'background-opacity': 0.70,
             'border-width': 1.5,
             'border-style': 'dashed',
             'border-color': '#3B6EA5',
-            'border-opacity': 0.8,
-            'border-radius': 12,
+            'border-opacity': 0.85,
+            'border-radius': 14,
             'label': 'data(label)',
-            'font-size': '12px',
+            'font-size': '12.5px',
             'font-weight': 'bold',
-            'color': '#3B6EA5',
+            'color': '#1e3a8a', /* deep navy ink - high contrast */
+            'text-outline-color': '#ffffff',
+            'text-outline-width': 2.0,
+            'text-outline-opacity': 1.0,
             'text-valign': 'top',
             'text-halign': 'center',
             'text-margin-y': 10,
-            'padding': '26px'
+            'padding': '28px'
           }
         },
         // Entity child nodes
@@ -500,15 +627,19 @@ def build_kg():
             },
             'border-color': ele => {
               const t = ele.data('evidence_tier');
-              return t === 'T1' ? '#1a2230' : (t === 'T2' ? '#475569' : (t === 'T3' ? '#64748b' : '#94a3b8'));
+              return t === 'T1' ? '#0f172a' : (t === 'T2' ? '#334155' : (t === 'T3' ? '#64748b' : '#94a3b8'));
             },
             'font-size': '9.5px',
-            'font-weight': '500',
-            'color': '#1a2230',
+            'font-weight': '600',
+            'font-family': 'system-ui, -apple-system, sans-serif',
+            'color': '#0f172a', /* deep dark ink — NEVER white! */
+            'text-outline-color': '#ffffff', /* white halo protects text from background / edge collisions */
+            'text-outline-width': 2.5,
+            'text-outline-opacity': 1.0,
             'text-valign': 'bottom',
             'text-margin-y': 6,
             'text-wrap': 'ellipsis',
-            'text-max-width': '95px'
+            'text-max-width': '105px'
           }
         },
         // Shapes based on kind
@@ -544,8 +675,11 @@ def build_kg():
             'curve-style': 'bezier',
             'opacity': 0.7,
             'label': 'data(label)',
-            'font-size': '8px',
-            'color': '#64748b',
+            'font-size': '8.5px',
+            'color': '#334155', /* dark slate */
+            'text-outline-color': '#ffffff',
+            'text-outline-width': 1.5,
+            'text-outline-opacity': 0.95,
             'text-rotation': 'autorotate'
           }
         },
@@ -611,18 +745,18 @@ def build_kg():
       }
 
       const qClasses = (data.quantum_class || []).map(c => `<span class="badge badge-chem">${c.replace(/_/g, ' ')}</span>`).join('');
-      const addressableBadge = data.is_magnetically_addressable ? '<span class="badge badge-chem" style="background:rgba(213,94,0,0.12); color:#D55E00;">Magnetically Addressable</span>' : '';
+      const addressableBadge = data.is_magnetically_addressable ? '<span class="badge badge-mag">Magnetically Addressable</span>' : '';
 
       tooltip.innerHTML = `
-        <strong>${data.label}</strong> <span style="font-size:0.75rem; color:var(--qba-soft);">(${data.id})</span><br/>
+        <strong>${data.label}</strong> <span style="font-size:0.75rem; color:#64748b;">(${data.id})</span><br/>
         <div style="margin:4px 0;">
           <span class="badge badge-tier">${data.evidence_tier} (${data.evidence_tier === 'T1' ? 'Demonstrated' : (data.evidence_tier === 'T2' ? 'Inferred' : (data.evidence_tier === 'T3' ? 'Plausible' : 'Context'))})</span>
-          <span class="badge badge-tier">${data.organelle || data.compartment_name}</span>
+          <span class="badge badge-org">${data.organelle || data.compartment_name}</span>
           ${addressableBadge}
         </div>
         ${qClasses ? `<div style="margin-top:2px;">${qClasses}</div>` : ''}
-        ${data.description ? `<p style="margin:6px 0 0; font-size:0.8rem; color:var(--qba-soft);">${data.description}</p>` : ''}
-        ${avg !== null ? `<div style="margin-top:6px; font-weight:600;">Average Selected Effect: <span class="${avg > 0 ? 'val-up' : (avg < 0 ? 'val-down' : '')}">${(avg > 0 ? '+' : '') + avg.toFixed(2)} log₂FC</span></div>` : ''}
+        ${data.description ? `<p style="margin:6px 0 0; font-size:0.8rem; color:#475569;">${data.description}</p>` : ''}
+        ${avg !== null ? `<div style="margin-top:6px; font-weight:650; color:#0f172a;">Average Selected Effect: <span class="${avg > 0 ? 'val-up' : (avg < 0 ? 'val-down' : '')}">${(avg > 0 ? '+' : '') + avg.toFixed(2)} log₂FC</span></div>` : ''}
         ${expRows}
       `;
       tooltip.style.display = 'block';
@@ -686,7 +820,7 @@ def build_kg():
     cy.elements().removeClass('highlighted dimmed');
 
     if (name === 'subcellular') {
-      infoEl.innerHTML = '<strong>Subcellular Localisation (Default):</strong> Grouping 83 entities into 7 biological compartments (Mitochondria, Chloroplast, Nucleus, Cytosol, Peroxisome, Plasma Membrane &amp; Cell, Environment) inside compound boundaries using physics-based relaxation.';
+      infoEl.innerHTML = '<strong>Subcellular Localisation (Default):</strong> Grouping 83 entities into 7 biological compartments (Mitochondria, Chloroplast, Nucleus, Cytosol, Peroxisome, Plasma Membrane &amp; Cell, Environment) inside compound boundaries using physics-based relaxation. Use <em>Expand Distance</em> to spread dense clusters.';
       
       // 1. Show compound containers
       cy.nodes('[?is_compartment]').style('display', 'element');
@@ -700,37 +834,37 @@ def build_kg():
 
       // 3. Set anatomical coordinates for compartment centroids
       const compPositions = {
-        'comp_chloroplast': { x: -400, y: -280 },
-        'comp_mitochondria': { x: 400, y: -280 },
+        'comp_chloroplast': { x: -420, y: -300 },
+        'comp_mitochondria': { x: 420, y: -300 },
         'comp_cytosol': { x: 0, y: -50 },
-        'comp_nucleus': { x: -400, y: 220 },
-        'comp_peroxisome': { x: 400, y: 220 },
-        'comp_plasma_membrane': { x: 0, y: 380 },
-        'comp_environment': { x: 0, y: -500 }
+        'comp_nucleus': { x: -420, y: 240 },
+        'comp_peroxisome': { x: 420, y: 240 },
+        'comp_plasma_membrane': { x: 0, y: 400 },
+        'comp_environment': { x: 0, y: -520 }
       };
 
       cy.nodes('[!is_compartment]').forEach(n => {
         const p = n.data('default_parent');
         const pos = compPositions[p] || { x: 0, y: 0 };
-        const jitterX = (Math.random() - 0.5) * 160;
-        const jitterY = (Math.random() - 0.5) * 160;
+        const jitterX = (Math.random() - 0.5) * 180;
+        const jitterY = (Math.random() - 0.5) * 180;
         n.position({ x: pos.x + jitterX, y: pos.y + jitterY });
       });
 
-      // 4. Run compound cose layout with gentle bounds
+      // 4. Run compound cose layout with generous spacing
       cy.layout({
         name: 'cose',
         animate: true,
         animationDuration: 800,
         fit: true,
-        padding: 40,
+        padding: 45,
         randomize: false,
-        componentSpacing: 80,
-        nodeRepulsion: 15000,
-        idealEdgeLength: 85,
+        componentSpacing: 90,
+        nodeRepulsion: 18000,
+        idealEdgeLength: 95,
         edgeElasticity: 0.45,
         nestingFactor: 0.15,
-        gravity: 0.25,
+        gravity: 0.22,
         numIter: 1600
       }).run();
 
@@ -742,20 +876,20 @@ def build_kg():
     unparentNodes();
 
     if (name === 'cose') {
-      infoEl.innerHTML = '<strong>Compound Spring Embedder (CoSE):</strong> Unconstrained force-directed physics simulation based on spring tension and electrical repulsion across the entire network.';
+      infoEl.innerHTML = '<strong>Compound Spring Embedder (CoSE):</strong> Unconstrained force-directed physics simulation based on spring tension and electrical repulsion across the entire network. Use <em>Expand Distance</em> to spread clusters.';
       cy.layout({
         name: 'cose',
         animate: true,
         animationDuration: 800,
         fit: true,
-        padding: 40,
+        padding: 45,
         randomize: true,
-        componentSpacing: 60,
-        nodeRepulsion: 12000,
-        idealEdgeLength: 90,
+        componentSpacing: 70,
+        nodeRepulsion: 14000,
+        idealEdgeLength: 100,
         edgeElasticity: 0.45,
         nestingFactor: 0.1,
-        gravity: 0.25,
+        gravity: 0.22,
         numIter: 2000
       }).run();
     } else if (name === 'circular') {
@@ -782,7 +916,7 @@ def build_kg():
         animationDuration: 600,
         fit: true,
         padding: 50,
-        minNodeSpacing: 25,
+        minNodeSpacing: 30,
         concentric: n => n.degree(),
         levelWidth: nodes => 3
       }).run();
@@ -847,7 +981,7 @@ def build_kg():
         animate: true,
         animationDuration: 700,
         fit: true,
-        padding: 40,
+        padding: 45,
         directed: true,
         roots: roots.length > 0 ? roots : undefined,
         spacingFactor: 1.5
@@ -859,13 +993,13 @@ def build_kg():
 
   function layoutClusterConstellation(clusters) {
     const K = clusters.length;
-    const R = 320;
+    const R = 340;
     clusters.forEach((clusterNodes, cIdx) => {
       const angle = (2 * Math.PI * cIdx) / K;
       const cx = R * Math.cos(angle);
       const cy_pos = R * Math.sin(angle);
       const N = clusterNodes.length;
-      const subRadius = Math.max(35, 20 * Math.sqrt(N));
+      const subRadius = Math.max(38, 22 * Math.sqrt(N));
       clusterNodes.forEach((node, nIdx) => {
         const subAngle = (2 * Math.PI * nIdx) / N;
         const x = cx + subRadius * Math.cos(subAngle);
@@ -873,7 +1007,7 @@ def build_kg():
         node.position({ x, y });
       });
     });
-    cy.animate({ fit: { padding: 50 }, duration: 600 });
+    cy.animate({ fit: { padding: 45 }, duration: 600 });
   }
 </script>
 """)
@@ -883,31 +1017,33 @@ def build_kg():
 
 def build_heatmap():
     out = [head(
-        "Collective Heatmap",
-        "A dense summary of all experimental data across all ontology entities.",
+        "Collective Heatmap — Quantum Biology Atlas",
+        "A dense, high-contrast summary table of all experimental data across all ontology entities.",
     )]
     out.append("""<style>
   .heatmap-container {
     overflow-x: auto;
     margin-top: 20px;
     border: 1px solid var(--qba-rule);
-    border-radius: 8px;
-    background: var(--qba-bg);
+    border-radius: 10px;
+    background: var(--qba-bg, #ffffff);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
   table.heatmap {
     border-collapse: collapse;
     width: 100%;
     font-size: 0.85rem;
-    color: var(--qba-ink);
+    color: var(--qba-ink, #0f172a);
   }
   table.heatmap th, table.heatmap td {
-    padding: 6px 10px;
+    padding: 7px 12px;
     text-align: left;
     border-bottom: 1px solid var(--qba-rule);
   }
   table.heatmap th {
     background: var(--qba-card);
     font-weight: 700;
+    color: var(--qba-ink, #0f172a);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -915,11 +1051,12 @@ def build_heatmap():
   table.heatmap th:first-child {
     left: 0;
     z-index: 3;
-    min-width: 200px;
+    min-width: 220px;
   }
   table.heatmap td:first-child {
     background: var(--qba-card);
     font-weight: 600;
+    color: var(--qba-ink, #0f172a);
     position: sticky;
     left: 0;
     z-index: 1;
@@ -928,21 +1065,39 @@ def build_heatmap():
   .cell {
     text-align: center;
     font-weight: 600;
-    color: #fff;
-    text-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+    font-family: system-ui, -apple-system, sans-serif;
   }
-  .controls { margin-bottom: 15px; }
-  select { padding: 5px 10px; border-radius: 5px; }
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .controls label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--qba-soft, #475569);
+  }
+  select {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--qba-rule);
+    background: var(--qba-bg, #ffffff);
+    color: var(--qba-ink, #0f172a);
+    font: inherit;
+    font-size: 0.88rem;
+  }
 </style>""")
     
     out.append("""<header class="hero">
 <h1>Collective Heatmap</h1>
-<p class="lede">A consolidated view of all experiments across all entities.</p>
+<p class="lede">A consolidated high-contrast view of all experimental data across all 83 Quantum Biology entities. Cells show the log₂ fold change, color-scaled from blue (downregulation) through white to vermillion (upregulation).</p>
 </header>
 <div class="controls">
   <label for="sort">Sort by:</label>
   <select id="sort" onchange="renderHeatmap()">
-    <option value="name">Entity Name</option>
+    <option value="name">Entity Name (Alphabetical)</option>
     <option value="mean_abs">Mean Absolute Response</option>
   </select>
 </div>
@@ -961,7 +1116,8 @@ def build_heatmap():
       const max = 2.0; 
       let intensity = Math.min(Math.abs(val) / max, 1.0);
       
-      // Interpolate to red (#D55E00 = 213,94,0) or blue (#0072B2 = 0,114,178)
+      // Vermillion #D55E00 (213, 94, 0)
+      // Blue #0072B2 (0, 114, 178)
       if (val > 0) {
           let r = Math.round(255 - (255 - 213) * intensity);
           let g = Math.round(255 - (255 - 94) * intensity);
@@ -977,17 +1133,21 @@ def build_heatmap():
 
   function renderHeatmap() {
     const experiments = Object.keys(graphData.experiments);
-    let nodes = graphData.elements.nodes.map(n => {
-       let vals = [];
-       experiments.forEach(e => {
-         let v = graphData.experiments[e][n.data.id];
-         if (typeof v === 'object' && v !== null) v = v.log2fc || v.mean_log2fc;
-         vals.push(v);
-       });
-       let validVals = vals.filter(v => v !== undefined && v !== null);
-       let meanAbs = validVals.length ? validVals.reduce((a,b) => a + Math.abs(b), 0) / validVals.length : 0;
-       return { id: n.data.id, label: n.data.label, vals: vals, meanAbs: meanAbs };
-    });
+    
+    // Filter out parent compound nodes so only actual entities appear
+    let nodes = graphData.elements.nodes
+      .filter(n => !n.data.is_compartment)
+      .map(n => {
+         let vals = [];
+         experiments.forEach(e => {
+           let v = graphData.experiments[e] ? graphData.experiments[e][n.data.id] : undefined;
+           if (typeof v === 'object' && v !== null) v = v.log2fc !== undefined ? v.log2fc : v.mean_log2fc;
+           vals.push(v);
+         });
+         let validVals = vals.filter(v => v !== undefined && v !== null);
+         let meanAbs = validVals.length ? validVals.reduce((a,b) => a + Math.abs(b), 0) / validVals.length : 0;
+         return { id: n.data.id, label: n.data.label, vals: vals, meanAbs: meanAbs };
+      });
     
     // sorting
     const sortMode = document.getElementById('sort').value;
@@ -1005,8 +1165,21 @@ def build_heatmap():
       html += `<tr><td>${n.label}</td>`;
       n.vals.forEach(v => {
         let color = getHexColor(v);
-        let text = (v !== undefined && v !== null) ? v.toFixed(2) : '-';
-        let style = color !== 'transparent' ? `background-color: ${color}; color: ${(Math.abs(v)>0.8)?'#fff':'#333'}; text-shadow: none;` : `color: #aaa;`;
+        let text = (v !== undefined && v !== null) ? (v > 0 ? '+' : '') + v.toFixed(2) : '—';
+        
+        // High contrast text check:
+        // White text ONLY on heavily saturated cells (|v| >= 1.0)
+        // Dark ink (#0f172a) on light/white cells (|v| < 1.0)
+        let textColor = '#0f172a';
+        if (v !== undefined && v !== null && Math.abs(v) >= 1.0) {
+          textColor = '#ffffff';
+        } else if (color === 'transparent') {
+          textColor = '#64748b';
+        }
+        
+        let style = color !== 'transparent' 
+          ? `background-color: ${color}; color: ${textColor};` 
+          : `color: #64748b;`;
         html += `<td class="cell" style="${style}">${text}</td>`;
       });
       html += `</tr>`;
@@ -1029,6 +1202,7 @@ def main():
     path_hm = DOCS / "heatmap.html"
     path_hm.write_text(build_heatmap(), encoding="utf-8")
     print(f"wrote {path_hm.relative_to(ROOT)}")
+
 
 if __name__ == "__main__":
     main()
