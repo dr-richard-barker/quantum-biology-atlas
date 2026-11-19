@@ -35,15 +35,24 @@ sys.path.insert(0, str(ROOT / "src"))
 AUTHOR = {
     "name": "Barker, Richard",
     "orcid": "0000-0001-5681-9857",
-    "affiliation": "University of Wisconsin–Madison",
+    "affiliation": "Department of Agricultural and Biological Engineering, Purdue University, West Lafayette, IN 47907, USA",
 }
+RELEASE_VERSION = "2.4"
+RELEASE_DATE = "2026-11-19"
 REPO_URL = "https://github.com/dr-richard-barker/quantum-biology-atlas"
 PAGES_URL = "https://dr-richard-barker.github.io/quantum-biology-atlas/"
 
 
+SELF_FILES = {"MANIFEST.tsv", "CHECKSUMS.sha256"}
+
+
 def tracked_files() -> list[pathlib.Path]:
     out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True)
-    return [ROOT / f for f in out.stdout.split() if (ROOT / f).is_file()]
+    return [
+        ROOT / f
+        for f in out.stdout.splitlines()
+        if f and f not in SELF_FILES and (ROOT / f).is_file()
+    ]
 
 
 def main() -> int:
@@ -51,9 +60,12 @@ def main() -> int:
     ap.add_argument("--out", type=pathlib.Path, default=ROOT)
     args = ap.parse_args()
 
-    from qbio import ontology
+    try:
+        from qbio import ontology
 
-    onto = ontology.load()
+        onto = ontology.load()
+    except ModuleNotFoundError:
+        onto = None
     manifest = json.loads((ROOT / "catalog" / "manifest.json").read_text())
     t = manifest["totals"]
 
@@ -95,6 +107,7 @@ software by its own DOI and the review by URL until one is issued.</p>"""
     zenodo = {
         "title": "Quantum Biology Atlas: a cross-species ontology and SBGN pathway maps "
                  "for quantum-biological processes",
+        "version": RELEASE_VERSION,
         "upload_type": "software",
         "description": description,
         "creators": [AUTHOR],
@@ -127,6 +140,8 @@ software by its own DOI and the review by URL until one is issued.</p>"""
 message: "If you use this software, please cite it as below."
 title: "Quantum Biology Atlas: a cross-species ontology and SBGN pathway maps for quantum-biological processes"
 type: software
+version: "{RELEASE_VERSION}"
+date-released: "{RELEASE_DATE}"
 authors:
   - family-names: Barker
     given-names: Richard

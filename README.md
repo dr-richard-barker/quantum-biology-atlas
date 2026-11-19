@@ -8,11 +8,10 @@ Companion software to the review *"Plant Responses to Near-Null Magnetic Fields:
 Geomagnetism, Bioenergetics, and Primary Metabolism in Arabidopsis and Brassica"*
 (D. M. Porterfield & R. Barker, Purdue University).
 
-> **Status: in development.** The ontology, all ten maps, the map compiler, the
-> orthology projection, OSDR ingestion and the legibility test are working and
-> verified. The manuscript, the Pages site, the viewer integration and the Zenodo
-> deposit are not yet built. Sections marked **(pending)** do not exist yet — this
-> README describes only what is in the repository.
+> **Status: release `v2.4` ready for Zenodo archiving.** The ontology, all ten maps,
+> the map compiler, the orthology projection, OSDR ingestion, the legibility test,
+> the pre-registered test, the draft manuscript, and the GitHub Pages site
+> (`https://dr-richard-barker.github.io/quantum-biology-atlas/`) are built and verified.
 
 ---
 
@@ -228,15 +227,16 @@ neither.
 Every projection reports coverage, and a projection that matches nothing **raises**
 rather than returning an empty frame that would render as a blank map.
 
-## Pending
+## Status & Next Milestones
 
-- **(pending)** The pre-registered enrichment test against `OSDR_X-species_V2`'s
-  conserved mitochondrial suppression
+- **Completed:** QBO ontology (`83` entities), 10 SBGN-ML/SVG maps, cross-species
+  orthology projection, NASA OSDR overlays (`OSD-8`, `OSD-27`, `OSD-782`),
+  pre-registered enrichment test (`results/`), GitHub Pages site (`docs/`), and
+  draft Applications Note manuscript (`manuscript/`).
 - **(pending)** Integration with the
   [SBGN Pathway Visualizer](https://dr-richard-barker.github.io/SBGN-Pathway-viewer/app/)
   via a published map catalogue
-- **(pending)** GitHub Pages site, manuscript, Zenodo deposit
-- **(pending)** Repair of the 49 DOIs in `magnetobiology-nnmf-review`
+- **(pending)** Permanent Zenodo DOI issuance (`v2.4`) and companion review publication
 
 ## Licensing
 

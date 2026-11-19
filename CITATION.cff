@@ -2,11 +2,13 @@ cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
 title: "Quantum Biology Atlas: a cross-species ontology and SBGN pathway maps for quantum-biological processes"
 type: software
+version: "2.4"
+date-released: "2026-11-19"
 authors:
   - family-names: Barker
     given-names: Richard
     orcid: "https://orcid.org/0000-0001-5681-9857"
-    affiliation: "University of Wisconsin–Madison"
+    affiliation: "Department of Agricultural and Biological Engineering, Purdue University, West Lafayette, IN 47907, USA"
 repository-code: "https://github.com/dr-richard-barker/quantum-biology-atlas"
 url: "https://dr-richard-barker.github.io/quantum-biology-atlas/"
 abstract: >-
